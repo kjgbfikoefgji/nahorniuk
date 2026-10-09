@@ -6,8 +6,8 @@ try { (() => {
     const sec = document.getElementById(a.getAttribute('href').slice(1));
     if (sec) map.set(sec, a);
   });
-  // герой не має пункту меню: на ньому підсвітка знімається
-  const none = [document.querySelector('.hero')].filter(Boolean);
+  // герой, умови, заклик і футер не мають пункту меню: на них підсвітка знімається
+  const none = ['.hero', '#terms', '.cta', '.site-footer'].map((q) => document.querySelector(q)).filter(Boolean);
   const io = new IntersectionObserver((entries) => {
     entries.forEach((en) => {
       if (!en.isIntersecting) return;

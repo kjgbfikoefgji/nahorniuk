@@ -234,7 +234,7 @@ main{counter-reset:sec}
 /* посилання на всю висоту смуги; активний розділ підсвічує помаранчева планка внизу */
 .nav{display:flex;align-self:stretch;gap:0.125rem}
 .nav a{position:relative;display:flex;align-items:center;padding:0 0.875rem;text-decoration:none;font:700 0.78rem/1 var(--font-body);letter-spacing:.09em;text-transform:uppercase;color:var(--muted);transition:color var(--t-fast),background-color var(--t-fast)}
-.nav a::after{content:"";position:absolute;left:0.875rem;right:0.875rem;bottom:0;height:0.2rem;border-radius:0.2rem 0.2rem 0 0;background:var(--accent);transform:scaleX(0);transform-origin:0 50%;transition:transform var(--t-med) var(--ease)}
+.nav a::after{content:"";position:absolute;left:0.875rem;right:0.875rem;bottom:-1px;height:0.1875rem;border-radius:3px 3px 0 0;background:var(--accent);box-shadow:0 0 0.75rem rgba(255,122,26,.65);z-index:1;transform:scaleX(0);transform-origin:0 50%;transition:transform var(--t-med) var(--ease)}
 .nav a:hover{color:var(--text);background:var(--glass)}
 .nav a[aria-current]{color:var(--accent-text)}
 .nav a:hover::after,.nav a[aria-current]::after{transform:scaleX(1)}
@@ -1328,8 +1328,8 @@ try { (() => {
     const sec = document.getElementById(a.getAttribute('href').slice(1));
     if (sec) map.set(sec, a);
   });
-  // герой не має пункту меню: на ньому підсвітка знімається
-  const none = [document.querySelector('.hero')].filter(Boolean);
+  // герой, умови, заклик і футер не мають пункту меню: на них підсвітка знімається
+  const none = ['.hero', '#terms', '.cta', '.site-footer'].map((q) => document.querySelector(q)).filter(Boolean);
   const io = new IntersectionObserver((entries) => {
     entries.forEach((en) => {
       if (!en.isIntersecting) return;
