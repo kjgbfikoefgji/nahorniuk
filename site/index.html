@@ -82,7 +82,7 @@ try {
   --maxw:72rem;
   --gutter:clamp(1.25rem,4vw,2.5rem);
   --section-y:clamp(4.5rem,9vw,8rem);
-  --header-h:4.25rem;
+  --header-h:4.5rem;
 
   --ease:cubic-bezier(.22,.8,.3,1);
   --t-fast:160ms;
@@ -203,21 +203,28 @@ main:focus{outline:none}
 .ticks li{position:relative;padding-left:1.75rem}
 .ticks li::before{content:"";position:absolute;left:0;top:.3em;width:1.0625rem;height:1.0625rem;border-radius:50%;background:rgba(255,122,26,.18)}
 .ticks li::after{content:"";position:absolute;left:0.375rem;top:.52em;width:0.25rem;height:0.5rem;border:solid var(--accent);border-width:0 2px 2px 0;transform:rotate(45deg)}
-/* Суцільна смуга на всю ширину: нічого не перекриває, герой починається під нею */
-.site-header{position:sticky;top:0;z-index:50;height:var(--header-h);background:var(--header-bg);border-bottom:1px solid var(--line);
-  -webkit-backdrop-filter:saturate(1.4) blur(1rem);backdrop-filter:saturate(1.4) blur(1rem);transition:background-color var(--t-med),border-color var(--t-med)}
+/* Суцільна темна смуга в обох темах (як тікер під героєм): нічого не перекриває, герой починається під нею.
+   Змінні перевизначені локально, тож меню, кнопки й випадна панель на телефоні лишаються темними і у світлій темі.
+   backdrop-filter тут не ставимо: усередині є fixed-панель меню. */
+.site-header{--bg:#0a0908;--text:#f8f4ee;--muted:#c4bbb0;--line:rgba(255,255,255,.1);--glass:rgba(255,255,255,.07);--glass-line:rgba(255,255,255,.18);--accent-text:#ff8f3d;--shadow:0 1.5rem 3.75rem rgba(0,0,0,.55);
+  position:sticky;top:0;z-index:50;height:var(--header-h);background:var(--bg);color:var(--text);border-bottom:1px solid var(--line)}
+.site-header::after{content:"";position:absolute;left:0;right:0;bottom:-1px;height:2px;background:linear-gradient(90deg,transparent,var(--accent) 18%,#ffa23d 50%,var(--accent) 82%,transparent);opacity:.9;pointer-events:none}
 .header-row{height:100%;display:flex;align-items:center;gap:1.5rem}
 .logo{display:inline-flex;align-items:center;gap:0.75rem;min-height:2.75rem;text-decoration:none;margin-right:auto}
-.logo-mark{display:grid;place-items:center;width:2.5rem;height:2.5rem;border-radius:var(--radius-sm);background:var(--accent-grad);color:var(--on-accent);font:800 1.15rem/1 var(--font-head)}
-.logo-text{font:800 0.95rem/1 var(--font-head);text-transform:uppercase;letter-spacing:-.01em}
-.logo-text b{color:var(--accent-text);font-weight:800}
+.logo-mark{display:grid;place-items:center;width:2.75rem;height:2.75rem;border-radius:var(--radius-sm);background:var(--accent-grad);color:var(--on-accent);font:800 1.25rem/1 var(--font-head);box-shadow:0 0 1.5rem rgba(255,122,26,.35)}
+.logo-text{font:800 1rem/1 var(--font-head);text-transform:uppercase;letter-spacing:-.01em}
+.logo-text b{color:var(--accent);font-weight:800}
 
-.nav{display:flex;gap:0.25rem}
-.nav a{position:relative;padding:0.625rem 0.875rem;text-decoration:none;font-weight:500;font-size:0.95rem;color:var(--muted);transition:color var(--t-fast)}
-.nav a::after{content:"";position:absolute;left:0.875rem;right:0.875rem;bottom:0.25rem;height:2px;background:var(--accent);transform:scaleX(0);transform-origin:0 50%;transition:transform var(--t-med) var(--ease)}
-.nav a:hover,.nav a[aria-current]{color:var(--text)}
+/* посилання на всю висоту смуги; активний розділ підсвічує помаранчева планка внизу */
+.nav{display:flex;align-self:stretch;gap:0.125rem}
+.nav a{position:relative;display:flex;align-items:center;padding:0 0.875rem;text-decoration:none;font:700 0.78rem/1 var(--font-body);letter-spacing:.09em;text-transform:uppercase;color:var(--muted);transition:color var(--t-fast),background-color var(--t-fast)}
+.nav a::after{content:"";position:absolute;left:0.875rem;right:0.875rem;bottom:0;height:0.2rem;border-radius:0.2rem 0.2rem 0 0;background:var(--accent);transform:scaleX(0);transform-origin:0 50%;transition:transform var(--t-med) var(--ease)}
+.nav a:hover{color:#fff;background:rgba(255,255,255,.05)}
+.nav a[aria-current]{color:var(--accent-text)}
 .nav a:hover::after,.nav a[aria-current]::after{transform:scaleX(1)}
+.nav .nav-cta{display:none}
 .header-actions{display:flex;align-items:center;gap:0.625rem}
+.header-cta{min-height:2.875rem;padding-inline:1.25rem}
 
 .theme-toggle .ico-sun{display:none}
 :root[data-theme="light"] .theme-toggle .ico-sun{display:block}
@@ -231,11 +238,15 @@ main:focus{outline:none}
 @media (max-width:899px){
   .menu-btn{display:inline-flex}
   .header-cta{display:none}
-  .nav{position:fixed;inset:var(--header-h) 0 auto 0;flex-direction:column;gap:0;padding:0.75rem var(--gutter) 1.5rem;background:var(--bg);
+  .nav{position:fixed;inset:var(--header-h) 0 auto 0;align-self:auto;flex-direction:column;gap:0;padding:0.75rem var(--gutter) 1.5rem;background:var(--bg);
     border-bottom:1px solid var(--line);box-shadow:var(--shadow);transform:translateY(-0.75rem);opacity:0;visibility:hidden;
     transition:transform var(--t-med) var(--ease),opacity var(--t-med),visibility 0s linear var(--t-med)}
   .menu-open .nav{transform:none;opacity:1;visibility:visible;transition-delay:0s}
-  .nav a{padding:1rem 0;font-size:1.15rem;color:var(--text);border-bottom:1px solid var(--line)}
+  .nav a{padding:1.125rem 0;font-size:1rem;letter-spacing:.08em;color:var(--text);border-bottom:1px solid var(--line)}
+  .nav a:hover{background:none}
+  .nav .nav-cta{display:inline-flex;justify-content:center;margin-top:1.25rem;padding:0 1.5rem;min-height:3.25rem;border:0;color:var(--on-accent);font-size:0.85rem}
+  .nav .nav-cta::after{display:none}
+  .nav a[aria-current]{color:var(--accent-text)}
   .nav a::after{display:none}
 }
 /* Повноекранний герой: портрет як фон, текст поверх з градієнтом, статистика, стрічка внизу */
@@ -534,6 +545,7 @@ body.lb-open{overflow:hidden}
       <a href="#reviews">Відгуки</a>
       <a href="#about">Про мене</a>
       <a href="#faq">Питання</a>
+      <a class="nav-cta btn btn-primary" href="https://t.me/nahorniuk_vlad" target="_blank" rel="noopener">Написати в Telegram</a>
     </nav>
     <div class="header-actions">
       <button class="icon-btn theme-toggle" type="button" aria-label="Перемкнути тему" data-theme-toggle>
@@ -1158,17 +1170,20 @@ try { (() => {
     const sec = document.getElementById(a.getAttribute('href').slice(1));
     if (sec) map.set(sec, a);
   });
+  // герой і «Досягнення» не мають пункту меню: на них підсвітка знімається
+  const none = [document.querySelector('.hero'), document.getElementById('achievements')].filter(Boolean);
   const io = new IntersectionObserver((entries) => {
     entries.forEach((en) => {
+      if (!en.isIntersecting) return;
+      if (none.includes(en.target)) { links.forEach((l) => l.removeAttribute('aria-current')); return; }
       const a = map.get(en.target);
       if (!a) return;
-      if (en.isIntersecting) {
-        links.forEach((l) => l.removeAttribute('aria-current'));
-        a.setAttribute('aria-current', 'true');
-      }
+      links.forEach((l) => l.removeAttribute('aria-current'));
+      a.setAttribute('aria-current', 'true');
     });
   }, { rootMargin: '-40% 0px -55% 0px' });
   map.forEach((_, sec) => io.observe(sec));
+  none.forEach((sec) => io.observe(sec));
 })(); } catch (e) { console.error(e); }
 try { (() => {
   // Липка кнопка на мобільному: з'являється після героя й ховається біля фінального CTA та футера.
