@@ -1,19 +1,20 @@
-/* Дизайн-токени. Напрям (ui-ux-pro-max): перебільшений мінімалізм + bento. Один акцент (помаранчевий) на графіті. */
+/* Дизайн-токени. Мова дизайну: темний «спортивний преміум» (широкий шрифт Unbounded капсом, повноекранне фото, акцентні цифри).
+   Акцент помаранчевий: він збігається з теплим тлом портрета. */
 :root{
-  --font-head:"Onest",system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;
+  --font-head:"Unbounded","Onest",system-ui,sans-serif;
   --font-body:"Onest",system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;
 
   --accent:#ff7a1a;
   --accent-hover:#ff8e3d;
-  --accent-grad:linear-gradient(135deg,#ff9a3c 0%,#ff6a14 100%);
-  --on-accent:#130a02;
+  --accent-grad:linear-gradient(135deg,#ffa23d 0%,#ff6a0a 100%);
+  --on-accent:#140a02;
 
-  --radius:1.75rem;
-  --radius-sm:1.125rem;
-  --maxw:75rem;
-  --gutter:clamp(1rem,4vw,2rem);
-  --section-y:clamp(4.5rem,10vw,8.75rem);
-  --header-h:4rem;
+  --radius:1.125rem;
+  --radius-sm:0.75rem;
+  --maxw:72rem;
+  --gutter:clamp(1.25rem,4vw,2.5rem);
+  --section-y:clamp(4.5rem,9vw,8rem);
+  --header-h:4.25rem;
 
   --ease:cubic-bezier(.22,.8,.3,1);
   --t-fast:160ms;
@@ -21,35 +22,35 @@
 }
 :root,:root[data-theme="dark"]{
   color-scheme:dark;
-  --bg:#0b0e13;
-  --bg-alt:#10151c;
-  --card:#151b24;
-  --card-hi:#1c2430;
-  --line:rgba(255,255,255,.09);
-  --text:#f6f7fa;
-  --muted:#a3adbd;
-  --accent-text:#ff9a4d;
-  --accent-big:#ff9a3c;
-  --glass:rgba(255,255,255,.07);
-  --glass-line:rgba(255,255,255,.16);
-  --shadow:0 1.5rem 3.75rem rgba(0,0,0,.5);
-  --header-bg:rgba(16,21,28,.7);
-  --grain:.07;
+  --bg:#0a0908;
+  --bg-alt:#100e0b;
+  --card:#15120f;
+  --card-hi:#1d1913;
+  --line:rgba(255,255,255,.085);
+  --text:#f8f4ee;
+  --muted:#b6ada2;
+  --accent-text:#ff8f3d;
+  --glass:rgba(255,255,255,.06);
+  --glass-line:rgba(255,255,255,.14);
+  --shadow:0 1.5rem 3.75rem rgba(0,0,0,.55);
+  --header-bg:rgba(10,9,8,.86);
+  --dots:rgba(255,255,255,.055);
+  --grain:.05;
 }
 :root[data-theme="light"]{
   color-scheme:light;
-  --bg:#f6f3ee;
-  --bg-alt:#ece7de;
+  --bg:#f7f3ec;
+  --bg-alt:#eee8de;
   --card:#ffffff;
-  --card-hi:#f3efe8;
-  --line:rgba(20,24,31,.11);
-  --text:#14181f;
-  --muted:#4d5766;
+  --card-hi:#f4efe6;
+  --line:rgba(30,20,10,.12);
+  --text:#17120d;
+  --muted:#5a5148;
   --accent-text:#a83a06;
-  --accent-big:#c2490a;
-  --glass:rgba(255,255,255,.72);
-  --glass-line:rgba(20,24,31,.1);
-  --shadow:0 1.5rem 3.75rem rgba(60,40,10,.16);
-  --header-bg:rgba(255,255,255,.72);
-  --grain:.05;
+  --glass:rgba(255,255,255,.7);
+  --glass-line:rgba(30,20,10,.12);
+  --shadow:0 1.5rem 3.75rem rgba(70,45,10,.16);
+  --header-bg:rgba(247,243,236,.9);
+  --dots:rgba(30,20,10,.07);
+  --grain:.04;
 }

@@ -1,0 +1,10 @@
+.ach-grid{display:grid;gap:1rem}
+.ach{display:flex;flex-direction:column;gap:0.5rem;padding:1.75rem}
+.ach:hover{border-color:rgba(255,122,26,.5);transform:translateY(-4px)}
+.ach-ico{display:grid;place-items:center;width:3.5rem;height:3.5rem;margin-bottom:1rem;border-radius:var(--radius-sm);background:rgba(255,122,26,.12);color:var(--accent-text)}
+.ach-year{position:absolute;top:1.5rem;right:1.5rem;font:800 1.9rem/1 var(--font-head);color:transparent;-webkit-text-stroke:1.5px var(--accent);letter-spacing:-.02em;transition:color var(--t-med)}
+.ach:hover .ach-year{color:var(--accent)}
+.ach h3{font-size:1.05rem;text-transform:uppercase}
+.ach p{margin:0;color:var(--muted)}
+@media (min-width:640px){.ach-grid{grid-template-columns:repeat(2,1fr)}}
+@media (min-width:1000px){.ach-grid{grid-template-columns:repeat(4,1fr)}}

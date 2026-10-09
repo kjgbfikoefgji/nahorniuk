@@ -53,29 +53,36 @@ try {
 } catch (e) { console.error(e); }
 </script>
 <style>
-/* Шрифт самохоститься (CSP не дозволяє зовнішні джерела). Onest, варіативний 100-900: і заголовки (800), і текст (400-600). */
+/* Шрифти самохостяться (CSP не дозволяє зовнішні джерела). Unbounded (OFL): заголовки й цифри, Onest: текст. Обидва варіативні. */
+@font-face{font-family:"Unbounded";font-style:normal;font-weight:200 900;font-display:swap;
+  src:url(/fonts/unbounded-cyrillic-wght-normal.woff2) format("woff2-variations");
+  unicode-range:U+0301,U+0400-045F,U+0490-0491,U+04B0-04B1,U+2116}
+@font-face{font-family:"Unbounded";font-style:normal;font-weight:200 900;font-display:swap;
+  src:url(/fonts/unbounded-latin-wght-normal.woff2) format("woff2-variations");
+  unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}
 @font-face{font-family:"Onest";font-style:normal;font-weight:100 900;font-display:swap;
   src:url(/fonts/onest-cyrillic-wght-normal.woff2) format("woff2-variations");
   unicode-range:U+0301,U+0400-045F,U+0490-0491,U+04B0-04B1,U+2116}
 @font-face{font-family:"Onest";font-style:normal;font-weight:100 900;font-display:swap;
   src:url(/fonts/onest-latin-wght-normal.woff2) format("woff2-variations");
   unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}
-/* Дизайн-токени. Напрям (ui-ux-pro-max): перебільшений мінімалізм + bento. Один акцент (помаранчевий) на графіті. */
+/* Дизайн-токени. Мова дизайну: темний «спортивний преміум» (широкий шрифт Unbounded капсом, повноекранне фото, акцентні цифри).
+   Акцент помаранчевий: він збігається з теплим тлом портрета. */
 :root{
-  --font-head:"Onest",system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;
+  --font-head:"Unbounded","Onest",system-ui,sans-serif;
   --font-body:"Onest",system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;
 
   --accent:#ff7a1a;
   --accent-hover:#ff8e3d;
-  --accent-grad:linear-gradient(135deg,#ff9a3c 0%,#ff6a14 100%);
-  --on-accent:#130a02;
+  --accent-grad:linear-gradient(135deg,#ffa23d 0%,#ff6a0a 100%);
+  --on-accent:#140a02;
 
-  --radius:1.75rem;
-  --radius-sm:1.125rem;
-  --maxw:75rem;
-  --gutter:clamp(1rem,4vw,2rem);
-  --section-y:clamp(4.5rem,10vw,8.75rem);
-  --header-h:4rem;
+  --radius:1.125rem;
+  --radius-sm:0.75rem;
+  --maxw:72rem;
+  --gutter:clamp(1.25rem,4vw,2.5rem);
+  --section-y:clamp(4.5rem,9vw,8rem);
+  --header-h:4.25rem;
 
   --ease:cubic-bezier(.22,.8,.3,1);
   --t-fast:160ms;
@@ -83,53 +90,54 @@ try {
 }
 :root,:root[data-theme="dark"]{
   color-scheme:dark;
-  --bg:#0b0e13;
-  --bg-alt:#10151c;
-  --card:#151b24;
-  --card-hi:#1c2430;
-  --line:rgba(255,255,255,.09);
-  --text:#f6f7fa;
-  --muted:#a3adbd;
-  --accent-text:#ff9a4d;
-  --accent-big:#ff9a3c;
-  --glass:rgba(255,255,255,.07);
-  --glass-line:rgba(255,255,255,.16);
-  --shadow:0 1.5rem 3.75rem rgba(0,0,0,.5);
-  --header-bg:rgba(16,21,28,.7);
-  --grain:.07;
+  --bg:#0a0908;
+  --bg-alt:#100e0b;
+  --card:#15120f;
+  --card-hi:#1d1913;
+  --line:rgba(255,255,255,.085);
+  --text:#f8f4ee;
+  --muted:#b6ada2;
+  --accent-text:#ff8f3d;
+  --glass:rgba(255,255,255,.06);
+  --glass-line:rgba(255,255,255,.14);
+  --shadow:0 1.5rem 3.75rem rgba(0,0,0,.55);
+  --header-bg:rgba(10,9,8,.86);
+  --dots:rgba(255,255,255,.055);
+  --grain:.05;
 }
 :root[data-theme="light"]{
   color-scheme:light;
-  --bg:#f6f3ee;
-  --bg-alt:#ece7de;
+  --bg:#f7f3ec;
+  --bg-alt:#eee8de;
   --card:#ffffff;
-  --card-hi:#f3efe8;
-  --line:rgba(20,24,31,.11);
-  --text:#14181f;
-  --muted:#4d5766;
+  --card-hi:#f4efe6;
+  --line:rgba(30,20,10,.12);
+  --text:#17120d;
+  --muted:#5a5148;
   --accent-text:#a83a06;
-  --accent-big:#c2490a;
-  --glass:rgba(255,255,255,.72);
-  --glass-line:rgba(20,24,31,.1);
-  --shadow:0 1.5rem 3.75rem rgba(60,40,10,.16);
-  --header-bg:rgba(255,255,255,.72);
-  --grain:.05;
+  --glass:rgba(255,255,255,.7);
+  --glass-line:rgba(30,20,10,.12);
+  --shadow:0 1.5rem 3.75rem rgba(70,45,10,.16);
+  --header-bg:rgba(247,243,236,.9);
+  --dots:rgba(30,20,10,.07);
+  --grain:.04;
 }
 *,*::before,*::after{box-sizing:border-box}
-/* на широких екранах (>1800px) увесь інтерфейс масштабується разом із rem; нижче лишається 16px */
-html{-webkit-text-size-adjust:100%;scroll-behavior:smooth;scroll-padding-top:6rem;font-size:max(16px,calc(1vw - 2px))}
+/* на дуже широких екранах інтерфейс трохи збільшується разом із rem; нижче ~1700px лишається 16px */
+html{-webkit-text-size-adjust:100%;scroll-behavior:smooth;scroll-padding-top:5.5rem;font-size:max(16px,calc(.45vw + 6px))}
 body{margin:0;background:var(--bg);color:var(--text);font:400 1rem/1.6 var(--font-body);
   -webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility;overflow-x:hidden;
   transition:background-color var(--t-med) ease,color var(--t-med) ease}
-/* зерно поверх усієї сторінки: прибирає «пластикову» гладкість градієнтів */
+/* легке зерно поверх сторінки */
 body::after{content:"";position:fixed;inset:0;z-index:90;pointer-events:none;opacity:var(--grain);
   background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 1 0 0 0 0 1 0 0 0 0 1 0 0 0 .9 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E")}
 img{display:block;max-width:100%;height:auto}
 a{color:inherit}
-h1,h2,h3{margin:0;font-family:var(--font-head);font-weight:800;text-wrap:balance}
-h1{font-size:clamp(2.7rem,6.4vw,5.6rem);line-height:.98;letter-spacing:-.045em}
-h2{font-size:clamp(2.2rem,5.4vw,4.4rem);line-height:1;letter-spacing:-.04em}
-h3{font-size:1.35rem;line-height:1.2;letter-spacing:-.02em;font-weight:700}
+h1,h2,h3{margin:0;font-family:var(--font-head);text-wrap:balance}
+h1,h2{font-weight:800;text-transform:uppercase;letter-spacing:-.015em;line-height:1.06}
+h1{font-size:clamp(1.85rem,4.4vw,3.7rem)}
+h2{font-size:clamp(1.7rem,3.9vw,3.2rem)}
+h3{font-size:1.2rem;line-height:1.25;font-weight:700;letter-spacing:-.01em}
 p{margin:0 0 1em;text-wrap:pretty}
 ul,ol{margin:0;padding:0;list-style:none}
 :focus-visible{outline:3px solid var(--accent);outline-offset:3px;border-radius:0.5rem}
@@ -141,72 +149,73 @@ main:focus{outline:none}
 .skip:focus{top:0.75rem}
 
 .ico{width:1.25rem;height:1.25rem;flex:none;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
-.ico-lg{width:1.875rem;height:1.875rem;stroke-width:1.7}
+.ico-lg{width:1.75rem;height:1.75rem;stroke-width:1.7}
 
-/* акцентний фрагмент заголовка: градієнт у темній темі, суцільний колір у світлій (контраст) */
-.accent{color:var(--accent-big)}
-:root:not([data-theme="light"]) .accent{background:linear-gradient(100deg,#ff7a1a,#ffc05a);-webkit-background-clip:text;background-clip:text;color:transparent}
+.accent{color:var(--accent)}
+:root[data-theme="light"] .accent{color:var(--accent-text)}
 .nowrap{white-space:nowrap}
-@media (max-width:420px){.nowrap{white-space:normal}}
 
-.eyebrow{display:flex;align-items:center;gap:0;font:600 .78rem/1 var(--font-body);letter-spacing:.16em;text-transform:uppercase;color:var(--accent-text);margin:0 0 1.25rem}
-.eyebrow span{display:inline-flex;align-items:center;color:var(--muted);font-variant-numeric:tabular-nums}
-.eyebrow span::after{content:"";display:inline-block;width:2rem;height:1px;background:currentColor;margin:0 0.875rem}
-.lead{font-size:clamp(1.05rem,1.5vw,1.25rem);color:var(--muted);max-width:52ch}
+/* рубрика над заголовком: лінія + капс */
+.eyebrow{display:flex;align-items:center;gap:0.75rem;margin:0 0 1.125rem;font:700 0.72rem/1 var(--font-head);letter-spacing:.14em;text-transform:uppercase;color:var(--accent-text)}
+.eyebrow::before{content:"";width:1.75rem;height:2px;background:currentColor;flex:none}
+.eyebrow span{display:none}
+.lead{font-size:clamp(1.05rem,1.4vw,1.25rem);color:var(--muted);max-width:42ch}
 
-.pill{display:inline-flex;align-items:center;gap:0.625rem;margin:0 0 1.625rem;padding:0.5rem 1rem 0.5rem 0.75rem;border-radius:62.4375rem;background:var(--glass);border:1px solid var(--glass-line);
-  font:500 .86rem/1 var(--font-body);color:var(--muted)}
-.dot{width:0.5rem;height:0.5rem;border-radius:50%;background:var(--accent);box-shadow:0 0 0 0.25rem rgba(255,122,26,.22)}
-
-.btn{display:inline-flex;align-items:center;justify-content:center;gap:0.625rem;min-height:3rem;padding:0 1.5rem;border:1.5px solid transparent;border-radius:62.4375rem;
-  font:600 1rem/1 var(--font-body);text-decoration:none;cursor:pointer;white-space:nowrap;
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:0.625rem;min-height:3rem;padding:0 1.5rem;border:1.5px solid transparent;border-radius:var(--radius-sm);
+  font:700 0.9rem/1 var(--font-head);text-decoration:none;cursor:pointer;white-space:nowrap;
   transition:transform var(--t-fast) var(--ease),background-color var(--t-fast),border-color var(--t-fast),box-shadow var(--t-fast),color var(--t-fast)}
-.btn .ico{transition:transform var(--t-fast) var(--ease)}
-.btn:hover .ico-arrow-slide,.btn-ghost:hover .ico:last-child{transform:translateX(0.25rem)}
-.btn-primary{background:var(--accent-grad);color:var(--on-accent);box-shadow:0 0.625rem 1.875rem rgba(255,106,20,.32),inset 0 1px 0 rgba(255,255,255,.35)}
-.btn-primary:hover{transform:translateY(-2px);box-shadow:0 1rem 2.5rem rgba(255,106,20,.45),inset 0 1px 0 rgba(255,255,255,.35)}
+.btn-primary{background:var(--accent-grad);color:var(--on-accent);box-shadow:0 0.625rem 1.875rem rgba(255,106,10,.28)}
+.btn-primary:hover{transform:translateY(-2px);box-shadow:0 0.875rem 2.375rem rgba(255,106,10,.42)}
 .btn-primary:active{transform:translateY(0)}
-.btn-ghost{background:var(--glass);color:var(--text);border-color:var(--glass-line)}
+.btn-ghost{background:transparent;color:var(--text);border-color:var(--glass-line)}
 .btn-ghost:hover{border-color:var(--accent);color:var(--accent-text);transform:translateY(-2px)}
-.btn-lg{min-height:3.625rem;padding:0 2rem;font-size:1.05rem}
-.btn-sm{min-height:2.75rem;padding:0 1.125rem;font-size:.92rem}
+.btn-lg{min-height:3.5rem;padding:0 2rem;font-size:0.95rem}
+.btn-sm{min-height:2.75rem;padding:0 1.125rem;font-size:0.8rem}
 .btn-block{width:100%}
+.link-arrow{display:inline-flex;align-items:center;gap:0.5rem;min-height:2.75rem;font-weight:600;color:var(--muted);text-decoration:none;border-bottom:1px solid var(--glass-line);transition:color var(--t-fast),border-color var(--t-fast)}
+.link-arrow:hover{color:var(--accent-text);border-color:var(--accent)}
 
-.icon-btn{display:inline-flex;align-items:center;justify-content:center;width:2.75rem;height:2.75rem;border-radius:50%;border:1px solid var(--glass-line);
+.icon-btn{display:inline-flex;align-items:center;justify-content:center;width:2.75rem;height:2.75rem;border-radius:var(--radius-sm);border:1px solid var(--glass-line);
   background:var(--glass);color:var(--text);cursor:pointer;text-decoration:none;transition:border-color var(--t-fast),color var(--t-fast),transform var(--t-fast) var(--ease)}
 .icon-btn:hover{border-color:var(--accent);color:var(--accent-text);transform:translateY(-2px)}
 
 /* картки: підсвітка під курсором (--mx/--my виставляє scripts/08-spotlight.js) */
-.card,.tile{position:relative;isolation:isolate;background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:1.875rem;
+.card{position:relative;isolation:isolate;background:var(--card);border:1px solid var(--line);border-radius:var(--radius);
   transition:border-color var(--t-med),transform var(--t-med) var(--ease),box-shadow var(--t-med)}
-.card::before,.tile::before,.result::before{content:"";position:absolute;inset:0;z-index:-1;border-radius:inherit;pointer-events:none;opacity:0;transition:opacity var(--t-med);
-  background:radial-gradient(23.75rem circle at var(--mx,50%) var(--my,-30%),rgba(255,122,26,.18),transparent 62%)}
-.card:hover::before,.tile:hover::before,.result:hover::before{opacity:1}
+.card::before,.result::before{content:"";position:absolute;inset:0;z-index:-1;border-radius:inherit;pointer-events:none;opacity:0;transition:opacity var(--t-med);
+  background:radial-gradient(24rem circle at var(--mx,50%) var(--my,-30%),rgba(255,122,26,.16),transparent 62%)}
+.card:hover::before,.result:hover::before{opacity:1}
 
-.section{padding-block:var(--section-y)}
+.section{padding-block:var(--section-y);position:relative}
 .section-alt{background:var(--bg-alt)}
-.section-head{max-width:48.75rem;margin-bottom:clamp(2.25rem,6vw,4.5rem)}
-.section-lead{color:var(--muted);font-size:1.12rem;margin:1.25rem 0 0;max-width:56ch}
+/* крапкова сітка як фактура секцій */
+.dotted{background-image:radial-gradient(var(--dots) 1px,transparent 1.2px);background-size:1.5rem 1.5rem}
+.section-head{display:grid;gap:1rem 3rem;margin-bottom:clamp(2.25rem,5vw,3.75rem)}
+.section-head .eyebrow{grid-column:1/-1;margin-bottom:0}
+.section-lead{color:var(--muted);font-size:1.08rem;margin:0;max-width:44ch}
+@media (min-width:900px){
+  .section-head{grid-template-columns:1.25fr 1fr;align-items:end}
+}
 
 .ticks{display:grid;gap:0.75rem;margin:1.25rem 0}
-.ticks li{position:relative;padding-left:2rem}
-.ticks li::before{content:"";position:absolute;left:0;top:.28em;width:1.25rem;height:1.25rem;border-radius:50%;background:var(--accent)}
-.ticks li::after{content:"";position:absolute;left:0.4375rem;top:.5em;width:0.3125rem;height:0.5625rem;border:solid var(--on-accent);border-width:0 2.4px 2.4px 0;transform:rotate(45deg) scale(.9)}
-/* Плаваюча скляна «таблетка» замість смуги на всю ширину */
-.site-header{position:sticky;top:0;z-index:50;padding-top:0.75rem;pointer-events:none}
-.header-row{position:relative;isolation:isolate;pointer-events:auto;display:flex;align-items:center;gap:1rem;height:var(--header-h);padding:0 0.625rem 0 0.875rem;border-radius:62.4375rem}
-/* скло в псевдоелементі: backdrop-filter на самому рядку зробив би його контейнером для fixed-меню на мобільному */
-.header-row::before{content:"";position:absolute;inset:0;z-index:-1;border-radius:inherit;background:var(--header-bg);border:1px solid var(--glass-line);box-shadow:0 0.625rem 2.5rem rgba(0,0,0,.18);
-  -webkit-backdrop-filter:saturate(1.6) blur(1.125rem);backdrop-filter:saturate(1.6) blur(1.125rem);transition:background-color var(--t-med),border-color var(--t-med)}
+.ticks li{position:relative;padding-left:1.75rem}
+.ticks li::before{content:"";position:absolute;left:0;top:.3em;width:1.0625rem;height:1.0625rem;border-radius:50%;background:rgba(255,122,26,.18)}
+.ticks li::after{content:"";position:absolute;left:0.375rem;top:.52em;width:0.25rem;height:0.5rem;border:solid var(--accent);border-width:0 2px 2px 0;transform:rotate(45deg)}
+/* Суцільна смуга на всю ширину: нічого не перекриває, герой починається під нею */
+.site-header{position:sticky;top:0;z-index:50;height:var(--header-h);background:var(--header-bg);border-bottom:1px solid var(--line);
+  -webkit-backdrop-filter:saturate(1.4) blur(1rem);backdrop-filter:saturate(1.4) blur(1rem);transition:background-color var(--t-med),border-color var(--t-med)}
+.header-row{height:100%;display:flex;align-items:center;gap:1.5rem}
 .logo{display:inline-flex;align-items:center;gap:0.75rem;min-height:2.75rem;text-decoration:none;margin-right:auto}
-.logo-mark{display:grid;place-items:center;width:2.5rem;height:2.5rem;border-radius:50%;background:var(--accent-grad);color:var(--on-accent);font:800 1.25rem/1 var(--font-head)}
-.logo-text{display:flex;flex-direction:column;font:800 1.05rem/1.05 var(--font-head);letter-spacing:-.02em}
-.logo-text small{font:500 .62rem/1.3 var(--font-body);letter-spacing:.18em;text-transform:uppercase;color:var(--muted)}
+.logo-mark{display:grid;place-items:center;width:2.5rem;height:2.5rem;border-radius:var(--radius-sm);background:var(--accent-grad);color:var(--on-accent);font:800 1.15rem/1 var(--font-head)}
+.logo-text{font:800 0.95rem/1 var(--font-head);text-transform:uppercase;letter-spacing:-.01em}
+.logo-text b{color:var(--accent-text);font-weight:800}
 
-.nav{display:flex;gap:2px}
-.nav a{padding:0.625rem 1rem;border-radius:62.4375rem;text-decoration:none;font-weight:500;font-size:.95rem;color:var(--muted);transition:color var(--t-fast),background-color var(--t-fast)}
-.nav a:hover,.nav a[aria-current]{color:var(--text);background:var(--glass)}
-.header-actions{display:flex;align-items:center;gap:0.5rem}
+.nav{display:flex;gap:0.25rem}
+.nav a{position:relative;padding:0.625rem 0.875rem;text-decoration:none;font-weight:500;font-size:0.95rem;color:var(--muted);transition:color var(--t-fast)}
+.nav a::after{content:"";position:absolute;left:0.875rem;right:0.875rem;bottom:0.25rem;height:2px;background:var(--accent);transform:scaleX(0);transform-origin:0 50%;transition:transform var(--t-med) var(--ease)}
+.nav a:hover,.nav a[aria-current]{color:var(--text)}
+.nav a:hover::after,.nav a[aria-current]::after{transform:scaleX(1)}
+.header-actions{display:flex;align-items:center;gap:0.625rem}
 
 .theme-toggle .ico-sun{display:none}
 :root[data-theme="light"] .theme-toggle .ico-sun{display:block}
@@ -220,138 +229,128 @@ main:focus{outline:none}
 @media (max-width:899px){
   .menu-btn{display:inline-flex}
   .header-cta{display:none}
-  .nav{position:fixed;inset:5.5rem var(--gutter) auto var(--gutter);flex-direction:column;gap:2px;padding:0.75rem;background:var(--bg-alt);
-    border:1px solid var(--glass-line);border-radius:1.75rem;box-shadow:var(--shadow);transform:translateY(-12px) scale(.98);opacity:0;visibility:hidden;pointer-events:auto;
+  .nav{position:fixed;inset:var(--header-h) 0 auto 0;flex-direction:column;gap:0;padding:0.75rem var(--gutter) 1.5rem;background:var(--bg);
+    border-bottom:1px solid var(--line);box-shadow:var(--shadow);transform:translateY(-0.75rem);opacity:0;visibility:hidden;
     transition:transform var(--t-med) var(--ease),opacity var(--t-med),visibility 0s linear var(--t-med)}
   .menu-open .nav{transform:none;opacity:1;visibility:visible;transition-delay:0s}
-  .nav a{padding:1rem 1.125rem;font-size:1.15rem;color:var(--text);border-radius:1.125rem}
+  .nav a{padding:1rem 0;font-size:1.15rem;color:var(--text);border-bottom:1px solid var(--line)}
+  .nav a::after{display:none}
 }
-/* герой заходить під плаваючу шапку (12 + 64 px), щоб сяйво не мало різкого краю зверху */
-.hero{position:relative;overflow:hidden;margin-top:calc(-1 * (var(--header-h) + 0.75rem));padding-top:calc(var(--header-h) + 0.75rem + clamp(1.75rem,5vw,4rem))}
-/* м'яке сяйво: два повільні «спалахи» позаду контенту */
-.hero::before,.hero::after{content:"";position:absolute;z-index:0;border-radius:50%;pointer-events:none;filter:blur(1.25rem)}
-.hero::before{width:60vw;max-width:51.25rem;aspect-ratio:1;right:-12%;top:-18%;background:radial-gradient(closest-side,rgba(255,122,26,.30),rgba(255,122,26,0))}
-.hero::after{width:45vw;max-width:38.75rem;aspect-ratio:1;left:-14%;bottom:8%;background:radial-gradient(closest-side,rgba(255,170,60,.12),rgba(255,170,60,0))}
-:root[data-theme="light"] .hero::before{background:radial-gradient(closest-side,rgba(255,122,26,.26),rgba(255,122,26,0))}
+/* Повноекранний герой: портрет як фон, текст поверх з градієнтом, статистика, стрічка внизу */
+.hero{position:relative;isolation:isolate;overflow:hidden;background:var(--bg)}
+/* у світлій темі герой лишається темним: портрет на світлому тлі дає брудне гало */
+:root[data-theme="light"] .hero{--bg:#0a0908;--bg-alt:#100e0b;--card:#15120f;--text:#f8f4ee;--muted:#b6ada2;--line:rgba(255,255,255,.085);--glass-line:rgba(255,255,255,.14);--accent-text:#ff8f3d;color:var(--text)}
+:root[data-theme="light"] .hero .accent,:root[data-theme="light"] .hero .ticker-track li.hl{color:var(--accent)}
+.hero-bg{position:absolute;inset:0 0 3.75rem 0;z-index:-1;overflow:hidden}
+.hero-bg::before{content:"";position:absolute;inset:0;
+  background:radial-gradient(48rem 38rem at 78% 38%,rgba(255,122,26,.30),transparent 62%),radial-gradient(32rem 26rem at 8% 92%,rgba(255,150,40,.10),transparent 60%)}
+.hero-bg img{position:absolute;top:0;right:max(0px,calc((100% - var(--maxw)) / 2 - 2rem));height:100%;width:auto;max-width:none;object-fit:cover;object-position:50% 12%;
+  -webkit-mask-image:linear-gradient(90deg,transparent 0,#000 34%),linear-gradient(270deg,transparent 0,#000 18%),linear-gradient(0deg,transparent 0,#000 26%),linear-gradient(180deg,transparent 0,#000 8%);
+  -webkit-mask-composite:source-in;
+  mask-image:linear-gradient(90deg,transparent 0,#000 34%),linear-gradient(270deg,transparent 0,#000 18%),linear-gradient(0deg,transparent 0,#000 26%),linear-gradient(180deg,transparent 0,#000 8%);
+  mask-composite:intersect}
 
-.hero-grid{position:relative;z-index:1;display:grid;gap:clamp(2.5rem,6vw,4.5rem);align-items:center;padding-bottom:clamp(3.5rem,8vw,6rem)}
-.hero-copy h1{margin-bottom:1.625rem}
-.hero-actions{display:flex;flex-wrap:wrap;gap:0.875rem;margin-top:2.125rem}
-.hero-note{margin:1.375rem 0 0;color:var(--muted);font-size:.95rem}
+.hero-inner{display:flex;align-items:flex-end;min-height:min(46rem,calc(100svh - var(--header-h) - 3.75rem));padding-block:3.5rem 2.75rem}
+.hero-copy{max-width:46rem}
+.badge{display:inline-flex;align-items:center;flex-wrap:wrap;gap:0.375rem 0.75rem;margin:0 0 1.5rem;padding:0.625rem 1rem;border-radius:var(--radius-sm);
+  border:1px solid rgba(255,122,26,.42);background:rgba(255,122,26,.12);font-size:0.9rem;line-height:1.3}
+.badge .ico{color:var(--accent-text);width:1.125rem;height:1.125rem}
+.badge b{font-weight:700}
+.badge span{color:var(--accent-text);font-weight:600}
+.hero h1{margin-bottom:1.25rem}
+.hero-actions{display:flex;flex-wrap:wrap;align-items:center;gap:0.5rem 1.75rem;margin-top:2rem}
+.hero-checks{display:flex;flex-wrap:wrap;gap:0.5rem 1.5rem;margin-top:1.5rem;color:var(--muted);font-size:0.92rem}
+.hero-checks li{display:inline-flex;align-items:center;gap:0.5rem}
+.hero-checks .ico{width:1rem;height:1rem;color:var(--accent-text);stroke-width:2.6}
 
-.hero-visual{position:relative;width:100%;max-width:32.5rem;margin-inline:auto}
-.portrait{position:relative;aspect-ratio:4/5;border-radius:2.25rem;overflow:hidden;border:1px solid var(--glass-line);box-shadow:var(--shadow),0 0 0 0.5rem rgba(255,122,26,.08)}
-.portrait img{width:100%;height:100%;object-fit:cover;object-position:50% 22%}
-.portrait::after{content:"";position:absolute;inset:0;background:linear-gradient(to top,rgba(11,14,19,.55),transparent 45%);pointer-events:none}
+.hero-stats{display:flex;flex-wrap:wrap;gap:1.25rem 0;margin-top:2.25rem;padding-top:1.5rem;border-top:1px solid var(--line)}
+.hero-stats li{padding-right:1.75rem;margin-right:1.75rem;border-right:1px solid var(--line)}
+.hero-stats li:last-child{border-right:0;margin-right:0;padding-right:0}
+.hero-stats b{display:block;font:800 clamp(1.1rem,1.8vw,1.6rem)/1.15 var(--font-head);letter-spacing:-.01em;font-variant-numeric:tabular-nums}
+.hero-stats span{display:block;margin-top:0.375rem;font:600 0.68rem/1.35 var(--font-body);letter-spacing:.13em;text-transform:uppercase;color:var(--muted)}
 
-.glass{position:absolute;z-index:2;display:flex;align-items:center;gap:0.75rem;padding:0.75rem 1.125rem 0.75rem 0.75rem;border-radius:1.25rem;background:var(--glass);border:1px solid var(--glass-line);
-  -webkit-backdrop-filter:blur(1.125rem) saturate(1.4);backdrop-filter:blur(1.125rem) saturate(1.4);box-shadow:0 0.875rem 2.5rem rgba(0,0,0,.28);color:var(--text)}
-.glass b{display:block;font:800 1.05rem/1.15 var(--font-head);letter-spacing:-.02em}
-.glass span{display:block;font-size:.8rem;color:var(--muted);line-height:1.3}
-.glass .ico{padding:0.625rem;box-sizing:content-box;width:1.5rem;height:1.5rem;border-radius:0.875rem;background:var(--accent-grad);color:var(--on-accent)}
-.glass img{width:3.25rem;height:3.25rem;border-radius:0.875rem;object-fit:cover;object-position:50% 30%}
-.glass-a{left:-6%;bottom:14%}
-.glass-b{right:-5%;top:10%}
+/* безперервна стрічка внизу героя */
+.ticker{position:relative;z-index:1;overflow:hidden;border-block:1px solid var(--line);background:var(--bg-alt);height:3.75rem}
+.ticker-track{display:flex;width:max-content;height:100%;align-items:center}
+.ticker-track li{display:flex;align-items:center;white-space:nowrap;padding-left:2.25rem;font:800 clamp(1rem,2.2vw,1.6rem)/1 var(--font-head);text-transform:uppercase;letter-spacing:-.01em}
+.ticker-track li.hl{color:var(--accent)}
+.ticker-track li::after{content:"";width:0.5rem;height:0.5rem;margin-left:2.25rem;background:var(--accent);transform:rotate(45deg);flex:none}
 
-.stamp{position:absolute;z-index:3;right:-3%;bottom:-5%;width:7.75rem;height:7.75rem;border-radius:50%;background:var(--accent-grad);color:var(--on-accent);box-shadow:0 0.875rem 2.5rem rgba(255,106,20,.45)}
-.stamp text{fill:currentColor;font-family:var(--font-body)}
-/* всередині SVG px = одиниці viewBox, тому rem тут не можна */
-.stamp-ring text{font-size:9.4px;font-weight:700;letter-spacing:.04em}
-.stamp-num{font-family:var(--font-head)!important;font-weight:800;font-size:40px;letter-spacing:-.04em}
-.stamp-ring{transform-box:fill-box;transform-origin:center}
-
-/* безперервна стрічка під героєм */
-.ticker{position:relative;z-index:1;overflow:hidden;border-block:1px solid var(--line);background:var(--bg-alt)}
-.ticker-track{display:flex;width:max-content}
-.ticker-track li{display:flex;align-items:center;white-space:nowrap;padding:1.125rem 0 1.125rem 2.25rem;font:800 clamp(1.05rem,2.2vw,1.5rem)/1 var(--font-head);letter-spacing:-.02em}
-.ticker-track li::after{content:"";width:0.5625rem;height:0.5625rem;margin-left:2.25rem;background:var(--accent);transform:rotate(45deg);flex:none}
-
-@media (min-width:900px){
-  .hero-grid{grid-template-columns:1.12fr .88fr}
-}
 @media (max-width:899px){
-  .glass-a{left:-2%}
-  .glass-b{right:-2%}
-  .stamp{right:-1%;width:6.5rem;height:6.5rem}
+  .hero-bg::before{background:radial-gradient(34rem 26rem at 70% 18%,rgba(255,122,26,.30),transparent 62%)}
+  .hero-bg img{left:0;right:0;width:100%;height:min(36rem,125vw);object-position:50% 8%;
+    -webkit-mask-image:linear-gradient(0deg,transparent 0,#000 62%);mask-image:linear-gradient(0deg,transparent 0,#000 62%);-webkit-mask-composite:source-over;mask-composite:add}
+  .hero-inner{min-height:0;padding-top:clamp(14rem,68vw,24rem)}
+  .hero-stats li{padding-right:1.25rem;margin-right:1.25rem}
 }
-.facts{padding-block:clamp(4rem,9vw,7.5rem) 0}
-.bento{display:grid;grid-template-columns:repeat(2,1fr);grid-auto-rows:minmax(10.625rem,auto);gap:0.875rem}
-.tile{display:flex;flex-direction:column;justify-content:flex-end;gap:0.375rem;padding:1.625rem;overflow:hidden}
-.tile:hover{border-color:rgba(255,122,26,.55);transform:translateY(-4px)}
-.tile .ico{align-self:flex-start;margin-bottom:auto;color:var(--accent-text)}
-.num{display:block;font:800 clamp(3.6rem,8vw,6.2rem)/.9 var(--font-head);letter-spacing:-.06em;font-variant-numeric:tabular-nums}
-.tile-xl .num{font-size:clamp(7rem,22vw,14rem);line-height:.8;margin-bottom:0.625rem;color:var(--accent-big)}
-:root:not([data-theme="light"]) .tile-xl .num{background:linear-gradient(160deg,#ffb25a 10%,#ff6a14 80%);-webkit-background-clip:text;background-clip:text;color:transparent}
-.num-plus::before{content:"+"}
-.tile-title{font:800 1.4rem/1.15 var(--font-head);letter-spacing:-.025em}
-.tile-label{color:var(--muted);font-size:.98rem;line-height:1.35}
-.tile-label strong{color:var(--text)}
-.tile-xl{grid-column:1/-1;min-height:16.25rem}
-.tile-wide{grid-column:1/-1}
+.ach-grid{display:grid;gap:1rem}
+.ach{display:flex;flex-direction:column;gap:0.5rem;padding:1.75rem}
+.ach:hover{border-color:rgba(255,122,26,.5);transform:translateY(-4px)}
+.ach-ico{display:grid;place-items:center;width:3.5rem;height:3.5rem;margin-bottom:1rem;border-radius:var(--radius-sm);background:rgba(255,122,26,.12);color:var(--accent-text)}
+.ach-year{position:absolute;top:1.5rem;right:1.5rem;font:800 1.9rem/1 var(--font-head);color:transparent;-webkit-text-stroke:1.5px var(--accent);letter-spacing:-.02em;transition:color var(--t-med)}
+.ach:hover .ach-year{color:var(--accent)}
+.ach h3{font-size:1.05rem;text-transform:uppercase}
+.ach p{margin:0;color:var(--muted)}
+@media (min-width:640px){.ach-grid{grid-template-columns:repeat(2,1fr)}}
+@media (min-width:1000px){.ach-grid{grid-template-columns:repeat(4,1fr)}}
+.service-grid{display:grid;gap:1.25rem}
+.service{display:flex;flex-direction:column;overflow:hidden}
+.service:hover{border-color:rgba(255,122,26,.5);transform:translateY(-4px);box-shadow:var(--shadow)}
 
-/* виділена плитка: суцільний акцент */
-.tile-hl{background:var(--accent-grad);border-color:transparent;color:var(--on-accent)}
-.tile-hl .ico,.tile-hl .num,.tile-hl .tile-label,.tile-hl .tile-label strong{color:var(--on-accent)}
-.tile-hl:hover{border-color:transparent;box-shadow:0 1.25rem 3.125rem rgba(255,106,20,.35)}
+/* візуальна шапка картки: акцентне сяйво, крапкова фактура, велика іконка, тег */
+.service-visual{position:relative;display:grid;place-items:center;height:10.5rem;overflow:hidden;border-bottom:1px solid var(--line);
+  background:radial-gradient(22rem 14rem at 25% 0%,rgba(255,122,26,.34),transparent 62%),radial-gradient(18rem 12rem at 90% 100%,rgba(255,150,40,.14),transparent 60%),var(--card-hi)}
+.service-visual::before{content:"";position:absolute;inset:0;background-image:radial-gradient(rgba(255,255,255,.10) 1px,transparent 1.2px);background-size:1.25rem 1.25rem;
+  -webkit-mask-image:linear-gradient(180deg,#000,transparent);mask-image:linear-gradient(180deg,#000,transparent)}
+:root[data-theme="light"] .service-visual::before{background-image:radial-gradient(rgba(30,20,10,.14) 1px,transparent 1.2px)}
+.service-visual .ico{position:relative;width:4.5rem;height:4.5rem;stroke-width:1.15;color:var(--accent);filter:drop-shadow(0 0 1.5rem rgba(255,122,26,.55))}
+.vtag{position:absolute;left:1.25rem;bottom:1.125rem;padding:0.5rem 0.75rem;border-radius:0.5rem;background:rgba(10,9,8,.78);color:#fff;
+  font:700 0.62rem/1 var(--font-head);letter-spacing:.1em;text-transform:uppercase;border:1px solid rgba(255,255,255,.12)}
+.vtag-accent{background:var(--accent);color:var(--on-accent);border-color:transparent}
 
-@media (min-width:900px){
-  .bento{grid-template-columns:repeat(4,1fr);grid-auto-rows:minmax(11.875rem,auto);gap:1rem}
-  .tile-xl{grid-column:span 2;grid-row:span 2}
-  .tile-wide{grid-column:span 2}
-}
-.service-grid{display:grid;gap:1rem}
-.service{display:flex;flex-direction:column;padding:clamp(1.625rem,3vw,2.375rem)}
-.service:hover{border-color:rgba(255,122,26,.55);transform:translateY(-4px);box-shadow:var(--shadow)}
-.service-ico{display:grid;place-items:center;width:3.5rem;height:3.5rem;margin-bottom:1.375rem;border-radius:1.125rem;background:rgba(255,122,26,.13);color:var(--accent-text)}
-.service h3{margin-bottom:0.75rem;font-size:clamp(1.5rem,2.4vw,1.9rem);letter-spacing:-.03em;font-weight:800}
-.service>p{color:var(--muted);margin:0}
+.service-body{display:flex;flex-direction:column;flex:1;padding:1.75rem}
+.service h3{margin-bottom:0.75rem;font-size:clamp(1.15rem,1.7vw,1.4rem)}
+.service-body>p{color:var(--muted);margin:0}
 
-.options{display:grid;gap:0.625rem;margin-top:auto;padding-top:1.625rem}
+.options{display:grid;gap:0.625rem;margin-top:auto;padding-top:1.5rem}
 .options li{display:grid;grid-template-columns:1fr auto auto;align-items:center;gap:0.875rem;padding:0.875rem 0.875rem 0.875rem 1.125rem;background:var(--bg);border:1px solid var(--line);border-radius:var(--radius-sm)}
 :root[data-theme="light"] .options li{background:var(--card-hi)}
 .opt-name{display:block;font-weight:600}
-.opt-meta{display:block;font-size:.85rem;color:var(--muted);margin-top:2px}
-.price{font:800 1.7rem/1 var(--font-head);letter-spacing:-.04em;white-space:nowrap;font-variant-numeric:tabular-nums}
+.opt-meta{display:block;font-size:0.85rem;color:var(--muted);margin-top:2px}
+.price{font:700 clamp(1.1rem,1.5vw,1.35rem)/1 var(--font-head);letter-spacing:-.02em;white-space:nowrap;font-variant-numeric:tabular-nums}
 
-/* виділена послуга: суцільний акцентний блок */
-.service-featured{background:var(--accent-grad);border-color:transparent;color:var(--on-accent)}
-.service-featured:hover{border-color:transparent;box-shadow:0 1.75rem 4.375rem rgba(255,106,20,.38)}
-.service-featured .service-ico{background:rgba(19,10,2,.14);color:var(--on-accent)}
-.service-featured>p{color:rgba(19,10,2,.82)}
-.service-featured .ticks li::before{background:var(--on-accent)}
-.service-featured .ticks li::after{border-color:#ff8a2b}
-.service-featured .options li,:root[data-theme="light"] .service-featured .options li{background:#130a02;border-color:transparent;color:#fff}
-.service-featured .opt-meta{color:#c9b8a8}
-.service-featured .btn-primary{box-shadow:none}
-.tag{position:absolute;top:1.375rem;right:1.375rem;padding:0.4375rem 0.875rem;border-radius:62.4375rem;background:var(--on-accent);color:#fff;font:600 .72rem/1 var(--font-body);letter-spacing:.08em;text-transform:uppercase}
+/* виділена послуга: акцентна рамка й сяйво (як у еталона), без суцільної заливки */
+.service-featured{border-color:var(--accent);box-shadow:0 0 0 1px var(--accent),0 1.75rem 4.5rem rgba(255,106,10,.2)}
+.service-featured:hover{border-color:var(--accent);box-shadow:0 0 0 1px var(--accent),0 2rem 5rem rgba(255,106,10,.32)}
 
-.pay-note{display:flex;gap:0.875rem;align-items:flex-start;margin:2rem 0 0;padding:1.125rem 1.375rem;border:1px dashed var(--line);border-radius:var(--radius-sm);color:var(--muted);font-size:.95rem}
+.pay-note{display:flex;gap:0.875rem;align-items:flex-start;margin:2rem 0 0;padding:1.125rem 1.375rem;border:1px dashed var(--glass-line);border-radius:var(--radius-sm);color:var(--muted);font-size:0.95rem}
 .pay-note .ico{margin-top:2px;color:var(--accent)}
 .pay-note a{color:var(--accent-text)}
 
-@media (min-width:900px){.service-grid{grid-template-columns:repeat(2,1fr);gap:1.25rem}}
+@media (min-width:900px){.service-grid{grid-template-columns:repeat(2,1fr);gap:1.5rem}}
 @media (max-width:480px){
   .options li{grid-template-columns:1fr auto}
   .options .btn{grid-column:1/-1}
 }
 /* Масонрі на CSS-колонках: фото з різним співвідношенням сторін не обрізаються */
-.results-grid{columns:3 18.125rem;column-gap:1.125rem}
-.results-grid li{break-inside:avoid;margin-bottom:1.125rem}
+.results-grid{columns:3 17rem;column-gap:1.25rem}
+.results-grid li{break-inside:avoid;margin-bottom:1.25rem}
 .result{position:relative;isolation:isolate;display:block;width:100%;padding:0;border:1px solid var(--line);border-radius:var(--radius);overflow:hidden;background:var(--card);cursor:zoom-in;color:inherit;text-align:left;
   transition:border-color var(--t-med),transform var(--t-med) var(--ease),box-shadow var(--t-med)}
-.result:hover{border-color:rgba(255,122,26,.55);transform:translateY(-4px);box-shadow:var(--shadow)}
+.result:hover{border-color:rgba(255,122,26,.5);transform:translateY(-4px);box-shadow:var(--shadow)}
 .result img{width:100%;height:auto}
-.result-cap{display:flex;align-items:baseline;gap:0.75rem;padding:1rem 1.25rem;color:var(--muted);font-size:.9rem;line-height:1.3}
-.result-cap b{font:800 1.7rem/1 var(--font-head);letter-spacing:-.04em;color:var(--accent-text);white-space:nowrap}
-.disclaimer{margin:2rem 0 0;color:var(--muted);font-size:.9rem;max-width:70ch}
+/* підпис як в еталона: велика акцентна цифра, нижче капс-опис */
+.result-cap{display:block;padding:1.125rem 1.5rem 1.375rem;border-top:1px solid var(--line);font:600 0.7rem/1.4 var(--font-body);letter-spacing:.12em;text-transform:uppercase;color:var(--muted)}
+.result-cap b{display:block;margin-bottom:0.5rem;font:800 clamp(1.7rem,2.6vw,2.25rem)/1 var(--font-head);letter-spacing:-.02em;text-transform:none;color:var(--accent-text);white-space:nowrap}
+.disclaimer{margin:2rem 0 0;padding-left:1rem;border-left:3px solid var(--accent);color:var(--muted);font-size:0.9rem;max-width:70ch}
 .disclaimer a{color:var(--accent-text)}
 
 .lightbox{width:min(96vw,68.75rem);max-height:96vh;padding:0;border:0;background:transparent;color:#fff;overflow:visible}
-.lightbox::backdrop{background:rgba(6,8,12,.9);-webkit-backdrop-filter:blur(0.5rem);backdrop-filter:blur(0.5rem)}
+.lightbox::backdrop{background:rgba(6,6,5,.92);-webkit-backdrop-filter:blur(0.5rem);backdrop-filter:blur(0.5rem)}
 .lb-figure{margin:0;text-align:center}
 .lb-figure img{max-height:80vh;width:auto;max-width:100%;margin-inline:auto;border-radius:var(--radius)}
-.lb-figure figcaption{margin-top:1rem;font:800 1.3rem/1.2 var(--font-head);letter-spacing:-.02em}
-.lightbox .icon-btn{background:rgba(20,26,36,.85);color:#fff;border-color:rgba(255,255,255,.2)}
+.lb-figure figcaption{margin-top:1rem;font:800 1.1rem/1.2 var(--font-head);text-transform:uppercase}
+.lightbox .icon-btn{background:rgba(20,18,15,.85);color:#fff;border-color:rgba(255,255,255,.2)}
 .lb-close{position:fixed;top:1rem;right:1rem;z-index:2}
 .lb-nav{position:fixed;top:50%;translate:0 -50%;z-index:2}
 .lb-prev{left:0.75rem}
@@ -361,107 +360,104 @@ body.lb-open{overflow:hidden}
 .reviews{overflow:hidden}
 .marquee{position:relative;overflow-x:auto;padding-block:0.5rem;scrollbar-width:none}
 .marquee::-webkit-scrollbar{display:none}
-.marquee+.marquee{margin-top:1rem}
+.marquee+.marquee{margin-top:1.25rem}
 .marquee.is-running{overflow:hidden;
   -webkit-mask-image:linear-gradient(90deg,transparent,#000 7%,#000 93%,transparent);mask-image:linear-gradient(90deg,transparent,#000 7%,#000 93%,transparent)}
 .track{display:flex;width:max-content;padding-inline:var(--gutter)}
-.marquee.is-running .track{padding-inline:0;animation:marquee 70s linear infinite}
+.marquee.is-running .track{padding-inline:0;animation:marquee 80s linear infinite}
 .marquee-rev.is-running .track{animation-direction:reverse}
 .marquee.is-running:hover .track{animation-play-state:paused}
 
-.quote{flex:none;width:min(84vw,22.5rem);margin-right:1rem;padding:2.125rem 1.75rem 1.625rem}
-.quote-lg{width:min(88vw,28.75rem)}
-.quote::after{content:"“";position:absolute;left:1.5rem;top:0.375rem;font:800 4.6rem/1 var(--font-head);color:var(--accent);opacity:.9;pointer-events:none}
-.quote blockquote{margin:1.25rem 0 1.125rem;font-size:1.06rem;line-height:1.55;letter-spacing:-.005em}
-.who{margin:0;color:var(--muted);font-size:.85rem;font-weight:500}
-.about-grid{display:grid;gap:clamp(2.5rem,6vw,5.5rem);align-items:center}
-.about-visual{position:relative;isolation:isolate;aspect-ratio:4/5;max-width:28.75rem;width:100%;margin-inline:auto}
-.about-visual img{width:100%;height:100%;object-fit:cover;object-position:50% 20%;border-radius:2.25rem;border:1px solid var(--glass-line)}
-.about-frame{position:absolute;z-index:-1;inset:1rem -1rem -1rem 1rem;border:2px solid var(--accent);border-radius:2.25rem;opacity:.7}
-.about-visual::after{content:"";position:absolute;inset:auto 0 0 0;height:42%;border-radius:0 0 2.25rem 2.25rem;background:linear-gradient(to top,rgba(8,10,14,.8),transparent);pointer-events:none}
-.about-chips{position:absolute;z-index:1;inset:auto 1.125rem 1.125rem 1.125rem;display:flex;flex-wrap:wrap;gap:0.5rem}
-.about-chips li{padding:0.5625rem 0.875rem;border-radius:62.4375rem;background:rgba(255,255,255,.14);border:1px solid rgba(255,255,255,.22);color:#fff;font-size:.82rem;font-weight:500;
-  -webkit-backdrop-filter:blur(0.625rem);backdrop-filter:blur(0.625rem)}
-.about-copy h2{margin-bottom:1.625rem}
-.about-copy p{color:var(--muted);font-size:1.06rem}
-.about-copy .btn{margin-top:0.625rem}
-@media (min-width:900px){.about-grid{grid-template-columns:.85fr 1.15fr}}
+.quote{display:flex;flex-direction:column;flex:none;width:min(84vw,24rem);margin-right:1.25rem;padding:2.5rem 1.75rem 1.5rem;
+  background:linear-gradient(160deg,rgba(255,122,26,.11),var(--card) 62%);border-color:rgba(255,122,26,.28)}
+.quote-lg{width:min(88vw,30rem)}
+.quote::after{content:"“";position:absolute;left:1.5rem;top:0.5rem;font:800 4.5rem/1 var(--font-head);color:var(--accent);pointer-events:none}
+.quote blockquote{margin:0.75rem 0 1.5rem;font-size:1.12rem;font-weight:500;line-height:1.5}
+.who{margin:auto 0 0;padding-top:1rem;border-top:1px solid var(--line);color:var(--muted);font-size:0.85rem;font-weight:600}
+.about-grid{display:grid;gap:clamp(2rem,6vw,5.5rem);align-items:center}
+.about-visual{max-width:27rem;width:100%;margin-inline:auto;padding:0.5rem;border:2px solid rgba(255,122,26,.5);border-radius:calc(var(--radius) + 0.5rem);box-shadow:0 0 4rem rgba(255,122,26,.12)}
+.about-visual img{width:100%;aspect-ratio:4/5;object-fit:cover;object-position:50% 18%;border-radius:var(--radius)}
+.about-copy h2{margin-bottom:1.25rem}
+.about-lead{color:var(--muted);font-size:1.1rem}
+.about-stats{display:grid;grid-template-columns:repeat(3,1fr);gap:1rem;margin:1.5rem 0;padding-block:1.375rem;border-block:1px solid var(--line)}
+.about-stats b{display:block;font:800 clamp(1.4rem,2.4vw,2rem)/1.1 var(--font-head);color:var(--accent-text)}
+.about-stats span{display:block;margin-top:0.375rem;font:600 0.68rem/1.35 var(--font-body);letter-spacing:.12em;text-transform:uppercase;color:var(--muted)}
+.about-copy .btn{margin-top:0.5rem}
+@media (min-width:900px){.about-grid{grid-template-columns:.8fr 1.2fr}}
 
-.steps{display:grid;gap:1rem}
-.step{padding:1.875rem 1.75rem}
-.step-num{display:block;margin-bottom:1.375rem;font:800 4.4rem/.85 var(--font-head);letter-spacing:-.06em;color:transparent;-webkit-text-stroke:1.5px var(--accent);font-variant-numeric:tabular-nums;transition:color var(--t-med)}
-.step:hover .step-num{color:var(--accent)}
-.step h3{margin-bottom:0.625rem}
+.steps{display:grid;gap:2rem 1.5rem}
+.step{position:relative}
+.step-num{display:grid;place-items:center;width:3rem;height:3rem;margin-bottom:1.25rem;border-radius:var(--radius-sm);background:var(--accent-grad);color:var(--on-accent);font:800 1.2rem/1 var(--font-head)}
+.step h3{margin-bottom:0.625rem;font-size:1.05rem;text-transform:uppercase}
 .step p{margin:0;color:var(--muted)}
 @media (min-width:640px){.steps{grid-template-columns:repeat(2,1fr)}}
-@media (min-width:1000px){.steps{grid-template-columns:repeat(4,1fr)}}
-.faq-wrap{max-width:calc(53.75rem + var(--gutter) * 2)}
+@media (min-width:1000px){
+  .steps{grid-template-columns:repeat(4,1fr)}
+  .step:not(:last-child)::after{content:"";position:absolute;top:1.5rem;left:3.75rem;right:-0.75rem;border-top:2px dashed var(--glass-line)}
+}
+.faq-grid{display:grid;gap:1.5rem;align-items:start}
 .faq{display:grid;gap:0.75rem}
 .faq details{background:var(--card);border:1px solid var(--line);border-radius:var(--radius-sm);transition:border-color var(--t-fast),background-color var(--t-fast)}
 .faq details:hover{border-color:rgba(255,122,26,.4)}
-.faq details[open]{border-color:var(--accent)}
-.faq summary{display:flex;justify-content:space-between;align-items:center;gap:1.25rem;min-height:4.25rem;padding:1.125rem 1.375rem;cursor:pointer;list-style:none;font-weight:700;font-size:1.08rem;letter-spacing:-.01em}
+.faq details[open]{border-color:rgba(255,122,26,.6);background:var(--card-hi)}
+.faq summary{display:flex;justify-content:space-between;align-items:center;gap:1.25rem;min-height:4rem;padding:1rem 1.375rem;cursor:pointer;list-style:none;font-weight:700;font-size:1.02rem}
 .faq summary::-webkit-details-marker{display:none}
-.plus{position:relative;flex:none;width:2.25rem;height:2.25rem;border-radius:50%;border:1.5px solid var(--glass-line);transition:background-color var(--t-fast),border-color var(--t-fast),transform var(--t-med) var(--ease)}
-.plus::before,.plus::after{content:"";position:absolute;left:50%;top:50%;width:0.875rem;height:2px;margin:-1px 0 0 -7px;border-radius:2px;background:var(--text);transition:transform var(--t-med) var(--ease),background-color var(--t-fast)}
+.plus{position:relative;flex:none;width:1.25rem;height:1.25rem}
+.plus::before,.plus::after{content:"";position:absolute;left:0;top:50%;width:100%;height:2.5px;margin-top:-1.25px;border-radius:2px;background:var(--accent);transition:transform var(--t-med) var(--ease)}
 .plus::after{transform:rotate(90deg)}
-.faq details[open] .plus{background:var(--accent);border-color:var(--accent);transform:rotate(180deg)}
-.faq details[open] .plus::before,.faq details[open] .plus::after{background:var(--on-accent)}
 .faq details[open] .plus::after{transform:rotate(0)}
 .faq details p{margin:0;padding:0 1.375rem 1.375rem;color:var(--muted);max-width:68ch}
+.faq-side{padding:1.75rem}
+.faq-side h3{margin-bottom:0.75rem}
+.faq-side p{color:var(--muted)}
+@media (min-width:960px){
+  .faq-grid{grid-template-columns:1fr 21rem}
+  .faq-side{position:sticky;top:6rem}
+}
 
-.terms{display:grid;gap:0.875rem}
-.terms>div{padding:1.625rem;border:1px solid var(--line);border-top:3px solid var(--accent);background:var(--card);border-radius:var(--radius-sm)}
-.terms h3{margin-bottom:0.5rem;font-size:1.15rem}
+.terms{display:grid;gap:1rem}
+.terms>div{padding:1.5rem 1.625rem;border:1px solid var(--line);border-left:3px solid var(--accent);background:var(--card);border-radius:var(--radius-sm)}
+.terms h3{margin-bottom:0.5rem;font-size:1rem;text-transform:uppercase}
 .terms p{margin:0;color:var(--muted)}
 @media (min-width:760px){.terms{grid-template-columns:repeat(2,1fr)}}
 
 .cta{padding-block:0 var(--section-y)}
-.cta-box{position:relative;isolation:isolate;overflow:hidden;padding:clamp(3rem,8vw,6.5rem) clamp(1.5rem,6vw,5rem);border-radius:clamp(1.75rem,4vw,3rem);
+.cta-box{position:relative;isolation:isolate;overflow:hidden;display:grid;gap:2rem;align-items:center;padding:clamp(2.25rem,6vw,4.5rem);border-radius:calc(var(--radius) + 0.5rem);
   background:var(--accent-grad);color:var(--on-accent)}
-.cta-box::before{content:"";position:absolute;z-index:-1;right:-12%;bottom:-70%;width:70%;aspect-ratio:1;border-radius:50%;background:rgba(255,255,255,.2)}
-.cta-box::after{content:"";position:absolute;z-index:-1;left:-8%;top:-60%;width:46%;aspect-ratio:1;border-radius:50%;border:2px solid rgba(19,10,2,.18)}
-.cta-box h2{font-size:clamp(2.8rem,8.4vw,7rem);line-height:.95;letter-spacing:-.05em;max-width:12ch}
-.cta-box p{max-width:44ch;margin:1.5rem 0 0;font-size:1.2rem;color:rgba(19,10,2,.85)}
-.cta-box .hero-actions{margin-top:2.25rem}
+.cta-box::before{content:"";position:absolute;z-index:-1;right:-10%;bottom:-80%;width:55%;aspect-ratio:1;border-radius:50%;background:rgba(255,255,255,.2)}
+.cta-box::after{content:"";position:absolute;z-index:-1;left:-6%;top:-70%;width:38%;aspect-ratio:1;border-radius:50%;border:2px solid rgba(20,10,2,.18)}
+.cta-box h2{font-size:clamp(1.8rem,4.4vw,3.4rem);margin-bottom:1rem}
+.cta-box p{max-width:44ch;margin:0;font-size:1.1rem;color:rgba(20,10,2,.85)}
+.cta-actions{display:flex;flex-wrap:wrap;gap:0.75rem}
 .cta-box .btn-primary{background:var(--on-accent);color:#fff;box-shadow:none}
 .cta-box .btn-primary:hover{background:#000}
-.cta-box .btn-ghost{background:transparent;color:var(--on-accent);border-color:rgba(19,10,2,.45)}
-.cta-box .btn-ghost:hover{background:rgba(19,10,2,.1);color:var(--on-accent);border-color:var(--on-accent)}
-.site-footer{border-top:1px solid var(--line);padding-block:3rem 2rem;background:var(--bg-alt)}
-.footer-row{display:grid;gap:1.75rem;align-items:start}
-.footer-brand p{margin:0.875rem 0 0;color:var(--muted);max-width:34ch}
-.footer-links{display:grid;gap:0}
-.footer-links a{display:flex;align-items:center;min-height:2.75rem;color:var(--muted);text-decoration:none;font-weight:500}
-.footer-links a:hover{color:var(--accent-text)}
-.socials{display:flex;gap:0.625rem}
-.footer-copy{margin-top:2rem;padding-top:1.375rem;border-top:1px solid var(--line);color:var(--muted);font-size:.85rem}
-@media (min-width:760px){.footer-row{grid-template-columns:1.4fr 1fr auto}}
+.cta-box .btn-ghost{background:transparent;color:var(--on-accent);border-color:rgba(20,10,2,.5)}
+.cta-box .btn-ghost:hover{background:rgba(20,10,2,.1);color:var(--on-accent);border-color:var(--on-accent)}
+@media (min-width:900px){.cta-box{grid-template-columns:1.2fr 1fr}.cta-actions{justify-content:flex-end}}
+.site-footer{border-top:1px solid var(--line);padding-block:1.75rem;background:var(--bg)}
+.footer-row{display:flex;flex-wrap:wrap;align-items:center;gap:1.25rem 2rem}
+.footer-row .logo{margin-right:0}
+.footer-copy{flex:1;min-width:14rem;margin:0;color:var(--muted);font-size:0.85rem}
+.footer-copy a{color:var(--text)}
+.socials{display:flex;align-items:center;gap:0.625rem}
 
 .sticky-cta{position:fixed;left:0;right:0;bottom:0;z-index:40;padding:0.75rem var(--gutter) calc(0.75rem + env(safe-area-inset-bottom));
   background:linear-gradient(to top,var(--bg) 55%,transparent);translate:0 110%;visibility:hidden;
   transition:translate var(--t-med) var(--ease),visibility 0s linear var(--t-med)}
 .sticky-cta.on{translate:0 0;visibility:visible;transition-delay:0s}
 @media (min-width:900px){.sticky-cta{display:none}}
+@media (max-width:899px){html{scroll-padding-bottom:5rem}}
 /* Поява при скролі працює лише з JS (клас .js на <html>), без нього все видно одразу */
 .js .reveal{opacity:0;translate:0 1.75rem;transition:opacity .8s var(--ease),translate .8s var(--ease)}
 .js .reveal.in{opacity:1;translate:0 0}
 
 @keyframes ticker{to{transform:translateX(-50%)}}
 @keyframes marquee{to{transform:translateX(-50%)}}
-@keyframes spin{to{transform:rotate(360deg)}}
-@keyframes drift-a{0%,100%{transform:translate(0,0)}50%{transform:translate(-3%,5%)}}
-@keyframes drift-b{0%,100%{transform:translate(0,0)}50%{transform:translate(5%,-4%)}}
-@keyframes float-a{0%,100%{translate:0 0}50%{translate:0 -10px}}
-@keyframes float-b{0%,100%{translate:0 0}50%{translate:0 0.625rem}}
+@keyframes glow{0%,100%{opacity:.85;transform:scale(1)}50%{opacity:1;transform:scale(1.06)}}
 
-.ticker-track{animation:ticker 45s linear infinite}
+.ticker-track{animation:ticker 50s linear infinite}
 .ticker:hover .ticker-track{animation-play-state:paused}
-.stamp-ring{animation:spin 24s linear infinite}
-.hero::before{animation:drift-a 16s ease-in-out infinite}
-.hero::after{animation:drift-b 20s ease-in-out infinite}
-.glass-a{animation:float-a 7s ease-in-out infinite}
-.glass-b{animation:float-b 8s ease-in-out infinite}
+.hero-bg::before{animation:glow 9s ease-in-out infinite}
 
 /* смужка прогресу читання (де підтримується scroll-driven animations) */
 @supports (animation-timeline:scroll()){
@@ -482,32 +478,28 @@ body.lb-open{overflow:hidden}
 <a class="skip" href="#main">Пропустити до змісту</a>
 
 <header class="site-header" id="top">
-  <div class="container">
-    <div class="header-row">
-      <a class="logo" href="#top" aria-label="Влад Нагорнюк, на початок сторінки">
-        <span class="logo-mark" aria-hidden="true">Н</span>
-        <span class="logo-text">Нагорнюк<small>онлайн-тренер</small></span>
-      </a>
-      <nav class="nav" id="nav" aria-label="Головне меню">
-        <a href="#services">Послуги</a>
-        <a href="#results">Результати</a>
-        <a href="#reviews">Відгуки</a>
-        <a href="#about">Про мене</a>
-        <a href="#faq">Питання</a>
-      </nav>
-      <div class="header-actions">
-        <button class="icon-btn theme-toggle" type="button" aria-label="Перемкнути тему" data-theme-toggle>
-          <svg class="ico ico-moon" aria-hidden="true"><use href="#i-moon"/></svg>
-          <svg class="ico ico-sun" aria-hidden="true"><use href="#i-sun"/></svg>
-        </button>
-        <a class="btn btn-primary btn-sm header-cta" href="https://t.me/nahorniuk_vlad" target="_blank" rel="noopener">
-          <svg class="ico" aria-hidden="true"><use href="#i-telegram"/></svg>Написати
-        </a>
-        <button class="icon-btn menu-btn" type="button" aria-label="Відкрити меню" aria-expanded="false" aria-controls="nav" data-menu-btn>
-          <svg class="ico ico-open" aria-hidden="true"><use href="#i-menu"/></svg>
-          <svg class="ico ico-close" aria-hidden="true"><use href="#i-x"/></svg>
-        </button>
-      </div>
+  <div class="container header-row">
+    <a class="logo" href="#top" aria-label="Нагорнюк, онлайн-тренер. На початок сторінки">
+      <span class="logo-mark" aria-hidden="true">Н</span>
+      <span class="logo-text">Нагорнюк <b>тренер</b></span>
+    </a>
+    <nav class="nav" id="nav" aria-label="Головне меню">
+      <a href="#services">Послуги</a>
+      <a href="#results">Результати</a>
+      <a href="#reviews">Відгуки</a>
+      <a href="#about">Про мене</a>
+      <a href="#faq">Питання</a>
+    </nav>
+    <div class="header-actions">
+      <button class="icon-btn theme-toggle" type="button" aria-label="Перемкнути тему" data-theme-toggle>
+        <svg class="ico ico-moon" aria-hidden="true"><use href="#i-moon"/></svg>
+        <svg class="ico ico-sun" aria-hidden="true"><use href="#i-sun"/></svg>
+      </button>
+      <a class="btn btn-primary btn-sm header-cta" href="https://t.me/nahorniuk_vlad" target="_blank" rel="noopener">Написати в Telegram</a>
+      <button class="icon-btn menu-btn" type="button" aria-label="Відкрити меню" aria-expanded="false" aria-controls="nav" data-menu-btn>
+        <svg class="ico ico-open" aria-hidden="true"><use href="#i-menu"/></svg>
+        <svg class="ico ico-close" aria-hidden="true"><use href="#i-x"/></svg>
+      </button>
     </div>
   </div>
 </header>
@@ -534,6 +526,7 @@ body.lb-open{overflow:hidden}
     <symbol id="i-chat" viewBox="0 0 24 24"><path d="M7.9 20A9 9 0 1 0 4 16.1L2 22Z"/></symbol>
     <symbol id="i-food" viewBox="0 0 24 24"><path d="M3 2v7c0 1.1.9 2 2 2h4a2 2 0 0 0 2-2V2"/><path d="M7 2v20"/><path d="M21 15V2a5 5 0 0 0-5 5v6c0 1.1.9 2 2 2h3Zm0 0v7"/></symbol>
     <symbol id="i-plan" viewBox="0 0 24 24"><rect width="8" height="4" x="8" y="2" rx="1"/><path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"/><path d="M12 11h4M12 16h4M8 11h.01M8 16h.01"/></symbol>
+    <symbol id="i-shield" viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10Z"/><path d="m9 12 2 2 4-4"/></symbol>
     <symbol id="i-card" viewBox="0 0 24 24"><rect x="2" y="5" width="20" height="14" rx="2"/><path d="M2 10h20"/></symbol>
   </defs>
 </svg>
@@ -541,178 +534,188 @@ body.lb-open{overflow:hidden}
 <main id="main" tabindex="-1">
 
 <section class="hero" aria-labelledby="hero-title">
-  <div class="container hero-grid">
-    <div class="hero-copy">
-      <p class="pill reveal"><span class="dot" aria-hidden="true"></span>Онлайн-тренер · Влад Нагорнюк</p>
-      <h1 id="hero-title" class="reveal">Тренування, що дають результат, <span class="accent nowrap">де б ти не був</span></h1>
-      <p class="lead reveal">12 років тренерського досвіду, 6 років онлайн і понад 100 задоволених клієнтів. Чемпіон світу з підтягувань та фіналіст шоу «Україна має талант&nbsp;5».</p>
-      <div class="hero-actions reveal">
-        <a class="btn btn-primary btn-lg" href="https://t.me/nahorniuk_vlad" target="_blank" rel="noopener">
-          <svg class="ico" aria-hidden="true"><use href="#i-telegram"/></svg>Написати в Telegram
-        </a>
-        <a class="btn btn-ghost btn-lg" href="#results">Результати клієнтів<svg class="ico" aria-hidden="true"><use href="#i-arrow"/></svg></a>
-      </div>
-      <p class="hero-note reveal">Програма від 350 ₴ · відповідаю в Telegram та Instagram</p>
-    </div>
+  <div class="hero-bg" aria-hidden="true">
+    <img src="/img/out/portrait-853.webp" alt="" width="853" height="1280" fetchpriority="high">
+  </div>
 
-    <div class="hero-visual reveal">
-      <div class="portrait">
-        <img src="/img/out/portrait-640.webp" alt="Влад Нагорнюк, онлайн-тренер" width="640" height="960" fetchpriority="high">
+  <div class="container hero-inner">
+    <div class="hero-copy">
+      <p class="badge reveal">
+        <svg class="ico" aria-hidden="true"><use href="#i-shield"/></svg>
+        <b>Влад Нагорнюк</b><span>Чемпіон світу з підтягувань</span>
+      </p>
+      <h1 id="hero-title" class="reveal">Тренування, що дають результат, <span class="accent nowrap">де б ти не був</span></h1>
+      <p class="lead reveal">Програма під твою ціль, відео техніки й підтримка в Telegram. Вдома, в залі чи на вулиці.</p>
+      <div class="hero-actions reveal">
+        <a class="btn btn-primary btn-lg" href="https://t.me/nahorniuk_vlad" target="_blank" rel="noopener">Написати в Telegram<svg class="ico" aria-hidden="true"><use href="#i-arrow"/></svg></a>
+        <a class="link-arrow" href="#results">Або спершу подивитись результати<svg class="ico" aria-hidden="true"><use href="#i-arrow"/></svg></a>
       </div>
-      <div class="glass glass-a" aria-hidden="true">
-        <svg class="ico ico-lg" aria-hidden="true"><use href="#i-trophy"/></svg>
-        <div><b>Чемпіон світу 2017</b><span>підтягування +32 кг</span></div>
-      </div>
-      <div class="glass glass-b" aria-hidden="true">
-        <img src="/img/out/res-7-640.webp" alt="" width="56" height="57" loading="lazy">
-        <div><b>+6 кг</b><span>за 2 місяці роботи</span></div>
-      </div>
-      <svg class="stamp" viewBox="0 0 120 120" aria-hidden="true" focusable="false">
-        <defs><path id="stamp-ring" d="M60,60 m-47,0 a47,47 0 1,1 94,0 a47,47 0 1,1 -94,0"/></defs>
-        <g class="stamp-ring"><text><textPath href="#stamp-ring" textLength="292" lengthAdjust="spacing">ТРЕНЕР ОНЛАЙН • РОКІВ ДОСВІДУ •</textPath></text></g>
-        <text class="stamp-num" x="60" y="73" text-anchor="middle">12</text>
-      </svg>
+      <ul class="hero-checks reveal">
+        <li><svg class="ico" aria-hidden="true"><use href="#i-check"/></svg>Програма від 350 ₴</li>
+        <li><svg class="ico" aria-hidden="true"><use href="#i-check"/></svg>Онлайн по відеозв'язку</li>
+        <li><svg class="ico" aria-hidden="true"><use href="#i-check"/></svg>Відповідаю в Telegram та Instagram</li>
+      </ul>
+
+      <ul class="hero-stats reveal">
+        <li><b class="num" data-count="12">12</b><span>років у тренерстві</span></li>
+        <li><b>Чемпіон світу</b><span>підтягування +32&nbsp;кг</span></li>
+        <li><b class="num" data-count="100" data-plus>100+</b><span>задоволених клієнтів</span></li>
+      </ul>
     </div>
   </div>
 
   <div class="ticker" aria-hidden="true">
     <ul class="ticker-track">
-      <li>Чемпіон світу 2017</li><li>Фіналіст «Україна має талант 5»</li><li>Чемпіон України 2015</li><li>12 років досвіду</li><li>100+ клієнтів</li><li>6 років онлайн</li>
-      <li>Чемпіон світу 2017</li><li>Фіналіст «Україна має талант 5»</li><li>Чемпіон України 2015</li><li>12 років досвіду</li><li>100+ клієнтів</li><li>6 років онлайн</li>
+      <li>Чемпіон світу 2017</li><li class="hl">Фіналіст «Україна має талант 5»</li><li>Чемпіон України 2015</li><li class="hl">12 років у тренерстві</li><li>6 років онлайн</li><li class="hl">100+ клієнтів</li>
+      <li>Чемпіон світу 2017</li><li class="hl">Фіналіст «Україна має талант 5»</li><li>Чемпіон України 2015</li><li class="hl">12 років у тренерстві</li><li>6 років онлайн</li><li class="hl">100+ клієнтів</li>
     </ul>
   </div>
 </section>
 
-<section class="facts" aria-label="Досягнення">
-  <div class="container">
-    <ul class="bento">
-      <li class="tile tile-xl reveal">
-        <b class="num" data-count="12">12</b>
-        <span class="tile-label">років тренерського досвіду</span>
-      </li>
-      <li class="tile reveal">
-        <b class="num" data-count="6">6</b>
-        <span class="tile-label">років роботи онлайн</span>
-      </li>
-      <li class="tile reveal">
-        <b class="num" data-count="100" data-plus>100+</b>
-        <span class="tile-label">задоволених клієнтів</span>
-      </li>
-      <li class="tile tile-wide tile-hl reveal">
-        <svg class="ico ico-lg" aria-hidden="true"><use href="#i-trophy"/></svg>
-        <b class="num num-plus" data-count="32">32</b>
-        <span class="tile-label"><strong>Чемпіон світу 2017.</strong> Підтягування з додатковою вагою 32&nbsp;кг</span>
-      </li>
-      <li class="tile tile-wide reveal">
-        <svg class="ico ico-lg" aria-hidden="true"><use href="#i-medal"/></svg>
-        <span class="tile-title">Чемпіон України 2015</span>
-        <span class="tile-label">Утримання статичного елемента «передній вис»</span>
-      </li>
-      <li class="tile reveal">
-        <svg class="ico ico-lg" aria-hidden="true"><use href="#i-star"/></svg>
-        <span class="tile-title">Фіналіст</span>
-        <span class="tile-label">«Україна має талант&nbsp;5»</span>
-      </li>
-      <li class="tile reveal">
-        <svg class="ico ico-lg" aria-hidden="true"><use href="#i-cap"/></svg>
-        <span class="tile-title">Вища освіта</span>
-        <span class="tile-label">у сфері фізичного виховання</span>
-      </li>
-    </ul>
-  </div>
-</section>
-
-<section class="section" id="services" aria-labelledby="services-title">
+<section class="section dotted" id="achievements" aria-labelledby="ach-title">
   <div class="container">
     <header class="section-head reveal">
-      <p class="eyebrow"><span>01</span>Послуги й ціни</p>
-      <h2 id="services-title">Обери, з чого почати</h2>
-      <p class="section-lead">Оплата через monobank. Після оплати напиши мені в Telegram: узгодимо ціль, рівень і старт.</p>
+      <p class="eyebrow">Досягнення</p>
+      <h2 id="ach-title">Титули, які я здобув сам</h2>
+      <p class="section-lead">Я не просто пояснюю вправи. Я сам доводив тіло до рекордів, тому знаю ціну кожного підходу.</p>
+    </header>
+    <ul class="ach-grid">
+      <li class="card ach reveal">
+        <span class="ach-ico"><svg class="ico ico-lg" aria-hidden="true"><use href="#i-trophy"/></svg></span>
+        <b class="ach-year">2017</b>
+        <h3>Чемпіон світу</h3>
+        <p>Підтягування з додатковою вагою 32&nbsp;кг.</p>
+      </li>
+      <li class="card ach reveal">
+        <span class="ach-ico"><svg class="ico ico-lg" aria-hidden="true"><use href="#i-medal"/></svg></span>
+        <b class="ach-year">2015</b>
+        <h3>Чемпіон України</h3>
+        <p>Утримання статичного елемента «передній вис».</p>
+      </li>
+      <li class="card ach reveal">
+        <span class="ach-ico"><svg class="ico ico-lg" aria-hidden="true"><use href="#i-star"/></svg></span>
+       <h3>Фіналіст шоу</h3>
+        <p>«Україна має талант&nbsp;5».</p>
+      </li>
+      <li class="card ach reveal">
+        <span class="ach-ico"><svg class="ico ico-lg" aria-hidden="true"><use href="#i-cap"/></svg></span>
+       <h3>Вища освіта</h3>
+        <p>У сфері фізичного виховання, 12 років тренерського досвіду.</p>
+      </li>
+    </ul>
+  </div>
+</section>
+
+<section class="section section-alt dotted" id="services" aria-labelledby="services-title">
+  <div class="container">
+    <header class="section-head reveal">
+      <p class="eyebrow">Що я пропоную</p>
+      <h2 id="services-title">Обери свій формат</h2>
+      <p class="section-lead">Від разової програми за 350 ₴ до місяця тренувань із відео техніки. Оплата через monobank, далі пишеш мені в Telegram.</p>
     </header>
 
     <div class="service-grid">
 
       <article class="card service reveal">
-        <span class="service-ico"><svg class="ico ico-lg" aria-hidden="true"><use href="#i-plan"/></svg></span>
-        <h3>Програма тренувань</h3>
-        <p>Персональна програма під твою ціль, рівень і обладнання. У місячному форматі до кожної вправи додається відео техніки виконання.</p>
-        <ul class="ticks">
-          <li>Підбір під ціль: маса, схуднення, форма</li>
-          <li>Відео техніки в місячній програмі</li>
-          <li>Зручно для залу й дому</li>
-        </ul>
-        <ul class="options">
-          <li>
-            <div><span class="opt-name">Разова програма</span></div>
-            <b class="price">350 ₴</b>
-            <a class="btn btn-primary btn-sm" href="https://send.monobank.ua/jar/2xg515qvKK?a=350&amp;t=%D0%9F%D1%80%D0%BE%D0%B3%D1%80%D0%B0%D0%BC%D0%B0%20%D1%82%D1%80%D0%B5%D0%BD%D1%83%D0%B2%D0%B0%D0%BD%D1%8C%20%28%D1%80%D0%B0%D0%B7%D0%BE%D0%B2%D0%B0%29" target="_blank" rel="noopener" aria-label="Оплатити разову програму, 350 гривень"><svg class="ico" aria-hidden="true"><use href="#i-card"/></svg>Оплатити</a>
-          </li>
-          <li>
-            <div><span class="opt-name">На місяць</span><span class="opt-meta">10 тренувань + відео техніки</span></div>
-            <b class="price">4 000 ₴</b>
-            <a class="btn btn-primary btn-sm" href="https://send.monobank.ua/jar/2xg515qvKK?a=4000&amp;t=%D0%9F%D1%80%D0%BE%D0%B3%D1%80%D0%B0%D0%BC%D0%B0%20%D1%82%D1%80%D0%B5%D0%BD%D1%83%D0%B2%D0%B0%D0%BD%D1%8C%20%D0%BD%D0%B0%20%D0%BC%D1%96%D1%81%D1%8F%D1%86%D1%8C" target="_blank" rel="noopener" aria-label="Оплатити програму на місяць, 4000 гривень"><svg class="ico" aria-hidden="true"><use href="#i-card"/></svg>Оплатити</a>
-          </li>
-        </ul>
+        <div class="service-visual">
+          <svg class="ico" aria-hidden="true"><use href="#i-plan"/></svg>
+          <span class="vtag">Найдешевший старт</span>
+        </div>
+        <div class="service-body">
+          <h3>Програма тренувань</h3>
+          <p>Персональна програма під твою ціль, рівень і обладнання. У місячному форматі до кожної вправи додається відео техніки виконання.</p>
+          <ul class="ticks">
+            <li>Підбір під ціль: маса, схуднення, форма</li>
+            <li>Відео техніки в місячній програмі</li>
+            <li>Зручно для залу й дому</li>
+          </ul>
+          <ul class="options">
+            <li>
+              <div><span class="opt-name">Разова програма</span></div>
+              <b class="price">350 ₴</b>
+              <a class="btn btn-primary btn-sm" href="https://send.monobank.ua/jar/2xg515qvKK?a=350&amp;t=%D0%9F%D1%80%D0%BE%D0%B3%D1%80%D0%B0%D0%BC%D0%B0%20%D1%82%D1%80%D0%B5%D0%BD%D1%83%D0%B2%D0%B0%D0%BD%D1%8C%20%28%D1%80%D0%B0%D0%B7%D0%BE%D0%B2%D0%B0%29" target="_blank" rel="noopener" aria-label="Оплатити разову програму, 350 гривень">Оплатити</a>
+            </li>
+            <li>
+              <div><span class="opt-name">На місяць</span><span class="opt-meta">10 тренувань + відео техніки</span></div>
+              <b class="price">4 000 ₴</b>
+              <a class="btn btn-primary btn-sm" href="https://send.monobank.ua/jar/2xg515qvKK?a=4000&amp;t=%D0%9F%D1%80%D0%BE%D0%B3%D1%80%D0%B0%D0%BC%D0%B0%20%D1%82%D1%80%D0%B5%D0%BD%D1%83%D0%B2%D0%B0%D0%BD%D1%8C%20%D0%BD%D0%B0%20%D0%BC%D1%96%D1%81%D1%8F%D1%86%D1%8C" target="_blank" rel="noopener" aria-label="Оплатити програму на місяць, 4000 гривень">Оплатити</a>
+            </li>
+          </ul>
+        </div>
       </article>
 
       <article class="card service service-featured reveal">
-        <span class="tag">Найпопулярніше</span>
-        <span class="service-ico"><svg class="ico ico-lg" aria-hidden="true"><use href="#i-video"/></svg></span>
-        <h3>Тренування онлайн по відеозв'язку</h3>
-        <p>Я поруч у відеодзвінку: ставлю техніку, підбираю ваги й темп. Не важливо, вдома ти чи в залі.</p>
-        <ul class="ticks">
-          <li>Корекція техніки в реальному часі</li>
-          <li>Вдома, у залі або на вулиці</li>
-          <li>Графік підбираємо під тебе</li>
-        </ul>
-        <ul class="options">
-          <li>
-            <div><span class="opt-name">Одне тренування</span></div>
-            <b class="price">700 ₴</b>
-            <a class="btn btn-primary btn-sm" href="https://send.monobank.ua/jar/2xg515qvKK?a=700&amp;t=%D0%9E%D0%BD%D0%BB%D0%B0%D0%B9%D0%BD-%D1%82%D1%80%D0%B5%D0%BD%D1%83%D0%B2%D0%B0%D0%BD%D0%BD%D1%8F%20%28%D1%80%D0%B0%D0%B7%D0%BE%D0%B2%D0%B5%29" target="_blank" rel="noopener" aria-label="Оплатити одне онлайн-тренування, 700 гривень"><svg class="ico" aria-hidden="true"><use href="#i-card"/></svg>Оплатити</a>
-          </li>
-          <li>
-            <div><span class="opt-name">Пакет</span><span class="opt-meta">10 тренувань</span></div>
-            <b class="price">7 000 ₴</b>
-            <a class="btn btn-primary btn-sm" href="https://send.monobank.ua/jar/2xg515qvKK?a=7000&amp;t=%D0%9E%D0%BD%D0%BB%D0%B0%D0%B9%D0%BD-%D1%82%D1%80%D0%B5%D0%BD%D1%83%D0%B2%D0%B0%D0%BD%D0%BD%D1%8F%2C%2010%20%D0%B7%D0%B0%D0%BD%D1%8F%D1%82%D1%8C" target="_blank" rel="noopener" aria-label="Оплатити пакет із 10 онлайн-тренувань, 7000 гривень"><svg class="ico" aria-hidden="true"><use href="#i-card"/></svg>Оплатити</a>
-          </li>
-        </ul>
+        <div class="service-visual">
+          <svg class="ico" aria-hidden="true"><use href="#i-video"/></svg>
+          <span class="vtag vtag-accent">Найпопулярніше</span>
+        </div>
+        <div class="service-body">
+          <h3>Тренування онлайн по відеозв'язку</h3>
+          <p>Я поруч у відеодзвінку: ставлю техніку, підбираю ваги й темп. Не важливо, вдома ти чи в залі.</p>
+          <ul class="ticks">
+            <li>Корекція техніки в реальному часі</li>
+            <li>Вдома, у залі або на вулиці</li>
+            <li>Графік підбираємо під тебе</li>
+          </ul>
+          <ul class="options">
+            <li>
+              <div><span class="opt-name">Одне тренування</span></div>
+              <b class="price">700 ₴</b>
+              <a class="btn btn-primary btn-sm" href="https://send.monobank.ua/jar/2xg515qvKK?a=700&amp;t=%D0%9E%D0%BD%D0%BB%D0%B0%D0%B9%D0%BD-%D1%82%D1%80%D0%B5%D0%BD%D1%83%D0%B2%D0%B0%D0%BD%D0%BD%D1%8F%20%28%D1%80%D0%B0%D0%B7%D0%BE%D0%B2%D0%B5%29" target="_blank" rel="noopener" aria-label="Оплатити одне онлайн-тренування, 700 гривень">Оплатити</a>
+            </li>
+            <li>
+              <div><span class="opt-name">Пакет</span><span class="opt-meta">10 тренувань</span></div>
+              <b class="price">7 000 ₴</b>
+              <a class="btn btn-primary btn-sm" href="https://send.monobank.ua/jar/2xg515qvKK?a=7000&amp;t=%D0%9E%D0%BD%D0%BB%D0%B0%D0%B9%D0%BD-%D1%82%D1%80%D0%B5%D0%BD%D1%83%D0%B2%D0%B0%D0%BD%D0%BD%D1%8F%2C%2010%20%D0%B7%D0%B0%D0%BD%D1%8F%D1%82%D1%8C" target="_blank" rel="noopener" aria-label="Оплатити пакет із 10 онлайн-тренувань, 7000 гривень">Оплатити</a>
+            </li>
+          </ul>
+        </div>
       </article>
 
       <article class="card service reveal">
-        <span class="service-ico"><svg class="ico ico-lg" aria-hidden="true"><use href="#i-chat"/></svg></span>
-        <h3>Консультація</h3>
-        <p>Розбираємо твою ситуацію, ціль і помилки. Ти отримуєш чіткий план дій, щоб рухатись далі самостійно.</p>
-        <ul class="ticks">
-          <li>Аналіз цілі, режиму й навантаження</li>
-          <li>Відповіді на всі запитання</li>
-          <li>Конкретні наступні кроки</li>
-        </ul>
-        <ul class="options">
-          <li>
-            <div><span class="opt-name">Одна консультація</span></div>
-            <b class="price">1 000 ₴</b>
-            <a class="btn btn-primary btn-sm" href="https://send.monobank.ua/jar/2xg515qvKK?a=1000&amp;t=%D0%9A%D0%BE%D0%BD%D1%81%D1%83%D0%BB%D1%8C%D1%82%D0%B0%D1%86%D1%96%D1%8F" target="_blank" rel="noopener" aria-label="Оплатити консультацію, 1000 гривень"><svg class="ico" aria-hidden="true"><use href="#i-card"/></svg>Оплатити</a>
-          </li>
-        </ul>
+        <div class="service-visual">
+          <svg class="ico" aria-hidden="true"><use href="#i-chat"/></svg>
+          <span class="vtag">Перший крок</span>
+        </div>
+        <div class="service-body">
+          <h3>Консультація</h3>
+          <p>Розбираємо твою ситуацію, ціль і помилки. Ти отримуєш чіткий план дій, щоб рухатись далі самостійно.</p>
+          <ul class="ticks">
+            <li>Аналіз цілі, режиму й навантаження</li>
+            <li>Відповіді на всі запитання</li>
+            <li>Конкретні наступні кроки</li>
+          </ul>
+          <ul class="options">
+            <li>
+              <div><span class="opt-name">Одна консультація</span></div>
+              <b class="price">1 000 ₴</b>
+              <a class="btn btn-primary btn-sm" href="https://send.monobank.ua/jar/2xg515qvKK?a=1000&amp;t=%D0%9A%D0%BE%D0%BD%D1%81%D1%83%D0%BB%D1%8C%D1%82%D0%B0%D1%86%D1%96%D1%8F" target="_blank" rel="noopener" aria-label="Оплатити консультацію, 1000 гривень">Оплатити</a>
+            </li>
+          </ul>
+        </div>
       </article>
 
       <article class="card service reveal">
-        <span class="service-ico"><svg class="ico ico-lg" aria-hidden="true"><use href="#i-food"/></svg></span>
-        <h3>Харчування</h3>
-        <p>Раціон на місяць із урахуванням усіх твоїх потреб: ціль, режим дня, смаки та особливості.</p>
-        <ul class="ticks">
-          <li>Під твою ціль і калорійність</li>
-          <li>Враховує уподобання й обмеження</li>
-          <li>Без виснажливих дієт</li>
-        </ul>
-        <ul class="options">
-          <li>
-            <div><span class="opt-name">Раціон на місяць</span></div>
-            <b class="price">3 000 ₴</b>
-            <a class="btn btn-primary btn-sm" href="https://send.monobank.ua/jar/2xg515qvKK?a=3000&amp;t=%D0%A5%D0%B0%D1%80%D1%87%D1%83%D0%B2%D0%B0%D0%BD%D0%BD%D1%8F%20%D0%BD%D0%B0%20%D0%BC%D1%96%D1%81%D1%8F%D1%86%D1%8C" target="_blank" rel="noopener" aria-label="Оплатити раціон на місяць, 3000 гривень"><svg class="ico" aria-hidden="true"><use href="#i-card"/></svg>Оплатити</a>
-          </li>
-        </ul>
+        <div class="service-visual">
+          <svg class="ico" aria-hidden="true"><use href="#i-food"/></svg>
+          <span class="vtag">Тільки харчування</span>
+        </div>
+        <div class="service-body">
+          <h3>Харчування</h3>
+          <p>Раціон на місяць із урахуванням усіх твоїх потреб: ціль, режим дня, смаки та особливості.</p>
+          <ul class="ticks">
+            <li>Під твою ціль і калорійність</li>
+            <li>Враховує уподобання й обмеження</li>
+            <li>Без виснажливих дієт</li>
+          </ul>
+          <ul class="options">
+            <li>
+              <div><span class="opt-name">Раціон на місяць</span></div>
+              <b class="price">3 000 ₴</b>
+              <a class="btn btn-primary btn-sm" href="https://send.monobank.ua/jar/2xg515qvKK?a=3000&amp;t=%D0%A5%D0%B0%D1%80%D1%87%D1%83%D0%B2%D0%B0%D0%BD%D0%BD%D1%8F%20%D0%BD%D0%B0%20%D0%BC%D1%96%D1%81%D1%8F%D1%86%D1%8C" target="_blank" rel="noopener" aria-label="Оплатити раціон на місяць, 3000 гривень">Оплатити</a>
+            </li>
+          </ul>
+        </div>
       </article>
 
     </div>
@@ -721,10 +724,10 @@ body.lb-open{overflow:hidden}
   </div>
 </section>
 
-<section class="section section-alt" id="results" aria-labelledby="results-title">
+<section class="section" id="results" aria-labelledby="results-title">
   <div class="container">
     <header class="section-head reveal">
-      <p class="eyebrow"><span>02</span>Результати клієнтів</p>
+      <p class="eyebrow">Результати клієнтів</p>
       <h2 id="results-title">Не словом, а ділом</h2>
       <p class="section-lead">Реальні фото «до» і «після». Натисни на картку, щоб розглянути уважніше.</p>
     </header>
@@ -778,10 +781,10 @@ body.lb-open{overflow:hidden}
   </div>
 </section>
 
-<section class="section reviews" id="reviews" aria-labelledby="reviews-title">
+<section class="section section-alt reviews" id="reviews" aria-labelledby="reviews-title">
   <div class="container">
     <header class="section-head reveal">
-      <p class="eyebrow"><span>03</span>Відгуки</p>
+      <p class="eyebrow">Відгуки</p>
       <h2 id="reviews-title">Що пишуть клієнти</h2>
       <p class="section-lead">Слова з переписок у Telegram та Instagram, без імен. Мова збережена як в оригіналі.</p>
     </header>
@@ -830,85 +833,93 @@ body.lb-open{overflow:hidden}
   </div>
 </section>
 
-<section class="section section-alt" id="about" aria-labelledby="about-title">
+<section class="section" id="about" aria-labelledby="about-title">
   <div class="container about-grid">
-    <div class="about-visual reveal"><span class="about-frame" aria-hidden="true"></span>
+    <div class="about-visual reveal">
       <img src="/img/out/portrait-853.webp" alt="Влад Нагорнюк" width="853" height="1280" loading="lazy">
-      <ul class="about-chips" aria-hidden="true">
-        <li>12 років у тренерстві</li>
-        <li>6 років онлайн</li>
-        <li>100+ клієнтів</li>
-      </ul>
     </div>
     <div class="about-copy reveal">
-      <p class="eyebrow"><span>04</span>Про мене</p>
-      <h2 id="about-title">Влад Нагорнюк: тренер, який сам доводить усе на ділі</h2>
-      <p>Я треную людей уже 12 років, останні 6 з них онлайн. Маю вищу освіту у сфері фізичного виховання й власний спортивний досвід: чемпіон України 2015 з утримання «переднього вису» та чемпіон світу 2017 з підтягувань з додатковою вагою 32&nbsp;кг.</p>
-      <p>Я дійшов до фіналу шоу «Україна має талант&nbsp;5», але найбільше пишаюся не медалями, а результатами клієнтів: від першого місяця тренувань до перевтілення за кілька років.</p>
-      <ul class="ticks">
-        <li>Програма під твою ціль, рівень і обладнання</li>
-        <li>Чітка техніка, яка береже суглоби й спину</li>
-        <li>Підтримка в Telegram на всьому шляху</li>
+      <p class="eyebrow">Про мене</p>
+      <h2 id="about-title">Влад Нагорнюк</h2>
+      <p class="about-lead">Фітнес-тренер із 12-річним досвідом, останні 6 років працюю онлайн. Вища освіта у сфері фізичного виховання. Сам виступав і перемагав, тому знаю ціну кожного підходу.</p>
+      <ul class="about-stats">
+        <li><b>12</b><span>років у тренерстві</span></li>
+        <li><b>6</b><span>років онлайн</span></li>
+        <li><b>100+</b><span>клієнтів</span></li>
       </ul>
-      <a class="btn btn-primary" href="https://t.me/nahorniuk_vlad" target="_blank" rel="noopener"><svg class="ico" aria-hidden="true"><use href="#i-telegram"/></svg>Написати мені</a>
+      <ul class="ticks">
+        <li>Чемпіон світу 2017 з підтягувань з додатковою вагою 32&nbsp;кг</li>
+        <li>Чемпіон України 2015 з утримання «переднього вису»</li>
+        <li>Фіналіст шоу «Україна має талант&nbsp;5»</li>
+        <li>Програма під твою ціль, рівень і обладнання, а техніка така, що береже суглоби й спину</li>
+      </ul>
+      <a class="btn btn-primary" href="https://t.me/nahorniuk_vlad" target="_blank" rel="noopener">Написати мені<svg class="ico" aria-hidden="true"><use href="#i-arrow"/></svg></a>
     </div>
   </div>
 </section>
 
-<section class="section" id="how" aria-labelledby="how-title">
+<section class="section section-alt dotted" id="how" aria-labelledby="how-title">
   <div class="container">
     <header class="section-head reveal">
-      <p class="eyebrow"><span>05</span>Як це працює</p>
+      <p class="eyebrow">Як це працює</p>
       <h2 id="how-title">Чотири кроки до старту</h2>
+      <p class="section-lead">Без складнощів: обираєш, оплачуєш, пишеш мені й починаєш тренуватись.</p>
     </header>
     <ol class="steps">
-      <li class="card step reveal"><span class="step-num">01</span><h3>Обери послугу</h3><p>Програма, онлайн-тренування, консультація або харчування. Не знаєш, що підійде, напиши мені.</p></li>
-      <li class="card step reveal"><span class="step-num">02</span><h3>Оплати</h3><p>Кнопка на картці відкриє monobank із потрібною сумою. Оплата наперед.</p></li>
-      <li class="card step reveal"><span class="step-num">03</span><h3>Напиши в Telegram</h3><p>Розкажи про ціль, досвід і обладнання. Домовимось про терміни й формат.</p></li>
-      <li class="card step reveal"><span class="step-num">04</span><h3>Тренуйся</h3><p>Отримуєш програму з відео техніки або заходиш на тренування по відеозв'язку.</p></li>
+      <li class="step reveal"><span class="step-num">1</span><h3>Обери послугу</h3><p>Програма, онлайн-тренування, консультація або харчування. Не знаєш, що підійде, напиши мені.</p></li>
+      <li class="step reveal"><span class="step-num">2</span><h3>Оплати</h3><p>Кнопка на картці відкриє monobank із потрібною сумою. Оплата наперед.</p></li>
+      <li class="step reveal"><span class="step-num">3</span><h3>Напиши в Telegram</h3><p>Розкажи про ціль, досвід і обладнання. Домовимось про терміни й формат.</p></li>
+      <li class="step reveal"><span class="step-num">4</span><h3>Тренуйся</h3><p>Отримуєш програму з відео техніки або заходиш на тренування по відеозв'язку.</p></li>
     </ol>
   </div>
 </section>
 
-<section class="section section-alt" id="faq" aria-labelledby="faq-title">
-  <div class="container faq-wrap">
+<section class="section" id="faq" aria-labelledby="faq-title">
+  <div class="container">
     <header class="section-head reveal">
-      <p class="eyebrow"><span>06</span>Питання</p>
-      <h2 id="faq-title">Часті запитання</h2>
+      <p class="eyebrow">Що зазвичай зупиняє</p>
+      <h2 id="faq-title">Питання</h2>
     </header>
-    <div class="faq reveal">
-      <details>
-        <summary>Я новачок. Мені підійде?<span class="plus" aria-hidden="true"></span></summary>
-        <p>Так. Я підбираю навантаження під твій рівень, а техніку пояснюю на відео й у дзвінку. Багато клієнтів починали з нуля.</p>
-      </details>
-      <details>
-        <summary>Чи потрібне обладнання або зал?<span class="plus" aria-hidden="true"></span></summary>
-        <p>Ні, не обов'язково. Тренуватись можна вдома, у залі чи на вулиці. Скажи, що в тебе є, і я складу програму під це.</p>
-      </details>
-      <details>
-        <summary>У чому різниця між програмою й тренуванням по відеозв'язку?<span class="plus" aria-hidden="true"></span></summary>
-        <p>Програма — це план, який ти виконуєш самостійно за відео техніки. Тренування по відеозв'язку — я поруч у дзвінку й коригую тебе під час заняття.</p>
-      </details>
-      <details>
-        <summary>Чи треба сидіти на жорстких дієтах?<span class="plus" aria-hidden="true"></span></summary>
-        <p>Ні. Харчування будуємо під твій режим і смаки, без виснажливих обмежень. Раціон на місяць можна замовити окремо.</p>
-      </details>
-      <details>
-        <summary>Коли буде видно результат?<span class="plus" aria-hidden="true"></span></summary>
-        <p>Усе індивідуально. Перші зміни клієнти зазвичай помічають за кілька тижнів регулярних тренувань, а виразний результат дає системна робота протягом місяців.</p>
-      </details>
-      <details>
-        <summary>Як оплатити?<span class="plus" aria-hidden="true"></span></summary>
-        <p>Натисни «Оплатити» на потрібній послузі, відкриється банка monobank. Оплати карткою, а потім напиши мені в Telegram, щоб узгодити старт.</p>
-      </details>
+    <div class="faq-grid">
+      <div class="faq reveal">
+        <details>
+          <summary>Я новачок. Мені підійде?<span class="plus" aria-hidden="true"></span></summary>
+          <p>Так. Я підбираю навантаження під твій рівень, а техніку пояснюю на відео й у дзвінку. Багато клієнтів починали з нуля.</p>
+        </details>
+        <details>
+          <summary>Чи потрібне обладнання або зал?<span class="plus" aria-hidden="true"></span></summary>
+          <p>Ні, не обов'язково. Тренуватись можна вдома, у залі чи на вулиці. Скажи, що в тебе є, і я складу програму під це.</p>
+        </details>
+        <details>
+          <summary>У чому різниця між програмою й тренуванням по відеозв'язку?<span class="plus" aria-hidden="true"></span></summary>
+          <p>Програма — це план, який ти виконуєш самостійно за відео техніки. Тренування по відеозв'язку — я поруч у дзвінку й коригую тебе під час заняття.</p>
+        </details>
+        <details>
+          <summary>Чи треба сидіти на жорстких дієтах?<span class="plus" aria-hidden="true"></span></summary>
+          <p>Ні. Харчування будуємо під твій режим і смаки, без виснажливих обмежень. Раціон на місяць можна замовити окремо.</p>
+        </details>
+        <details>
+          <summary>Коли буде видно результат?<span class="plus" aria-hidden="true"></span></summary>
+          <p>Усе індивідуально. Перші зміни клієнти зазвичай помічають за кілька тижнів регулярних тренувань, а виразний результат дає системна робота протягом місяців.</p>
+        </details>
+        <details>
+          <summary>Як оплатити?<span class="plus" aria-hidden="true"></span></summary>
+          <p>Натисни «Оплатити» на потрібній послузі, відкриється банка monobank. Оплати карткою, а потім напиши мені в Telegram, щоб узгодити старт.</p>
+        </details>
+      </div>
+      <aside class="card faq-side reveal">
+        <h3>Не знайшов відповідь?</h3>
+        <p>Напиши мені в Telegram. Відповім і підкажу, з чого почати саме тобі.</p>
+        <a class="btn btn-primary btn-block" href="https://t.me/nahorniuk_vlad" target="_blank" rel="noopener">Написати в Telegram</a>
+      </aside>
     </div>
   </div>
 </section>
 
-<section class="section" id="terms" aria-labelledby="terms-title">
+<section class="section section-alt" id="terms" aria-labelledby="terms-title">
   <div class="container terms-wrap">
     <header class="section-head reveal">
-      <p class="eyebrow"><span>07</span>Умови співпраці</p>
+      <p class="eyebrow">Умови співпраці</p>
       <h2 id="terms-title">Прозоро й без сюрпризів</h2>
     </header>
     <div class="terms reveal">
@@ -935,9 +946,11 @@ body.lb-open{overflow:hidden}
 <section class="cta" aria-labelledby="cta-title">
   <div class="container">
     <div class="cta-box reveal">
-      <h2 id="cta-title">Готовий почати?</h2>
-      <p>Напиши мені в Telegram: розкажи про ціль, а я підкажу, з чого стартувати.</p>
-      <div class="hero-actions">
+      <div class="cta-text">
+        <h2 id="cta-title">Готовий почати?</h2>
+        <p>Напиши мені в Telegram: розкажи про ціль, а я підкажу, з чого стартувати. Навіть якщо це буде проста програма за 350 ₴.</p>
+      </div>
+      <div class="cta-actions">
         <a class="btn btn-primary btn-lg" href="https://t.me/nahorniuk_vlad" target="_blank" rel="noopener"><svg class="ico" aria-hidden="true"><use href="#i-telegram"/></svg>Написати в Telegram</a>
         <a class="btn btn-ghost btn-lg" href="https://www.instagram.com/nahorniuk/" target="_blank" rel="noopener"><svg class="ico" aria-hidden="true"><use href="#i-instagram"/></svg>Instagram</a>
       </div>
@@ -949,24 +962,17 @@ body.lb-open{overflow:hidden}
 
 <footer class="site-footer">
   <div class="container footer-row">
-    <div class="footer-brand">
-      <a class="logo" href="#top" aria-label="На початок сторінки">
-        <span class="logo-mark" aria-hidden="true">Н</span>
-        <span class="logo-text">Нагорнюк<small>онлайн-тренер</small></span>
-      </a>
-      <p>Тренування, програми й харчування онлайн. Результат на ділі.</p>
-    </div>
-    <div class="footer-links">
-      <a href="#terms">Умови співпраці</a>
-      <a href="#faq">Питання</a>
-      <a href="#services">Послуги</a>
-    </div>
+    <a class="logo" href="#top" aria-label="Нагорнюк, онлайн-тренер. На початок сторінки">
+      <span class="logo-mark" aria-hidden="true">Н</span>
+      <span class="logo-text">Нагорнюк <b>тренер</b></span>
+    </a>
+    <p class="footer-copy">© 2026 Влад Нагорнюк. Результати індивідуальні й не гарантуються. <a href="#terms">Умови співпраці</a></p>
     <div class="socials">
-      <a class="icon-btn" href="https://t.me/nahorniuk_vlad" target="_blank" rel="noopener" aria-label="Telegram"><svg class="ico" aria-hidden="true"><use href="#i-telegram"/></svg></a>
+      <a class="btn btn-primary btn-sm" href="https://t.me/nahorniuk_vlad" target="_blank" rel="noopener">Написати</a>
       <a class="icon-btn" href="https://www.instagram.com/nahorniuk/" target="_blank" rel="noopener" aria-label="Instagram"><svg class="ico" aria-hidden="true"><use href="#i-instagram"/></svg></a>
+      <a class="icon-btn" href="https://t.me/nahorniuk_vlad" target="_blank" rel="noopener" aria-label="Telegram"><svg class="ico" aria-hidden="true"><use href="#i-telegram"/></svg></a>
     </div>
   </div>
-  <div class="container footer-copy">© 2026 Влад Нагорнюк. Результати індивідуальні й не гарантуються.</div>
 </footer>
 
 <div class="sticky-cta" data-sticky-cta>
@@ -1136,7 +1142,7 @@ try { (() => {
   if (!matchMedia('(hover: hover) and (pointer: fine)').matches) return;
   let raf = 0;
   document.addEventListener('pointermove', (e) => {
-    const card = e.target.closest && e.target.closest('.card, .tile, .result');
+    const card = e.target.closest && e.target.closest('.card, .result');
     if (!card) return;
     cancelAnimationFrame(raf);
     raf = requestAnimationFrame(() => {

@@ -1,94 +1,113 @@
-<section class="section" id="services" aria-labelledby="services-title">
+<section class="section section-alt dotted" id="services" aria-labelledby="services-title">
   <div class="container">
     <header class="section-head reveal">
-      <p class="eyebrow"><span>01</span>Послуги й ціни</p>
-      <h2 id="services-title">Обери, з чого почати</h2>
-      <p class="section-lead">Оплата через monobank. Після оплати напиши мені в Telegram: узгодимо ціль, рівень і старт.</p>
+      <p class="eyebrow">Що я пропоную</p>
+      <h2 id="services-title">Обери свій формат</h2>
+      <p class="section-lead">Від разової програми за 350 ₴ до місяця тренувань із відео техніки. Оплата через monobank, далі пишеш мені в Telegram.</p>
     </header>
 
     <div class="service-grid">
 
       <article class="card service reveal">
-        <span class="service-ico"><svg class="ico ico-lg" aria-hidden="true"><use href="#i-plan"/></svg></span>
-        <h3>Програма тренувань</h3>
-        <p>Персональна програма під твою ціль, рівень і обладнання. У місячному форматі до кожної вправи додається відео техніки виконання.</p>
-        <ul class="ticks">
-          <li>Підбір під ціль: маса, схуднення, форма</li>
-          <li>Відео техніки в місячній програмі</li>
-          <li>Зручно для залу й дому</li>
-        </ul>
-        <ul class="options">
-          <li>
-            <div><span class="opt-name">Разова програма</span></div>
-            <b class="price">350 ₴</b>
-            <a class="btn btn-primary btn-sm" href="{{ mono_url }}?a=350&amp;t=%D0%9F%D1%80%D0%BE%D0%B3%D1%80%D0%B0%D0%BC%D0%B0%20%D1%82%D1%80%D0%B5%D0%BD%D1%83%D0%B2%D0%B0%D0%BD%D1%8C%20%28%D1%80%D0%B0%D0%B7%D0%BE%D0%B2%D0%B0%29" target="_blank" rel="noopener" aria-label="Оплатити разову програму, 350 гривень"><svg class="ico" aria-hidden="true"><use href="#i-card"/></svg>Оплатити</a>
-          </li>
-          <li>
-            <div><span class="opt-name">На місяць</span><span class="opt-meta">10 тренувань + відео техніки</span></div>
-            <b class="price">4 000 ₴</b>
-            <a class="btn btn-primary btn-sm" href="{{ mono_url }}?a=4000&amp;t=%D0%9F%D1%80%D0%BE%D0%B3%D1%80%D0%B0%D0%BC%D0%B0%20%D1%82%D1%80%D0%B5%D0%BD%D1%83%D0%B2%D0%B0%D0%BD%D1%8C%20%D0%BD%D0%B0%20%D0%BC%D1%96%D1%81%D1%8F%D1%86%D1%8C" target="_blank" rel="noopener" aria-label="Оплатити програму на місяць, 4000 гривень"><svg class="ico" aria-hidden="true"><use href="#i-card"/></svg>Оплатити</a>
-          </li>
-        </ul>
+        <div class="service-visual">
+          <svg class="ico" aria-hidden="true"><use href="#i-plan"/></svg>
+          <span class="vtag">Найдешевший старт</span>
+        </div>
+        <div class="service-body">
+          <h3>Програма тренувань</h3>
+          <p>Персональна програма під твою ціль, рівень і обладнання. У місячному форматі до кожної вправи додається відео техніки виконання.</p>
+          <ul class="ticks">
+            <li>Підбір під ціль: маса, схуднення, форма</li>
+            <li>Відео техніки в місячній програмі</li>
+            <li>Зручно для залу й дому</li>
+          </ul>
+          <ul class="options">
+            <li>
+              <div><span class="opt-name">Разова програма</span></div>
+              <b class="price">350 ₴</b>
+              <a class="btn btn-primary btn-sm" href="{{ mono_url }}?a=350&amp;t=%D0%9F%D1%80%D0%BE%D0%B3%D1%80%D0%B0%D0%BC%D0%B0%20%D1%82%D1%80%D0%B5%D0%BD%D1%83%D0%B2%D0%B0%D0%BD%D1%8C%20%28%D1%80%D0%B0%D0%B7%D0%BE%D0%B2%D0%B0%29" target="_blank" rel="noopener" aria-label="Оплатити разову програму, 350 гривень">Оплатити</a>
+            </li>
+            <li>
+              <div><span class="opt-name">На місяць</span><span class="opt-meta">10 тренувань + відео техніки</span></div>
+              <b class="price">4 000 ₴</b>
+              <a class="btn btn-primary btn-sm" href="{{ mono_url }}?a=4000&amp;t=%D0%9F%D1%80%D0%BE%D0%B3%D1%80%D0%B0%D0%BC%D0%B0%20%D1%82%D1%80%D0%B5%D0%BD%D1%83%D0%B2%D0%B0%D0%BD%D1%8C%20%D0%BD%D0%B0%20%D0%BC%D1%96%D1%81%D1%8F%D1%86%D1%8C" target="_blank" rel="noopener" aria-label="Оплатити програму на місяць, 4000 гривень">Оплатити</a>
+            </li>
+          </ul>
+        </div>
       </article>
 
       <article class="card service service-featured reveal">
-        <span class="tag">Найпопулярніше</span>
-        <span class="service-ico"><svg class="ico ico-lg" aria-hidden="true"><use href="#i-video"/></svg></span>
-        <h3>Тренування онлайн по відеозв'язку</h3>
-        <p>Я поруч у відеодзвінку: ставлю техніку, підбираю ваги й темп. Не важливо, вдома ти чи в залі.</p>
-        <ul class="ticks">
-          <li>Корекція техніки в реальному часі</li>
-          <li>Вдома, у залі або на вулиці</li>
-          <li>Графік підбираємо під тебе</li>
-        </ul>
-        <ul class="options">
-          <li>
-            <div><span class="opt-name">Одне тренування</span></div>
-            <b class="price">700 ₴</b>
-            <a class="btn btn-primary btn-sm" href="{{ mono_url }}?a=700&amp;t=%D0%9E%D0%BD%D0%BB%D0%B0%D0%B9%D0%BD-%D1%82%D1%80%D0%B5%D0%BD%D1%83%D0%B2%D0%B0%D0%BD%D0%BD%D1%8F%20%28%D1%80%D0%B0%D0%B7%D0%BE%D0%B2%D0%B5%29" target="_blank" rel="noopener" aria-label="Оплатити одне онлайн-тренування, 700 гривень"><svg class="ico" aria-hidden="true"><use href="#i-card"/></svg>Оплатити</a>
-          </li>
-          <li>
-            <div><span class="opt-name">Пакет</span><span class="opt-meta">10 тренувань</span></div>
-            <b class="price">7 000 ₴</b>
-            <a class="btn btn-primary btn-sm" href="{{ mono_url }}?a=7000&amp;t=%D0%9E%D0%BD%D0%BB%D0%B0%D0%B9%D0%BD-%D1%82%D1%80%D0%B5%D0%BD%D1%83%D0%B2%D0%B0%D0%BD%D0%BD%D1%8F%2C%2010%20%D0%B7%D0%B0%D0%BD%D1%8F%D1%82%D1%8C" target="_blank" rel="noopener" aria-label="Оплатити пакет із 10 онлайн-тренувань, 7000 гривень"><svg class="ico" aria-hidden="true"><use href="#i-card"/></svg>Оплатити</a>
-          </li>
-        </ul>
+        <div class="service-visual">
+          <svg class="ico" aria-hidden="true"><use href="#i-video"/></svg>
+          <span class="vtag vtag-accent">Найпопулярніше</span>
+        </div>
+        <div class="service-body">
+          <h3>Тренування онлайн по відеозв'язку</h3>
+          <p>Я поруч у відеодзвінку: ставлю техніку, підбираю ваги й темп. Не важливо, вдома ти чи в залі.</p>
+          <ul class="ticks">
+            <li>Корекція техніки в реальному часі</li>
+            <li>Вдома, у залі або на вулиці</li>
+            <li>Графік підбираємо під тебе</li>
+          </ul>
+          <ul class="options">
+            <li>
+              <div><span class="opt-name">Одне тренування</span></div>
+              <b class="price">700 ₴</b>
+              <a class="btn btn-primary btn-sm" href="{{ mono_url }}?a=700&amp;t=%D0%9E%D0%BD%D0%BB%D0%B0%D0%B9%D0%BD-%D1%82%D1%80%D0%B5%D0%BD%D1%83%D0%B2%D0%B0%D0%BD%D0%BD%D1%8F%20%28%D1%80%D0%B0%D0%B7%D0%BE%D0%B2%D0%B5%29" target="_blank" rel="noopener" aria-label="Оплатити одне онлайн-тренування, 700 гривень">Оплатити</a>
+            </li>
+            <li>
+              <div><span class="opt-name">Пакет</span><span class="opt-meta">10 тренувань</span></div>
+              <b class="price">7 000 ₴</b>
+              <a class="btn btn-primary btn-sm" href="{{ mono_url }}?a=7000&amp;t=%D0%9E%D0%BD%D0%BB%D0%B0%D0%B9%D0%BD-%D1%82%D1%80%D0%B5%D0%BD%D1%83%D0%B2%D0%B0%D0%BD%D0%BD%D1%8F%2C%2010%20%D0%B7%D0%B0%D0%BD%D1%8F%D1%82%D1%8C" target="_blank" rel="noopener" aria-label="Оплатити пакет із 10 онлайн-тренувань, 7000 гривень">Оплатити</a>
+            </li>
+          </ul>
+        </div>
       </article>
 
       <article class="card service reveal">
-        <span class="service-ico"><svg class="ico ico-lg" aria-hidden="true"><use href="#i-chat"/></svg></span>
-        <h3>Консультація</h3>
-        <p>Розбираємо твою ситуацію, ціль і помилки. Ти отримуєш чіткий план дій, щоб рухатись далі самостійно.</p>
-        <ul class="ticks">
-          <li>Аналіз цілі, режиму й навантаження</li>
-          <li>Відповіді на всі запитання</li>
-          <li>Конкретні наступні кроки</li>
-        </ul>
-        <ul class="options">
-          <li>
-            <div><span class="opt-name">Одна консультація</span></div>
-            <b class="price">1 000 ₴</b>
-            <a class="btn btn-primary btn-sm" href="{{ mono_url }}?a=1000&amp;t=%D0%9A%D0%BE%D0%BD%D1%81%D1%83%D0%BB%D1%8C%D1%82%D0%B0%D1%86%D1%96%D1%8F" target="_blank" rel="noopener" aria-label="Оплатити консультацію, 1000 гривень"><svg class="ico" aria-hidden="true"><use href="#i-card"/></svg>Оплатити</a>
-          </li>
-        </ul>
+        <div class="service-visual">
+          <svg class="ico" aria-hidden="true"><use href="#i-chat"/></svg>
+          <span class="vtag">Перший крок</span>
+        </div>
+        <div class="service-body">
+          <h3>Консультація</h3>
+          <p>Розбираємо твою ситуацію, ціль і помилки. Ти отримуєш чіткий план дій, щоб рухатись далі самостійно.</p>
+          <ul class="ticks">
+            <li>Аналіз цілі, режиму й навантаження</li>
+            <li>Відповіді на всі запитання</li>
+            <li>Конкретні наступні кроки</li>
+          </ul>
+          <ul class="options">
+            <li>
+              <div><span class="opt-name">Одна консультація</span></div>
+              <b class="price">1 000 ₴</b>
+              <a class="btn btn-primary btn-sm" href="{{ mono_url }}?a=1000&amp;t=%D0%9A%D0%BE%D0%BD%D1%81%D1%83%D0%BB%D1%8C%D1%82%D0%B0%D1%86%D1%96%D1%8F" target="_blank" rel="noopener" aria-label="Оплатити консультацію, 1000 гривень">Оплатити</a>
+            </li>
+          </ul>
+        </div>
       </article>
 
       <article class="card service reveal">
-        <span class="service-ico"><svg class="ico ico-lg" aria-hidden="true"><use href="#i-food"/></svg></span>
-        <h3>Харчування</h3>
-        <p>Раціон на місяць із урахуванням усіх твоїх потреб: ціль, режим дня, смаки та особливості.</p>
-        <ul class="ticks">
-          <li>Під твою ціль і калорійність</li>
-          <li>Враховує уподобання й обмеження</li>
-          <li>Без виснажливих дієт</li>
-        </ul>
-        <ul class="options">
-          <li>
-            <div><span class="opt-name">Раціон на місяць</span></div>
-            <b class="price">3 000 ₴</b>
-            <a class="btn btn-primary btn-sm" href="{{ mono_url }}?a=3000&amp;t=%D0%A5%D0%B0%D1%80%D1%87%D1%83%D0%B2%D0%B0%D0%BD%D0%BD%D1%8F%20%D0%BD%D0%B0%20%D0%BC%D1%96%D1%81%D1%8F%D1%86%D1%8C" target="_blank" rel="noopener" aria-label="Оплатити раціон на місяць, 3000 гривень"><svg class="ico" aria-hidden="true"><use href="#i-card"/></svg>Оплатити</a>
-          </li>
-        </ul>
+        <div class="service-visual">
+          <svg class="ico" aria-hidden="true"><use href="#i-food"/></svg>
+          <span class="vtag">Тільки харчування</span>
+        </div>
+        <div class="service-body">
+          <h3>Харчування</h3>
+          <p>Раціон на місяць із урахуванням усіх твоїх потреб: ціль, режим дня, смаки та особливості.</p>
+          <ul class="ticks">
+            <li>Під твою ціль і калорійність</li>
+            <li>Враховує уподобання й обмеження</li>
+            <li>Без виснажливих дієт</li>
+          </ul>
+          <ul class="options">
+            <li>
+              <div><span class="opt-name">Раціон на місяць</span></div>
+              <b class="price">3 000 ₴</b>
+              <a class="btn btn-primary btn-sm" href="{{ mono_url }}?a=3000&amp;t=%D0%A5%D0%B0%D1%80%D1%87%D1%83%D0%B2%D0%B0%D0%BD%D0%BD%D1%8F%20%D0%BD%D0%B0%20%D0%BC%D1%96%D1%81%D1%8F%D1%86%D1%8C" target="_blank" rel="noopener" aria-label="Оплатити раціон на місяць, 3000 гривень">Оплатити</a>
+            </li>
+          </ul>
+        </div>
       </article>
 
     </div>

@@ -3,7 +3,7 @@ try { (() => {
   if (!matchMedia('(hover: hover) and (pointer: fine)').matches) return;
   let raf = 0;
   document.addEventListener('pointermove', (e) => {
-    const card = e.target.closest && e.target.closest('.card, .tile, .result');
+    const card = e.target.closest && e.target.closest('.card, .result');
     if (!card) return;
     cancelAnimationFrame(raf);
     raf = requestAnimationFrame(() => {

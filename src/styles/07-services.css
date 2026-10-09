@@ -1,34 +1,38 @@
-.service-grid{display:grid;gap:1rem}
-.service{display:flex;flex-direction:column;padding:clamp(1.625rem,3vw,2.375rem)}
-.service:hover{border-color:rgba(255,122,26,.55);transform:translateY(-4px);box-shadow:var(--shadow)}
-.service-ico{display:grid;place-items:center;width:3.5rem;height:3.5rem;margin-bottom:1.375rem;border-radius:1.125rem;background:rgba(255,122,26,.13);color:var(--accent-text)}
-.service h3{margin-bottom:0.75rem;font-size:clamp(1.5rem,2.4vw,1.9rem);letter-spacing:-.03em;font-weight:800}
-.service>p{color:var(--muted);margin:0}
+.service-grid{display:grid;gap:1.25rem}
+.service{display:flex;flex-direction:column;overflow:hidden}
+.service:hover{border-color:rgba(255,122,26,.5);transform:translateY(-4px);box-shadow:var(--shadow)}
 
-.options{display:grid;gap:0.625rem;margin-top:auto;padding-top:1.625rem}
+/* візуальна шапка картки: акцентне сяйво, крапкова фактура, велика іконка, тег */
+.service-visual{position:relative;display:grid;place-items:center;height:10.5rem;overflow:hidden;border-bottom:1px solid var(--line);
+  background:radial-gradient(22rem 14rem at 25% 0%,rgba(255,122,26,.34),transparent 62%),radial-gradient(18rem 12rem at 90% 100%,rgba(255,150,40,.14),transparent 60%),var(--card-hi)}
+.service-visual::before{content:"";position:absolute;inset:0;background-image:radial-gradient(rgba(255,255,255,.10) 1px,transparent 1.2px);background-size:1.25rem 1.25rem;
+  -webkit-mask-image:linear-gradient(180deg,#000,transparent);mask-image:linear-gradient(180deg,#000,transparent)}
+:root[data-theme="light"] .service-visual::before{background-image:radial-gradient(rgba(30,20,10,.14) 1px,transparent 1.2px)}
+.service-visual .ico{position:relative;width:4.5rem;height:4.5rem;stroke-width:1.15;color:var(--accent);filter:drop-shadow(0 0 1.5rem rgba(255,122,26,.55))}
+.vtag{position:absolute;left:1.25rem;bottom:1.125rem;padding:0.5rem 0.75rem;border-radius:0.5rem;background:rgba(10,9,8,.78);color:#fff;
+  font:700 0.62rem/1 var(--font-head);letter-spacing:.1em;text-transform:uppercase;border:1px solid rgba(255,255,255,.12)}
+.vtag-accent{background:var(--accent);color:var(--on-accent);border-color:transparent}
+
+.service-body{display:flex;flex-direction:column;flex:1;padding:1.75rem}
+.service h3{margin-bottom:0.75rem;font-size:clamp(1.15rem,1.7vw,1.4rem)}
+.service-body>p{color:var(--muted);margin:0}
+
+.options{display:grid;gap:0.625rem;margin-top:auto;padding-top:1.5rem}
 .options li{display:grid;grid-template-columns:1fr auto auto;align-items:center;gap:0.875rem;padding:0.875rem 0.875rem 0.875rem 1.125rem;background:var(--bg);border:1px solid var(--line);border-radius:var(--radius-sm)}
 :root[data-theme="light"] .options li{background:var(--card-hi)}
 .opt-name{display:block;font-weight:600}
-.opt-meta{display:block;font-size:.85rem;color:var(--muted);margin-top:2px}
-.price{font:800 1.7rem/1 var(--font-head);letter-spacing:-.04em;white-space:nowrap;font-variant-numeric:tabular-nums}
+.opt-meta{display:block;font-size:0.85rem;color:var(--muted);margin-top:2px}
+.price{font:700 clamp(1.1rem,1.5vw,1.35rem)/1 var(--font-head);letter-spacing:-.02em;white-space:nowrap;font-variant-numeric:tabular-nums}
 
-/* виділена послуга: суцільний акцентний блок */
-.service-featured{background:var(--accent-grad);border-color:transparent;color:var(--on-accent)}
-.service-featured:hover{border-color:transparent;box-shadow:0 1.75rem 4.375rem rgba(255,106,20,.38)}
-.service-featured .service-ico{background:rgba(19,10,2,.14);color:var(--on-accent)}
-.service-featured>p{color:rgba(19,10,2,.82)}
-.service-featured .ticks li::before{background:var(--on-accent)}
-.service-featured .ticks li::after{border-color:#ff8a2b}
-.service-featured .options li,:root[data-theme="light"] .service-featured .options li{background:#130a02;border-color:transparent;color:#fff}
-.service-featured .opt-meta{color:#c9b8a8}
-.service-featured .btn-primary{box-shadow:none}
-.tag{position:absolute;top:1.375rem;right:1.375rem;padding:0.4375rem 0.875rem;border-radius:62.4375rem;background:var(--on-accent);color:#fff;font:600 .72rem/1 var(--font-body);letter-spacing:.08em;text-transform:uppercase}
+/* виділена послуга: акцентна рамка й сяйво (як у еталона), без суцільної заливки */
+.service-featured{border-color:var(--accent);box-shadow:0 0 0 1px var(--accent),0 1.75rem 4.5rem rgba(255,106,10,.2)}
+.service-featured:hover{border-color:var(--accent);box-shadow:0 0 0 1px var(--accent),0 2rem 5rem rgba(255,106,10,.32)}
 
-.pay-note{display:flex;gap:0.875rem;align-items:flex-start;margin:2rem 0 0;padding:1.125rem 1.375rem;border:1px dashed var(--line);border-radius:var(--radius-sm);color:var(--muted);font-size:.95rem}
+.pay-note{display:flex;gap:0.875rem;align-items:flex-start;margin:2rem 0 0;padding:1.125rem 1.375rem;border:1px dashed var(--glass-line);border-radius:var(--radius-sm);color:var(--muted);font-size:0.95rem}
 .pay-note .ico{margin-top:2px;color:var(--accent)}
 .pay-note a{color:var(--accent-text)}
 
-@media (min-width:900px){.service-grid{grid-template-columns:repeat(2,1fr);gap:1.25rem}}
+@media (min-width:900px){.service-grid{grid-template-columns:repeat(2,1fr);gap:1.5rem}}
 @media (max-width:480px){
   .options li{grid-template-columns:1fr auto}
   .options .btn{grid-column:1/-1}
