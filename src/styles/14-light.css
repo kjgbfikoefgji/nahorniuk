@@ -38,14 +38,15 @@
 :root[data-theme="light"] .btn-primary:hover{box-shadow:0.4rem 0.4rem 0 #17120d;transform:translate(-2px,-2px)}
 :root[data-theme="light"] .btn-ghost{border-color:#17120d;color:#17120d}
 :root[data-theme="light"] .nav a:hover{background:rgba(30,20,10,.06)}
-:root[data-theme="light"] .site-header .btn-primary{box-shadow:0.2rem 0.2rem 0 #17120d}
+:root[data-theme="light"] .site-header .btn-primary{border-color:transparent;box-shadow:0 0.375rem 1.125rem rgba(255,106,10,.3)}
+:root[data-theme="light"] .site-header .logo-mark{box-shadow:none}
 :root[data-theme="light"] #how .btn-primary,:root[data-theme="light"] .site-footer .btn-primary{border-color:transparent;box-shadow:0 0.625rem 1.875rem rgba(255,106,10,.28)}
 :root[data-theme="light"] .cta-box{box-shadow:0.75rem 0.75rem 0 #17120d;border:3px solid #17120d}
 :root[data-theme="light"] .cta-box .btn-primary{box-shadow:none}
 
 /* 6. Відгуки: біла картка з темним лапками й помаранчевою лінією */
 :root[data-theme="light"] .quote{background:#fff}
-:root[data-theme="light"] .q-mark{background:#17120d;color:var(--accent)}
+:root[data-theme="light"] .q-mark{background:var(--accent-grad);color:var(--on-accent)}
 :root[data-theme="light"] .faq details{border-color:rgba(30,20,10,.16)}
 :root[data-theme="light"] .faq details[open]{border-color:#17120d;background:#fff}
 
