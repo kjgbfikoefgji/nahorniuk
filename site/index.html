@@ -158,7 +158,7 @@ main:focus{outline:none}
 /* рубрика над заголовком: лінія + капс */
 main{counter-reset:sec}
 .eyebrow{display:flex;align-items:center;gap:0.75rem;margin:0 0 1.125rem;font:700 0.75rem/1 var(--font-head);letter-spacing:.14em;text-transform:uppercase;color:var(--accent-text);counter-increment:sec}
-.eyebrow::before{content:counter(sec,decimal-leading-zero);display:grid;place-items:center;flex:none;min-width:2.25rem;height:1.75rem;padding-inline:0.5rem;border:1px solid currentColor;border-radius:0.4rem;font-size:0.68rem;letter-spacing:.04em}
+.eyebrow::before{content:counter(sec,decimal-leading-zero);display:grid;place-items:center;flex:none;min-width:2.25rem;height:1.75rem;padding-inline:0.5rem;border:1px solid currentColor;border-radius:0.4rem;font-size:0.75rem;letter-spacing:.02em}
 .eyebrow span{display:none}
 .lead{font-size:clamp(1.05rem,1.4vw,1.25rem);color:var(--muted);max-width:42ch}
 
@@ -233,7 +233,7 @@ main{counter-reset:sec}
 
 /* посилання на всю висоту смуги; активний розділ підсвічує помаранчева планка внизу */
 .nav{display:flex;align-self:stretch;gap:0.125rem}
-.nav a{position:relative;display:flex;align-items:center;padding:0 0.875rem;text-decoration:none;font:700 0.78rem/1 var(--font-body);letter-spacing:.09em;text-transform:uppercase;color:var(--muted);transition:color var(--t-fast),background-color var(--t-fast)}
+.nav a{position:relative;display:flex;align-items:center;white-space:nowrap;padding:0 0.875rem;text-decoration:none;font:700 0.78rem/1 var(--font-body);letter-spacing:.09em;text-transform:uppercase;color:var(--muted);transition:color var(--t-fast),background-color var(--t-fast)}
 .nav a::after{content:"";position:absolute;left:0.875rem;right:0.875rem;bottom:-1px;height:0.1875rem;border-radius:3px 3px 0 0;background:var(--accent);box-shadow:0 0 0.75rem rgba(255,122,26,.65);z-index:1;transform:scaleX(0);transform-origin:0 50%;transition:transform var(--t-med) var(--ease)}
 .nav a:hover{color:var(--text);background:var(--glass)}
 .nav a[aria-current]{color:var(--accent-text)}
@@ -251,6 +251,20 @@ main{counter-reset:sec}
 .menu-open .menu-btn .ico-open{display:none}
 .menu-open .menu-btn .ico-close{display:block}
 
+/* 900–1099px: меню вже в рядку, але місця мало, тож пункти й відступи компактніші (інакше кнопка виходила за край) */
+@media (min-width:900px) and (max-width:1099px){
+  .header-row{gap:1rem}
+  .nav a{padding:0 0.55rem;letter-spacing:.05em}
+  .nav a::after{left:0.55rem;right:0.55rem}
+  .header-cta{padding-inline:0.875rem}
+}
+@media (min-width:900px){.logo-text{white-space:nowrap}}
+@media (min-width:900px) and (max-width:1059px){.site-header .logo-text b{display:none}}
+@media (min-width:900px) and (max-width:939px){
+  .header-row{gap:0.75rem}
+  .nav a{padding:0 0.45rem}
+  .nav a::after{left:0.45rem;right:0.45rem}
+}
 @media (max-width:899px){
   .menu-btn{display:inline-flex}
   .header-cta{display:none}
@@ -335,7 +349,7 @@ main{counter-reset:sec}
 .hero-stats li{padding-right:1.75rem;margin-right:1.75rem;border-right:1px solid var(--line)}
 .hero-stats li:last-child{border-right:0;margin-right:0;padding-right:0}
 .hero-stats b{display:block;font:800 clamp(1.1rem,1.8vw,1.6rem)/1.15 var(--font-head);letter-spacing:-.01em;font-variant-numeric:tabular-nums}
-.hero-stats span{display:block;margin-top:0.375rem;font:600 0.68rem/1.35 var(--font-body);letter-spacing:.13em;text-transform:uppercase;color:var(--muted)}
+.hero-stats span{display:block;margin-top:0.375rem;font:600 0.75rem/1.35 var(--font-body);letter-spacing:.12em;text-transform:uppercase;color:var(--muted)}
 
 /* безперервна стрічка внизу героя */
 .ticker{position:relative;z-index:1;overflow:hidden;border-block:1px solid var(--line);background:var(--bg-alt);height:3.75rem;padding-right:calc(var(--gutter) + 3.5rem)}
@@ -358,9 +372,23 @@ main{counter-reset:sec}
   :root[data-theme="light"] .hero{--pw:min(21rem,calc(100vw - var(--gutter) * 2))}
   :root[data-theme="light"] .hero-bg::after{display:none}
   :root[data-theme="light"] .hero-photo{top:1.5rem;bottom:auto;left:50%;right:auto;translate:-50% 0;height:calc(var(--pw) * 1.12);box-shadow:0 1.5rem 3rem rgba(90,40,5,.25)}
-  :root[data-theme="light"] .hero-photo img{object-position:50% 8%;transform:none}
+  :root[data-theme="light"] .hero-photo img{object-position:50% 8%;transform:translateX(-10%) scale(1.2)}
   :root[data-theme="light"] .hero-inner{padding-top:calc(var(--pw) * 1.12 + 3.5rem)}
 }
+/* телефон в альбомній орієнтації: портрет праворуч, текст ліворуч, щоб заголовок і кнопка були в першому екрані */
+@media (max-width:899px) and (orientation:landscape) and (max-height:560px){
+  .hero,:root[data-theme="light"] .hero{--pw:min(15rem,34vw)}
+  .hero-bg img{top:0;left:auto;right:0;width:48%;height:calc(100svh - var(--header-h));object-position:50% 25%;
+    -webkit-mask-image:linear-gradient(90deg,transparent 0,#000 45%),linear-gradient(0deg,transparent 0,#000 30%);-webkit-mask-composite:source-in;
+    mask-image:linear-gradient(90deg,transparent 0,#000 45%),linear-gradient(0deg,transparent 0,#000 30%);mask-composite:intersect}
+  .hero-inner{padding-top:2rem}
+  .hero-copy{max-width:calc(100% - var(--pw) - 2rem)}
+  :root[data-theme="light"] .hero-photo{top:1.25rem;bottom:auto;left:auto;right:var(--gutter);translate:none;width:var(--pw);height:calc(100svh - var(--header-h) - 2.5rem)}
+  :root[data-theme="light"] .hero-photo img{object-position:50% 30%;transform:translateX(-14%) scale(1.3)}
+  :root[data-theme="light"] .hero-inner{padding-top:2rem}
+}
+/* найвужчі телефони: посилання під кнопкою вміщається в один рядок разом зі стрілкою */
+@media (max-width:399px){.hero .link-arrow{font-size:0.94rem}}
 /* невисокі екрани ноутбуків: щільніші відступи, щоб заголовок, кнопка й цифри вміщались у перший екран */
 @media (min-width:900px) and (max-height:860px){
   .hero-inner{padding-block:2rem 1.75rem}
@@ -377,7 +405,7 @@ main{counter-reset:sec}
   .hero-stats{display:grid;grid-template-columns:repeat(3,1fr);gap:0;margin-top:1.75rem;padding-top:1.25rem}
   .hero-stats li{min-width:0;padding-right:0.75rem;margin-right:0.75rem}
   .hero-stats b{font-size:1rem}
-  .hero-stats span{font-size:0.68rem;letter-spacing:.06em;line-height:1.35}
+  .hero-stats span{font-size:0.75rem;letter-spacing:.03em;line-height:1.35}
   .hero-checks{gap:0.5rem 1rem;font-size:0.92rem}
   .hero .lead{font-size:1.1rem}
   .hero-actions{gap:0.25rem 1.5rem}
@@ -396,9 +424,10 @@ main{counter-reset:sec}
 .ach:hover .ach-wm{opacity:.14;transform:rotate(-6deg) scale(1.05)}
 .ach-top{display:flex;align-items:center;gap:0.75rem;margin:0 0 1.5rem}
 .ach-ico{display:grid;place-items:center;flex:none;width:2.5rem;height:2.5rem;border-radius:var(--radius-sm);background:rgba(255,122,26,.14);color:var(--accent-text)}
-.ach-label{font:700 0.68rem/1.3 var(--font-body);letter-spacing:.14em;text-transform:uppercase;color:var(--muted)}
-.ach-fig{display:block;margin-bottom:0.75rem;font:800 clamp(2.2rem,4.4vw,3.4rem)/1 var(--font-head);letter-spacing:-.03em;text-transform:uppercase;color:var(--accent);font-variant-numeric:tabular-nums}
-:root[data-theme="light"] .ach-fig{color:var(--accent-text)}
+.ach-label{font:700 0.75rem/1.3 var(--font-body);letter-spacing:.12em;text-transform:uppercase;color:var(--muted)}
+/* розмір цифри/слова від ширини самої картки (cqi), а не вікна: «ФІНАЛ» і «ВИЩА» не виходять за картку на жодній ширині */
+.ach{container-type:inline-size}
+.ach-fig{display:block;margin-bottom:0.75rem;font:800 clamp(2.2rem,4.4vw,3.4rem)/1 var(--font-head);font-size:clamp(1.9rem,21cqi,3.4rem);letter-spacing:-.03em;text-transform:uppercase;color:var(--accent);font-variant-numeric:tabular-nums}
 .ach-fig small{margin-left:0.4rem;font-size:0.38em;letter-spacing:.04em;text-transform:uppercase;color:var(--muted)}
 .ach h3{font-size:1.05rem;text-transform:uppercase;margin-bottom:0.5rem}
 .ach-text{margin:0;color:var(--muted);font-size:0.95rem}
@@ -408,8 +437,7 @@ main{counter-reset:sec}
   .ach-grid{grid-template-columns:1fr;gap:0.75rem}
   .ach{padding:1.25rem 1.25rem 1.5rem}
   .ach-top{margin-bottom:1rem}
-  .ach-label{font-size:0.7rem}
-  .ach-fig{font-size:clamp(2.1rem,11vw,2.8rem)}
+  .ach-label{letter-spacing:.1em}
   .ach h3{font-size:1rem}
   .ach-text{font-size:1rem;line-height:1.5}
   .ach-wm{width:7rem;height:7rem}
@@ -426,7 +454,7 @@ main{counter-reset:sec}
 :root[data-theme="light"] .service-visual::before{background-image:radial-gradient(rgba(30,20,10,.14) 1px,transparent 1.2px)}
 .service-visual .ico{position:relative;width:4.5rem;height:4.5rem;stroke-width:1.15;color:var(--accent);filter:drop-shadow(0 0 1.5rem rgba(255,122,26,.55))}
 .vtag{position:absolute;left:1.25rem;bottom:1.125rem;padding:0.5rem 0.75rem;border-radius:0.5rem;background:rgba(10,9,8,.78);color:#fff;
-  font:700 0.62rem/1 var(--font-head);letter-spacing:.1em;text-transform:uppercase;border:1px solid rgba(255,255,255,.12)}
+  font:700 0.75rem/1 var(--font-head);letter-spacing:.05em;text-transform:uppercase;border:1px solid rgba(255,255,255,.12)}
 .vtag-accent{background:var(--accent);color:var(--on-accent);border-color:transparent}
 
 .service-body{display:flex;flex-direction:column;flex:1;padding:1.75rem}
@@ -484,7 +512,7 @@ main{counter-reset:sec}
 .result-cta .btn{min-height:3rem;padding-inline:1.25rem;white-space:normal;text-align:center}
 @media (min-width:760px){.result-cta{grid-column:span 2;padding:2.25rem}}
 /* підпис як в еталона: велика акцентна цифра, нижче капс-опис */
-.result-cap{display:block;padding:1.125rem 1.5rem 1.375rem;border-top:1px solid var(--line);font:600 0.7rem/1.4 var(--font-body);letter-spacing:.12em;text-transform:uppercase;color:var(--muted)}
+.result-cap{display:block;padding:1.125rem 1.5rem 1.375rem;border-top:1px solid var(--line);font:600 0.75rem/1.4 var(--font-body);letter-spacing:.1em;text-transform:uppercase;color:var(--muted)}
 .result-cap b{display:block;margin-bottom:0.5rem;font:800 clamp(1.7rem,2.6vw,2.25rem)/1 var(--font-head);letter-spacing:-.02em;text-transform:none;color:var(--accent-text);white-space:nowrap}
 /* телефон: цифра й опис в один рядок, опис читається без напруги */
 @media (max-width:639px){
@@ -537,7 +565,7 @@ body.lb-open{overflow:hidden}
 .quote-lg{width:min(88vw,30rem)}
 .q-top{display:flex;align-items:center;justify-content:space-between;gap:0.75rem;margin:0 0 1.125rem}
 .q-mark{display:grid;place-items:center;width:2.5rem;height:2.5rem;padding-top:0.5rem;border-radius:var(--radius-sm);background:var(--accent-grad);color:var(--on-accent);font:800 2.1rem/1 var(--font-head)}
-.q-src{padding:0.3125rem 0.75rem;border:1px solid var(--glass-line);border-radius:2rem;font:700 0.7rem/1.2 var(--font-body);letter-spacing:.12em;text-transform:uppercase;color:var(--muted)}
+.q-src{padding:0.3125rem 0.75rem;border:1px solid var(--glass-line);border-radius:2rem;font:700 0.75rem/1.2 var(--font-body);letter-spacing:.1em;text-transform:uppercase;color:var(--muted)}
 .quote blockquote{margin:0 0 1.5rem;font-size:1.08rem;font-weight:500;line-height:1.55}
 .who{position:relative;margin:auto 0 0;padding:1rem 0 0 1.75rem;border-top:1px solid var(--line);color:var(--muted);font-size:0.85rem;font-weight:600}
 .who::before{content:"";position:absolute;left:0;top:calc(1rem + 0.62em);width:1.125rem;height:2px;background:var(--accent)}
@@ -567,7 +595,7 @@ body.lb-open{overflow:hidden}
 .about-lead{color:var(--muted);font-size:1.1rem}
 .about-stats{display:grid;grid-template-columns:repeat(3,1fr);gap:1rem;margin:1.5rem 0;padding-block:1.375rem;border-block:1px solid var(--line)}
 .about-stats b{display:block;font:800 clamp(1.4rem,2.4vw,2rem)/1.1 var(--font-head);color:var(--accent-text)}
-.about-stats span{display:block;margin-top:0.375rem;font:600 0.72rem/1.35 var(--font-body);letter-spacing:.12em;text-transform:uppercase;color:var(--muted)}
+.about-stats span{display:block;margin-top:0.375rem;font:600 0.75rem/1.35 var(--font-body);letter-spacing:.12em;text-transform:uppercase;color:var(--muted)}
 .about-copy .btn{margin-top:0.5rem}
 @media (min-width:900px){.about-grid{grid-template-columns:.8fr 1.2fr}}
 
@@ -622,6 +650,11 @@ body.lb-open{overflow:hidden}
 .cta-box .btn-ghost{background:transparent;color:var(--on-accent);border-color:rgba(20,10,2,.5)}
 .cta-box .btn-ghost:hover{background:rgba(20,10,2,.1);color:var(--on-accent);border-color:var(--on-accent)}
 @media (min-width:900px){.cta-box{grid-template-columns:1.2fr 1fr}.cta-actions{justify-content:flex-end}}
+/* телефон: кнопки на всю ширину блоку з меншими полями, щоб «Написати в Telegram» не обрізалась */
+@media (max-width:639px){
+  .cta-box{padding:2.25rem 1.25rem}
+  .cta-actions .btn{width:100%;padding-inline:1rem}
+}
 .site-footer{border-top:1px solid var(--line);padding-block:1.75rem;background:var(--bg)}
 .footer-row{display:flex;flex-wrap:wrap;align-items:center;gap:1.25rem 2rem}
 .footer-row .logo{margin-right:0}
@@ -1398,8 +1431,8 @@ try { (() => {
     const sec = document.getElementById(a.getAttribute('href').slice(1));
     if (sec) map.set(sec, a);
   });
-  // герой, умови, заклик і футер не мають пункту меню: на них підсвітка знімається
-  const none = ['.hero', '#terms', '.cta', '.site-footer'].map((q) => document.querySelector(q)).filter(Boolean);
+  // герой, «Як це працює», умови, заклик і футер не мають пункту меню: на них підсвітка знімається
+  const none = ['.hero', '#how', '#terms', '.cta', '.site-footer'].map((q) => document.querySelector(q)).filter(Boolean);
   const io = new IntersectionObserver((entries) => {
     entries.forEach((en) => {
       if (!en.isIntersecting) return;

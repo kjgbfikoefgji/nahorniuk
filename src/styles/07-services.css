@@ -10,7 +10,7 @@
 :root[data-theme="light"] .service-visual::before{background-image:radial-gradient(rgba(30,20,10,.14) 1px,transparent 1.2px)}
 .service-visual .ico{position:relative;width:4.5rem;height:4.5rem;stroke-width:1.15;color:var(--accent);filter:drop-shadow(0 0 1.5rem rgba(255,122,26,.55))}
 .vtag{position:absolute;left:1.25rem;bottom:1.125rem;padding:0.5rem 0.75rem;border-radius:0.5rem;background:rgba(10,9,8,.78);color:#fff;
-  font:700 0.62rem/1 var(--font-head);letter-spacing:.1em;text-transform:uppercase;border:1px solid rgba(255,255,255,.12)}
+  font:700 0.75rem/1 var(--font-head);letter-spacing:.05em;text-transform:uppercase;border:1px solid rgba(255,255,255,.12)}
 .vtag-accent{background:var(--accent);color:var(--on-accent);border-color:transparent}
 
 .service-body{display:flex;flex-direction:column;flex:1;padding:1.75rem}

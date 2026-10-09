@@ -68,7 +68,7 @@
 .hero-stats li{padding-right:1.75rem;margin-right:1.75rem;border-right:1px solid var(--line)}
 .hero-stats li:last-child{border-right:0;margin-right:0;padding-right:0}
 .hero-stats b{display:block;font:800 clamp(1.1rem,1.8vw,1.6rem)/1.15 var(--font-head);letter-spacing:-.01em;font-variant-numeric:tabular-nums}
-.hero-stats span{display:block;margin-top:0.375rem;font:600 0.68rem/1.35 var(--font-body);letter-spacing:.13em;text-transform:uppercase;color:var(--muted)}
+.hero-stats span{display:block;margin-top:0.375rem;font:600 0.75rem/1.35 var(--font-body);letter-spacing:.12em;text-transform:uppercase;color:var(--muted)}
 
 /* безперервна стрічка внизу героя */
 .ticker{position:relative;z-index:1;overflow:hidden;border-block:1px solid var(--line);background:var(--bg-alt);height:3.75rem;padding-right:calc(var(--gutter) + 3.5rem)}
@@ -91,9 +91,23 @@
   :root[data-theme="light"] .hero{--pw:min(21rem,calc(100vw - var(--gutter) * 2))}
   :root[data-theme="light"] .hero-bg::after{display:none}
   :root[data-theme="light"] .hero-photo{top:1.5rem;bottom:auto;left:50%;right:auto;translate:-50% 0;height:calc(var(--pw) * 1.12);box-shadow:0 1.5rem 3rem rgba(90,40,5,.25)}
-  :root[data-theme="light"] .hero-photo img{object-position:50% 8%;transform:none}
+  :root[data-theme="light"] .hero-photo img{object-position:50% 8%;transform:translateX(-10%) scale(1.2)}
   :root[data-theme="light"] .hero-inner{padding-top:calc(var(--pw) * 1.12 + 3.5rem)}
 }
+/* телефон в альбомній орієнтації: портрет праворуч, текст ліворуч, щоб заголовок і кнопка були в першому екрані */
+@media (max-width:899px) and (orientation:landscape) and (max-height:560px){
+  .hero,:root[data-theme="light"] .hero{--pw:min(15rem,34vw)}
+  .hero-bg img{top:0;left:auto;right:0;width:48%;height:calc(100svh - var(--header-h));object-position:50% 25%;
+    -webkit-mask-image:linear-gradient(90deg,transparent 0,#000 45%),linear-gradient(0deg,transparent 0,#000 30%);-webkit-mask-composite:source-in;
+    mask-image:linear-gradient(90deg,transparent 0,#000 45%),linear-gradient(0deg,transparent 0,#000 30%);mask-composite:intersect}
+  .hero-inner{padding-top:2rem}
+  .hero-copy{max-width:calc(100% - var(--pw) - 2rem)}
+  :root[data-theme="light"] .hero-photo{top:1.25rem;bottom:auto;left:auto;right:var(--gutter);translate:none;width:var(--pw);height:calc(100svh - var(--header-h) - 2.5rem)}
+  :root[data-theme="light"] .hero-photo img{object-position:50% 30%;transform:translateX(-14%) scale(1.3)}
+  :root[data-theme="light"] .hero-inner{padding-top:2rem}
+}
+/* найвужчі телефони: посилання під кнопкою вміщається в один рядок разом зі стрілкою */
+@media (max-width:399px){.hero .link-arrow{font-size:0.94rem}}
 /* невисокі екрани ноутбуків: щільніші відступи, щоб заголовок, кнопка й цифри вміщались у перший екран */
 @media (min-width:900px) and (max-height:860px){
   .hero-inner{padding-block:2rem 1.75rem}
@@ -110,7 +124,7 @@
   .hero-stats{display:grid;grid-template-columns:repeat(3,1fr);gap:0;margin-top:1.75rem;padding-top:1.25rem}
   .hero-stats li{min-width:0;padding-right:0.75rem;margin-right:0.75rem}
   .hero-stats b{font-size:1rem}
-  .hero-stats span{font-size:0.68rem;letter-spacing:.06em;line-height:1.35}
+  .hero-stats span{font-size:0.75rem;letter-spacing:.03em;line-height:1.35}
   .hero-checks{gap:0.5rem 1rem;font-size:0.92rem}
   .hero .lead{font-size:1.1rem}
   .hero-actions{gap:0.25rem 1.5rem}

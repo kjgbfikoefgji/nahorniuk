@@ -5,7 +5,7 @@
 .about-lead{color:var(--muted);font-size:1.1rem}
 .about-stats{display:grid;grid-template-columns:repeat(3,1fr);gap:1rem;margin:1.5rem 0;padding-block:1.375rem;border-block:1px solid var(--line)}
 .about-stats b{display:block;font:800 clamp(1.4rem,2.4vw,2rem)/1.1 var(--font-head);color:var(--accent-text)}
-.about-stats span{display:block;margin-top:0.375rem;font:600 0.72rem/1.35 var(--font-body);letter-spacing:.12em;text-transform:uppercase;color:var(--muted)}
+.about-stats span{display:block;margin-top:0.375rem;font:600 0.75rem/1.35 var(--font-body);letter-spacing:.12em;text-transform:uppercase;color:var(--muted)}
 .about-copy .btn{margin-top:0.5rem}
 @media (min-width:900px){.about-grid{grid-template-columns:.8fr 1.2fr}}
 
