@@ -1,7 +1,7 @@
 /* Суцільна темна смуга в обох темах (як тікер під героєм): нічого не перекриває, герой починається під нею.
    Змінні перевизначені локально, тож меню, кнопки й випадна панель на телефоні лишаються темними і у світлій темі.
    backdrop-filter тут не ставимо: усередині є fixed-панель меню. */
-.site-header{--bg:#0a0908;--text:#f8f4ee;--muted:#c4bbb0;--line:rgba(255,255,255,.1);--glass:rgba(255,255,255,.07);--glass-line:rgba(255,255,255,.18);--accent-text:#ff8f3d;--shadow:0 1.5rem 3.75rem rgba(0,0,0,.55);
+.site-header{--bg:#08080a;--text:#f8f4ee;--muted:#c4bbb0;--line:rgba(255,255,255,.1);--glass:rgba(255,255,255,.07);--glass-line:rgba(255,255,255,.18);--accent-text:#ff8f3d;--shadow:0 1.5rem 3.75rem rgba(0,0,0,.55);
   position:sticky;top:0;z-index:50;height:var(--header-h);background:var(--bg);color:var(--text);border-bottom:1px solid var(--line)}
 .site-header::after{content:"";position:absolute;left:0;right:0;bottom:-1px;height:2px;background:linear-gradient(90deg,transparent,var(--accent) 18%,#ffa23d 50%,var(--accent) 82%,transparent);opacity:.9;pointer-events:none}
 .header-row{height:100%;display:flex;align-items:center;gap:1.5rem}

@@ -1,19 +1,28 @@
+/* Досягнення: велика акцентна цифра як головний елемент картки, водяний знак-іконка, лінія акценту зверху */
 .ach-grid{display:grid;gap:1rem}
-.ach{display:flex;flex-direction:column;gap:0.5rem;padding:1.75rem}
+.ach{display:flex;flex-direction:column;overflow:hidden;padding:1.5rem 1.5rem 1.75rem}
+.ach::after{content:"";position:absolute;left:0;top:0;right:0;height:3px;background:var(--accent-grad);transform:scaleX(.28);transform-origin:0 50%;transition:transform var(--t-med) var(--ease)}
 .ach:hover{border-color:rgba(255,122,26,.5);transform:translateY(-4px)}
-.ach-ico{display:grid;place-items:center;width:3.5rem;height:3.5rem;margin-bottom:1rem;border-radius:var(--radius-sm);background:rgba(255,122,26,.12);color:var(--accent-text)}
-.ach-year{position:absolute;top:1.5rem;right:1.5rem;font:800 1.9rem/1 var(--font-head);color:transparent;-webkit-text-stroke:1.5px var(--accent);letter-spacing:-.02em;transition:color var(--t-med)}
-.ach:hover .ach-year{color:var(--accent)}
-.ach h3{font-size:1.05rem;text-transform:uppercase}
-.ach p{margin:0;color:var(--muted)}
+.ach:hover::after{transform:scaleX(1)}
+.ach-wm{position:absolute;right:-1.25rem;bottom:-1.5rem;width:9rem;height:9rem;stroke-width:1;color:var(--accent);opacity:.07;pointer-events:none;transition:opacity var(--t-med),transform var(--t-med) var(--ease)}
+.ach:hover .ach-wm{opacity:.14;transform:rotate(-6deg) scale(1.05)}
+.ach-top{display:flex;align-items:center;gap:0.75rem;margin:0 0 1.5rem}
+.ach-ico{display:grid;place-items:center;flex:none;width:2.5rem;height:2.5rem;border-radius:var(--radius-sm);background:rgba(255,122,26,.14);color:var(--accent-text)}
+.ach-label{font:700 0.68rem/1.3 var(--font-body);letter-spacing:.14em;text-transform:uppercase;color:var(--muted)}
+.ach-fig{display:block;margin-bottom:0.75rem;font:800 clamp(2.2rem,4.4vw,3.4rem)/1 var(--font-head);letter-spacing:-.03em;text-transform:uppercase;color:var(--accent);font-variant-numeric:tabular-nums}
+:root[data-theme="light"] .ach-fig{color:var(--accent-text)}
+.ach-fig small{margin-left:0.4rem;font-size:0.38em;letter-spacing:.04em;text-transform:uppercase;color:var(--muted)}
+.ach h3{font-size:1.05rem;text-transform:uppercase;margin-bottom:0.5rem}
+.ach-text{margin:0;color:var(--muted);font-size:0.95rem}
 @media (min-width:640px){.ach-grid{grid-template-columns:repeat(2,1fr)}}
 @media (min-width:1000px){.ach-grid{grid-template-columns:repeat(4,1fr)}}
 @media (max-width:639px){
-  .ach-grid{grid-template-columns:repeat(2,1fr);gap:0.75rem}
-  .ach{padding:1.125rem}
-  .ach-ico{width:2.75rem;height:2.75rem;margin-bottom:0.5rem}
-  .ach-ico .ico{width:1.4rem;height:1.4rem}
-  .ach-year{top:1rem;right:0.875rem;font-size:1.15rem}
-  .ach h3{font-size:0.82rem}
-  .ach p{font-size:0.85rem;line-height:1.45}
+  .ach-grid{grid-template-columns:1fr;gap:0.75rem}
+  .ach{padding:1.25rem 1.25rem 1.5rem}
+  .ach-top{margin-bottom:1rem}
+  .ach-label{font-size:0.7rem}
+  .ach-fig{font-size:clamp(2.1rem,11vw,2.8rem)}
+  .ach h3{font-size:1rem}
+  .ach-text{font-size:1rem;line-height:1.5}
+  .ach-wm{width:7rem;height:7rem}
 }

@@ -10,16 +10,16 @@
 .marquee-rev.is-running .track{animation-direction:reverse}
 .marquee.is-running:hover .track{animation-play-state:paused}
 
-.quote{display:flex;flex-direction:column;flex:none;width:min(84vw,24rem);margin-right:1.25rem;padding:2.5rem 1.75rem 1.5rem;
-  background:linear-gradient(160deg,rgba(255,122,26,.11),var(--card) 62%);border-color:rgba(255,122,26,.28)}
-/* у світлій темі чиста біла картка, без брудного градієнта */
-:root[data-theme="light"] .quote{background:var(--card)}
+.quote{display:flex;flex-direction:column;flex:none;width:min(84vw,24rem);margin-right:1.25rem;padding:1.5rem 1.625rem 1.375rem}
 .quote-lg{width:min(88vw,30rem)}
-.quote::after{content:"“";position:absolute;left:1.5rem;top:0.5rem;font:800 4.5rem/1 var(--font-head);color:var(--accent);pointer-events:none}
-.quote blockquote{margin:0.75rem 0 1.5rem;font-size:1.12rem;font-weight:500;line-height:1.5}
-.who{margin:auto 0 0;padding-top:1rem;border-top:1px solid var(--line);color:var(--muted);font-size:0.85rem;font-weight:600}
+.q-top{display:flex;align-items:center;justify-content:space-between;gap:0.75rem;margin:0 0 1.125rem}
+.q-mark{display:grid;place-items:center;width:2.5rem;height:2.5rem;padding-top:0.5rem;border-radius:var(--radius-sm);background:var(--accent-grad);color:var(--on-accent);font:800 2.1rem/1 var(--font-head)}
+.q-src{padding:0.3125rem 0.75rem;border:1px solid var(--glass-line);border-radius:2rem;font:700 0.7rem/1.2 var(--font-body);letter-spacing:.12em;text-transform:uppercase;color:var(--muted)}
+.quote blockquote{margin:0 0 1.5rem;font-size:1.08rem;font-weight:500;line-height:1.55}
+.who{position:relative;margin:auto 0 0;padding:1rem 0 0 1.75rem;border-top:1px solid var(--line);color:var(--muted);font-size:0.85rem;font-weight:600}
+.who::before{content:"";position:absolute;left:0;top:calc(1rem + 0.62em);width:1.125rem;height:2px;background:var(--accent)}
 @media (max-width:639px){
-  .quote{width:min(78vw,19rem);padding:2.25rem 1.25rem 1.125rem;margin-right:0.875rem}
+  .quote{width:min(80vw,19rem);padding:1.25rem 1.25rem 1.125rem;margin-right:0.875rem}
   .quote-lg{width:min(84vw,21rem)}
   .track{align-items:flex-start}
   .quote blockquote{font-size:1rem;margin-bottom:1rem}

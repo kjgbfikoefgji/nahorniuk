@@ -13,7 +13,7 @@
   --radius-sm:0.75rem;
   --maxw:72rem;
   --gutter:clamp(1.25rem,4vw,2.5rem);
-  --section-y:clamp(4.5rem,9vw,8rem);
+  --section-y:clamp(3.75rem,9vw,8rem);
   --header-h:4.5rem;
 
   --ease:cubic-bezier(.22,.8,.3,1);
@@ -22,18 +22,18 @@
 }
 :root,:root[data-theme="dark"]{
   color-scheme:dark;
-  --bg:#0a0908;
-  --bg-alt:#100e0b;
-  --card:#15120f;
-  --card-hi:#1d1913;
+  --bg:#08080a;
+  --bg-alt:#0d0d10;
+  --card:#121216;
+  --card-hi:#1a1a1f;
   --line:rgba(255,255,255,.085);
-  --text:#f8f4ee;
-  --muted:#b6ada2;
+  --text:#f7f4ef;
+  --muted:#b4aea6;
   --accent-text:#ff8f3d;
   --glass:rgba(255,255,255,.06);
   --glass-line:rgba(255,255,255,.14);
   --shadow:0 1.5rem 3.75rem rgba(0,0,0,.55);
-  --header-bg:rgba(10,9,8,.86);
+  --header-bg:#08080a;
   --dots:rgba(255,255,255,.055);
   --grain:.05;
 }

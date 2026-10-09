@@ -5,16 +5,29 @@
 :root[data-theme="light"] .hero-bg img{top:50%;translate:0 -50%;width:min(27rem,38vw);height:auto;max-height:calc(100% - 4.5rem);aspect-ratio:853/1280;right:max(var(--gutter),calc((100% - var(--maxw)) / 2 + 0.75rem));
   border-radius:calc(var(--radius) + 0.5rem);object-position:50% 14%;-webkit-mask-image:none;mask-image:none;
   box-shadow:0 2rem 4.5rem rgba(90,40,5,.28),0 0 0 0.5rem rgba(255,255,255,.7),0 0 0 calc(0.5rem + 2px) rgba(255,122,26,.45)}
-:root[data-theme="light"] .ticker{--bg-alt:#0a0908;--text:#f8f4ee;--line:rgba(255,255,255,.1);color:var(--text)}
+:root[data-theme="light"] .ticker{--bg-alt:#08080a;--text:#f8f4ee;--line:rgba(255,255,255,.1);color:var(--text)}
 .hero-bg{position:absolute;inset:0 0 3.75rem 0;z-index:-1;overflow:hidden}
 .hero-bg::before{content:"";position:absolute;inset:0;
   background:radial-gradient(48rem 38rem at 78% 38%,rgba(255,122,26,.30),transparent 62%),radial-gradient(32rem 26rem at 8% 92%,rgba(255,150,40,.10),transparent 60%)}
+:root:not([data-theme="light"]) .hero-bg::after{content:"";position:absolute;right:max(-6rem,calc((100% - var(--maxw)) / 2 - 8rem));top:50%;width:min(44rem,70vw);aspect-ratio:1;translate:0 -50%;border-radius:50%;
+  border:1px solid rgba(255,122,26,.16);box-shadow:0 0 0 3rem rgba(255,122,26,.025),0 0 0 3.05rem rgba(255,122,26,.08),inset 0 0 6rem rgba(255,122,26,.06);pointer-events:none}
 .hero-bg img{position:absolute;top:0;right:max(0px,calc((100% - var(--maxw)) / 2 - 2rem));height:100%;width:auto;max-width:none;object-fit:cover;object-position:50% 12%;
   -webkit-mask-image:linear-gradient(90deg,transparent 0,#000 34%),linear-gradient(270deg,transparent 0,#000 18%),linear-gradient(0deg,transparent 0,#000 26%),linear-gradient(180deg,transparent 0,#000 8%);
   -webkit-mask-composite:source-in;
   mask-image:linear-gradient(90deg,transparent 0,#000 34%),linear-gradient(270deg,transparent 0,#000 18%),linear-gradient(0deg,transparent 0,#000 26%),linear-gradient(180deg,transparent 0,#000 8%);
   mask-composite:intersect}
 
+/* скляні чіпи поверх портрета (лише десктоп), легко «пливуть» */
+.hero-chips{position:absolute;inset:0;left:0;right:0;margin-inline:auto;pointer-events:none;display:none}
+.chip{position:absolute;display:flex;align-items:center;gap:0.75rem;padding:0.75rem 1rem 0.75rem 0.75rem;border-radius:var(--radius-sm);border:1px solid var(--glass-line);
+  background:rgba(14,14,17,.66);color:#f7f4ef;-webkit-backdrop-filter:blur(0.875rem);backdrop-filter:blur(0.875rem);box-shadow:0 1rem 2.5rem rgba(0,0,0,.35);animation:float 7s ease-in-out infinite}
+.chip b{display:block;font:800 0.82rem/1.2 var(--font-head);text-transform:uppercase;letter-spacing:-.005em}
+.chip small{display:block;margin-top:0.25rem;font:500 0.75rem/1.3 var(--font-body);color:#cfc8bf}
+.chip-ico{display:grid;place-items:center;flex:none;width:2.5rem;height:2.5rem;border-radius:0.6rem;background:var(--accent-grad);color:var(--on-accent)}
+.chip-a{right:1.5rem;bottom:6rem}
+.chip-b{flex-direction:column;align-items:flex-start;gap:0;right:calc(min(27rem,38vw) - 1.5rem);top:46%;padding:0.875rem 1.125rem;animation-delay:-3.5s}
+.chip-num{font-size:1.6rem!important;color:var(--accent)}
+@media (min-width:1100px){.hero-chips{display:block}}
 .hero-inner{display:flex;align-items:flex-end;min-height:min(46rem,calc(100svh - var(--header-h) - 3.75rem));padding-block:3.5rem 2.75rem}
 .hero-copy{max-width:46rem}
 .badge{display:inline-flex;align-items:center;flex-wrap:wrap;gap:0.375rem 0.75rem;margin:0 0 1.5rem;padding:0.625rem 1rem;border-radius:var(--radius-sm);
@@ -42,10 +55,11 @@
 .ticker-track li::after{content:"";width:0.5rem;height:0.5rem;margin-left:2.25rem;background:var(--accent);transform:rotate(45deg);flex:none}
 
 @media (max-width:899px){
+  :root:not([data-theme="light"]) .hero-bg::after{display:none}
   .hero-bg::before{background:radial-gradient(34rem 26rem at 70% 18%,rgba(255,122,26,.30),transparent 62%)}
   .hero-bg img{left:0;right:0;width:100%;height:min(36rem,125vw);object-position:50% 8%;
     -webkit-mask-image:linear-gradient(0deg,transparent 0,#000 62%);mask-image:linear-gradient(0deg,transparent 0,#000 62%);-webkit-mask-composite:source-over;mask-composite:add}
-  .hero-inner{min-height:0;padding-top:clamp(14rem,68vw,24rem)}
+  .hero-inner{min-height:0;padding-top:clamp(17rem,80vw,27rem)}
   .hero-stats li{padding-right:1.25rem;margin-right:1.25rem}
 }
 @media (max-width:899px){
@@ -57,7 +71,9 @@
   .hero-stats{display:grid;grid-template-columns:1fr 1.5fr 1fr;gap:0;margin-top:1.75rem;padding-top:1.25rem}
   .hero-stats li{min-width:0;padding-right:0.75rem;margin-right:0.75rem}
   .hero-stats b{font-size:1rem}
-  .hero-stats span{font-size:0.6rem;letter-spacing:.08em}
-  .hero-checks{gap:0.375rem 1rem;font-size:0.85rem}
+  .hero-stats span{font-size:0.68rem;letter-spacing:.06em;line-height:1.35}
+  .hero-checks{gap:0.5rem 1rem;font-size:0.92rem}
+  .hero .lead{font-size:1.1rem}
+  .hero-actions{gap:0.25rem 1.5rem}
   .hero-actions .btn{width:100%}
 }

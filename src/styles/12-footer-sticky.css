@@ -1,6 +1,7 @@
 .site-footer{border-top:1px solid var(--line);padding-block:1.75rem;background:var(--bg)}
 .footer-row{display:flex;flex-wrap:wrap;align-items:center;gap:1.25rem 2rem}
 .footer-row .logo{margin-right:0}
+.site-footer .logo-text b{color:var(--accent-text)}
 .footer-copy{flex:1;min-width:14rem;margin:0;color:var(--muted);font-size:0.85rem}
 .footer-copy a{color:var(--text)}
 .socials{display:flex;align-items:center;gap:0.625rem}
