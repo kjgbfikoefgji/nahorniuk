@@ -8,10 +8,10 @@
 :root[data-theme="light"] #how::before{background:linear-gradient(90deg,transparent,rgba(255,122,26,.5) 50%,transparent)}
 :root[data-theme="light"] #how::after{opacity:1}
 
-/* 2. Герой: велике помаранчеве коло за портретом і жорстка «блочна» тінь рамки */
-:root[data-theme="light"] .hero-bg::after{content:"";position:absolute;right:max(-4rem,calc((100% - var(--maxw)) / 2 - 6rem));top:50%;width:min(46rem,70vw);aspect-ratio:1;translate:0 -50%;border-radius:50%;
-  background:radial-gradient(circle,rgba(255,150,40,.34),rgba(255,122,26,.12) 62%,transparent 63%);border:2px solid rgba(255,122,26,.35);box-shadow:0 0 0 2.5rem rgba(255,122,26,.07);pointer-events:none}
-:root[data-theme="light"] .hero-bg img{box-shadow:1rem 1rem 0 var(--accent),0 2.5rem 5rem rgba(90,40,5,.3);border:3px solid #17120d}
+/* 2. Герой: одне м'яке помаранчеве коло за портретом, рамка з тонкою темною обводкою без жорсткої тіні (вона виглядала як збій на краю) */
+:root[data-theme="light"] .hero-bg::after{content:"";position:absolute;right:max(-2rem,calc((100% - var(--maxw)) / 2 - 4rem));top:50%;width:min(44rem,66vw);aspect-ratio:1;translate:0 -50%;border-radius:50%;
+  background:radial-gradient(circle,rgba(255,150,40,.30),rgba(255,122,26,.10) 64%,transparent 65%);pointer-events:none}
+:root[data-theme="light"] .hero-bg img{box-shadow:0 2rem 4.5rem rgba(90,40,5,.28);border:3px solid #17120d}
 :root[data-theme="light"] .hero h1{text-shadow:none}
 :root[data-theme="light"] .hero-stats b{color:var(--text)}
 
@@ -51,7 +51,7 @@
 
 @media (max-width:899px){
   :root[data-theme="light"] .hero-bg::after{display:none}
-  :root[data-theme="light"] .hero-bg img{box-shadow:0.6rem 0.6rem 0 var(--accent),0 1.5rem 3rem rgba(90,40,5,.25)}
+  :root[data-theme="light"] .hero-bg img{box-shadow:0 1.5rem 3rem rgba(90,40,5,.25)}
   :root[data-theme="light"] .cta-box{box-shadow:0.4rem 0.4rem 0 #17120d}
   :root[data-theme="light"] .service-featured{box-shadow:0.4rem 0.4rem 0 var(--accent)}
 }

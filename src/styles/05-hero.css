@@ -2,7 +2,7 @@
 .hero{position:relative;isolation:isolate;overflow:hidden;background:var(--bg)}
 /* світла тема: герой і стрічка внизу теж світлі, портрет у рамці зі своїм теплим тлом (без брудного гало від градієнтів) */
 :root[data-theme="light"] .hero-bg::before{background:radial-gradient(46rem 36rem at 80% 40%,rgba(255,122,26,.20),transparent 64%),radial-gradient(30rem 24rem at 6% 96%,rgba(255,150,40,.14),transparent 60%)}
-:root[data-theme="light"] .hero-bg img{top:50%;translate:0 -50%;width:min(27rem,38vw);height:auto;max-height:calc(100% - 4.5rem);aspect-ratio:853/1280;right:max(var(--gutter),calc((100% - var(--maxw)) / 2 + 0.75rem));
+:root[data-theme="light"] .hero-bg img{top:50%;translate:0 -50%;width:min(25rem,35vw);height:auto;max-height:calc(100% - 4.5rem);aspect-ratio:853/1280;right:max(var(--gutter),calc((100% - var(--maxw)) / 2 + 0.75rem));
   border-radius:calc(var(--radius) + 0.5rem);object-position:50% 14%;-webkit-mask-image:none;mask-image:none;
   box-shadow:0 2rem 4.5rem rgba(90,40,5,.28),0 0 0 0.5rem rgba(255,255,255,.7),0 0 0 calc(0.5rem + 2px) rgba(255,122,26,.45)}
 :root[data-theme="light"] .ticker-track li.hl{color:var(--accent-text)}
