@@ -20,7 +20,8 @@
 .motion-btn-ticker{position:absolute;right:var(--gutter);bottom:0.5rem;z-index:2;background:#08080a;color:#f7f4ef;border-color:rgba(255,255,255,.2)}
 .motion-btn-text{width:auto;gap:0.5rem;padding:0 1rem;font:700 0.8rem/1 var(--font-body);letter-spacing:.06em;text-transform:uppercase}
 .motion-row{display:flex;justify-content:flex-end;margin:-1.25rem 0 1.25rem}
-@media (max-width:639px){.motion-row{justify-content:flex-start;margin:0 0 1.25rem}}
+/* на телефоні відгуки не біжать, тож паузи для них не треба */
+@media (max-width:759px){.motion-row{display:none}}
 
 /* смужка прогресу читання (де підтримується scroll-driven animations) */
 @supports (animation-timeline:scroll()){

@@ -1,4 +1,7 @@
-/* Досягнення: велика акцентна цифра як головний елемент картки, водяний знак-іконка, лінія акценту зверху */
+/* Титули всередині секції «Про мене»: велика акцентна цифра як головний елемент картки, водяний знак-іконка, лінія акценту зверху */
+.ach-block{margin-top:clamp(2.5rem,6vw,4.5rem)}
+.ach-kicker{display:flex;align-items:center;gap:1rem;margin:0 0 1.5rem;font:800 clamp(1.05rem,1.8vw,1.4rem)/1.2 var(--font-head);text-transform:uppercase;letter-spacing:-.01em}
+.ach-kicker::after{content:"";flex:1;height:1px;background:linear-gradient(90deg,var(--glass-line),transparent)}
 .ach-grid{display:grid;gap:1rem}
 .ach{display:flex;flex-direction:column;overflow:hidden;padding:1.5rem 1.5rem 1.75rem}
 .ach::after{content:"";position:absolute;left:0;top:0;right:0;height:3px;background:var(--accent-grad);transform:scaleX(.28);transform-origin:0 50%;transition:transform var(--t-med) var(--ease)}

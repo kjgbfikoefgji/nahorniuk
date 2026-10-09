@@ -6,8 +6,8 @@ try { (() => {
     const sec = document.getElementById(a.getAttribute('href').slice(1));
     if (sec) map.set(sec, a);
   });
-  // герой і «Досягнення» не мають пункту меню: на них підсвітка знімається
-  const none = [document.querySelector('.hero'), document.getElementById('achievements')].filter(Boolean);
+  // герой не має пункту меню: на ньому підсвітка знімається
+  const none = [document.querySelector('.hero')].filter(Boolean);
   const io = new IntersectionObserver((entries) => {
     entries.forEach((en) => {
       if (!en.isIntersecting) return;

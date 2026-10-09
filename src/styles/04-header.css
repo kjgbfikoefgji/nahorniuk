@@ -1,20 +1,20 @@
-/* Суцільна темна смуга в обох темах (як тікер під героєм): нічого не перекриває, герой починається під нею.
-   Змінні перевизначені локально, тож меню, кнопки й випадна панель на телефоні лишаються темними і у світлій темі.
-   backdrop-filter тут не ставимо: усередині є fixed-панель меню. */
-.site-header{--bg:#08080a;--text:#f8f4ee;--muted:#c4bbb0;--line:rgba(255,255,255,.1);--glass:rgba(255,255,255,.07);--glass-line:rgba(255,255,255,.18);--accent-text:#ff8f3d;--shadow:0 1.5rem 3.75rem rgba(0,0,0,.55);
-  position:sticky;top:0;z-index:50;height:var(--header-h);background:var(--bg);color:var(--text);border-bottom:1px solid var(--line)}
+/* Суцільна смуга, колір слідує темі: у темній майже чорна, у світлій кремова (токени з 02-tokens.css).
+   Нічого не перекриває, герой починається під нею. Фон суцільний: backdrop-filter не ставимо, бо всередині є fixed-панель меню. */
+.site-header{--muted:#c4bbb0;
+  position:sticky;top:0;z-index:50;height:var(--header-h);background:var(--header-bg);color:var(--text);border-bottom:1px solid var(--line)}
+:root[data-theme="light"] .site-header{--muted:#4a4138;--header-bg:#fbf8f2}
 .site-header::after{content:"";position:absolute;left:0;right:0;bottom:-1px;height:2px;background:linear-gradient(90deg,transparent,var(--accent) 18%,#ffa23d 50%,var(--accent) 82%,transparent);opacity:.9;pointer-events:none}
 .header-row{height:100%;display:flex;align-items:center;gap:1.5rem}
 .logo{display:inline-flex;align-items:center;gap:0.75rem;min-height:2.75rem;text-decoration:none;margin-right:auto}
 .logo-mark{display:grid;place-items:center;width:2.75rem;height:2.75rem;border-radius:var(--radius-sm);background:var(--accent-grad);color:var(--on-accent);font:800 1.25rem/1 var(--font-head);box-shadow:0 0 1.5rem rgba(255,122,26,.35)}
 .logo-text{font:800 1rem/1 var(--font-head);text-transform:uppercase;letter-spacing:-.01em}
-.logo-text b{color:var(--accent);font-weight:800}
+.logo-text b{color:var(--accent-text);font-weight:800}
 
 /* посилання на всю висоту смуги; активний розділ підсвічує помаранчева планка внизу */
 .nav{display:flex;align-self:stretch;gap:0.125rem}
 .nav a{position:relative;display:flex;align-items:center;padding:0 0.875rem;text-decoration:none;font:700 0.78rem/1 var(--font-body);letter-spacing:.09em;text-transform:uppercase;color:var(--muted);transition:color var(--t-fast),background-color var(--t-fast)}
 .nav a::after{content:"";position:absolute;left:0.875rem;right:0.875rem;bottom:0;height:0.2rem;border-radius:0.2rem 0.2rem 0 0;background:var(--accent);transform:scaleX(0);transform-origin:0 50%;transition:transform var(--t-med) var(--ease)}
-.nav a:hover{color:#fff;background:rgba(255,255,255,.05)}
+.nav a:hover{color:var(--text);background:var(--glass)}
 .nav a[aria-current]{color:var(--accent-text)}
 .nav a:hover::after,.nav a[aria-current]::after{transform:scaleX(1)}
 .nav .nav-cta{display:none}
@@ -33,7 +33,7 @@
 @media (max-width:899px){
   .menu-btn{display:inline-flex}
   .header-cta{display:none}
-  .nav{position:fixed;inset:var(--header-h) 0 auto 0;align-self:auto;flex-direction:column;gap:0;padding:0.75rem var(--gutter) 1.5rem;background:var(--bg);
+  .nav{position:fixed;inset:var(--header-h) 0 auto 0;align-self:auto;flex-direction:column;gap:0;padding:0.75rem var(--gutter) 1.5rem;background:var(--header-bg);
     border-bottom:1px solid var(--line);box-shadow:var(--shadow);transform:translateY(-0.75rem);opacity:0;visibility:hidden;
     transition:transform var(--t-med) var(--ease),opacity var(--t-med),visibility 0s linear var(--t-med)}
   .menu-open .nav{transform:none;opacity:1;visibility:visible;transition-delay:0s}
