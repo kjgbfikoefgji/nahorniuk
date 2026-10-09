@@ -378,6 +378,20 @@ main{counter-reset:sec}
   :root[data-theme="light"] .hero-photo img{object-position:50% 8%;transform:translateX(-10%) scale(1.2)}
   :root[data-theme="light"] .hero-inner{padding-top:calc(var(--pw) * 1.12 + 3.5rem)}
 }
+/* темна тема на телефоні: так само, як у світлій, портрет у рамці по центру (обличчя ціле, не під плашкою й заголовком),
+   позаду нахилена помаранчева картка з сяйвом; не для альбомного телефона (там портрет збоку, див. нижче) */
+@media (max-width:899px) and (orientation:portrait),(max-width:899px) and (min-height:561px){
+  :root:not([data-theme="light"]) .hero{--pw:min(21rem,calc(100vw - var(--gutter) * 2))}
+  :root:not([data-theme="light"]) .hero-bg::before{background:radial-gradient(30rem 24rem at 50% 14%,rgba(255,122,26,.30),transparent 64%)}
+  :root:not([data-theme="light"]) .hero-bg::after{display:block;content:"";position:absolute;z-index:0;top:1.5rem;right:auto;left:50%;width:var(--pw);height:calc(var(--pw) * 1.12);aspect-ratio:auto;translate:-50% 0;
+    transform:rotate(4deg) scale(1.02);border:0;border-radius:calc(var(--radius) + 0.75rem);pointer-events:none;
+    background:radial-gradient(rgba(10,6,2,.28) 0.09rem,transparent 0.13rem) 0 0/1.25rem 1.25rem,linear-gradient(165deg,#ff8f33,#e8620c 55%,#a63e06);box-shadow:0 0 4rem rgba(255,122,26,.35)}
+  :root:not([data-theme="light"]) .hero-photo{z-index:1;display:block;position:absolute;top:1.5rem;left:50%;translate:-50% 0;width:var(--pw);height:calc(var(--pw) * 1.12);overflow:hidden;
+    border:2px solid rgba(255,170,90,.7);border-radius:calc(var(--radius) + 0.75rem);background:#2a140a;box-shadow:0 1.5rem 3rem rgba(0,0,0,.55)}
+  :root:not([data-theme="light"]) .hero-photo img{inset:0;width:100%;height:100%;max-width:none;object-fit:cover;object-position:50% 8%;
+    transform-origin:50% 40%;transform:translateX(-10%) scale(1.2);-webkit-mask-image:none;mask-image:none}
+  :root:not([data-theme="light"]) .hero-inner{padding-top:calc(var(--pw) * 1.12 + 3.5rem)}
+}
 /* телефон в альбомній орієнтації: портрет праворуч, текст ліворуч, щоб заголовок і кнопка були в першому екрані */
 @media (max-width:899px) and (orientation:landscape) and (max-height:560px){
   .hero,:root[data-theme="light"] .hero{--pw:min(15rem,34vw)}
