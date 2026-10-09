@@ -1,0 +1,16 @@
+.env
+.env.*
+!.env.example
+.venv/
+__pycache__/
+*.py[cod]
+.idea/
+.vscode/
+.claude/
+node_modules/
+artifacts/
+
+# Сирі матеріали клієнта (оригінали фото й скріншоти відгуків з чужими нікнеймами) не публікуємо
+images/
+Notes/
+/*.png

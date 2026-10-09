@@ -1,0 +1,6 @@
+.quotes{columns:3 300px;column-gap:20px}
+.quote{break-inside:avoid;margin-bottom:20px;position:relative;padding:36px 26px 24px}
+.quote::before{content:"“";position:absolute;left:22px;top:2px;font:700 4.2rem/1 var(--font-head);color:var(--accent);opacity:.9}
+.quote blockquote{margin:14px 0 16px;font-size:1.02rem;line-height:1.55}
+.who{margin:0;color:var(--muted);font-size:.85rem;font-weight:500}
+.quote:hover{border-color:var(--accent)}

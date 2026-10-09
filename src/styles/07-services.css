@@ -1,0 +1,25 @@
+.service-grid{display:grid;gap:20px}
+.service{position:relative;display:flex;flex-direction:column;padding:30px}
+.service:hover{border-color:var(--accent);transform:translateY(-4px);box-shadow:var(--shadow)}
+.service-ico{color:var(--accent);margin-bottom:16px}
+.service h3{margin-bottom:10px}
+.service>p{color:var(--muted);margin:0}
+.service-featured{border-color:var(--accent);background:linear-gradient(180deg,var(--card-hi),var(--card))}
+.tag{position:absolute;top:-13px;right:24px;padding:6px 14px;border-radius:999px;background:var(--accent);color:var(--on-accent);font:600 .75rem/1 var(--font-body);letter-spacing:.06em;text-transform:uppercase}
+
+.options{display:grid;gap:10px;margin-top:auto;padding-top:20px}
+.options li{display:grid;grid-template-columns:1fr auto auto;align-items:center;gap:14px;padding:14px 16px;background:var(--bg);border:1px solid var(--line);border-radius:var(--radius-sm)}
+:root[data-theme="light"] .options li{background:var(--card-hi)}
+.opt-name{display:block;font-weight:600}
+.opt-meta{display:block;font-size:.85rem;color:var(--muted);margin-top:2px}
+.price{font:600 1.5rem/1 var(--font-head);white-space:nowrap;font-variant-numeric:tabular-nums}
+
+.pay-note{display:flex;gap:12px;align-items:flex-start;margin:32px 0 0;padding:16px 20px;border:1px dashed var(--line);border-radius:var(--radius-sm);color:var(--muted);font-size:.95rem}
+.pay-note .ico{margin-top:2px;color:var(--accent)}
+.pay-note a{color:var(--accent-text)}
+
+@media (min-width:900px){.service-grid{grid-template-columns:repeat(2,1fr);gap:24px}}
+@media (max-width:480px){
+  .options li{grid-template-columns:1fr auto}
+  .options .btn{grid-column:1/-1}
+}

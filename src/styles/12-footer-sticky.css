@@ -1,0 +1,16 @@
+.site-footer{border-top:1px solid var(--line);padding-block:40px 28px;background:var(--bg-alt)}
+.footer-row{display:grid;gap:28px;align-items:start}
+.footer-brand p{margin:14px 0 0;color:var(--muted);max-width:34ch}
+.footer-links{display:grid;gap:10px}
+.footer-links a{color:var(--muted);text-decoration:none}
+.footer-links a:hover{color:var(--accent-text)}
+.socials{display:flex;gap:10px}
+.footer-copy{margin-top:28px;padding-top:20px;border-top:1px solid var(--line);color:var(--muted);font-size:.85rem}
+@media (min-width:760px){.footer-row{grid-template-columns:1.4fr 1fr auto}}
+
+.sticky-cta{position:fixed;left:0;right:0;bottom:0;z-index:40;padding:12px var(--gutter) calc(12px + env(safe-area-inset-bottom));
+  background:linear-gradient(to top,var(--bg) 55%,transparent);translate:0 110%;visibility:hidden;
+  transition:translate var(--t-med) var(--ease),visibility 0s linear var(--t-med)}
+.sticky-cta.on{translate:0 0;visibility:visible;transition-delay:0s}
+@media (min-width:900px){.sticky-cta{display:none}}
+@media (max-width:899px){body{padding-bottom:0}}

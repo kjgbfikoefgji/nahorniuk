@@ -1,0 +1,78 @@
+<!doctype html>
+<html lang="uk" data-theme="dark">
+<head>
+{{ include "head/meta.html" }}
+{{ include "head/social.html" }}
+{{ include "head/structured-data.html" }}
+{{ include "head/icons.html" }}
+<script>
+{{ include "scripts/00-theme-init.js" }}
+</script>
+<style>
+{{ include "styles/01-fonts.css" }}
+{{ include "styles/02-tokens.css" }}
+{{ include "styles/03-base.css" }}
+{{ include "styles/04-header.css" }}
+{{ include "styles/05-hero.css" }}
+{{ include "styles/06-facts.css" }}
+{{ include "styles/07-services.css" }}
+{{ include "styles/08-results.css" }}
+{{ include "styles/09-reviews.css" }}
+{{ include "styles/10-about-how.css" }}
+{{ include "styles/11-faq-terms-cta.css" }}
+{{ include "styles/12-footer-sticky.css" }}
+{{ include "styles/13-motion.css" }}
+</style>
+</head>
+<body>
+
+<a class="skip" href="#main">Пропустити до змісту</a>
+
+{{ include "partials/header.html" }}
+
+{{ include "partials/icon-sprite.html" }}
+
+<main id="main" tabindex="-1">
+
+{{ include "sections/hero.html" }}
+
+{{ include "sections/facts.html" }}
+
+{{ include "sections/services.html" }}
+
+{{ include "sections/results.html" }}
+
+{{ include "sections/reviews.html" }}
+
+{{ include "sections/about.html" }}
+
+{{ include "sections/how.html" }}
+
+{{ include "sections/faq.html" }}
+
+{{ include "sections/terms.html" }}
+
+{{ include "sections/cta.html" }}
+
+</main>
+
+{{ include "partials/footer.html" }}
+
+{{ include "partials/sticky-cta.html" }}
+
+{{ include "partials/lightbox.html" }}
+
+<script>
+// Кожен верхньорівневий блок обгорнуто в try/catch: збій одного (скажімо,
+// SecurityError зі сховища в Safari) не зупиняє решту.
+{{ include "scripts/01-menu.js" }}
+{{ include "scripts/02-theme.js" }}
+{{ include "scripts/03-reveal.js" }}
+{{ include "scripts/04-counters.js" }}
+{{ include "scripts/05-lightbox.js" }}
+{{ include "scripts/06-nav-highlight.js" }}
+{{ include "scripts/07-sticky-cta.js" }}
+</script>
+
+</body>
+</html>

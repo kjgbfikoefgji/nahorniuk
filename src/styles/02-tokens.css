@@ -1,0 +1,47 @@
+/* Дизайн-токени. Палітра: енергійний помаранчевий на графіті (ui-ux-pro-max, фітнес). */
+:root{
+  --font-head:"Oswald","Arial Narrow",Impact,sans-serif;
+  --font-body:"Onest",system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;
+
+  --accent:#ff7a1a;
+  --accent-hover:#ff8e3d;
+  --on-accent:#130a02;
+  --ok:#3ddc84;
+
+  --radius:16px;
+  --radius-sm:10px;
+  --maxw:1160px;
+  --gutter:clamp(16px,4vw,32px);
+  --section-y:clamp(64px,9vw,120px);
+  --header-h:68px;
+
+  --ease:cubic-bezier(.22,.8,.3,1);
+  --t-fast:160ms;
+  --t-med:320ms;
+}
+:root,:root[data-theme="dark"]{
+  color-scheme:dark;
+  --bg:#0e1218;
+  --bg-alt:#131922;
+  --card:#1a212c;
+  --card-hi:#212a37;
+  --line:#2a3442;
+  --text:#f4f6f9;
+  --muted:#aab4c3;
+  --accent-text:#ff9a4d;
+  --shadow:0 18px 50px rgba(0,0,0,.45);
+  --header-bg:rgba(14,18,24,.78);
+}
+:root[data-theme="light"]{
+  color-scheme:light;
+  --bg:#f6f3ee;
+  --bg-alt:#ede8e0;
+  --card:#ffffff;
+  --card-hi:#f3efe8;
+  --line:#ddd6ca;
+  --text:#14181f;
+  --muted:#4d5766;
+  --accent-text:#b8430a;
+  --shadow:0 18px 50px rgba(60,40,10,.14);
+  --header-bg:rgba(246,243,238,.82);
+}

@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://nahorniuk.netlify.app/sitemap.xml
