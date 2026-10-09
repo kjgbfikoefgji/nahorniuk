@@ -37,3 +37,7 @@
   .options li{grid-template-columns:1fr auto}
   .options .btn{grid-column:1/-1}
 }
+@media (max-width:639px){
+  .service-visual{height:6.5rem;place-items:center end;padding-right:2.5rem}
+  .service-visual .ico{width:3.25rem;height:3.25rem}
+}

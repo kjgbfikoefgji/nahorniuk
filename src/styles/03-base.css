@@ -58,6 +58,8 @@ main:focus{outline:none}
 /* картки: підсвітка під курсором (--mx/--my виставляє scripts/08-spotlight.js) */
 .card{position:relative;isolation:isolate;background:var(--card);border:1px solid var(--line);border-radius:var(--radius);
   transition:border-color var(--t-med),transform var(--t-med) var(--ease),box-shadow var(--t-med)}
+/* світла тема: м'яка тінь замість лінії, щоб білі картки відділялись від кремового тла */
+:root[data-theme="light"] .card,:root[data-theme="light"] .result{box-shadow:0 0.25rem 1.5rem rgba(70,45,10,.07)}
 .card::before,.result::before{content:"";position:absolute;inset:0;z-index:-1;border-radius:inherit;pointer-events:none;opacity:0;transition:opacity var(--t-med);
   background:radial-gradient(24rem circle at var(--mx,50%) var(--my,-30%),rgba(255,122,26,.16),transparent 62%)}
 .card:hover::before,.result:hover::before{opacity:1}

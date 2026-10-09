@@ -8,3 +8,12 @@
 .ach p{margin:0;color:var(--muted)}
 @media (min-width:640px){.ach-grid{grid-template-columns:repeat(2,1fr)}}
 @media (min-width:1000px){.ach-grid{grid-template-columns:repeat(4,1fr)}}
+@media (max-width:639px){
+  .ach-grid{grid-template-columns:repeat(2,1fr);gap:0.75rem}
+  .ach{padding:1.125rem}
+  .ach-ico{width:2.75rem;height:2.75rem;margin-bottom:0.5rem}
+  .ach-ico .ico{width:1.4rem;height:1.4rem}
+  .ach-year{top:1rem;right:0.875rem;font-size:1.15rem}
+  .ach h3{font-size:0.82rem}
+  .ach p{font-size:0.85rem;line-height:1.45}
+}
