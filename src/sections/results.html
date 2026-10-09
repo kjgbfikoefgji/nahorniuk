@@ -6,7 +6,7 @@
       <p class="section-lead">Реальні фото «до» і «після» та слова клієнтів із переписок. Натисни на фото, щоб розглянути уважніше.</p>
     </header>
 
-    <ul class="results-grid">
+    <ul class="results-grid" id="results-list">
       <li class="reveal">
         <button class="result" type="button" data-lb data-full="/img/out/res-1-1200.webp" data-cap="Місяць тренувань: +5 кг" aria-label="Відкрити: місяць тренувань, плюс 5 кг">
           <img src="/img/out/res-1-640.webp" alt="Фото до і після: місяць тренувань" width="640" height="621" loading="lazy">
@@ -49,6 +49,7 @@
           <span class="result-cap"><b>4 роки</b> перевтілення</span>
         </button>
       </li>
+      <li class="more-li"><button class="btn btn-ghost btn-block more-btn" type="button" aria-expanded="false" aria-controls="results-list" data-more=".result">Показати ще 4 результати<svg class="ico" aria-hidden="true"><use href="#i-chevron"/></svg></button></li>
       <li class="result-cta reveal">
         <p class="result-cta-title">Хочеш такий самий результат?</p>
         <p class="result-cta-text">Напиши мені: підберу програму під твою ціль і рівень.</p>
@@ -65,54 +66,56 @@
     </div>
   </div>
 
-  <div class="marquee" data-marquee>
-    <ul class="track">
-      <li class="card quote">
-        <p class="q-top"><span class="q-mark" aria-hidden="true">“</span><span class="q-src">Telegram</span></p>
-        <blockquote>По сравнению с тем как начинал — я вижу большой результат</blockquote>
-        <p class="who">Клієнт</p>
-      </li>
-      <li class="card quote">
-        <p class="q-top"><span class="q-mark" aria-hidden="true">“</span><span class="q-src">Telegram</span></p>
-        <blockquote>Привет, вообще огонь! Я за час справилась, может даже минут за 50</blockquote>
-        <p class="who">Клієнтка</p>
-      </li>
-      <li class="card quote quote-lg">
-        <p class="q-top"><span class="q-mark" aria-hidden="true">“</span><span class="q-src">Telegram</span></p>
-        <blockquote>Мы когда начинали заниматься, я тогда последний раз была на льду… а сейчас после наших тренировок всё настолько легче даётся, я прям почувствовала как больше сил стало. Спасибо большое за результаты!</blockquote>
-        <p class="who">Клієнтка, фігуристка</p>
-      </li>
-      <li class="card quote">
-        <p class="q-top"><span class="q-mark" aria-hidden="true">“</span><span class="q-src">Telegram</span></p>
-        <blockquote>По вазі трохи прогрес, по об'ємах мінус 5–6 см</blockquote>
-        <p class="who">Клієнтка</p>
-      </li>
-    </ul>
-  </div>
-
-  <div class="marquee marquee-rev" data-marquee>
-    <ul class="track">
-      <li class="card quote">
-        <p class="q-top"><span class="q-mark" aria-hidden="true">“</span><span class="q-src">Instagram</span></p>
-        <blockquote>Спасибо за поддержку и мотивацию в моих начинаниях, я очень рада что именно ты был моим первым тренером!</blockquote>
-        <p class="who">Клієнтка</p>
-      </li>
-      <li class="card quote">
-        <p class="q-top"><span class="q-mark" aria-hidden="true">“</span><span class="q-src">Telegram</span></p>
-        <blockquote>Сьогодні дуже сподобалось тренування! В загалом динаміка позитивна! Спина відпускає і настрій від цього росте!</blockquote>
-        <p class="who">Клієнт(ка)</p>
-      </li>
-      <li class="card quote">
-        <p class="q-top"><span class="q-mark" aria-hidden="true">“</span><span class="q-src">Telegram</span></p>
-        <blockquote>Друге дуже сподобалось, я прям відчула всю біль. А руки робила з 20 кг</blockquote>
-        <p class="who">Клієнтка</p>
-      </li>
-      <li class="card quote">
-        <p class="q-top"><span class="q-mark" aria-hidden="true">“</span><span class="q-src">Telegram</span></p>
-        <blockquote>Тренировка как раз в точку и веса все чётко</blockquote>
-        <p class="who">Клієнт</p>
-      </li>
-    </ul>
+  <div class="reviews-wall" id="reviews-list">
+    <div class="marquee" data-marquee>
+      <ul class="track">
+        <li class="card quote quote-lg">
+          <p class="q-top"><span class="q-mark" aria-hidden="true">“</span><span class="q-src">Telegram</span></p>
+          <blockquote>Мы когда начинали заниматься, я тогда последний раз была на льду… а сейчас после наших тренировок всё настолько легче даётся, я прям почувствовала как больше сил стало. Спасибо большое за результаты!</blockquote>
+          <p class="who">Клієнтка, фігуристка</p>
+        </li>
+        <li class="card quote">
+          <p class="q-top"><span class="q-mark" aria-hidden="true">“</span><span class="q-src">Instagram</span></p>
+          <blockquote>Спасибо за поддержку и мотивацию в моих начинаниях, я очень рада что именно ты был моим первым тренером!</blockquote>
+          <p class="who">Клієнтка</p>
+        </li>
+        <li class="card quote">
+          <p class="q-top"><span class="q-mark" aria-hidden="true">“</span><span class="q-src">Telegram</span></p>
+          <blockquote>По сравнению с тем как начинал — я вижу большой результат</blockquote>
+          <p class="who">Клієнт</p>
+        </li>
+        <li class="card quote">
+          <p class="q-top"><span class="q-mark" aria-hidden="true">“</span><span class="q-src">Telegram</span></p>
+          <blockquote>По вазі трохи прогрес, по об'ємах мінус 5–6 см</blockquote>
+          <p class="who">Клієнтка</p>
+        </li>
+      </ul>
+    </div>
+    <div class="marquee marquee-rev" data-marquee>
+      <ul class="track">
+        <li class="card quote">
+          <p class="q-top"><span class="q-mark" aria-hidden="true">“</span><span class="q-src">Telegram</span></p>
+          <blockquote>Сьогодні дуже сподобалось тренування! В загалом динаміка позитивна! Спина відпускає і настрій від цього росте!</blockquote>
+          <p class="who">Клієнт(ка)</p>
+        </li>
+        <li class="card quote">
+          <p class="q-top"><span class="q-mark" aria-hidden="true">“</span><span class="q-src">Telegram</span></p>
+          <blockquote>Друге дуже сподобалось, я прям відчула всю біль. А руки робила з 20 кг</blockquote>
+          <p class="who">Клієнтка</p>
+        </li>
+        <li class="card quote">
+          <p class="q-top"><span class="q-mark" aria-hidden="true">“</span><span class="q-src">Telegram</span></p>
+          <blockquote>Привет, вообще огонь! Я за час справилась, может даже минут за 50</blockquote>
+          <p class="who">Клієнтка</p>
+        </li>
+        <li class="card quote">
+          <p class="q-top"><span class="q-mark" aria-hidden="true">“</span><span class="q-src">Telegram</span></p>
+          <blockquote>Тренировка как раз в точку и веса все чётко</blockquote>
+          <p class="who">Клієнт</p>
+        </li>
+      </ul>
+    </div>
+    <div class="container more-wrap"><button class="btn btn-ghost btn-block more-btn" type="button" aria-expanded="false" aria-controls="reviews-list" data-more=".quote">Показати ще 5 відгуків<svg class="ico" aria-hidden="true"><use href="#i-chevron"/></svg></button></div>
   </div>
 
   <div class="container">

@@ -24,11 +24,13 @@
 .terms p{margin:0;color:var(--muted)}
 @media (min-width:760px){.terms{grid-template-columns:repeat(2,1fr)}}
 
-.cta{padding-block:0 var(--section-y)}
+/* знизу менший відступ: між закликом і футером не лишається порожньої смуги */
+.cta{padding-block:0 clamp(2.5rem,6vw,4.5rem)}
 .cta-box{position:relative;isolation:isolate;overflow:hidden;display:grid;gap:2rem;align-items:center;padding:clamp(2.25rem,6vw,4.5rem);border-radius:calc(var(--radius) + 0.5rem);
   background:var(--accent-grad);color:var(--on-accent)}
 .cta-box::before{content:"";position:absolute;z-index:-1;right:-10%;bottom:-80%;width:55%;aspect-ratio:1;border-radius:50%;background:rgba(255,255,255,.2)}
-.cta-box::after{content:"";position:absolute;z-index:-1;left:-6%;top:-70%;width:38%;aspect-ratio:1;border-radius:50%;border:2px solid rgba(20,10,2,.18)}
+/* кільце концентричне світлому колу (той самий бокс, збільшений), тож не перетинає заголовок */
+.cta-box::after{content:"";position:absolute;z-index:-1;right:-10%;bottom:-80%;width:55%;aspect-ratio:1;border-radius:50%;border:2px solid rgba(20,10,2,.14);transform:scale(1.22)}
 .cta-box h2{font-size:clamp(1.8rem,4.4vw,3.4rem);margin-bottom:1rem}
 .cta-box p{max-width:44ch;margin:0;font-size:1.1rem;color:rgba(20,10,2,.85)}
 .cta-actions{display:flex;flex-wrap:wrap;gap:0.75rem}

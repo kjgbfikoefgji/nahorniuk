@@ -1,4 +1,5 @@
-/* Два ряди відгуків, що біжать у різні боки. Без JS або з reduced-motion це звичайні ряди з прокручуванням. */
+/* Два ряди відгуків, що біжать у різні боки (лише десктоп із мишею, scripts/09-marquee.js).
+   Без бігу (телефон, сенсорний екран, reduced-motion, без JS) це звичайна сітка карток, яку зручно читати. */
 .reviews{overflow:hidden}
 /* відгуки живуть усередині розділу «Результати»: підзаголовок, лід і стрічки під сіткою фото */
 .reviews-block{margin-top:clamp(3rem,7vw,5rem)}
@@ -21,12 +22,22 @@
 .quote blockquote{margin:0 0 1.5rem;font-size:1.08rem;font-weight:500;line-height:1.55}
 .who{position:relative;margin:auto 0 0;padding:1rem 0 0 1.75rem;border-top:1px solid var(--line);color:var(--muted);font-size:0.85rem;font-weight:600}
 .who::before{content:"";position:absolute;left:0;top:calc(1rem + 0.62em);width:1.125rem;height:2px;background:var(--accent)}
-@media (max-width:759px){
-  .marquee{scroll-snap-type:x mandatory;scroll-padding-inline:var(--gutter);-webkit-overflow-scrolling:touch}
-  .quote{scroll-snap-align:start}
+/* статична сітка: картки на всю ширину колонки, без обрізаних країв і горизонтального гортання */
+.marquee:not(.is-running){overflow:visible;padding-block:0}
+.marquee:not(.is-running) .track{display:grid;grid-template-columns:1fr;gap:0.875rem;width:auto;max-width:calc(var(--maxw) + var(--gutter) * 2);margin-inline:auto}
+.marquee:not(.is-running) .quote{width:auto;margin:0}
+.marquee:not(.is-running)+.marquee{margin-top:0.875rem}
+@media (min-width:640px){
+  .marquee:not(.is-running) .track{grid-template-columns:repeat(2,1fr);gap:1.25rem}
+  .marquee:not(.is-running)+.marquee{margin-top:1.25rem}
 }
+@media (min-width:1200px){.marquee:not(.is-running) .track{grid-template-columns:repeat(4,1fr)}}
+/* телефон: з JS видно перші три відгуки, решта за кнопкою «Показати ще» */
 @media (max-width:639px){
-  .quote{width:min(86vw,22rem);padding:1.25rem 1.25rem 1.125rem;margin-right:0.875rem}
-  .quote-lg{width:min(90vw,24rem)}
+  .reviews-wall.is-collapsed .marquee-rev,.reviews-wall.is-collapsed .quote:nth-child(n+4){display:none}
+  .reviews-wall.is-collapsed .more-wrap{display:block;margin-top:0.875rem}
+  .quote{padding:1.25rem 1.25rem 1.125rem}
+  .q-top{margin-bottom:0.875rem}
+  .q-mark{width:2.25rem;height:2.25rem;font-size:1.9rem}
   .quote blockquote{font-size:1.0625rem;line-height:1.55;margin-bottom:1rem}
 }

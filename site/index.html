@@ -267,12 +267,6 @@ main{counter-reset:sec}
 }
 /* Повноекранний герой: портрет як фон, текст поверх з градієнтом, статистика, стрічка внизу */
 .hero{position:relative;isolation:isolate;overflow:hidden;background:var(--bg)}
-/* світла тема: герой і стрічка внизу теж світлі, портрет у рамці зі своїм теплим тлом (без брудного гало від градієнтів) */
-:root[data-theme="light"] .hero-bg::before{background:radial-gradient(46rem 36rem at 80% 40%,rgba(255,122,26,.20),transparent 64%),radial-gradient(30rem 24rem at 6% 96%,rgba(255,150,40,.14),transparent 60%)}
-:root[data-theme="light"] .hero-bg img{top:50%;translate:0 -50%;width:min(25rem,35vw);height:auto;max-height:calc(100% - 4.5rem);aspect-ratio:853/1280;right:max(var(--gutter),calc((100% - var(--maxw)) / 2 + 0.75rem));
-  border-radius:calc(var(--radius) + 0.5rem);object-position:50% 14%;-webkit-mask-image:none;mask-image:none;
-  box-shadow:0 2rem 4.5rem rgba(90,40,5,.28),0 0 0 0.5rem rgba(255,255,255,.7),0 0 0 calc(0.5rem + 2px) rgba(255,122,26,.45)}
-:root[data-theme="light"] .ticker-track li.hl{color:var(--accent-text)}
 .hero-bg{position:absolute;inset:0 0 3.75rem 0;z-index:-1;overflow:hidden}
 .hero-bg::before{content:"";position:absolute;inset:0;
   background:radial-gradient(48rem 38rem at 78% 38%,rgba(255,122,26,.30),transparent 62%),radial-gradient(32rem 26rem at 8% 92%,rgba(255,150,40,.10),transparent 60%)}
@@ -283,6 +277,22 @@ main{counter-reset:sec}
   -webkit-mask-composite:source-in;
   mask-image:linear-gradient(90deg,transparent 0,#000 34%),linear-gradient(270deg,transparent 0,#000 18%),linear-gradient(0deg,transparent 0,#000 26%),linear-gradient(180deg,transparent 0,#000 8%);
   mask-composite:intersect}
+/* обгортка портрета в темній темі не створює власної коробки: фото лежить прямо на тлі героя */
+.hero-photo{display:contents}
+
+/* Світла тема: герой світлий, портрет у високій рамці на всю висоту героя. Кадр наближено (scale + зсув), щоб обличчя
+   стояло ближче до центру рамки, позаду одне м'яке помаранчеве коло. --pr: правий край рамки = правий край контенту */
+:root[data-theme="light"] .hero{--pw:min(26rem,34vw);--pt:2.25rem;--pb:2.25rem;--pr:max(var(--gutter),calc((100% - var(--maxw)) / 2))}
+:root[data-theme="light"] .hero-bg::before{background:radial-gradient(46rem 36rem at 80% 40%,rgba(255,122,26,.20),transparent 64%),radial-gradient(30rem 24rem at 6% 96%,rgba(255,150,40,.14),transparent 60%)}
+:root[data-theme="light"] .hero-bg::after{content:"";position:absolute;top:50%;right:calc(var(--pr) + var(--pw) / 2);width:min(46rem,62vw);aspect-ratio:1;translate:50% -50%;border-radius:50%;
+  background:radial-gradient(circle,rgba(255,150,40,.32),rgba(255,122,26,.10) 64%,transparent 65%);pointer-events:none}
+:root[data-theme="light"] .hero-photo{display:block;position:absolute;top:var(--pt);bottom:var(--pb);right:var(--pr);width:var(--pw);overflow:hidden;
+  border:3px solid #17120d;border-radius:calc(var(--radius) + 0.75rem);background:#3a1c0c;box-shadow:0 2rem 4.5rem rgba(90,40,5,.28)}
+:root[data-theme="light"] .hero-photo img{inset:0;width:100%;height:100%;max-width:none;object-fit:cover;object-position:50% 30%;
+  transform-origin:50% 40%;transform:translateX(-20%) scale(1.4);-webkit-mask-image:none;mask-image:none}
+:root[data-theme="light"] .hero h1 .accent{color:#e0560a}
+@media (min-width:900px){:root[data-theme="light"] .hero-copy{max-width:min(46rem,calc(100% - var(--pw) - 3rem))}}
+:root[data-theme="light"] .ticker-track li.hl{color:var(--accent-text)}
 
 /* скляні чіпи поверх портрета (лише десктоп), легко «пливуть» */
 .hero-chips{position:absolute;inset:0;left:0;right:0;margin-inline:auto;pointer-events:none;display:none}
@@ -291,13 +301,22 @@ main{counter-reset:sec}
 /* світла тема: біле скло замість сірого */
 :root[data-theme="light"] .chip{background:rgba(255,255,255,.86);color:#17120d;border-color:rgba(30,20,10,.12);box-shadow:0 1rem 2.5rem rgba(90,40,5,.2)}
 :root[data-theme="light"] .chip small{color:#5a5148}
-:root[data-theme="light"] .chip-num{color:var(--accent-text)}
 .chip b{display:block;font:800 0.82rem/1.2 var(--font-head);text-transform:uppercase;letter-spacing:-.005em}
 .chip small{display:block;margin-top:0.25rem;font:500 0.75rem/1.3 var(--font-body);color:#cfc8bf}
 .chip-ico{display:grid;place-items:center;flex:none;width:2.5rem;height:2.5rem;border-radius:0.6rem;background:var(--accent-grad);color:var(--on-accent)}
 .chip-a{right:1.5rem;bottom:6rem}
-.chip-b{flex-direction:column;align-items:flex-start;gap:0;right:calc(min(27rem,38vw) - 1.5rem);top:46%;padding:0.875rem 1.125rem;animation-delay:-3.5s}
-.chip-num{font-size:1.6rem!important;color:var(--accent)}
+.chip-b{right:calc(min(27rem,38vw) - 3.5rem);top:50%;animation-delay:-3.5s}
+/* світла тема: чіп і печатка тримаються країв рамки портрета (у координатах контейнера правий край рамки = --gutter) */
+:root[data-theme="light"] .chip-a{display:none}
+:root[data-theme="light"] .chip-b{top:auto;right:calc(var(--gutter) + var(--pw) + 1.5rem);bottom:calc(var(--pb) + 6rem);translate:100% 0}
+/* печатка «Чемпіон світу», що повільно обертається (лише світла тема, пауза разом зі стрічками) */
+.hero-stamp{display:none}
+:root[data-theme="light"] .hero-stamp{display:grid;place-items:center;position:absolute;right:calc(var(--gutter) + var(--pw) - 4.375rem);top:calc(var(--pt) + 1.5rem);width:8.75rem;height:8.75rem;border-radius:50%;
+  background:var(--accent-grad);color:var(--on-accent);box-shadow:0 1.25rem 2.75rem rgba(90,40,5,.32),inset 0 0 0 0.375rem rgba(255,255,255,.18)}
+.hero-stamp>svg{position:absolute;inset:0;width:100%;height:100%;animation:spin 28s linear infinite}
+.hero-stamp text{font-family:var(--font-head);font-size:9.6px;font-weight:800;letter-spacing:.04em;text-transform:uppercase;fill:currentColor}
+.hero-stamp-ico{display:grid;place-items:center;width:3.25rem;height:3.25rem;border-radius:50%;border:1.5px solid rgba(20,10,2,.4)}
+.hero-stamp-ico .ico{width:1.6rem;height:1.6rem}
 @media (min-width:1100px){.hero-chips{display:block}}
 .hero-inner{display:flex;align-items:flex-end;min-height:min(46rem,calc(100svh - var(--header-h) - 3.75rem));padding-block:3.5rem 2.75rem}
 .hero-copy{max-width:46rem}
@@ -337,12 +356,25 @@ main{counter-reset:sec}
 @media (max-width:899px){
   /* портрет у світлій темі на телефоні: майже квадратна рамка по центру, обличчя ціле на будь-якій ширині (широка рамка його обрізала) */
   :root[data-theme="light"] .hero{--pw:min(21rem,calc(100vw - var(--gutter) * 2))}
-  :root[data-theme="light"] .hero-bg img{left:50%;right:auto;top:1.5rem;translate:-50% 0;max-height:none;width:var(--pw);height:auto;aspect-ratio:1/1.12;object-position:50% 8%}
+  :root[data-theme="light"] .hero-bg::after{display:none}
+  :root[data-theme="light"] .hero-photo{top:1.5rem;bottom:auto;left:50%;right:auto;translate:-50% 0;height:calc(var(--pw) * 1.12);box-shadow:0 1.5rem 3rem rgba(90,40,5,.25)}
+  :root[data-theme="light"] .hero-photo img{object-position:50% 8%;transform:none}
   :root[data-theme="light"] .hero-inner{padding-top:calc(var(--pw) * 1.12 + 3.5rem)}
+}
+/* невисокі екрани ноутбуків: щільніші відступи, щоб заголовок, кнопка й цифри вміщались у перший екран */
+@media (min-width:900px) and (max-height:860px){
+  .hero-inner{padding-block:2rem 1.75rem}
+  .hero h1{font-size:clamp(1.85rem,min(4.4vw,7.6vh),3.7rem)}
+  .badge{margin-bottom:1rem}
+  .hero .lead{margin-bottom:0}
+  .hero-actions{margin-top:1.5rem}
+  .hero-checks{margin-top:1.125rem}
+  .hero-stats{margin-top:1.5rem;padding-top:1.125rem}
+  :root[data-theme="light"] .hero{--pt:1.5rem;--pb:1.5rem}
 }
 /* телефон: статистика героя в три компактні колонки замість стовпчика */
 @media (max-width:639px){
-  .hero-stats{display:grid;grid-template-columns:1fr 1.5fr 1fr;gap:0;margin-top:1.75rem;padding-top:1.25rem}
+  .hero-stats{display:grid;grid-template-columns:repeat(3,1fr);gap:0;margin-top:1.75rem;padding-top:1.25rem}
   .hero-stats li{min-width:0;padding-right:0.75rem;margin-right:0.75rem}
   .hero-stats b{font-size:1rem}
   .hero-stats span{font-size:0.68rem;letter-spacing:.06em;line-height:1.35}
@@ -425,14 +457,19 @@ main{counter-reset:sec}
   .service-visual{height:6.5rem;place-items:center end;padding-right:2.5rem}
   .service-visual .ico{width:3.25rem;height:3.25rem}
 }
-/* Сітка з однаковою висотою рядка: без порожніх «дірок», як у масонрі. Фото в рядку підтягуються по висоті (object-fit), остання клітинка це заклик до дії */
-.results-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:0.75rem}
+/* Сітка з однаковою висотою рядка: без порожніх «дірок», як у масонрі. Фото в рядку підтягуються по висоті (object-fit), остання клітинка це заклик до дії.
+   Телефон: одна колонка, фото на всю ширину без обрізання; 640–759px: дві колонки (7 фото + заклик = 4 рівні рядки); від 760px: три колонки, заклик на дві клітинки */
+.results-grid{display:grid;grid-template-columns:1fr;gap:1rem}
 .results-grid li{display:flex}
+@media (min-width:640px){.results-grid{grid-template-columns:repeat(2,1fr)}}
 @media (min-width:760px){.results-grid{grid-template-columns:repeat(3,1fr);gap:1.25rem}}
-/* телефон: заклик на всю ширину між шостим і сьомим фото, сьоме фото теж на всю ширину, без порожніх клітинок */
-@media (max-width:759px){
-  .result-cta{order:1;grid-column:1/-1}
-  .results-grid li:nth-child(7){order:2;grid-column:1/-1}
+/* «Показати ще»: на телефоні з JS видно перші три фото, решта за кнопкою (scripts/11-more.js) */
+.results-grid .more-li,.more-wrap{display:none}
+.more-btn{min-height:3.25rem;gap:0.5rem}
+.more-btn .ico{width:1.125rem;height:1.125rem}
+@media (max-width:639px){
+  .results-grid.is-collapsed>li:nth-child(n+4):not(.more-li):not(.result-cta){display:none}
+  .results-grid.is-collapsed>.more-li{display:block}
 }
 .result{position:relative;isolation:isolate;display:block;width:100%;padding:0;border:1px solid var(--line);border-radius:var(--radius);overflow:hidden;background:var(--card);cursor:zoom-in;color:inherit;text-align:left;
   transition:border-color var(--t-med),transform var(--t-med) var(--ease),box-shadow var(--t-med)}
@@ -449,25 +486,39 @@ main{counter-reset:sec}
 /* підпис як в еталона: велика акцентна цифра, нижче капс-опис */
 .result-cap{display:block;padding:1.125rem 1.5rem 1.375rem;border-top:1px solid var(--line);font:600 0.7rem/1.4 var(--font-body);letter-spacing:.12em;text-transform:uppercase;color:var(--muted)}
 .result-cap b{display:block;margin-bottom:0.5rem;font:800 clamp(1.7rem,2.6vw,2.25rem)/1 var(--font-head);letter-spacing:-.02em;text-transform:none;color:var(--accent-text);white-space:nowrap}
+/* телефон: цифра й опис в один рядок, опис читається без напруги */
 @media (max-width:639px){
-  .result-cap{padding:0.75rem 0.875rem 0.875rem;font-size:0.68rem;letter-spacing:.06em;line-height:1.35}
-  .result-cap b{font-size:1.4rem;margin-bottom:0.3rem}
+  .result-cap{display:flex;align-items:center;gap:0.875rem;padding:0.875rem 1.125rem 1rem;font-size:0.8rem;letter-spacing:.07em;line-height:1.35}
+  .result-cap b{flex:none;margin:0;font-size:1.65rem}
+  .result-cta{padding:1.5rem 1.25rem}
+  .result-cta .btn{width:100%}
 }
 .disclaimer{margin:2rem 0 0;padding-left:1rem;border-left:3px solid var(--accent);color:var(--muted);font-size:0.9rem;max-width:70ch}
 .disclaimer a{color:var(--accent-text)}
 
-.lightbox{width:min(96vw,68.75rem);max-height:96vh;padding:0;border:0;background:transparent;color:#fff;overflow:visible}
+/* горизонтальні жести у вікні перегляду віддаємо свайпу (scripts/05-lightbox.js), інакше браузер сприймає їх як «Назад» */
+.lightbox{width:min(96vw,68.75rem);max-height:96vh;padding:0;border:0;background:transparent;color:#fff;overflow:visible;touch-action:pan-y pinch-zoom;overscroll-behavior:contain}
 .lightbox::backdrop{background:rgba(6,6,5,.92);-webkit-backdrop-filter:blur(0.5rem);backdrop-filter:blur(0.5rem)}
 .lb-figure{margin:0;text-align:center}
 .lb-figure img{max-height:80vh;width:auto;max-width:100%;margin-inline:auto;border-radius:var(--radius)}
-.lb-figure figcaption{margin-top:1rem;font:800 1.1rem/1.2 var(--font-head);text-transform:uppercase}
+.lb-figure figcaption{display:flex;flex-wrap:wrap;justify-content:center;align-items:center;gap:0.5rem 0.875rem;margin-top:1rem;font:800 1.1rem/1.2 var(--font-head);text-transform:uppercase}
+.lb-count{padding:0.375rem 0.625rem;border:1px solid rgba(255,255,255,.22);border-radius:0.5rem;font:700 0.8rem/1 var(--font-body);letter-spacing:.08em;color:#d8d0c6;font-variant-numeric:tabular-nums}
 .lightbox .icon-btn{background:rgba(20,18,15,.85);color:#fff;border-color:rgba(255,255,255,.2)}
 .lb-close{position:fixed;top:1rem;right:1rem;z-index:2}
 .lb-nav{position:fixed;top:50%;translate:0 -50%;z-index:2}
 .lb-prev{left:0.75rem}
 .lb-next{right:0.75rem}
 body.lb-open{overflow:hidden}
-/* Два ряди відгуків, що біжать у різні боки. Без JS або з reduced-motion це звичайні ряди з прокручуванням. */
+/* телефон: стрілки внизу по центру, щоб не перекривали фото; гортати можна й свайпом */
+@media (max-width:759px){
+  .lb-figure img{max-height:72vh}
+  .lb-nav{top:auto;bottom:calc(1rem + env(safe-area-inset-bottom));translate:none;width:3.25rem;height:3.25rem}
+  .lb-prev{left:calc(50% - 4rem)}
+  .lb-next{right:calc(50% - 4rem)}
+  .lb-figure figcaption{font-size:0.95rem;padding-inline:0.5rem}
+}
+/* Два ряди відгуків, що біжать у різні боки (лише десктоп із мишею, scripts/09-marquee.js).
+   Без бігу (телефон, сенсорний екран, reduced-motion, без JS) це звичайна сітка карток, яку зручно читати. */
 .reviews{overflow:hidden}
 /* відгуки живуть усередині розділу «Результати»: підзаголовок, лід і стрічки під сіткою фото */
 .reviews-block{margin-top:clamp(3rem,7vw,5rem)}
@@ -490,13 +541,23 @@ body.lb-open{overflow:hidden}
 .quote blockquote{margin:0 0 1.5rem;font-size:1.08rem;font-weight:500;line-height:1.55}
 .who{position:relative;margin:auto 0 0;padding:1rem 0 0 1.75rem;border-top:1px solid var(--line);color:var(--muted);font-size:0.85rem;font-weight:600}
 .who::before{content:"";position:absolute;left:0;top:calc(1rem + 0.62em);width:1.125rem;height:2px;background:var(--accent)}
-@media (max-width:759px){
-  .marquee{scroll-snap-type:x mandatory;scroll-padding-inline:var(--gutter);-webkit-overflow-scrolling:touch}
-  .quote{scroll-snap-align:start}
+/* статична сітка: картки на всю ширину колонки, без обрізаних країв і горизонтального гортання */
+.marquee:not(.is-running){overflow:visible;padding-block:0}
+.marquee:not(.is-running) .track{display:grid;grid-template-columns:1fr;gap:0.875rem;width:auto;max-width:calc(var(--maxw) + var(--gutter) * 2);margin-inline:auto}
+.marquee:not(.is-running) .quote{width:auto;margin:0}
+.marquee:not(.is-running)+.marquee{margin-top:0.875rem}
+@media (min-width:640px){
+  .marquee:not(.is-running) .track{grid-template-columns:repeat(2,1fr);gap:1.25rem}
+  .marquee:not(.is-running)+.marquee{margin-top:1.25rem}
 }
+@media (min-width:1200px){.marquee:not(.is-running) .track{grid-template-columns:repeat(4,1fr)}}
+/* телефон: з JS видно перші три відгуки, решта за кнопкою «Показати ще» */
 @media (max-width:639px){
-  .quote{width:min(86vw,22rem);padding:1.25rem 1.25rem 1.125rem;margin-right:0.875rem}
-  .quote-lg{width:min(90vw,24rem)}
+  .reviews-wall.is-collapsed .marquee-rev,.reviews-wall.is-collapsed .quote:nth-child(n+4){display:none}
+  .reviews-wall.is-collapsed .more-wrap{display:block;margin-top:0.875rem}
+  .quote{padding:1.25rem 1.25rem 1.125rem}
+  .q-top{margin-bottom:0.875rem}
+  .q-mark{width:2.25rem;height:2.25rem;font-size:1.9rem}
   .quote blockquote{font-size:1.0625rem;line-height:1.55;margin-bottom:1rem}
 }
 .about-grid{display:grid;gap:clamp(2rem,6vw,5.5rem);align-items:center}
@@ -546,11 +607,13 @@ body.lb-open{overflow:hidden}
 .terms p{margin:0;color:var(--muted)}
 @media (min-width:760px){.terms{grid-template-columns:repeat(2,1fr)}}
 
-.cta{padding-block:0 var(--section-y)}
+/* знизу менший відступ: між закликом і футером не лишається порожньої смуги */
+.cta{padding-block:0 clamp(2.5rem,6vw,4.5rem)}
 .cta-box{position:relative;isolation:isolate;overflow:hidden;display:grid;gap:2rem;align-items:center;padding:clamp(2.25rem,6vw,4.5rem);border-radius:calc(var(--radius) + 0.5rem);
   background:var(--accent-grad);color:var(--on-accent)}
 .cta-box::before{content:"";position:absolute;z-index:-1;right:-10%;bottom:-80%;width:55%;aspect-ratio:1;border-radius:50%;background:rgba(255,255,255,.2)}
-.cta-box::after{content:"";position:absolute;z-index:-1;left:-6%;top:-70%;width:38%;aspect-ratio:1;border-radius:50%;border:2px solid rgba(20,10,2,.18)}
+/* кільце концентричне світлому колу (той самий бокс, збільшений), тож не перетинає заголовок */
+.cta-box::after{content:"";position:absolute;z-index:-1;right:-10%;bottom:-80%;width:55%;aspect-ratio:1;border-radius:50%;border:2px solid rgba(20,10,2,.14);transform:scale(1.22)}
 .cta-box h2{font-size:clamp(1.8rem,4.4vw,3.4rem);margin-bottom:1rem}
 .cta-box p{max-width:44ch;margin:0;font-size:1.1rem;color:rgba(20,10,2,.85)}
 .cta-actions{display:flex;flex-wrap:wrap;gap:0.75rem}
@@ -580,6 +643,7 @@ body.lb-open{overflow:hidden}
 @keyframes ticker{to{transform:translateX(-50%)}}
 @keyframes marquee{to{transform:translateX(-50%)}}
 @keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-0.5rem)}}
+@keyframes spin{to{transform:rotate(1turn)}}
 @keyframes glow{0%,100%{opacity:.85;transform:scale(1)}50%{opacity:1;transform:scale(1.06)}}
 
 .ticker-track{animation:ticker 50s linear infinite}
@@ -587,85 +651,75 @@ body.lb-open{overflow:hidden}
 .hero-bg::before{animation:glow 9s ease-in-out infinite}
 
 /* кнопка паузи для рухомих стрічок (WCAG 2.2.2) */
-.motion-paused .ticker-track,.motion-paused .track,.motion-paused .chip,.motion-paused .hero-bg::before{animation-play-state:paused!important}
+.motion-paused .ticker-track,.motion-paused .track,.motion-paused .chip,.motion-paused .hero-stamp>svg,.motion-paused .hero-bg::before{animation-play-state:paused!important}
 .ticker:focus-within .ticker-track{animation-play-state:paused}
 .motion-btn .ico-play,.motion-btn[aria-pressed="true"] .ico-pause{display:none}
 .motion-btn[aria-pressed="true"] .ico-play{display:block}
 .motion-btn .ico{width:1.1rem;height:1.1rem;fill:currentColor;stroke:none}
 .motion-btn-ticker{position:absolute;right:var(--gutter);bottom:0.5rem;z-index:2;background:var(--card);color:var(--text);border-color:var(--glass-line)}
 .motion-btn-text{width:auto;gap:0.5rem;padding:0 1rem;font:700 0.8rem/1 var(--font-body);letter-spacing:.06em;text-transform:uppercase}
-.motion-row{display:flex;justify-content:flex-start;margin:0 0 1.25rem}
-/* на телефоні відгуки не біжать, тож паузи для них не треба */
-@media (max-width:759px){.motion-row{display:none}}
+/* кнопка паузи біля відгуків потрібна лише тоді, коли стрічки справді біжать (клас ставить scripts/09-marquee.js) */
+.motion-row{display:none;justify-content:flex-start;margin:0 0 1.25rem}
+.has-marquee .motion-row{display:flex}
 
 @media (prefers-reduced-motion:reduce){
   html{scroll-behavior:auto}
   *,*::before,*::after{animation:none!important;transition-duration:.01ms!important;transition-delay:0s!important}
   .js .reveal{opacity:1;translate:none}
 }
-/* Посилення світлої теми: ті самі прийоми, що й у темній (контраст, глибина, акцент), але в світлій палітрі.
-   Файл іде останнім, щоб перекривати базові правила; усе тут діє лише при data-theme="light". */
+/* Посилення світлої теми: контраст, глибина й акцент тими ж прийомами, що й у темній, але у світлій палітрі.
+   Без чорних смуг-«островів» і зсунутих чорних тіней (вони виглядали як збій): глибину дають м'які теплі тіні, чіткі рамки
+   й помаранчевий акцент. Файл іде останнім, щоб перекривати базові правила; усе тут діє лише при data-theme="light".
+   Правила світлого героя лежать у 05-hero.css. */
 
-/* 1. Темні «острови» для ритму сторінки: «Як це працює» і футер беруть токени темної теми */
-:root[data-theme="light"] :is(#how,.site-footer){color-scheme:dark;--bg:#0b0a09;--bg-alt:#0e0d0b;--card:#17140f;--card-hi:#1f1b14;--line:rgba(255,255,255,.09);--text:#f8f4ee;--muted:#bdb4a8;
-  --accent-text:#ff8f3d;--glass:rgba(255,255,255,.06);--glass-line:rgba(255,255,255,.15);--dots:rgba(255,255,255,.06);--shadow:0 1.5rem 3.75rem rgba(0,0,0,.5);color:var(--text);background:var(--bg)}
-:root[data-theme="light"] #how .step{background:linear-gradient(180deg,rgba(255,255,255,.05),rgba(255,255,255,.012) 55%),var(--card);box-shadow:inset 0 1px 0 rgba(255,255,255,.07)}
-:root[data-theme="light"] #how::before{background:linear-gradient(90deg,transparent,rgba(255,122,26,.5) 50%,transparent)}
-:root[data-theme="light"] #how::after{opacity:1}
-
-/* 2. Герой: одне м'яке помаранчеве коло за портретом, рамка з тонкою темною обводкою без жорсткої тіні (вона виглядала як збій на краю) */
-:root[data-theme="light"] .hero-bg::after{content:"";position:absolute;right:max(-2rem,calc((100% - var(--maxw)) / 2 - 4rem));top:50%;width:min(44rem,66vw);aspect-ratio:1;translate:0 -50%;border-radius:50%;
-  background:radial-gradient(circle,rgba(255,150,40,.30),rgba(255,122,26,.10) 64%,transparent 65%);pointer-events:none}
-:root[data-theme="light"] .hero-bg img{box-shadow:0 2rem 4.5rem rgba(90,40,5,.28);border:3px solid #17120d}
-:root[data-theme="light"] .hero h1{text-shadow:none}
+/* 1. Ритм розділів: «Як це працює» і футер на теплому пісочному тлі, як «Послуги» */
+:root[data-theme="light"] .site-footer{background:var(--bg-alt);border-top-color:rgba(30,20,10,.12)}
+:root[data-theme="light"] .step{box-shadow:0 0.5rem 2rem rgba(70,45,10,.08)}
 :root[data-theme="light"] .hero-stats b{color:var(--text)}
 
-/* 3. Рубрики й заголовки: залита мітка з номером, товстіші акценти */
+/* 2. Рубрики й заголовки: залита мітка з номером; великі акцентні слова й цифри яскраво-помаранчеві
+   (#e0560a дає ≥3:1 на кремовому, цього досить для великого тексту; дрібний текст лишається темнішим --accent-text) */
 :root[data-theme="light"] .eyebrow::before{background:#17120d;color:#fff;border-color:#17120d}
 :root[data-theme="light"] .ach-kicker::after{background:linear-gradient(90deg,rgba(30,20,10,.3),transparent)}
 :root[data-theme="light"] .section::before{background:linear-gradient(90deg,transparent,rgba(255,122,26,.55) 50%,transparent)}
+:root[data-theme="light"] :is(h1,h2) .accent,:root[data-theme="light"] .ach-fig{color:#e0560a}
 
-/* 4. Картки: чітка рамка + глибша тінь, а при наведенні помаранчева жорстка тінь */
-:where(:root[data-theme="light"]) .card,:where(:root[data-theme="light"]) .result{box-shadow:0 0.5rem 2rem rgba(70,45,10,.11)}
-:root[data-theme="light"] .card,:root[data-theme="light"] .result{border-color:rgba(30,20,10,.16)}
-:root[data-theme="light"] .ach:hover,:root[data-theme="light"] .service:hover,:root[data-theme="light"] .result:hover{border-color:#17120d;box-shadow:0.5rem 0.5rem 0 var(--accent)}
-:root[data-theme="light"] .service-featured{border-color:#17120d;box-shadow:0.6rem 0.6rem 0 var(--accent)}
-:root[data-theme="light"] .service-featured:hover{box-shadow:0.8rem 0.8rem 0 var(--accent)}
+/* 3. Картки: чітка рамка й м'яка тепла тінь; при наведенні помаранчева рамка й глибша тінь, як у темній темі */
+:where(:root[data-theme="light"]) .card,:where(:root[data-theme="light"]) .result{box-shadow:0 0.5rem 2rem rgba(70,45,10,.10)}
+:root[data-theme="light"] .card,:root[data-theme="light"] .result{border-color:rgba(30,20,10,.14)}
+:root[data-theme="light"] :is(.ach,.service,.result,.step):hover{border-color:rgba(226,90,0,.6);box-shadow:0 1.25rem 3rem rgba(110,50,5,.16)}
+:root[data-theme="light"] .service-featured{border:2px solid var(--accent);box-shadow:0 1.5rem 3.5rem rgba(255,106,10,.22)}
+:root[data-theme="light"] .service-featured:hover{border-color:var(--accent);box-shadow:0 2rem 4.5rem rgba(255,106,10,.32)}
 :root[data-theme="light"] .service-visual{background:radial-gradient(22rem 14rem at 25% 0%,rgba(255,122,26,.42),transparent 62%),linear-gradient(135deg,#ffe3c7,#ffd2a6)}
 :root[data-theme="light"] .vtag{background:#17120d}
 :root[data-theme="light"] .vtag-accent{background:var(--accent);color:var(--on-accent);border:2px solid #17120d}
 :root[data-theme="light"] .options li{background:#fff7ec;border-color:rgba(30,20,10,.14)}
-:root[data-theme="light"] .ach-fig{color:var(--accent-text)}
 :root[data-theme="light"] .ach-wm{opacity:.1}
 
-/* 5. Кнопки: тонка темна обводка й жорстка тінь, як у спортивного «блочного» стилю */
-:root[data-theme="light"] .btn-primary{border-color:#17120d;box-shadow:0.25rem 0.25rem 0 #17120d}
-:root[data-theme="light"] .btn-primary:hover{box-shadow:0.4rem 0.4rem 0 #17120d;transform:translate(-2px,-2px)}
-:root[data-theme="light"] .btn-ghost{border-color:#17120d;color:#17120d}
+/* 4. Кнопки: м'яка помаранчева тінь; контурна кнопка з темною рамкою */
+:root[data-theme="light"] .btn-primary{box-shadow:0 0.625rem 1.5rem rgba(226,90,0,.26)}
+:root[data-theme="light"] .btn-primary:hover{box-shadow:0 0.875rem 2.125rem rgba(226,90,0,.36)}
+:root[data-theme="light"] .btn-ghost{border-color:rgba(23,18,13,.55);color:#17120d}
+:root[data-theme="light"] .btn-ghost:hover{border-color:var(--accent);color:var(--accent-text)}
 :root[data-theme="light"] .nav a:hover{background:rgba(30,20,10,.06)}
-:root[data-theme="light"] .site-header .btn-primary{border-color:transparent;box-shadow:0 0.375rem 1.125rem rgba(255,106,10,.3)}
 :root[data-theme="light"] .site-header .logo-mark{box-shadow:none}
-:root[data-theme="light"] #how .btn-primary,:root[data-theme="light"] .site-footer .btn-primary{border-color:transparent;box-shadow:0 0.625rem 1.875rem rgba(255,106,10,.28)}
-:root[data-theme="light"] .cta-box{box-shadow:0.75rem 0.75rem 0 #17120d;border:3px solid #17120d}
-:root[data-theme="light"] .cta-box .btn-primary{box-shadow:none}
 
-/* 6. Відгуки: біла картка з темним лапками й помаранчевою лінією */
+/* 5. Заклик: помаранчевий блок із теплим сяйвом; темна кнопка на ньому з легкою тінню */
+:root[data-theme="light"] .cta-box{box-shadow:0 1.75rem 4rem rgba(226,90,0,.26)}
+:root[data-theme="light"] .cta-box .btn-primary,:root[data-theme="light"] .cta-box .btn-primary:hover{box-shadow:0 0.75rem 1.75rem rgba(20,10,2,.22)}
+:root[data-theme="light"] .cta-box .btn-ghost{border-color:rgba(20,10,2,.55);color:var(--on-accent)}
+:root[data-theme="light"] .cta-box .btn-ghost:hover{border-color:var(--on-accent);color:var(--on-accent)}
+
+/* 6. Відгуки й питання: білі картки, відкрите питання з помаранчевою рамкою */
 :root[data-theme="light"] .quote{background:#fff}
-:root[data-theme="light"] .q-mark{background:var(--accent-grad);color:var(--on-accent)}
 :root[data-theme="light"] .faq details{border-color:rgba(30,20,10,.16)}
-:root[data-theme="light"] .faq details[open]{border-color:#17120d;background:#fff}
+:root[data-theme="light"] .faq details[open]{border-color:var(--accent);background:#fff}
 
-@media (max-width:899px){
-  :root[data-theme="light"] .hero-bg::after{display:none}
-  :root[data-theme="light"] .hero-bg img{box-shadow:0 1.5rem 3rem rgba(90,40,5,.25)}
-  :root[data-theme="light"] .cta-box{box-shadow:0.4rem 0.4rem 0 #17120d}
-  :root[data-theme="light"] .service-featured{box-shadow:0.4rem 0.4rem 0 var(--accent)}
-}
-
-/* дрібні доведення */
-:root[data-theme="light"] #how .eyebrow::before{background:var(--accent);color:var(--on-accent);border-color:var(--accent)}
+/* 7. Портрет у «Про мене»: темна рамка й помаранчевий блок позаду (графічний акцент, не тінь) */
 :root[data-theme="light"] .about-visual{border:3px solid #17120d;box-shadow:0.9rem 0.9rem 0 var(--accent)}
-@media (max-width:899px){:root[data-theme="light"] .about-visual{box-shadow:0.5rem 0.5rem 0 var(--accent)}}
+@media (max-width:899px){
+  :root[data-theme="light"] .about-visual{box-shadow:0.5rem 0.5rem 0 var(--accent)}
+}
 </style>
 </head>
 <body>
@@ -732,12 +786,16 @@ body.lb-open{overflow:hidden}
 
 <section class="hero" aria-labelledby="hero-title">
   <div class="hero-bg" aria-hidden="true">
-    <img src="/img/out/portrait-853.webp" alt="" width="853" height="1280" fetchpriority="high">
+    <div class="hero-photo"><img src="/img/out/portrait-853.webp" alt="" width="853" height="1280" fetchpriority="high"></div>
   </div>
 
   <div class="container hero-chips" aria-hidden="true">
     <div class="chip chip-a"><span class="chip-ico"><svg class="ico" aria-hidden="true"><use href="#i-trophy"/></svg></span><span><b>Чемпіон світу</b><small>2017 · підтягування +32&nbsp;кг</small></span></div>
-    <div class="chip chip-b"><b class="chip-num">100+</b><small>клієнтів онлайн</small></div>
+    <div class="chip chip-b"><span class="chip-ico"><svg class="ico" aria-hidden="true"><use href="#i-star"/></svg></span><span><b>Фіналіст</b><small>«Україна має талант 5»</small></span></div>
+    <div class="hero-stamp">
+      <svg viewBox="0 0 120 120" aria-hidden="true"><path id="stamp-ring" d="M60 60m-46 0a46 46 0 1 1 92 0a46 46 0 1 1-92 0" fill="none"/><text><textPath href="#stamp-ring" textLength="288" lengthAdjust="spacing">Чемпіон світу 2017 • підтягування +32 кг • </textPath></text></svg>
+      <span class="hero-stamp-ico"><svg class="ico" aria-hidden="true"><use href="#i-trophy"/></svg></span>
+    </div>
   </div>
 
   <div class="container hero-inner">
@@ -760,7 +818,7 @@ body.lb-open{overflow:hidden}
 
       <ul class="hero-stats reveal">
         <li><b class="num" data-count="12">12</b><span>років у тренерстві</span></li>
-        <li><b>Чемпіон світу</b><span>підтягування +32&nbsp;кг</span></li>
+        <li><b class="num" data-count="6">6</b><span>років онлайн</span></li>
         <li><b class="num" data-count="100" data-plus>100+</b><span>задоволених клієнтів</span></li>
       </ul>
     </div>
@@ -901,7 +959,7 @@ body.lb-open{overflow:hidden}
       <p class="section-lead">Реальні фото «до» і «після» та слова клієнтів із переписок. Натисни на фото, щоб розглянути уважніше.</p>
     </header>
 
-    <ul class="results-grid">
+    <ul class="results-grid" id="results-list">
       <li class="reveal">
         <button class="result" type="button" data-lb data-full="/img/out/res-1-1200.webp" data-cap="Місяць тренувань: +5 кг" aria-label="Відкрити: місяць тренувань, плюс 5 кг">
           <img src="/img/out/res-1-640.webp" alt="Фото до і після: місяць тренувань" width="640" height="621" loading="lazy">
@@ -944,6 +1002,7 @@ body.lb-open{overflow:hidden}
           <span class="result-cap"><b>4 роки</b> перевтілення</span>
         </button>
       </li>
+      <li class="more-li"><button class="btn btn-ghost btn-block more-btn" type="button" aria-expanded="false" aria-controls="results-list" data-more=".result">Показати ще 4 результати<svg class="ico" aria-hidden="true"><use href="#i-chevron"/></svg></button></li>
       <li class="result-cta reveal">
         <p class="result-cta-title">Хочеш такий самий результат?</p>
         <p class="result-cta-text">Напиши мені: підберу програму під твою ціль і рівень.</p>
@@ -960,54 +1019,56 @@ body.lb-open{overflow:hidden}
     </div>
   </div>
 
-  <div class="marquee" data-marquee>
-    <ul class="track">
-      <li class="card quote">
-        <p class="q-top"><span class="q-mark" aria-hidden="true">“</span><span class="q-src">Telegram</span></p>
-        <blockquote>По сравнению с тем как начинал — я вижу большой результат</blockquote>
-        <p class="who">Клієнт</p>
-      </li>
-      <li class="card quote">
-        <p class="q-top"><span class="q-mark" aria-hidden="true">“</span><span class="q-src">Telegram</span></p>
-        <blockquote>Привет, вообще огонь! Я за час справилась, может даже минут за 50</blockquote>
-        <p class="who">Клієнтка</p>
-      </li>
-      <li class="card quote quote-lg">
-        <p class="q-top"><span class="q-mark" aria-hidden="true">“</span><span class="q-src">Telegram</span></p>
-        <blockquote>Мы когда начинали заниматься, я тогда последний раз была на льду… а сейчас после наших тренировок всё настолько легче даётся, я прям почувствовала как больше сил стало. Спасибо большое за результаты!</blockquote>
-        <p class="who">Клієнтка, фігуристка</p>
-      </li>
-      <li class="card quote">
-        <p class="q-top"><span class="q-mark" aria-hidden="true">“</span><span class="q-src">Telegram</span></p>
-        <blockquote>По вазі трохи прогрес, по об'ємах мінус 5–6 см</blockquote>
-        <p class="who">Клієнтка</p>
-      </li>
-    </ul>
-  </div>
-
-  <div class="marquee marquee-rev" data-marquee>
-    <ul class="track">
-      <li class="card quote">
-        <p class="q-top"><span class="q-mark" aria-hidden="true">“</span><span class="q-src">Instagram</span></p>
-        <blockquote>Спасибо за поддержку и мотивацию в моих начинаниях, я очень рада что именно ты был моим первым тренером!</blockquote>
-        <p class="who">Клієнтка</p>
-      </li>
-      <li class="card quote">
-        <p class="q-top"><span class="q-mark" aria-hidden="true">“</span><span class="q-src">Telegram</span></p>
-        <blockquote>Сьогодні дуже сподобалось тренування! В загалом динаміка позитивна! Спина відпускає і настрій від цього росте!</blockquote>
-        <p class="who">Клієнт(ка)</p>
-      </li>
-      <li class="card quote">
-        <p class="q-top"><span class="q-mark" aria-hidden="true">“</span><span class="q-src">Telegram</span></p>
-        <blockquote>Друге дуже сподобалось, я прям відчула всю біль. А руки робила з 20 кг</blockquote>
-        <p class="who">Клієнтка</p>
-      </li>
-      <li class="card quote">
-        <p class="q-top"><span class="q-mark" aria-hidden="true">“</span><span class="q-src">Telegram</span></p>
-        <blockquote>Тренировка как раз в точку и веса все чётко</blockquote>
-        <p class="who">Клієнт</p>
-      </li>
-    </ul>
+  <div class="reviews-wall" id="reviews-list">
+    <div class="marquee" data-marquee>
+      <ul class="track">
+        <li class="card quote quote-lg">
+          <p class="q-top"><span class="q-mark" aria-hidden="true">“</span><span class="q-src">Telegram</span></p>
+          <blockquote>Мы когда начинали заниматься, я тогда последний раз была на льду… а сейчас после наших тренировок всё настолько легче даётся, я прям почувствовала как больше сил стало. Спасибо большое за результаты!</blockquote>
+          <p class="who">Клієнтка, фігуристка</p>
+        </li>
+        <li class="card quote">
+          <p class="q-top"><span class="q-mark" aria-hidden="true">“</span><span class="q-src">Instagram</span></p>
+          <blockquote>Спасибо за поддержку и мотивацию в моих начинаниях, я очень рада что именно ты был моим первым тренером!</blockquote>
+          <p class="who">Клієнтка</p>
+        </li>
+        <li class="card quote">
+          <p class="q-top"><span class="q-mark" aria-hidden="true">“</span><span class="q-src">Telegram</span></p>
+          <blockquote>По сравнению с тем как начинал — я вижу большой результат</blockquote>
+          <p class="who">Клієнт</p>
+        </li>
+        <li class="card quote">
+          <p class="q-top"><span class="q-mark" aria-hidden="true">“</span><span class="q-src">Telegram</span></p>
+          <blockquote>По вазі трохи прогрес, по об'ємах мінус 5–6 см</blockquote>
+          <p class="who">Клієнтка</p>
+        </li>
+      </ul>
+    </div>
+    <div class="marquee marquee-rev" data-marquee>
+      <ul class="track">
+        <li class="card quote">
+          <p class="q-top"><span class="q-mark" aria-hidden="true">“</span><span class="q-src">Telegram</span></p>
+          <blockquote>Сьогодні дуже сподобалось тренування! В загалом динаміка позитивна! Спина відпускає і настрій від цього росте!</blockquote>
+          <p class="who">Клієнт(ка)</p>
+        </li>
+        <li class="card quote">
+          <p class="q-top"><span class="q-mark" aria-hidden="true">“</span><span class="q-src">Telegram</span></p>
+          <blockquote>Друге дуже сподобалось, я прям відчула всю біль. А руки робила з 20 кг</blockquote>
+          <p class="who">Клієнтка</p>
+        </li>
+        <li class="card quote">
+          <p class="q-top"><span class="q-mark" aria-hidden="true">“</span><span class="q-src">Telegram</span></p>
+          <blockquote>Привет, вообще огонь! Я за час справилась, может даже минут за 50</blockquote>
+          <p class="who">Клієнтка</p>
+        </li>
+        <li class="card quote">
+          <p class="q-top"><span class="q-mark" aria-hidden="true">“</span><span class="q-src">Telegram</span></p>
+          <blockquote>Тренировка как раз в точку и веса все чётко</blockquote>
+          <p class="who">Клієнт</p>
+        </li>
+      </ul>
+    </div>
+    <div class="container more-wrap"><button class="btn btn-ghost btn-block more-btn" type="button" aria-expanded="false" aria-controls="reviews-list" data-more=".quote">Показати ще 5 відгуків<svg class="ico" aria-hidden="true"><use href="#i-chevron"/></svg></button></div>
   </div>
 
   <div class="container">
@@ -1201,7 +1262,7 @@ body.lb-open{overflow:hidden}
   <button class="icon-btn lb-nav lb-prev" type="button" aria-label="Попереднє фото" data-lb-prev><svg class="ico" aria-hidden="true"><use href="#i-left"/></svg></button>
   <figure class="lb-figure">
     <img id="lb-img" alt="" width="1200" height="1200">
-    <figcaption id="lb-cap"></figcaption>
+    <figcaption><span class="lb-count" id="lb-count"></span><span id="lb-cap"></span></figcaption>
   </figure>
   <button class="icon-btn lb-nav lb-next" type="button" aria-label="Наступне фото" data-lb-next><svg class="ico" aria-hidden="true"><use href="#i-right"/></svg></button>
 </dialog>
@@ -1288,6 +1349,7 @@ try { (() => {
   const triggers = [...document.querySelectorAll('[data-lb]')];
   const img = document.getElementById('lb-img');
   const cap = document.getElementById('lb-cap');
+  const count = document.getElementById('lb-count');
   let cur = 0;
   let opener = null;
 
@@ -1297,6 +1359,7 @@ try { (() => {
     img.src = t.dataset.full;
     img.alt = t.querySelector('img').alt;
     cap.textContent = t.dataset.cap;
+    if (count) count.textContent = (cur + 1) + ' / ' + triggers.length;
   };
   const open = (i) => {
     opener = triggers[i];
@@ -1315,6 +1378,13 @@ try { (() => {
     img.removeAttribute('src');
     if (opener) opener.focus();
   });
+  // свайп убік на телефоні гортає фото (вертикальний рух ігноруємо)
+  let sx = 0, sy = 0;
+  dlg.addEventListener('touchstart', (e) => { sx = e.touches[0].clientX; sy = e.touches[0].clientY; }, { passive: true });
+  dlg.addEventListener('touchend', (e) => {
+    const dx = e.changedTouches[0].clientX - sx, dy = e.changedTouches[0].clientY - sy;
+    if (Math.abs(dx) > 48 && Math.abs(dx) > Math.abs(dy) * 1.5) show(cur + (dx < 0 ? 1 : -1));
+  }, { passive: true });
   dlg.addEventListener('keydown', (e) => {
     if (e.key === 'ArrowLeft') show(cur - 1);
     if (e.key === 'ArrowRight') show(cur + 1);
@@ -1371,11 +1441,13 @@ try { (() => {
   }, { passive: true });
 })(); } catch (e) { console.error(e); }
 try { (() => {
-  // Нескінченна стрічка відгуків: копіюємо картки (копія прихована від AT). Без JS або з
-  // reduced-motion лишається звичайний ряд із горизонтальним прокручуванням.
-  // На телефоні (до 760px) стрічка не біжить: текст читається лише в спокої, тому картки гортаються пальцем зі «снепом»
-  if (matchMedia('(prefers-reduced-motion: reduce)').matches || matchMedia('(max-width: 759px)').matches) return;
-  document.querySelectorAll('[data-marquee]').forEach((m) => {
+  // Нескінченна стрічка відгуків: копіюємо картки (копія прихована від AT).
+  // Біжить лише на десктопі з мишею (наведення ставить на паузу). На телефоні, сенсорному екрані,
+  // з reduced-motion або без JS відгуки лишаються звичайною сіткою карток, яку зручно читати.
+  const fine = matchMedia('(min-width: 760px) and (hover: hover) and (pointer: fine)').matches;
+  if (!fine || matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+  const rows = document.querySelectorAll('[data-marquee]');
+  rows.forEach((m) => {
     const track = m.querySelector('.track');
     if (!track) return;
     [...track.children].forEach((li) => {
@@ -1386,6 +1458,7 @@ try { (() => {
     });
     m.classList.add('is-running');
   });
+  if (rows.length) document.querySelector('.reviews')?.classList.add('has-marquee');
 })(); } catch (e) { console.error(e); }
 try { (() => {
   // Пауза для рухомого контенту (WCAG 2.2.2): одна кнопка-перемикач на всіх стрічках, вибір пам'ятається
@@ -1410,6 +1483,24 @@ try { (() => {
     set(next);
     try { localStorage.setItem(KEY, next ? '1' : '0'); } catch (e) { /* сховище недоступне */ }
   }));
+})(); } catch (e) { console.error(e); }
+try { (() => {
+  // «Показати ще» для довгих списків (результати, відгуки). Згортаємо лише з JS, без нього все видно;
+  // що саме сховати, вирішує CSS (тільки на телефоні, до 640px). data-more на кнопці це селектор елементів
+  // списку: після розгортання фокус переходить на перший щойно показаний, бо кнопка зникає.
+  document.querySelectorAll('[data-more]').forEach((btn) => {
+    const list = document.getElementById(btn.getAttribute('aria-controls'));
+    if (!list) return;
+    list.classList.add('is-collapsed');
+    btn.addEventListener('click', () => {
+      const first = [...list.querySelectorAll(btn.dataset.more)].find((el) => !el.getClientRects().length);
+      list.classList.remove('is-collapsed');
+      btn.setAttribute('aria-expanded', 'true');
+      if (!first) return;
+      if (!first.matches('a, button')) first.setAttribute('tabindex', '-1');
+      first.focus({ preventScroll: true });
+    });
+  });
 })(); } catch (e) { console.error(e); }
 </script>
 

@@ -1,9 +1,11 @@
 try { (() => {
-  // Нескінченна стрічка відгуків: копіюємо картки (копія прихована від AT). Без JS або з
-  // reduced-motion лишається звичайний ряд із горизонтальним прокручуванням.
-  // На телефоні (до 760px) стрічка не біжить: текст читається лише в спокої, тому картки гортаються пальцем зі «снепом»
-  if (matchMedia('(prefers-reduced-motion: reduce)').matches || matchMedia('(max-width: 759px)').matches) return;
-  document.querySelectorAll('[data-marquee]').forEach((m) => {
+  // Нескінченна стрічка відгуків: копіюємо картки (копія прихована від AT).
+  // Біжить лише на десктопі з мишею (наведення ставить на паузу). На телефоні, сенсорному екрані,
+  // з reduced-motion або без JS відгуки лишаються звичайною сіткою карток, яку зручно читати.
+  const fine = matchMedia('(min-width: 760px) and (hover: hover) and (pointer: fine)').matches;
+  if (!fine || matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+  const rows = document.querySelectorAll('[data-marquee]');
+  rows.forEach((m) => {
     const track = m.querySelector('.track');
     if (!track) return;
     [...track.children].forEach((li) => {
@@ -14,4 +16,5 @@ try { (() => {
     });
     m.classList.add('is-running');
   });
+  if (rows.length) document.querySelector('.reviews')?.classList.add('has-marquee');
 })(); } catch (e) { console.error(e); }
