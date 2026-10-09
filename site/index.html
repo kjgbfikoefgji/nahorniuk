@@ -217,19 +217,18 @@ main:focus{outline:none}
 .hero-card figcaption{position:absolute;left:10px;bottom:10px;padding:8px 12px;border-radius:999px;background:rgba(14,18,24,.82);color:#fff;font-size:.85rem;
   -webkit-backdrop-filter:blur(6px);backdrop-filter:blur(6px)}
 .hero-card figcaption b{color:var(--accent);font:600 1.05rem/1 var(--font-head);margin-right:4px}
-.hero-card-a{left:0;top:0;transform:rotate(-3deg);z-index:1}
-.hero-card-b{right:0;bottom:0;transform:rotate(3deg);z-index:2}
-.hero-badge{position:absolute;left:2%;bottom:9%;z-index:3;display:inline-flex;align-items:center;gap:8px;padding:10px 16px;border-radius:999px;
+.hero-card-a{left:0;top:0;width:66%;transform:rotate(-2deg);z-index:1}
+.hero-card-a img{aspect-ratio:2/3;object-fit:cover}
+.hero-card-b{right:0;bottom:2%;width:52%;transform:rotate(3deg);z-index:2}
+.hero-badge{position:absolute;right:0;top:4%;z-index:3;display:inline-flex;align-items:center;gap:8px;padding:10px 16px;border-radius:999px;
   background:var(--accent);color:var(--on-accent);font:600 .9rem/1 var(--font-body);box-shadow:0 10px 30px rgba(255,122,26,.4);white-space:nowrap}
 
 @media (min-width:900px){
   .hero-grid{grid-template-columns:1.15fr .85fr}
-  .hero-visual{min-height:560px}
-  .hero-card{width:68%}
+  .hero-visual{min-height:640px}
 }
 @media (max-width:899px){
-  .hero-badge{left:auto;right:0;bottom:auto;top:2%}
-  .hero-visual{min-height:clamp(300px,80vw,480px);max-width:520px;width:100%;margin-inline:auto}
+  .hero-visual{min-height:clamp(420px,115vw,600px);max-width:520px;width:100%;margin-inline:auto}
 }
 .facts{padding-block:0 var(--section-y)}
 .facts-strip{display:grid;grid-template-columns:repeat(2,1fr);gap:1px;background:var(--line);border:1px solid var(--line);border-radius:var(--radius);overflow:hidden}
@@ -301,10 +300,11 @@ body.lb-open{overflow:hidden}
 .who{margin:0;color:var(--muted);font-size:.85rem;font-weight:500}
 .quote:hover{border-color:var(--accent)}
 .about-grid{display:grid;gap:clamp(28px,5vw,64px);align-items:center}
-.about-visual{position:relative;display:grid;place-items:center;aspect-ratio:1;max-width:420px;width:100%;margin-inline:auto;border-radius:var(--radius);
+.about-visual{position:relative;aspect-ratio:4/5;max-width:440px;width:100%;margin-inline:auto;border-radius:var(--radius);
   background:radial-gradient(circle at 30% 20%,rgba(255,122,26,.35),transparent 55%),var(--card);border:1px solid var(--line);overflow:hidden}
-.monogram{font:700 clamp(9rem,26vw,15rem)/1 var(--font-head);color:var(--accent);opacity:.95}
-.about-chips{position:absolute;inset:auto 16px 16px 16px;display:flex;flex-wrap:wrap;gap:8px}
+.about-visual img{width:100%;height:100%;object-fit:cover;object-position:50% 20%}
+.about-visual::after{content:"";position:absolute;inset:auto 0 0 0;height:40%;background:linear-gradient(to top,rgba(8,10,14,.75),transparent);pointer-events:none}
+.about-chips{position:absolute;z-index:1;inset:auto 16px 16px 16px;display:flex;flex-wrap:wrap;gap:8px}
 .about-chips li{padding:8px 14px;border-radius:999px;background:rgba(14,18,24,.82);color:#fff;font-size:.82rem;font-weight:500}
 .about-copy h2{margin-bottom:20px}
 .about-copy p{color:var(--muted)}
@@ -453,14 +453,13 @@ body.lb-open{overflow:hidden}
       </div>
       <p class="hero-note reveal">Програма від 350 ₴ · відповідаю в Telegram та Instagram</p>
     </div>
-    <div class="hero-visual reveal" aria-hidden="true">
+    <div class="hero-visual reveal">
       <figure class="hero-card hero-card-a">
-        <img src="/img/out/res-7-640.webp" alt="" width="640" height="651" fetchpriority="high">
-        <figcaption><b>+6 кг</b> за 2 місяці</figcaption>
+        <img src="/img/out/portrait-640.webp" alt="Влад Нагорнюк, онлайн-тренер" width="640" height="960" fetchpriority="high">
       </figure>
-      <figure class="hero-card hero-card-b">
-        <img src="/img/out/res-6-640.webp" alt="" width="640" height="649" loading="lazy">
-        <figcaption><b>+4 кг</b> м'язів, без живота</figcaption>
+      <figure class="hero-card hero-card-b" aria-hidden="true">
+        <img src="/img/out/res-7-640.webp" alt="" width="640" height="651" loading="lazy">
+        <figcaption><b>+6 кг</b> за 2 місяці</figcaption>
       </figure>
       <span class="hero-badge"><svg class="ico" aria-hidden="true"><use href="#i-trophy"/></svg>Чемпіон світу 2017</span>
     </div>
@@ -703,9 +702,9 @@ body.lb-open{overflow:hidden}
 
 <section class="section section-alt" id="about" aria-labelledby="about-title">
   <div class="container about-grid">
-    <div class="about-visual reveal" aria-hidden="true">
-      <div class="monogram">Н</div>
-      <ul class="about-chips">
+    <div class="about-visual reveal">
+      <img src="/img/out/portrait-853.webp" alt="Влад Нагорнюк" width="853" height="1280" loading="lazy">
+      <ul class="about-chips" aria-hidden="true">
         <li>12 років у тренерстві</li>
         <li>6 років онлайн</li>
         <li>100+ клієнтів</li>

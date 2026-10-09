@@ -3,7 +3,7 @@
     python main.py images
 
 Потрібен Pillow (pip install pillow). Лише для розробки: на Netlify не запускається.
-Результати before/after: res-N-640.webp і res-N-1200.webp. Також генеруються
+Портрет: portrait-640.webp, portrait-853.webp. Результати before/after: res-N-640.webp і res-N-1200.webp. Також генеруються
 og.jpg (1200x630), favicon.ico та icon-180.png.
 """
 import os
@@ -27,6 +27,7 @@ RESULTS = [
     'photo_2026-10-09_11-41-40.jpg',  # 2 місяці, +6 кг
 ]
 WIDTHS = (640, 1200)
+PORTRAIT = 'photo_2026-10-09_12-25-44.jpg'  # портрет тренера (герой, «Про мене», og)
 
 BG = (14, 18, 24)
 ACCENT = (255, 122, 26)
@@ -52,6 +53,14 @@ def results():
         print('res-%d: %dx%d' % (i, img.width, img.height))
 
 
+def portrait():
+    img = ImageOps.exif_transpose(Image.open(os.path.join(SRC, PORTRAIT))).convert('RGB')
+    for w in (640, 853):
+        im = img if img.width <= w else img.resize((w, round(img.height * w / img.width)), Image.LANCZOS)
+        im.save(os.path.join(OUT, 'portrait-%d.webp' % w), 'WEBP', quality=82, method=6)
+    print('portrait: %dx%d' % img.size)
+
+
 def cover(img, w, h):
     return ImageOps.fit(img, (w, h), Image.LANCZOS, centering=(0.5, 0.35))
 
@@ -60,14 +69,9 @@ def og():
     W, H = 1200, 630
     im = Image.new('RGB', (W, H), BG)
     d = ImageDraw.Draw(im)
-    # правий блок: два фото-результати
-    for i, idx in enumerate((6, 7)):
-        photo = Image.open(os.path.join(OUT, 'res-%d-640.webp' % idx)).convert('RGB')
-        tile = cover(photo, 240, 440)
-        x = 700 + i * 255
-        y = 70 + i * 60
-        im.paste(tile, (x, y))
-        d.rectangle((x, y, x + 239, y + 439), outline=(42, 52, 66), width=2)
+    # правий блок: портрет тренера
+    photo = Image.open(os.path.join(OUT, 'portrait-853.webp')).convert('RGB')
+    im.paste(cover(photo, 400, 630), (800, 0))
     d.rectangle((0, 0, 14, H), fill=ACCENT)
     d.text((70, 90), 'ОНЛАЙН-ТРЕНЕР', font=font(30), fill=ACCENT)
     d.text((70, 140), 'Влад', font=font(104), fill=TEXT)
@@ -96,6 +100,7 @@ def icons():
 def main():
     os.makedirs(OUT, exist_ok=True)
     results()
+    portrait()
     og()
     icons()
     print('готово:', OUT)
