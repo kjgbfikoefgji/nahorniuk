@@ -204,8 +204,12 @@ def main():
         pass
     args = [a for a in sys.argv[1:] if not a.startswith('--')]
     port = int(args[0]) if args else 8830
-    srv = ThreadingHTTPServer(('127.0.0.1', port), Handler)
+    # --lan: слухати всю локальну мережу (щоб відкрити сайт на телефоні з тієї ж Wi-Fi); типово лише цей комп'ютер
+    host = '0.0.0.0' if '--lan' in sys.argv[1:] else '127.0.0.1'
+    srv = ThreadingHTTPServer((host, port), Handler)
     print('Dev-сервер: http://127.0.0.1:%d/  (корінь: %s)' % (port, SITE), flush=True)
+    if host == '0.0.0.0':
+        print("У локальній мережі: відкрий на телефоні http://<IP цього комп'ютера>:%d/" % port, flush=True)
     try:
         srv.serve_forever()
     except KeyboardInterrupt:

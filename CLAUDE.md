@@ -12,6 +12,7 @@
 
 ```
 python main.py serve [порт]   # локальний сервер :8830 із заголовками й CSP з netlify.toml (команда за замовчуванням)
+python main.py serve --lan    # те саме, але слухає всю локальну мережу (відкрити на телефоні за IP комп'ютера)
 python main.py build          # src/ -> site/index.html, robots.txt, sitemap.xml; перераховує хеші CSP у netlify.toml
 python main.py check          # код виходу 1, якщо site/ або хеш CSP застаріли відносно src/
 python main.py images         # images/ -> site/img/out (webp), плюс og.jpg, favicon.ico, icon-180.png (потрібен Pillow)

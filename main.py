@@ -3,6 +3,7 @@
     python main.py build              зібрати site/ із src/ (і синхронізувати хеш CSP у netlify.toml)
     python main.py check              перевірити, що site/ і хеш CSP актуальні (код виходу 1, якщо ні)
     python main.py serve [порт]       локальний сервер із заголовками Netlify (типово 8830)
+    python main.py serve --lan        те саме, але доступний у локальній мережі (для перегляду на телефоні)
     python main.py images             оптимізувати фото з images/ у site/img/out і згенерувати og.jpg, favicon
 
 Без аргументів запускається сервер. Правити треба src/, а site/index.html
