@@ -14,13 +14,15 @@
 .hero-photo{display:contents}
 
 /* Світла тема: герой світлий, портрет у високій рамці на всю висоту героя. Кадр наближено (scale + зсув), щоб обличчя
-   стояло ближче до центру рамки, позаду одне м'яке помаранчеве коло. --pr: правий край рамки = правий край контенту */
+   стояло ближче до центру рамки; позаду суцільна помаранчева панель із косим краєм і крапковою фактурою (контраст до кремового тла,
+   на телефоні це смуга за портретом). --pr: правий край рамки = правий край контенту */
 :root[data-theme="light"] .hero{--pw:min(26rem,34vw);--pt:2.25rem;--pb:2.25rem;--pr:max(var(--gutter),calc((100% - var(--maxw)) / 2))}
-:root[data-theme="light"] .hero-bg::before{background:radial-gradient(46rem 36rem at 80% 40%,rgba(255,122,26,.20),transparent 64%),radial-gradient(30rem 24rem at 6% 96%,rgba(255,150,40,.14),transparent 60%)}
-:root[data-theme="light"] .hero-bg::after{content:"";position:absolute;top:50%;right:calc(var(--pr) + var(--pw) / 2);width:min(46rem,62vw);aspect-ratio:1;translate:50% -50%;border-radius:50%;
-  background:radial-gradient(circle,rgba(255,150,40,.32),rgba(255,122,26,.10) 64%,transparent 65%);pointer-events:none}
-:root[data-theme="light"] .hero-photo{display:block;position:absolute;top:var(--pt);bottom:var(--pb);right:var(--pr);width:var(--pw);overflow:hidden;
-  border:3px solid #17120d;border-radius:calc(var(--radius) + 0.75rem);background:#3a1c0c;box-shadow:0 2rem 4.5rem rgba(90,40,5,.28)}
+:root[data-theme="light"] .hero-bg::before{background:radial-gradient(36rem 28rem at 4% 8%,rgba(255,150,40,.14),transparent 62%),radial-gradient(30rem 24rem at 6% 96%,rgba(255,150,40,.14),transparent 60%)}
+:root[data-theme="light"] .hero-bg::after{content:"";position:absolute;z-index:0;top:0;bottom:0;right:0;width:calc(var(--pr) + var(--pw) + 2rem);pointer-events:none;
+  background:radial-gradient(22rem 22rem at 30% 18%,rgba(255,214,150,.55),transparent 66%),radial-gradient(rgba(23,18,13,.17) 0.09rem,transparent 0.13rem) 0 0/1.25rem 1.25rem,linear-gradient(165deg,#ffa04a,#ff7a1a 46%,#f05a00);
+  clip-path:polygon(0 0,100% 0,100% 100%,3rem 100%)}
+:root[data-theme="light"] .hero-photo{z-index:1;display:block;position:absolute;top:var(--pt);bottom:var(--pb);right:var(--pr);width:var(--pw);overflow:hidden;
+  border:3px solid #17120d;border-radius:calc(var(--radius) + 0.75rem);background:#3a1c0c;box-shadow:0 2rem 4.5rem rgba(80,20,0,.42)}
 :root[data-theme="light"] .hero-photo img{inset:0;width:100%;height:100%;max-width:none;object-fit:cover;object-position:50% 30%;
   transform-origin:50% 40%;transform:translateX(-20%) scale(1.4);-webkit-mask-image:none;mask-image:none}
 :root[data-theme="light"] .hero h1 .accent{color:#e0560a}
@@ -45,10 +47,10 @@
 /* печатка «Чемпіон світу», що повільно обертається (лише світла тема, пауза разом зі стрічками) */
 .hero-stamp{display:none}
 :root[data-theme="light"] .hero-stamp{display:grid;place-items:center;position:absolute;right:calc(var(--gutter) + var(--pw) - 4.375rem);top:calc(var(--pt) + 1.5rem);width:8.75rem;height:8.75rem;border-radius:50%;
-  background:var(--accent-grad);color:var(--on-accent);box-shadow:0 1.25rem 2.75rem rgba(90,40,5,.32),inset 0 0 0 0.375rem rgba(255,255,255,.18)}
+  background:#fff;color:#17120d;border:3px solid #17120d;box-shadow:0 1.25rem 2.75rem rgba(80,20,0,.35)}
 .hero-stamp>svg{position:absolute;inset:0;width:100%;height:100%;animation:spin 28s linear infinite}
 .hero-stamp text{font-family:var(--font-head);font-size:9.6px;font-weight:800;letter-spacing:.04em;text-transform:uppercase;fill:currentColor}
-.hero-stamp-ico{display:grid;place-items:center;width:3.25rem;height:3.25rem;border-radius:50%;border:1.5px solid rgba(20,10,2,.4)}
+.hero-stamp-ico{display:grid;place-items:center;width:3.25rem;height:3.25rem;border-radius:50%;background:var(--accent-grad);color:var(--on-accent)}
 .hero-stamp-ico .ico{width:1.6rem;height:1.6rem}
 @media (min-width:1100px){.hero-chips{display:block}}
 .hero-inner{display:flex;align-items:flex-end;min-height:min(46rem,calc(100svh - var(--header-h) - 3.75rem));padding-block:3.5rem 2.75rem}
@@ -89,10 +91,10 @@
 @media (max-width:899px){
   /* портрет у світлій темі на телефоні: майже квадратна рамка по центру, обличчя ціле на будь-якій ширині (широка рамка його обрізала) */
   :root[data-theme="light"] .hero{--pw:min(21rem,calc(100vw - var(--gutter) * 2))}
-  :root[data-theme="light"] .hero-bg::after{display:none}
+  :root[data-theme="light"] .hero-bg::after{bottom:auto;left:0;width:auto;height:calc(var(--pw) * 1.12 + 3.5rem);clip-path:polygon(0 0,100% 0,100% 100%,0 calc(100% - 1.5rem))}
   :root[data-theme="light"] .hero-photo{top:1.5rem;bottom:auto;left:50%;right:auto;translate:-50% 0;height:calc(var(--pw) * 1.12);box-shadow:0 1.5rem 3rem rgba(90,40,5,.25)}
   :root[data-theme="light"] .hero-photo img{object-position:50% 8%;transform:translateX(-10%) scale(1.2)}
-  :root[data-theme="light"] .hero-inner{padding-top:calc(var(--pw) * 1.12 + 3.5rem)}
+  :root[data-theme="light"] .hero-inner{padding-top:calc(var(--pw) * 1.12 + 4.75rem)}
 }
 /* телефон в альбомній орієнтації: портрет праворуч, текст ліворуч, щоб заголовок і кнопка були в першому екрані */
 @media (max-width:899px) and (orientation:landscape) and (max-height:560px){
@@ -102,6 +104,7 @@
     mask-image:linear-gradient(90deg,transparent 0,#000 45%),linear-gradient(0deg,transparent 0,#000 30%);mask-composite:intersect}
   .hero-inner{padding-top:2rem}
   .hero-copy{max-width:calc(100% - var(--pw) - 2rem)}
+  :root[data-theme="light"] .hero-bg::after{top:0;bottom:0;left:auto;height:auto;width:calc(var(--gutter) + var(--pw) + 1.5rem);clip-path:polygon(0 0,100% 0,100% 100%,2rem 100%)}
   :root[data-theme="light"] .hero-photo{top:1.25rem;bottom:auto;left:auto;right:var(--gutter);translate:none;width:var(--pw);height:calc(100svh - var(--header-h) - 2.5rem)}
   :root[data-theme="light"] .hero-photo img{object-position:50% 30%;transform:translateX(-14%) scale(1.3)}
   :root[data-theme="light"] .hero-inner{padding-top:2rem}
@@ -119,6 +122,8 @@
   .hero-stats{margin-top:1.5rem;padding-top:1.125rem}
   :root[data-theme="light"] .hero{--pt:1.5rem;--pb:1.5rem}
 }
+/* 900–1099px: колонка тексту вузька, тому відступи між цифрами менші, і всі три вміщуються в один рядок */
+@media (min-width:900px) and (max-width:1099px){.hero-stats li{padding-right:1rem;margin-right:1rem}}
 /* телефон: статистика героя в три компактні колонки замість стовпчика */
 @media (max-width:639px){
   .hero-stats{display:grid;grid-template-columns:repeat(3,1fr);gap:0;margin-top:1.75rem;padding-top:1.25rem}
