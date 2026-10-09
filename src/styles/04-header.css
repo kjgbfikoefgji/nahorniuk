@@ -3,7 +3,6 @@
 .site-header{--muted:#c4bbb0;
   position:sticky;top:0;z-index:50;height:var(--header-h);background:var(--header-bg);color:var(--text);border-bottom:1px solid var(--line)}
 :root[data-theme="light"] .site-header{--muted:#4a4138;--header-bg:#fbf8f2}
-.site-header::after{content:"";position:absolute;left:0;right:0;bottom:-1px;height:2px;background:linear-gradient(90deg,transparent,var(--accent) 18%,#ffa23d 50%,var(--accent) 82%,transparent);opacity:.9;pointer-events:none}
 .header-row{height:100%;display:flex;align-items:center;gap:1.5rem}
 .logo{display:inline-flex;align-items:center;gap:0.75rem;min-height:2.75rem;text-decoration:none;margin-right:auto}
 .logo-mark{display:grid;place-items:center;width:2.75rem;height:2.75rem;border-radius:var(--radius-sm);background:var(--accent-grad);color:var(--on-accent);font:800 1.25rem/1 var(--font-head);box-shadow:0 0 1.5rem rgba(255,122,26,.35)}

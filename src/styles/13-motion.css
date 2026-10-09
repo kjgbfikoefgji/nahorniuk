@@ -23,13 +23,6 @@
 /* на телефоні відгуки не біжать, тож паузи для них не треба */
 @media (max-width:759px){.motion-row{display:none}}
 
-/* смужка прогресу читання (де підтримується scroll-driven animations) */
-@supports (animation-timeline:scroll()){
-  body::before{content:"";position:fixed;top:0;left:0;right:0;height:3px;z-index:95;background:var(--accent-grad);transform-origin:0 50%;transform:scaleX(0);
-    animation:progress linear both;animation-timeline:scroll(root)}
-  @keyframes progress{to{transform:scaleX(1)}}
-}
-
 @media (prefers-reduced-motion:reduce){
   html{scroll-behavior:auto}
   *,*::before,*::after{animation:none!important;transition-duration:.01ms!important;transition-delay:0s!important}
