@@ -573,6 +573,17 @@ body.lb-open{overflow:hidden}
 .ticker:hover .ticker-track{animation-play-state:paused}
 .hero-bg::before{animation:glow 9s ease-in-out infinite}
 
+/* кнопка паузи для рухомих стрічок (WCAG 2.2.2) */
+.motion-paused .ticker-track,.motion-paused .track,.motion-paused .chip,.motion-paused .hero-bg::before{animation-play-state:paused!important}
+.ticker:focus-within .ticker-track{animation-play-state:paused}
+.motion-btn .ico-play,.motion-btn[aria-pressed="true"] .ico-pause{display:none}
+.motion-btn[aria-pressed="true"] .ico-play{display:block}
+.motion-btn .ico{width:1.1rem;height:1.1rem;fill:currentColor;stroke:none}
+.motion-btn-ticker{position:absolute;right:var(--gutter);bottom:0.5rem;z-index:2;background:#08080a;color:#f7f4ef;border-color:rgba(255,255,255,.2)}
+.motion-btn-text{width:auto;gap:0.5rem;padding:0 1rem;font:700 0.8rem/1 var(--font-body);letter-spacing:.06em;text-transform:uppercase}
+.motion-row{display:flex;justify-content:flex-end;margin:-1.25rem 0 1.25rem}
+@media (max-width:639px){.motion-row{justify-content:flex-start;margin:0 0 1.25rem}}
+
 /* смужка прогресу читання (де підтримується scroll-driven animations) */
 @supports (animation-timeline:scroll()){
   body::before{content:"";position:fixed;top:0;left:0;right:0;height:3px;z-index:95;background:var(--accent-grad);transform-origin:0 50%;transform:scaleX(0);
@@ -623,6 +634,8 @@ body.lb-open{overflow:hidden}
   <defs>
     <symbol id="i-check" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></symbol>
     <symbol id="i-x" viewBox="0 0 24 24"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></symbol>
+    <symbol id="i-pause" viewBox="0 0 24 24"><rect x="6" y="5" width="4" height="14" rx="1"/><rect x="14" y="5" width="4" height="14" rx="1"/></symbol>
+    <symbol id="i-play" viewBox="0 0 24 24"><polygon points="7 4 20 12 7 20 7 4"/></symbol>
     <symbol id="i-menu" viewBox="0 0 24 24"><path d="M4 6h16M4 12h16M4 18h16"/></symbol>
     <symbol id="i-sun" viewBox="0 0 24 24"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"/></symbol>
     <symbol id="i-moon" viewBox="0 0 24 24"><path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"/></symbol>
@@ -690,6 +703,7 @@ body.lb-open{overflow:hidden}
       <li>Чемпіон світу 2017</li><li class="hl">Фіналіст «Україна має талант 5»</li><li>Чемпіон України 2015</li><li class="hl">12 років у тренерстві</li><li>6 років онлайн</li><li class="hl">100+ клієнтів</li>
     </ul>
   </div>
+  <button class="icon-btn motion-btn motion-btn-ticker" type="button" aria-pressed="false" aria-label="Призупинити анімацію стрічок" data-motion-toggle><svg class="ico ico-pause" aria-hidden="true"><use href="#i-pause"/></svg><svg class="ico ico-play" aria-hidden="true"><use href="#i-play"/></svg></button>
 </section>
 
 <section class="section dotted" id="achievements" aria-labelledby="ach-title">
@@ -919,6 +933,9 @@ body.lb-open{overflow:hidden}
       <h2 id="reviews-title">Що пишуть клієнти</h2>
       <p class="section-lead">Слова з переписок у Telegram та Instagram, без імен. Мова збережена як в оригіналі.</p>
     </header>
+    <div class="motion-row reveal">
+      <button class="icon-btn motion-btn motion-btn-text" type="button" aria-pressed="false" aria-label="Призупинити анімацію стрічок" data-motion-toggle><svg class="ico ico-pause" aria-hidden="true"><use href="#i-pause"/></svg><svg class="ico ico-play" aria-hidden="true"><use href="#i-play"/></svg><span class="motion-label">Пауза</span></button>
+    </div>
   </div>
 
   <div class="marquee" data-marquee>
@@ -1309,6 +1326,30 @@ try { (() => {
     });
     m.classList.add('is-running');
   });
+})(); } catch (e) { console.error(e); }
+try { (() => {
+  // Пауза для рухомого контенту (WCAG 2.2.2): одна кнопка-перемикач на всіх стрічках, вибір пам'ятається
+  const root = document.documentElement;
+  const btns = [...document.querySelectorAll('[data-motion-toggle]')];
+  if (!btns.length) return;
+  const KEY = 'motion-paused';
+  const set = (paused) => {
+    root.classList.toggle('motion-paused', paused);
+    btns.forEach((b) => {
+      b.setAttribute('aria-pressed', String(paused));
+      b.setAttribute('aria-label', paused ? 'Відновити анімацію стрічок' : 'Призупинити анімацію стрічок');
+      const t = b.querySelector('.motion-label');
+      if (t) t.textContent = paused ? 'Відновити' : 'Пауза';
+    });
+  };
+  let saved = false;
+  try { saved = localStorage.getItem(KEY) === '1'; } catch (e) { /* сховище недоступне */ }
+  if (saved) set(true);
+  btns.forEach((b) => b.addEventListener('click', () => {
+    const next = !root.classList.contains('motion-paused');
+    set(next);
+    try { localStorage.setItem(KEY, next ? '1' : '0'); } catch (e) { /* сховище недоступне */ }
+  }));
 })(); } catch (e) { console.error(e); }
 </script>
 
