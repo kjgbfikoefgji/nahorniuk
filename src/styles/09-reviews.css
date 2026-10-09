@@ -1,5 +1,8 @@
 /* Два ряди відгуків, що біжать у різні боки. Без JS або з reduced-motion це звичайні ряди з прокручуванням. */
 .reviews{overflow:hidden}
+/* відгуки живуть усередині розділу «Результати»: підзаголовок, лід і стрічки під сіткою фото */
+.reviews-block{margin-top:clamp(3rem,7vw,5rem)}
+.reviews-block .section-lead{max-width:60ch;margin:0 0 1rem}
 .marquee{position:relative;overflow-x:auto;padding-block:0.5rem;scrollbar-width:none}
 .marquee::-webkit-scrollbar{display:none}
 .marquee+.marquee{margin-top:1.25rem}
@@ -21,7 +24,6 @@
 @media (max-width:759px){
   .marquee{scroll-snap-type:x mandatory;scroll-padding-inline:var(--gutter);-webkit-overflow-scrolling:touch}
   .quote{scroll-snap-align:start}
-  .track{align-items:flex-start}
 }
 @media (max-width:639px){
   .quote{width:min(86vw,22rem);padding:1.25rem 1.25rem 1.125rem;margin-right:0.875rem}

@@ -470,6 +470,9 @@ main{counter-reset:sec}
 body.lb-open{overflow:hidden}
 /* Два ряди відгуків, що біжать у різні боки. Без JS або з reduced-motion це звичайні ряди з прокручуванням. */
 .reviews{overflow:hidden}
+/* відгуки живуть усередині розділу «Результати»: підзаголовок, лід і стрічки під сіткою фото */
+.reviews-block{margin-top:clamp(3rem,7vw,5rem)}
+.reviews-block .section-lead{max-width:60ch;margin:0 0 1rem}
 .marquee{position:relative;overflow-x:auto;padding-block:0.5rem;scrollbar-width:none}
 .marquee::-webkit-scrollbar{display:none}
 .marquee+.marquee{margin-top:1.25rem}
@@ -491,7 +494,6 @@ body.lb-open{overflow:hidden}
 @media (max-width:759px){
   .marquee{scroll-snap-type:x mandatory;scroll-padding-inline:var(--gutter);-webkit-overflow-scrolling:touch}
   .quote{scroll-snap-align:start}
-  .track{align-items:flex-start}
 }
 @media (max-width:639px){
   .quote{width:min(86vw,22rem);padding:1.25rem 1.25rem 1.125rem;margin-right:0.875rem}
@@ -595,7 +597,7 @@ body.lb-open{overflow:hidden}
 .motion-btn .ico{width:1.1rem;height:1.1rem;fill:currentColor;stroke:none}
 .motion-btn-ticker{position:absolute;right:var(--gutter);bottom:0.5rem;z-index:2;background:var(--card);color:var(--text);border-color:var(--glass-line)}
 .motion-btn-text{width:auto;gap:0.5rem;padding:0 1rem;font:700 0.8rem/1 var(--font-body);letter-spacing:.06em;text-transform:uppercase}
-.motion-row{display:flex;justify-content:flex-end;margin:-1.25rem 0 1.25rem}
+.motion-row{display:flex;justify-content:flex-start;margin:0 0 1.25rem}
 /* на телефоні відгуки не біжать, тож паузи для них не треба */
 @media (max-width:759px){.motion-row{display:none}}
 
@@ -626,7 +628,6 @@ body.lb-open{overflow:hidden}
     <nav class="nav" id="nav" aria-label="Головне меню">
       <a href="#services">Послуги</a>
       <a href="#results">Результати</a>
-      <a href="#reviews">Відгуки</a>
       <a href="#about">Про мене</a>
       <a href="#faq">Питання</a>
       <a class="nav-cta btn btn-primary" href="https://t.me/nahorniuk_vlad" target="_blank" rel="noopener">Написати в Telegram</a>
@@ -839,12 +840,12 @@ body.lb-open{overflow:hidden}
   </div>
 </section>
 
-<section class="section" id="results" aria-labelledby="results-title">
+<section class="section reviews" id="results" aria-labelledby="results-title">
   <div class="container">
     <header class="section-head reveal">
       <p class="eyebrow">Результати клієнтів</p>
       <h2 id="results-title">Не словом, а ділом</h2>
-      <p class="section-lead">Реальні фото «до» і «після». Натисни на картку, щоб розглянути уважніше.</p>
+      <p class="section-lead">Реальні фото «до» і «після» та слова клієнтів із переписок. Натисни на фото, щоб розглянути уважніше.</p>
     </header>
 
     <ul class="results-grid">
@@ -897,19 +898,12 @@ body.lb-open{overflow:hidden}
       </li>
     </ul>
 
-    <p class="disclaimer reveal">Результати індивідуальні й залежать від регулярності тренувань, харчування та відновлення. Гарантій конкретних цифр немає. Більше історій в <a href="https://www.instagram.com/nahorniuk/" target="_blank" rel="noopener">Instagram</a>.</p>
-  </div>
-</section>
-
-<section class="section section-alt reviews" id="reviews" aria-labelledby="reviews-title">
-  <div class="container">
-    <header class="section-head reveal">
-      <p class="eyebrow">Відгуки</p>
-      <h2 id="reviews-title">Що пишуть клієнти</h2>
-      <p class="section-lead">Слова з переписок у Telegram та Instagram, без імен. Мова збережена як в оригіналі.</p>
-    </header>
-    <div class="motion-row reveal">
-      <button class="icon-btn motion-btn motion-btn-text" type="button" aria-pressed="false" aria-label="Призупинити анімацію стрічок" data-motion-toggle><svg class="ico ico-pause" aria-hidden="true"><use href="#i-pause"/></svg><svg class="ico ico-play" aria-hidden="true"><use href="#i-play"/></svg><span class="motion-label">Пауза</span></button>
+    <div class="reviews-block">
+      <h3 class="ach-kicker reveal" id="reviews-title">Що пишуть клієнти</h3>
+      <p class="section-lead reveal">Слова з переписок у Telegram та Instagram, без імен. Мова збережена як в оригіналі.</p>
+      <div class="motion-row reveal">
+        <button class="icon-btn motion-btn motion-btn-text" type="button" aria-pressed="false" aria-label="Призупинити анімацію стрічок" data-motion-toggle><svg class="ico ico-pause" aria-hidden="true"><use href="#i-pause"/></svg><svg class="ico ico-play" aria-hidden="true"><use href="#i-play"/></svg><span class="motion-label">Пауза</span></button>
+      </div>
     </div>
   </div>
 
@@ -961,6 +955,11 @@ body.lb-open{overflow:hidden}
         <p class="who">Клієнт</p>
       </li>
     </ul>
+  </div>
+
+  <div class="container">
+
+    <p class="disclaimer reveal">Результати індивідуальні й залежать від регулярності тренувань, харчування та відновлення. Гарантій конкретних цифр немає. Більше історій в <a href="https://www.instagram.com/nahorniuk/" target="_blank" rel="noopener">Instagram</a>.</p>
   </div>
 </section>
 
