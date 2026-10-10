@@ -566,7 +566,8 @@ main{counter-reset:sec}
 .result-cta-title{margin:0;font:800 clamp(1.15rem,2vw,1.6rem)/1.15 var(--font-head);text-transform:uppercase;letter-spacing:-.01em}
 .result-cta-text{margin:0 0 0.5rem;color:var(--muted)}
 .result-cta .btn{min-height:3rem;padding-inline:1.25rem;white-space:normal;text-align:center}
-@media (min-width:760px){.result-cta{grid-column:span 2;padding:2.25rem}}
+@media (min-width:640px){.results-grid>.result-cta{order:1}.results-grid>.res-w{order:2}}
+@media (min-width:760px){.result-cta{padding:1.75rem}}
 /* підпис як в еталона: велика акцентна цифра, нижче капс-опис */
 .result-cap{display:block;padding:1.125rem 1.5rem 1.375rem;border-top:1px solid var(--line);font:600 0.75rem/1.4 var(--font-body);letter-spacing:.1em;text-transform:uppercase;color:var(--muted)}
 .result-cap b{display:block;margin-bottom:0.5rem;font:800 clamp(1.7rem,2.6vw,2.25rem)/1 var(--font-head);letter-spacing:-.02em;text-transform:none;color:var(--accent-text);white-space:nowrap}
@@ -1063,21 +1064,9 @@ body.lb-open{overflow:hidden}
         </button>
       </li>
       <li class="reveal">
-        <button class="result" type="button" data-lb data-full="/img/out/res-2-1200.webp" data-cap="4 місяці: −5 кг і округлі сідниці" aria-label="Відкрити: 4 місяці, мінус 5 кг">
-          <img src="/img/out/res-2-640.webp" alt="Фото до і після: 4 місяці тренувань" width="640" height="522" loading="lazy">
-          <span class="result-cap"><b>−5 кг</b> 4 місяці · округлі сідниці</span>
-        </button>
-      </li>
-      <li class="reveal">
         <button class="result" type="button" data-lb data-full="/img/out/res-7-1200.webp" data-cap="2 місяці роботи: +6 кг, ціль — набір м'язів" aria-label="Відкрити: 2 місяці, плюс 6 кг">
           <img src="/img/out/res-7-640.webp" alt="Фото до і після: 2 місяці роботи" width="640" height="651" loading="lazy">
           <span class="result-cap"><b>+6 кг</b> 2 місяці · набір м'язів</span>
-        </button>
-      </li>
-      <li class="reveal">
-        <button class="result" type="button" data-lb data-full="/img/out/res-3-1200.webp" data-cap="4 місяці: округлі сідниці, виражені ноги, −3 кг" aria-label="Відкрити: 4 місяці, мінус 3 кг">
-          <img src="/img/out/res-3-640.webp" alt="Фото до і після: 4 місяці, ноги" width="640" height="589" loading="lazy">
-          <span class="result-cap"><b>−3 кг</b> 4 місяці · гарно виражені ноги</span>
         </button>
       </li>
       <li class="reveal">
@@ -1090,6 +1079,18 @@ body.lb-open{overflow:hidden}
         <button class="result" type="button" data-lb data-full="/img/out/res-5-1200.webp" data-cap="4 роки: перевтілення" aria-label="Відкрити: 4 роки, перевтілення">
           <img src="/img/out/res-5-640.webp" alt="Фото до і після: 4 роки" width="640" height="700" loading="lazy">
           <span class="result-cap"><b>4 роки</b> перевтілення</span>
+        </button>
+      </li>
+      <li class="reveal res-w">
+        <button class="result" type="button" data-lb data-full="/img/out/res-2-1200.webp" data-cap="4 місяці: −5 кг і округлі сідниці" aria-label="Відкрити: 4 місяці, мінус 5 кг">
+          <img src="/img/out/res-2-640.webp" alt="Фото до і після: 4 місяці тренувань" width="640" height="522" loading="lazy">
+          <span class="result-cap"><b>−5 кг</b> 4 місяці · округлі сідниці</span>
+        </button>
+      </li>
+      <li class="reveal res-w">
+        <button class="result" type="button" data-lb data-full="/img/out/res-3-1200.webp" data-cap="4 місяці: округлі сідниці, виражені ноги, −3 кг" aria-label="Відкрити: 4 місяці, мінус 3 кг">
+          <img src="/img/out/res-3-640.webp" alt="Фото до і після: 4 місяці, ноги" width="640" height="589" loading="lazy">
+          <span class="result-cap"><b>−3 кг</b> 4 місяці · гарно виражені ноги</span>
         </button>
       </li>
       <li class="more-li"><button class="btn btn-ghost btn-block more-btn" type="button" aria-expanded="false" aria-controls="results-list" data-more=".result">Показати ще 4 результати<svg class="ico" aria-hidden="true"><use href="#i-chevron"/></svg></button></li>

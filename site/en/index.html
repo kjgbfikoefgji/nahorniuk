@@ -566,7 +566,8 @@ main{counter-reset:sec}
 .result-cta-title{margin:0;font:800 clamp(1.15rem,2vw,1.6rem)/1.15 var(--font-head);text-transform:uppercase;letter-spacing:-.01em}
 .result-cta-text{margin:0 0 0.5rem;color:var(--muted)}
 .result-cta .btn{min-height:3rem;padding-inline:1.25rem;white-space:normal;text-align:center}
-@media (min-width:760px){.result-cta{grid-column:span 2;padding:2.25rem}}
+@media (min-width:640px){.results-grid>.result-cta{order:1}.results-grid>.res-w{order:2}}
+@media (min-width:760px){.result-cta{padding:1.75rem}}
 /* підпис як в еталона: велика акцентна цифра, нижче капс-опис */
 .result-cap{display:block;padding:1.125rem 1.5rem 1.375rem;border-top:1px solid var(--line);font:600 0.75rem/1.4 var(--font-body);letter-spacing:.1em;text-transform:uppercase;color:var(--muted)}
 .result-cap b{display:block;margin-bottom:0.5rem;font:800 clamp(1.7rem,2.6vw,2.25rem)/1 var(--font-head);letter-spacing:-.02em;text-transform:none;color:var(--accent-text);white-space:nowrap}
@@ -1063,21 +1064,9 @@ body.lb-open{overflow:hidden}
         </button>
       </li>
       <li class="reveal">
-        <button class="result" type="button" data-lb data-full="/img/out/res-2-1200.webp" data-cap="4 months: −5 kg and toned glutes" aria-label="Open: 4 months, minus 5 kg">
-          <img src="/img/out/res-2-640.webp" alt="Before and after photo: 4 months of training" width="640" height="522" loading="lazy">
-          <span class="result-cap"><b>−5 kg</b> 4 months · toned glutes</span>
-        </button>
-      </li>
-      <li class="reveal">
         <button class="result" type="button" data-lb data-full="/img/out/res-7-1200.webp" data-cap="2 months of work: +6 kg, goal: muscle gain" aria-label="Open: 2 months, plus 6 kg">
           <img src="/img/out/res-7-640.webp" alt="Before and after photo: 2 months of work" width="640" height="651" loading="lazy">
           <span class="result-cap"><b>+6 kg</b> 2 months · muscle gain</span>
-        </button>
-      </li>
-      <li class="reveal">
-        <button class="result" type="button" data-lb data-full="/img/out/res-3-1200.webp" data-cap="4 months: toned glutes, defined legs, −3 kg" aria-label="Open: 4 months, minus 3 kg">
-          <img src="/img/out/res-3-640.webp" alt="Before and after photo: 4 months, legs" width="640" height="589" loading="lazy">
-          <span class="result-cap"><b>−3 kg</b> 4 months · defined legs</span>
         </button>
       </li>
       <li class="reveal">
@@ -1090,6 +1079,18 @@ body.lb-open{overflow:hidden}
         <button class="result" type="button" data-lb data-full="/img/out/res-5-1200.webp" data-cap="4 years: a full transformation" aria-label="Open: 4 years, transformation">
           <img src="/img/out/res-5-640.webp" alt="Before and after photo: 4 years" width="640" height="700" loading="lazy">
           <span class="result-cap"><b>4 years</b> transformation</span>
+        </button>
+      </li>
+      <li class="reveal res-w">
+        <button class="result" type="button" data-lb data-full="/img/out/res-2-1200.webp" data-cap="4 months: −5 kg and toned glutes" aria-label="Open: 4 months, minus 5 kg">
+          <img src="/img/out/res-2-640.webp" alt="Before and after photo: 4 months of training" width="640" height="522" loading="lazy">
+          <span class="result-cap"><b>−5 kg</b> 4 months · toned glutes</span>
+        </button>
+      </li>
+      <li class="reveal res-w">
+        <button class="result" type="button" data-lb data-full="/img/out/res-3-1200.webp" data-cap="4 months: toned glutes, defined legs, −3 kg" aria-label="Open: 4 months, minus 3 kg">
+          <img src="/img/out/res-3-640.webp" alt="Before and after photo: 4 months, legs" width="640" height="589" loading="lazy">
+          <span class="result-cap"><b>−3 kg</b> 4 months · defined legs</span>
         </button>
       </li>
       <li class="more-li"><button class="btn btn-ghost btn-block more-btn" type="button" aria-expanded="false" aria-controls="results-list" data-more=".result">Show 4 more results<svg class="ico" aria-hidden="true"><use href="#i-chevron"/></svg></button></li>
