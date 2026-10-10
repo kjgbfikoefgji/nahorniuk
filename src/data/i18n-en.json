@@ -211,5 +211,13 @@
  "Відновити анімацію стрічок": "Resume the scrolling strips",
  "Відновити": "Resume",
  "Попередні відгуки": "Previous reviews",
- "Наступні відгуки": "Next reviews"
+ "Наступні відгуки": "Next reviews",
+ "Оплатили?": "Paid?",
+ "Напиши мені в Telegram, щоб узгодити старт. Повідомлення вже заготовлено, залишиться натиснути «Надіслати».": "Message me on Telegram to agree on the start. The message is already prepared, you only need to press “Send”.",
+ "Привіт! Я оплатив(ла) «{s}», {a} ₴. Підкажи, будь ласка, як почати.": "Hi! I have paid {a} ₴ for “{s}”. Please tell me how to start.",
+ "Програма тренувань (разова)": "Training program (one-time)",
+ "Програма тренувань на місяць": "Training program for a month",
+ "Онлайн-тренування, 10 занять": "Online workouts, package of 10",
+ "Онлайн-тренування (разове)": "Online workout (one-time)",
+ "Харчування на місяць": "Nutrition plan for a month"
 }

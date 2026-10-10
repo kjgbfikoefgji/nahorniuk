@@ -1,0 +1,8 @@
+<dialog class="paydone" id="paydone" aria-labelledby="paydone-title" data-msg="Привіт! Я оплатив(ла) «{s}», {a} ₴. Підкажи, будь ласка, як почати.">
+  <h2 id="paydone-title">Оплатили?</h2>
+  <p>Напиши мені в Telegram, щоб узгодити старт. Повідомлення вже заготовлено, залишиться натиснути «Надіслати».</p>
+  <div class="paydone-actions">
+    <a class="btn btn-primary btn-block" href="{{ telegram_url }}" data-href="{{ telegram_url }}" target="_blank" rel="noopener" data-pay-go><svg class="ico" aria-hidden="true"><use href="#i-telegram"/></svg>Написати в Telegram</a>
+    <button class="btn btn-ghost btn-block" type="button" data-pay-close>Закрити</button>
+  </div>
+</dialog>

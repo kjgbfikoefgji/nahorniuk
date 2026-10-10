@@ -4,7 +4,7 @@ try { (() => {
   // атрибутах, оригінали пам'ятає в WeakMap (повернення бере їх, а не здогад). Підхід як на Katsko.
   const DICT = {{ json "data/i18n-en.json" }};
   const KEY = 'lang';
-  const ATTRS = ['alt', 'aria-label', 'placeholder', 'title', 'content', 'data-cap'];
+  const ATTRS = ['alt', 'aria-label', 'placeholder', 'title', 'content', 'data-cap', 'data-msg'];
   const btn = document.querySelector('.lang');
   if (!btn) return;
   const has = (k) => Object.prototype.hasOwnProperty.call(DICT, k);
@@ -105,6 +105,9 @@ try { (() => {
     const done = () => root.removeAttribute('data-lang-anim');
     t.finished.then(done, done);
   });
+
+  // для скриптів, що збирають текст у браузері (14-pay.js): переклад за поточної мови
+  window.__i18n = { t: (s) => (lang === 'en' && has(s) ? DICT[s] : s) };
 
   if (lang === 'en') apply();
 })(); } catch (e) { console.error(e); }

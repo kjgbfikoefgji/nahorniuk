@@ -45,3 +45,10 @@
   .service-visual{aspect-ratio:4/3}
   .service-visual .ico{width:3.25rem;height:3.25rem}
 }
+
+/* вікно «Оплатили?» після натискання «Оплатити» (scripts/14-pay.js) */
+.paydone{width:min(92vw,26rem);padding:1.75rem;border:1px solid var(--glass-line);border-radius:var(--radius);background:var(--card);color:var(--text);box-shadow:var(--shadow)}
+.paydone::backdrop{background:rgba(6,6,5,.72);-webkit-backdrop-filter:blur(0.375rem);backdrop-filter:blur(0.375rem)}
+.paydone h2{margin:0 0 0.625rem;font-size:1.5rem}
+.paydone p{margin:0 0 1.25rem;color:var(--muted)}
+.paydone-actions{display:grid;gap:0.625rem}
