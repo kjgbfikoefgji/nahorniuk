@@ -3,7 +3,7 @@
     python main.py images
 
 Потрібен Pillow (pip install pillow). Лише для розробки: на Netlify не запускається.
-Портрет: portrait-640.webp, portrait-853.webp. Результати before/after: res-N-640.webp і res-N-1200.webp. Також генеруються
+Заглавне фото: hero-640.webp, hero-853.webp. Результати before/after: res-N-640.webp і res-N-1200.webp. Також генеруються
 og.jpg (1200x630), favicon.ico та icon-180.png.
 """
 import os
@@ -70,7 +70,7 @@ def portrait():
     crop = img.crop((left, 0, left + cw, img.height))
     for w in (640, 853):
         crop.resize((w, round(w * 3 / 2)), Image.LANCZOS).save(
-            os.path.join(OUT, 'portrait-%d.webp' % w), 'WEBP', quality=82, method=6)
+            os.path.join(OUT, 'hero-%d.webp' % w), 'WEBP', quality=82, method=6)
     # круглий аватар у шапці: обличчя з нового фото
     r = round(img.height * 0.084)
     cx, cy = round(img.width * 0.512), round(img.height * 0.312)
@@ -103,7 +103,7 @@ def og(lang='uk'):  # lang лишився на випадок окремого �
     im = Image.new('RGB', (W, H), BG)
     d = ImageDraw.Draw(im)
     # правий блок: портрет тренера
-    photo = Image.open(os.path.join(OUT, 'portrait-853.webp')).convert('RGB')
+    photo = Image.open(os.path.join(OUT, 'hero-853.webp')).convert('RGB')
     im.paste(cover(photo, 400, 630), (800, 0))
     d.rectangle((0, 0, 14, H), fill=ACCENT)
     d.text((70, 90), t[0], font=font(30), fill=ACCENT)

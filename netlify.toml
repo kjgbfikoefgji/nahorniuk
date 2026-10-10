@@ -21,7 +21,7 @@
 [[headers]]
   for = "/img/out/*"
   [headers.values]
-    Cache-Control = "public, max-age=604800"
+    Cache-Control = "public, max-age=3600, must-revalidate"
 
 # Шрифти без хешів у назві: 30 діб без immutable, щоб заміна файлу доїхала.
 [[headers]]
