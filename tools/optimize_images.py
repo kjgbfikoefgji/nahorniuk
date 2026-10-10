@@ -72,8 +72,8 @@ def portrait():
         crop.resize((w, round(w * 3 / 2)), Image.LANCZOS).save(
             os.path.join(OUT, 'portrait-%d.webp' % w), 'WEBP', quality=82, method=6)
     # круглий аватар у шапці: обличчя з нового фото
-    r = round(img.height * 0.115)
-    cx, cy = round(img.width * 0.512), round(img.height * 0.285)
+    r = round(img.height * 0.108)
+    cx, cy = round(img.width * 0.512), round(img.height * 0.296)
     face = img.crop((cx - r, cy - r, cx + r, cy + r)).resize((112, 112), Image.LANCZOS)
     face.save(os.path.join(OUT, 'avatar-112.webp'), 'WEBP', quality=86, method=6)
     print('portrait: %dx%d' % img.size)
