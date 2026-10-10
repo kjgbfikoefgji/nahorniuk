@@ -21,7 +21,7 @@
 .motion-btn-ticker{position:absolute;right:var(--gutter);bottom:0.5rem;z-index:2;background:var(--card);color:var(--text);border-color:var(--glass-line)}
 .motion-btn-text{width:auto;gap:0.5rem;padding:0 1rem;font:700 0.8rem/1 var(--font-body);letter-spacing:.06em;text-transform:uppercase}
 /* кнопка паузи біля відгуків потрібна лише тоді, коли стрічки справді біжать (клас ставить scripts/09-marquee.js) */
-.motion-row{display:none;justify-content:flex-start;margin:0 0 1.25rem}
+.motion-row{display:none;justify-content:flex-start;gap:0.5rem;margin:0 0 1.25rem}
 .has-marquee .motion-row{display:flex}
 
 @media (prefers-reduced-motion:reduce){
