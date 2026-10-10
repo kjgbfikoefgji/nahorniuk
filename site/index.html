@@ -5,13 +5,13 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="color-scheme" content="dark light">
 <meta name="theme-color" content="#0e1218">
-<title>Влад Нагорнюк — онлайн-тренер: програми, тренування, харчування</title>
-<meta name="description" content="Онлайн-тренер Влад Нагорнюк: програми тренувань від 350 грн, тренування по відеозв'язку, консультації та раціон харчування. 12 років досвіду, 100+ клієнтів, чемпіон світу з підтягувань.">
+<title>Владислав Нагорнюк — онлайн-тренер: програми, тренування, харчування</title>
+<meta name="description" content="Онлайн-тренер Владислав Нагорнюк: програми тренувань від 350 грн, тренування по відеозв'язку, консультації та раціон харчування. 12 років досвіду, 100+ клієнтів, чемпіон світу з підтягувань.">
 <link rel="canonical" href="https://nahorniuk.netlify.app/">
 <meta property="og:type" content="website">
 <meta property="og:locale" content="uk_UA">
-<meta property="og:site_name" content="Влад Нагорнюк">
-<meta property="og:title" content="Влад Нагорнюк — онлайн-тренер">
+<meta property="og:site_name" content="Владислав Нагорнюк">
+<meta property="og:title" content="Владислав Нагорнюк — онлайн-тренер">
 <meta property="og:description" content="Програми тренувань, онлайн-заняття по відео, консультації та харчування. 12 років досвіду, 100+ задоволених клієнтів.">
 <meta property="og:url" content="https://nahorniuk.netlify.app/">
 <meta property="og:image" content="https://nahorniuk.netlify.app/img/og.jpg">
@@ -22,7 +22,7 @@
 {
   "@context": "https://schema.org",
   "@type": "Person",
-  "name": "Влад Нагорнюк",
+  "name": "Владислав Нагорнюк",
   "jobTitle": "Онлайн фітнес-тренер",
   "url": "https://nahorniuk.netlify.app/",
   "image": "https://nahorniuk.netlify.app/img/og.jpg",
@@ -227,7 +227,8 @@ main{counter-reset:sec}
 :root[data-theme="light"] .site-header{--muted:#4a4138;--header-bg:#fbf8f2}
 .header-row{height:100%;display:flex;align-items:center;gap:1.5rem}
 .logo{display:inline-flex;align-items:center;gap:0.75rem;min-height:2.75rem;text-decoration:none;margin-right:auto}
-.logo-mark{display:grid;place-items:center;width:2.75rem;height:2.75rem;border-radius:var(--radius-sm);background:var(--accent-grad);color:var(--on-accent);font:800 1.25rem/1 var(--font-head);box-shadow:0 0 1.5rem rgba(255,122,26,.35)}
+.logo-mark{flex:none;display:block;width:2.75rem;height:2.75rem;border-radius:50%;overflow:hidden;border:2px solid var(--accent);background:var(--accent-grad);box-shadow:0 0 1.5rem rgba(255,122,26,.35)}
+.logo-mark img{display:block;width:100%;height:100%;object-fit:cover}
 .logo-text{font:800 1rem/1 var(--font-head);text-transform:uppercase;letter-spacing:-.01em}
 .logo-text b{color:var(--accent-text);font-weight:800}
 
@@ -258,12 +259,17 @@ main{counter-reset:sec}
   .nav a::after{left:0.55rem;right:0.55rem}
   .header-cta{padding-inline:0.875rem}
 }
-@media (min-width:900px){.logo-text{white-space:nowrap}}
-@media (min-width:900px) and (max-width:1059px){.site-header .logo-text b{display:none}}
+@media (max-width:639px){.site-header .logo-text b{display:none}}
+@media (min-width:1200px){.logo-text{white-space:nowrap}}
+@media (min-width:900px) and (max-width:1199px){
+  .site-header .logo-text{max-width:8.5rem;font-size:.9rem;line-height:1.15}
+  .site-header .logo-text b{display:none}
+}
 @media (min-width:900px) and (max-width:939px){
   .header-row{gap:0.75rem}
   .nav a{padding:0 0.45rem}
   .nav a::after{left:0.45rem;right:0.45rem}
+  .site-header .logo-text{max-width:7.5rem;font-size:.85rem}
 }
 @media (max-width:899px){
   .menu-btn{display:inline-flex}
@@ -467,13 +473,17 @@ main{counter-reset:sec}
 .service:hover{border-color:rgba(255,122,26,.5);transform:translateY(-4px);box-shadow:var(--shadow)}
 
 /* візуальна шапка картки: акцентне сяйво, крапкова фактура, велика іконка, тег */
-.service-visual{position:relative;display:grid;place-items:center;height:10.5rem;overflow:hidden;border-bottom:1px solid var(--line);
+.service-visual{position:relative;display:grid;place-items:center;height:15rem;overflow:hidden;border-bottom:1px solid var(--line);
   background:radial-gradient(22rem 14rem at 25% 0%,rgba(255,122,26,.34),transparent 62%),radial-gradient(18rem 12rem at 90% 100%,rgba(255,150,40,.14),transparent 60%),var(--card-hi)}
 .service-visual::before{content:"";position:absolute;inset:0;background-image:radial-gradient(rgba(255,255,255,.10) 1px,transparent 1.2px);background-size:1.25rem 1.25rem;
   -webkit-mask-image:linear-gradient(180deg,#000,transparent);mask-image:linear-gradient(180deg,#000,transparent)}
 :root[data-theme="light"] .service-visual::before{background-image:radial-gradient(rgba(30,20,10,.14) 1px,transparent 1.2px)}
 .service-visual .ico{position:relative;width:4.5rem;height:4.5rem;stroke-width:1.15;color:var(--accent);filter:drop-shadow(0 0 1.5rem rgba(255,122,26,.55))}
-.vtag{position:absolute;left:1.25rem;bottom:1.125rem;padding:0.5rem 0.75rem;border-radius:0.5rem;background:rgba(10,9,8,.78);color:#fff;
+.service-photo{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.service-visual:has(.service-photo)::before{display:none}
+.service-visual:has(.service-photo)::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,transparent 45%,rgba(10,9,8,.72))}
+:root[data-theme="light"] .service-visual:has(.service-photo){background:var(--card-hi)}
+.vtag{z-index:1;position:absolute;left:1.25rem;bottom:1.125rem;padding:0.5rem 0.75rem;border-radius:0.5rem;background:rgba(10,9,8,.78);color:#fff;
   font:700 0.75rem/1 var(--font-head);letter-spacing:.05em;text-transform:uppercase;border:1px solid rgba(255,255,255,.12)}
 .vtag-accent{background:var(--accent);color:var(--on-accent);border-color:transparent}
 
@@ -502,7 +512,7 @@ main{counter-reset:sec}
   .options .btn{grid-column:1/-1}
 }
 @media (max-width:639px){
-  .service-visual{height:6.5rem;place-items:center end;padding-right:2.5rem}
+  .service-visual{height:8.5rem;place-items:center end;padding-right:2.5rem}
   .service-visual .ico{width:3.25rem;height:3.25rem}
 }
 /* Сітка з однаковою висотою рядка: без порожніх «дірок», як у масонрі. Фото в рядку підтягуються по висоті (object-fit), остання клітинка це заклик до дії.
@@ -781,9 +791,9 @@ body.lb-open{overflow:hidden}
 
 <header class="site-header" id="top">
   <div class="container header-row">
-    <a class="logo" href="#top" aria-label="Нагорнюк, онлайн-тренер. На початок сторінки">
-      <span class="logo-mark" aria-hidden="true">Н</span>
-      <span class="logo-text">Нагорнюк <b>тренер</b></span>
+    <a class="logo" href="#top" aria-label="Владислав Нагорнюк, онлайн-тренер. На початок сторінки">
+      <span class="logo-mark" aria-hidden="true"><img src="/img/out/avatar-112.webp" alt="" width="112" height="112"></span>
+      <span class="logo-text">Владислав Нагорнюк <b>тренер</b></span>
     </a>
     <nav class="nav" id="nav" aria-label="Головне меню">
       <a href="#services">Послуги</a>
@@ -855,7 +865,7 @@ body.lb-open{overflow:hidden}
     <div class="hero-copy">
       <p class="badge reveal">
         <svg class="ico" aria-hidden="true"><use href="#i-shield"/></svg>
-        <b>Влад Нагорнюк</b><span>Чемпіон світу з підтягувань</span>
+        <b>Владислав Нагорнюк</b><span>Чемпіон світу з підтягувань</span>
       </p>
       <h1 id="hero-title" class="reveal">Тренування, що дають результат, <span class="accent nowrap">де б ти не був</span></h1>
       <p class="lead reveal">Програма під твою ціль, відео техніки й підтримка в Telegram. Вдома, в залі чи на вулиці.</p>
@@ -898,7 +908,7 @@ body.lb-open{overflow:hidden}
 
       <article class="card service reveal">
         <div class="service-visual">
-          <svg class="ico" aria-hidden="true"><use href="#i-plan"/></svg>
+          <img class="service-photo" src="/img/out/svc-plan.webp" alt="" width="800" height="1000" loading="lazy" style="object-position:50% 6%">
           <span class="vtag">Найдешевший старт</span>
         </div>
         <div class="service-body">
@@ -926,7 +936,7 @@ body.lb-open{overflow:hidden}
 
       <article class="card service service-featured reveal">
         <div class="service-visual">
-          <svg class="ico" aria-hidden="true"><use href="#i-video"/></svg>
+          <img class="service-photo" src="/img/out/svc-online.webp" alt="" width="800" height="1000" loading="lazy" style="object-position:50% 10%">
           <span class="vtag vtag-accent">Найпопулярніше</span>
         </div>
         <div class="service-body">
@@ -954,7 +964,7 @@ body.lb-open{overflow:hidden}
 
       <article class="card service reveal">
         <div class="service-visual">
-          <svg class="ico" aria-hidden="true"><use href="#i-chat"/></svg>
+          <img class="service-photo" src="/img/out/svc-consult.webp" alt="" width="800" height="1000" loading="lazy" style="object-position:50% 54%">
           <span class="vtag">Перший крок</span>
         </div>
         <div class="service-body">
@@ -977,7 +987,7 @@ body.lb-open{overflow:hidden}
 
       <article class="card service reveal">
         <div class="service-visual">
-          <svg class="ico" aria-hidden="true"><use href="#i-food"/></svg>
+          <img class="service-photo" src="/img/out/svc-meal.webp" alt="" width="800" height="1000" loading="lazy" style="object-position:50% 30%">
           <span class="vtag">Тільки харчування</span>
         </div>
         <div class="service-body">
@@ -1020,27 +1030,27 @@ body.lb-open{overflow:hidden}
         </button>
       </li>
       <li class="reveal">
-        <button class="result" type="button" data-lb data-full="/img/out/res-2-1200.webp" data-cap="4 місяці: −5 кг і округлі сідниці" aria-label="Відкрити: 4 місяці, мінус 5 кг">
-          <img src="/img/out/res-2-640.webp" alt="Фото до і після: 4 місяці тренувань" width="640" height="522" loading="lazy">
-          <span class="result-cap"><b>−5 кг</b> 4 місяці · округлі сідниці</span>
-        </button>
-      </li>
-      <li class="reveal">
-        <button class="result" type="button" data-lb data-full="/img/out/res-3-1200.webp" data-cap="4 місяці: округлі сідниці, виражені ноги, −3 кг" aria-label="Відкрити: 4 місяці, мінус 3 кг">
-          <img src="/img/out/res-3-640.webp" alt="Фото до і після: 4 місяці, ноги" width="640" height="589" loading="lazy">
-          <span class="result-cap"><b>−3 кг</b> 4 місяці · гарно виражені ноги</span>
-        </button>
-      </li>
-      <li class="reveal">
         <button class="result" type="button" data-lb data-full="/img/out/res-6-1200.webp" data-cap="4 місяці: прибрали живіт, додали в м'язах +4 кг" aria-label="Відкрити: 4 місяці, плюс 4 кг м'язів">
           <img src="/img/out/res-6-640.webp" alt="Фото до і після: 4 місяці, м'язи" width="640" height="649" loading="lazy">
           <span class="result-cap"><b>+4 кг</b> 4 місяці · без живота</span>
         </button>
       </li>
       <li class="reveal">
+        <button class="result" type="button" data-lb data-full="/img/out/res-2-1200.webp" data-cap="4 місяці: −5 кг і округлі сідниці" aria-label="Відкрити: 4 місяці, мінус 5 кг">
+          <img src="/img/out/res-2-640.webp" alt="Фото до і після: 4 місяці тренувань" width="640" height="522" loading="lazy">
+          <span class="result-cap"><b>−5 кг</b> 4 місяці · округлі сідниці</span>
+        </button>
+      </li>
+      <li class="reveal">
         <button class="result" type="button" data-lb data-full="/img/out/res-7-1200.webp" data-cap="2 місяці роботи: +6 кг, ціль — набір м'язів" aria-label="Відкрити: 2 місяці, плюс 6 кг">
           <img src="/img/out/res-7-640.webp" alt="Фото до і після: 2 місяці роботи" width="640" height="651" loading="lazy">
           <span class="result-cap"><b>+6 кг</b> 2 місяці · набір м'язів</span>
+        </button>
+      </li>
+      <li class="reveal">
+        <button class="result" type="button" data-lb data-full="/img/out/res-3-1200.webp" data-cap="4 місяці: округлі сідниці, виражені ноги, −3 кг" aria-label="Відкрити: 4 місяці, мінус 3 кг">
+          <img src="/img/out/res-3-640.webp" alt="Фото до і після: 4 місяці, ноги" width="640" height="589" loading="lazy">
+          <span class="result-cap"><b>−3 кг</b> 4 місяці · гарно виражені ноги</span>
         </button>
       </li>
       <li class="reveal">
@@ -1133,11 +1143,11 @@ body.lb-open{overflow:hidden}
 <section class="section dotted" id="about" aria-labelledby="about-title">
   <div class="container about-grid">
     <div class="about-visual reveal">
-      <img src="/img/out/portrait-853.webp" alt="Влад Нагорнюк" width="853" height="1280" loading="lazy">
+      <img src="/img/out/about-853.webp" alt="Владислав Нагорнюк" width="853" height="1280" loading="lazy">
     </div>
     <div class="about-copy reveal">
       <p class="eyebrow">Про мене</p>
-      <h2 id="about-title">Влад Нагорнюк</h2>
+      <h2 id="about-title">Владислав Нагорнюк</h2>
       <p class="about-lead">Фітнес-тренер із 12-річним досвідом, останні 6 років працюю онлайн. Вища освіта у сфері фізичного виховання. Сам виступав і перемагав, тому знаю ціну кожного підходу.</p>
       <ul class="about-stats">
         <li><b>12</b><span>років у тренерстві</span></li>
@@ -1291,11 +1301,11 @@ body.lb-open{overflow:hidden}
 
 <footer class="site-footer">
   <div class="container footer-row">
-    <a class="logo" href="#top" aria-label="Нагорнюк, онлайн-тренер. На початок сторінки">
-      <span class="logo-mark" aria-hidden="true">Н</span>
-      <span class="logo-text">Нагорнюк <b>тренер</b></span>
+    <a class="logo" href="#top" aria-label="Владислав Нагорнюк, онлайн-тренер. На початок сторінки">
+      <span class="logo-mark" aria-hidden="true"><img src="/img/out/avatar-112.webp" alt="" width="112" height="112"></span>
+      <span class="logo-text">Владислав Нагорнюк <b>тренер</b></span>
     </a>
-    <p class="footer-copy">© 2026 Влад Нагорнюк. Результати індивідуальні й не гарантуються. <a href="#terms">Умови співпраці</a></p>
+    <p class="footer-copy">© 2026 Владислав Нагорнюк. Результати індивідуальні й не гарантуються. <a href="#terms">Умови співпраці</a></p>
     <div class="socials">
       <a class="btn btn-primary btn-sm" href="https://t.me/nahorniuk_vlad" target="_blank" rel="noopener">Написати</a>
       <a class="icon-btn" href="https://www.instagram.com/nahorniuk/" target="_blank" rel="noopener" aria-label="Instagram"><svg class="ico" aria-hidden="true"><use href="#i-instagram"/></svg></a>

@@ -5,7 +5,8 @@
 :root[data-theme="light"] .site-header{--muted:#4a4138;--header-bg:#fbf8f2}
 .header-row{height:100%;display:flex;align-items:center;gap:1.5rem}
 .logo{display:inline-flex;align-items:center;gap:0.75rem;min-height:2.75rem;text-decoration:none;margin-right:auto}
-.logo-mark{display:grid;place-items:center;width:2.75rem;height:2.75rem;border-radius:var(--radius-sm);background:var(--accent-grad);color:var(--on-accent);font:800 1.25rem/1 var(--font-head);box-shadow:0 0 1.5rem rgba(255,122,26,.35)}
+.logo-mark{flex:none;display:block;width:2.75rem;height:2.75rem;border-radius:50%;overflow:hidden;border:2px solid var(--accent);background:var(--accent-grad);box-shadow:0 0 1.5rem rgba(255,122,26,.35)}
+.logo-mark img{display:block;width:100%;height:100%;object-fit:cover}
 .logo-text{font:800 1rem/1 var(--font-head);text-transform:uppercase;letter-spacing:-.01em}
 .logo-text b{color:var(--accent-text);font-weight:800}
 
@@ -36,12 +37,17 @@
   .nav a::after{left:0.55rem;right:0.55rem}
   .header-cta{padding-inline:0.875rem}
 }
-@media (min-width:900px){.logo-text{white-space:nowrap}}
-@media (min-width:900px) and (max-width:1059px){.site-header .logo-text b{display:none}}
+@media (max-width:639px){.site-header .logo-text b{display:none}}
+@media (min-width:1200px){.logo-text{white-space:nowrap}}
+@media (min-width:900px) and (max-width:1199px){
+  .site-header .logo-text{max-width:8.5rem;font-size:.9rem;line-height:1.15}
+  .site-header .logo-text b{display:none}
+}
 @media (min-width:900px) and (max-width:939px){
   .header-row{gap:0.75rem}
   .nav a{padding:0 0.45rem}
   .nav a::after{left:0.45rem;right:0.45rem}
+  .site-header .logo-text{max-width:7.5rem;font-size:.85rem}
 }
 @media (max-width:899px){
   .menu-btn{display:inline-flex}

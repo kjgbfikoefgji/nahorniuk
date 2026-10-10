@@ -27,7 +27,16 @@ RESULTS = [
     'photo_2026-10-09_11-41-40.jpg',  # 2 місяці, +6 кг
 ]
 WIDTHS = (640, 1200)
-PORTRAIT = 'photo_2026-10-09_12-25-44.jpg'  # портрет тренера (герой, «Про мене», og)
+PORTRAIT = 'Останню на заглавну фото можна.JPG'  # заглавне фото з торсом (герой, og, аватар у шапці)
+PORTRAIT_CENTER = 0.52  # де по горизонталі стоїть тренер (частка ширини): за нею кадруємо 2:3
+ABOUT = 'photo_2026-10-09_12-25-44.jpg'  # портрет для «Про мене»
+# фото в картках послуг: файл -> ім'я виходу
+SERVICES = {
+    'Програми тренувань.JPG': 'svc-plan',
+    'Онлайн-тренування.JPG': 'svc-online',
+    'Консультація.JPG': 'svc-consult',
+    'Харчування.JPG': 'svc-meal',
+}
 
 BG = (14, 18, 24)
 ACCENT = (255, 122, 26)
@@ -55,10 +64,31 @@ def results():
 
 def portrait():
     img = ImageOps.exif_transpose(Image.open(os.path.join(SRC, PORTRAIT))).convert('RGB')
+    # кадр 2:3 по висоті знімка, зсунутий до тренера
+    cw = round(img.height * 2 / 3)
+    left = min(max(round(img.width * PORTRAIT_CENTER - cw / 2), 0), img.width - cw)
+    crop = img.crop((left, 0, left + cw, img.height))
     for w in (640, 853):
-        im = img if img.width <= w else img.resize((w, round(img.height * w / img.width)), Image.LANCZOS)
-        im.save(os.path.join(OUT, 'portrait-%d.webp' % w), 'WEBP', quality=82, method=6)
+        crop.resize((w, round(w * 3 / 2)), Image.LANCZOS).save(
+            os.path.join(OUT, 'portrait-%d.webp' % w), 'WEBP', quality=82, method=6)
+    # круглий аватар у шапці: обличчя з нового фото
+    r = round(img.height * 0.115)
+    cx, cy = round(img.width * 0.512), round(img.height * 0.285)
+    face = img.crop((cx - r, cy - r, cx + r, cy + r)).resize((112, 112), Image.LANCZOS)
+    face.save(os.path.join(OUT, 'avatar-112.webp'), 'WEBP', quality=86, method=6)
     print('portrait: %dx%d' % img.size)
+    about = ImageOps.exif_transpose(Image.open(os.path.join(SRC, ABOUT))).convert('RGB')
+    for w in (640, 853):
+        im = about if about.width <= w else about.resize((w, round(about.height * w / about.width)), Image.LANCZOS)
+        im.save(os.path.join(OUT, 'about-%d.webp' % w), 'WEBP', quality=82, method=6)
+
+
+def services():
+    for name, out in SERVICES.items():
+        img = ImageOps.exif_transpose(Image.open(os.path.join(SRC, name))).convert('RGB')
+        im = img if img.width <= 800 else img.resize((800, round(img.height * 800 / img.width)), Image.LANCZOS)
+        im.save(os.path.join(OUT, out + '.webp'), 'WEBP', quality=78, method=6)
+        print('%s: %dx%d' % (out, im.width, im.height))
 
 
 def cover(img, w, h):
@@ -74,7 +104,7 @@ def og():
     im.paste(cover(photo, 400, 630), (800, 0))
     d.rectangle((0, 0, 14, H), fill=ACCENT)
     d.text((70, 90), 'ОНЛАЙН-ТРЕНЕР', font=font(30), fill=ACCENT)
-    d.text((70, 140), 'Влад', font=font(104), fill=TEXT)
+    d.text((70, 140), 'Владислав', font=font(104), fill=TEXT)
     d.text((70, 252), 'Нагорнюк', font=font(104), fill=TEXT)
     d.text((70, 420), '12 років досвіду · 100+ клієнтів', font=font(32, False), fill=MUTED)
     d.text((70, 470), 'Чемпіон світу · «Україна має талант 5»', font=font(28, False), fill=MUTED)
@@ -101,6 +131,7 @@ def main():
     os.makedirs(OUT, exist_ok=True)
     results()
     portrait()
+    services()
     og()
     icons()
     print('готово:', OUT)

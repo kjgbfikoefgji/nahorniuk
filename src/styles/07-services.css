@@ -3,13 +3,17 @@
 .service:hover{border-color:rgba(255,122,26,.5);transform:translateY(-4px);box-shadow:var(--shadow)}
 
 /* візуальна шапка картки: акцентне сяйво, крапкова фактура, велика іконка, тег */
-.service-visual{position:relative;display:grid;place-items:center;height:10.5rem;overflow:hidden;border-bottom:1px solid var(--line);
+.service-visual{position:relative;display:grid;place-items:center;height:15rem;overflow:hidden;border-bottom:1px solid var(--line);
   background:radial-gradient(22rem 14rem at 25% 0%,rgba(255,122,26,.34),transparent 62%),radial-gradient(18rem 12rem at 90% 100%,rgba(255,150,40,.14),transparent 60%),var(--card-hi)}
 .service-visual::before{content:"";position:absolute;inset:0;background-image:radial-gradient(rgba(255,255,255,.10) 1px,transparent 1.2px);background-size:1.25rem 1.25rem;
   -webkit-mask-image:linear-gradient(180deg,#000,transparent);mask-image:linear-gradient(180deg,#000,transparent)}
 :root[data-theme="light"] .service-visual::before{background-image:radial-gradient(rgba(30,20,10,.14) 1px,transparent 1.2px)}
 .service-visual .ico{position:relative;width:4.5rem;height:4.5rem;stroke-width:1.15;color:var(--accent);filter:drop-shadow(0 0 1.5rem rgba(255,122,26,.55))}
-.vtag{position:absolute;left:1.25rem;bottom:1.125rem;padding:0.5rem 0.75rem;border-radius:0.5rem;background:rgba(10,9,8,.78);color:#fff;
+.service-photo{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.service-visual:has(.service-photo)::before{display:none}
+.service-visual:has(.service-photo)::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,transparent 45%,rgba(10,9,8,.72))}
+:root[data-theme="light"] .service-visual:has(.service-photo){background:var(--card-hi)}
+.vtag{z-index:1;position:absolute;left:1.25rem;bottom:1.125rem;padding:0.5rem 0.75rem;border-radius:0.5rem;background:rgba(10,9,8,.78);color:#fff;
   font:700 0.75rem/1 var(--font-head);letter-spacing:.05em;text-transform:uppercase;border:1px solid rgba(255,255,255,.12)}
 .vtag-accent{background:var(--accent);color:var(--on-accent);border-color:transparent}
 
@@ -38,6 +42,6 @@
   .options .btn{grid-column:1/-1}
 }
 @media (max-width:639px){
-  .service-visual{height:6.5rem;place-items:center end;padding-right:2.5rem}
+  .service-visual{height:8.5rem;place-items:center end;padding-right:2.5rem}
   .service-visual .ico{width:3.25rem;height:3.25rem}
 }
