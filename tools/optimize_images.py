@@ -71,11 +71,13 @@ def portrait():
     for w in (640, 853):
         crop.resize((w, round(w * 3 / 2)), Image.LANCZOS).save(
             os.path.join(OUT, 'hero-%d.webp' % w), 'WEBP', quality=82, method=6)
-    # круглий аватар у шапці: обличчя з нового фото
-    r = round(img.height * 0.084)
-    cx, cy = round(img.width * 0.512), round(img.height * 0.312)
-    face = img.crop((cx - r, cy - r, cx + r, cy + r)).resize((112, 112), Image.LANCZOS)
-    face.save(os.path.join(OUT, 'avatar-112.webp'), 'WEBP', quality=86, method=6)
+    # круглий аватар у шапці: обличчя з фото в кепці (те саме, що в «Про мене»)
+    cap = ImageOps.exif_transpose(Image.open(os.path.join(SRC, ABOUT))).convert('RGB')
+    side = min(cap.width, round(cap.height * 0.56))
+    left = cap.width - side  # обличчя праворуч у кадрі
+    top = round(cap.height * 0.13)
+    face = cap.crop((left, top, left + side, top + side)).resize((112, 112), Image.LANCZOS)
+    face.save(os.path.join(OUT, 'avatar-cap-112.webp'), 'WEBP', quality=86, method=6)
     print('portrait: %dx%d' % img.size)
     about = ImageOps.exif_transpose(Image.open(os.path.join(SRC, ABOUT))).convert('RGB')
     for w in (640, 853):
