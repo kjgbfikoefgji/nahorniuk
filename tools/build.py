@@ -5,13 +5,13 @@
                                      netlify.toml відповідають src/ (код виходу 1, якщо ні)
 
 Мова шаблонів (усе інше в файлах лишається як є):
+  * {{ json "data/i18n-en.json" }}  підставляє вміст JSON-файла (словник англійської);
   * маркер на окремому рядку   {{ include "styles/01-fonts.css" }}
     замінюється вмістом файлу з src/ (вкладені include підтримуються);
   * {{ site_url }}, {{ telegram_url }}, {{ instagram_url }}, {{ mono_url }} ...
     підставляються з src/site.json: ключ JSON = назва маркера.
 
-Збираються: src/index.html (дві мови: site/index.html і site/en/index.html), src/robots.txt, src/sitemap.xml -> site/.
-Переклади англійської версії лежать у src/en/ з тими самими відносними шляхами, що й українські файли.
+Збираються: src/index.html, src/robots.txt, src/sitemap.xml -> site/.
 Після збірки рахується sha256 кожного виконуваного inline-<script>, і хеші
 записуються в script-src у netlify.toml: вручну перераховувати їх не треба.
 
@@ -20,6 +20,7 @@ CSP дозволяє лише хеші inline-скриптів (без 'self'), 
 один index.html. Лише стандартна бібліотека Python.
 """
 import base64
+from html.parser import HTMLParser
 import hashlib
 import json
 import os
@@ -31,17 +32,11 @@ SRC = os.path.join(ROOT, 'src')
 SITE = os.path.join(ROOT, 'site')
 TOML = os.path.join(ROOT, 'netlify.toml')
 
-# (готовий файл у site/, шаблон у src/, мова). Англійська версія збирається з того самого
-# index.html, але кожен include спершу шукається в src/en/ (там лежать переклади), а якщо
-# файла там немає, береться український із src/. Так CSS і більшість JS спільні.
-PAGES = [
-    ('index.html', 'index.html', 'uk'),
-    ('en/index.html', 'index.html', 'en'),
-    ('robots.txt', 'robots.txt', 'uk'),
-    ('sitemap.xml', 'sitemap.xml', 'uk'),
-]
+# шаблон у src/ -> готовий файл у site/
+PAGES = ['index.html', 'robots.txt', 'sitemap.xml']
 
 INCLUDE = re.compile(r'^\{\{ include "([^"]+)" \}\}\n', re.M)
+JSON = re.compile(r'\{\{ json "([^"]+)" \}\}')
 VAR = re.compile(r'\{\{ (\w+) \}\}')
 LEFTOVER = re.compile(r'\{\{ *\w+')
 MAX_DEPTH = 8
@@ -53,40 +48,39 @@ def read(path):
         return f.read().replace('\r\n', '\n')
 
 
-def src_path(rel, lang='uk'):
+def src_path(rel):
     path = os.path.normpath(os.path.join(SRC, *rel.split('/')))
     if os.path.commonpath([path, SRC]) != SRC:
         sys.exit('шлях виходить за межі src/: %s' % rel)
-    if lang != 'uk':
-        loc = os.path.normpath(os.path.join(SRC, lang, *rel.split('/')))
-        if os.path.isfile(loc):
-            return loc
     if not os.path.isfile(path):
         sys.exit('у src/ немає файла: %s' % rel)
     return path
 
 
-def render(text, variables, depth=0, lang='uk'):
+def render(text, variables, depth=0):
     if depth > MAX_DEPTH:
         sys.exit('include вкладений глибше за %d рівнів (цикл?)' % MAX_DEPTH)
 
     def include(m):
-        part = read(src_path(m.group(1), lang))
+        part = read(src_path(m.group(1)))
         if not part.endswith('\n'):
             part += '\n'
-        return render(part, variables, depth + 1, lang)
+        return render(part, variables, depth + 1)
 
     def var(m):
         return variables.get(m.group(1), m.group(0))
 
-    return VAR.sub(var, INCLUDE.sub(include, text))
+    def as_json(m):
+        data = json.loads(read(src_path(m.group(1))))
+        # </ екранується, щоб рядок не міг закрити <script>
+        return json.dumps(data, ensure_ascii=False, separators=(',', ':')).replace('</', r'<\/')
+
+    return VAR.sub(var, JSON.sub(as_json, INCLUDE.sub(include, text)))
 
 
 def load_variables():
     data = json.loads(read(os.path.join(SRC, 'site.json')))
     data['site_url'] = data['site_url'].rstrip('/')
-    data['url_uk'] = data['site_url'] + '/'
-    data['url_en'] = data['site_url'] + '/en/'
     return data
 
 
@@ -94,14 +88,59 @@ def build_pages():
     """Повертає {назва файла в site/: готовий текст}."""
     variables = load_variables()
     pages = {}
-    for name, tpl, lang in PAGES:
-        v = dict(variables, html_lang=lang, url_self=variables['url_en'] if lang == 'en' else variables['url_uk'])
-        out = render(read(src_path(tpl)), v, lang=lang)
+    for name in PAGES:
+        out = render(read(src_path(name)), variables)
         left = LEFTOVER.search(out)
         if left:
             sys.exit('у %s лишився нерозкритий маркер: %s' % (name, left.group(0)))
         pages[name] = out
     return pages
+
+
+I18N_ATTRS = ('alt', 'aria-label', 'placeholder', 'title', 'content', 'data-cap')
+# ключі, які скрипти ставлять уже в браузері: у розмітці їх немає, але вони потрібні
+I18N_RUNTIME = {'Закрити меню', 'Відновити анімацію стрічок', 'Відновити'}
+
+
+class _Texts(HTMLParser):
+    """Видимі тексти й атрибути сторінки: саме їх обходить скрипт перекладу (12-i18n.js)."""
+
+    def __init__(self):
+        super().__init__(convert_charrefs=True)
+        self.found = []
+        self.skip = 0
+
+    def handle_starttag(self, tag, attrs):
+        if tag in ('script', 'style'):
+            self.skip += 1
+            return
+        d = dict(attrs)
+        for a in I18N_ATTRS:
+            v = d.get(a)
+            if v and v.strip():
+                self.found.append(v.strip())
+
+    def handle_startendtag(self, tag, attrs):
+        self.handle_starttag(tag, attrs)
+
+    def handle_endtag(self, tag):
+        if tag in ('script', 'style') and self.skip:
+            self.skip -= 1
+
+    def handle_data(self, data):
+        if not self.skip and data.strip():
+            self.found.append(data.strip())
+
+
+def i18n_report(html):
+    """(немає в словнику, застарілі ключі). Текст без кирилиці (числа, бренди) перекладу не потребує."""
+    d = json.loads(read(src_path('data/i18n-en.json')))
+    p = _Texts()
+    p.feed(html)
+    found = set(p.found)
+    missing = sorted(t for t in found if re.search('[А-Яа-яІіЇїЄєҐґ]', t) and t not in d)
+    stale = sorted(k for k in d if k not in found and k not in I18N_RUNTIME)
+    return missing, stale
 
 
 def inline_script_hashes(html):
@@ -152,16 +191,17 @@ def write_text(path, text):
 def main(argv):
     check = '--check' in argv
     pages = build_pages()
-    hashes = []
-    for html in ('index.html', 'en/index.html'):
-        for h in inline_script_hashes(pages[html]):
-            if h not in hashes:
-                hashes.append(h)
+    hashes = inline_script_hashes(pages['index.html'])
     if not hashes:
         sys.exit('у зібраному index.html немає жодного inline-скрипта')
     toml_old, toml_new = toml_with_hashes(hashes)
+    missing, stale_keys = i18n_report(pages['index.html'])
+    for t in missing:
+        print('НЕМАЄ ПЕРЕКЛАДУ (src/data/i18n-en.json):', t[:90])
+    for t in stale_keys:
+        print('застарілий ключ словника:', t[:90])
 
-    stale = [n for n in pages if read_current(os.path.join(SITE, *n.split('/'))) != pages[n]]
+    stale = [n for n in PAGES if read_current(os.path.join(SITE, n)) != pages[n]]
     toml_stale = toml_old != toml_new
 
     for h in hashes:
@@ -171,18 +211,18 @@ def main(argv):
             print('site/%s НЕ відповідає src/' % n)
         if toml_stale:
             print('хеш CSP у netlify.toml НЕ відповідає site/index.html')
-        if stale or toml_stale:
+        if stale or toml_stale or missing:
             print('Запусти: python main.py build')
             return 1
         print('збирання актуальне')
         return 0
 
     for n in stale:
-        write_text(os.path.join(SITE, *n.split('/')), pages[n])
+        write_text(os.path.join(SITE, n), pages[n])
     if toml_stale:
         write_text(TOML, toml_new)
     print('site/: оновлено %d з %d файлів%s' % (
-        len(stale), len(pages), '; хеш у netlify.toml оновлено' if toml_stale else ''))
+        len(stale), len(PAGES), '; хеш у netlify.toml оновлено' if toml_stale else ''))
     return 0
 
 

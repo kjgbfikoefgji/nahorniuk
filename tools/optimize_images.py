@@ -137,7 +137,6 @@ def main():
     portrait()
     services()
     og('uk')
-    og('en')
     icons()
     print('готово:', OUT)
 

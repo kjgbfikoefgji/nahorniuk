@@ -8,9 +8,6 @@
 <title>Владислав Нагорнюк — онлайн-тренер: програми, тренування, харчування</title>
 <meta name="description" content="Онлайн-тренер Владислав Нагорнюк: програми тренувань від 350 грн, тренування по відеозв'язку, консультації та раціон харчування. 12 років досвіду, 100+ клієнтів, чемпіон світу з підтягувань.">
 <link rel="canonical" href="https://nahorniuk.netlify.app/">
-<link rel="alternate" hreflang="uk" href="https://nahorniuk.netlify.app/">
-<link rel="alternate" hreflang="en" href="https://nahorniuk.netlify.app/en/">
-<link rel="alternate" hreflang="x-default" href="https://nahorniuk.netlify.app/">
 <meta property="og:type" content="website">
 <meta property="og:locale" content="uk_UA">
 <meta property="og:site_name" content="Владислав Нагорнюк">
@@ -45,13 +42,6 @@
 try {
   const root = document.documentElement;
   root.classList.add('js');
-  // після перемикання мови сторінка лишається прихованою, доки 12-lang.js не відновить прокрутку
-  try {
-    if (sessionStorage.getItem('lang-scroll')) {
-      root.classList.add('lang-restore');
-      setTimeout(() => root.classList.remove('lang-restore'), 1500);
-    }
-  } catch (e) { /* сховище недоступне */ }
   let theme = null;
   try { theme = localStorage.getItem('theme'); } catch (e) { /* приватний режим */ }
   if (theme !== 'light' && theme !== 'dark') {
@@ -296,15 +286,9 @@ main{counter-reset:sec}
   .nav a::after{display:none}
 }
 
-/* перемикач мови UA / EN */
-.lang-switch{display:inline-flex;gap:2px;padding:3px;height:2.75rem;box-sizing:border-box;border:1px solid var(--glass-line);border-radius:var(--radius-sm);background:var(--glass)}
-.lang-switch a{display:grid;place-items:center;min-width:2.125rem;padding:0 0.375rem;border-radius:calc(var(--radius-sm) - 3px);color:var(--muted);text-decoration:none;font:700 0.75rem/1 var(--font-head);letter-spacing:.04em;transition:background var(--t-fast),color var(--t-fast)}
-.lang-switch a:hover{color:var(--accent-text)}
-.lang-switch a[aria-current="true"]{background:var(--accent);color:var(--on-accent);cursor:default}
+
 @media (max-width:639px){
   .header-actions{gap:0.375rem}
-  .lang-switch{height:2.5rem}
-  .lang-switch a{min-width:1.875rem;padding:0 0.25rem}
 }
 @media (max-width:479px){
   .site-header .logo{gap:0.5rem}
@@ -319,11 +303,24 @@ main{counter-reset:sec}
 @media (min-width:900px) and (max-width:1099px){.site-header .logo-text{display:none}}
 @media (min-width:1100px) and (max-width:1199px){.site-header .logo-text{max-width:7.5rem}}
 
-/* швидке перемикання мови: на новій сторінці коротке проявлення (скрипт 12-lang.js) */
-html.lang-restore{opacity:0}
-html.lang-in{animation:lang-in .18s ease both}
-@keyframes lang-in{from{opacity:0}to{opacity:1}}
-@media (prefers-reduced-motion:reduce){html.lang-in{animation:none}}
+
+/* повзунок мови UA / EN (скрипт 12-i18n.js міняє aria-checked) */
+.lang{position:relative;flex:none;display:grid;grid-template-columns:1fr 1fr;place-items:center;width:4.25rem;height:2.75rem;padding:3px;box-sizing:border-box;
+  border-radius:var(--radius-sm);border:1px solid var(--glass-line);background:var(--glass);color:var(--muted);cursor:pointer;font:inherit}
+.lang i{position:absolute;top:3px;left:3px;width:calc(50% - 3px);height:calc(100% - 6px);border-radius:calc(var(--radius-sm) - 3px);background:var(--accent);
+  transition:translate .25s var(--ease)}
+.lang[aria-checked="true"] i{translate:100% 0}
+.lang span{position:relative;z-index:1;font:700 0.75rem/1 var(--font-head);letter-spacing:.04em;transition:color .2s}
+.lang[aria-checked="false"] span:first-of-type,.lang[aria-checked="true"] span:last-of-type{color:var(--on-accent)}
+.lang:hover{border-color:var(--accent)}
+.lang:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+@media (max-width:639px){.lang{width:3.75rem;height:2.5rem}}
+/* перехід мови: один кадр-розчинення, кулька повзунка їде окремо */
+:root[data-lang-anim]::view-transition-old(root),:root[data-lang-anim]::view-transition-new(root){animation-duration:.3s;animation-timing-function:ease}
+.lang i{view-transition-name:lang-knob}
+::view-transition-group(lang-knob){animation-duration:.3s}
+@media (max-width:349px){.lang{width:3.25rem}}
+@media (max-width:349px){.header-actions{gap:0.25rem}.header-row{gap:0.375rem}.site-header .logo-mark{width:2.25rem;height:2.25rem}}
 /* Повноекранний герой: портрет як фон, текст поверх з градієнтом, статистика, стрічка внизу */
 .hero{position:relative;isolation:isolate;overflow:hidden;background:var(--bg)}
 .hero-bg{position:absolute;inset:0 0 3.75rem 0;z-index:-1;overflow:hidden}
@@ -843,7 +840,7 @@ body.lb-open{overflow:hidden}
       <a class="nav-cta btn btn-primary" href="https://t.me/nahorniuk_vlad" target="_blank" rel="noopener">Написати в Telegram</a>
     </nav>
     <div class="header-actions">
-      <div class="lang-switch" role="group" aria-label="Мова сайту"><a href="/" lang="uk" hreflang="uk" aria-current="true">UA</a><a href="/en/" lang="en" hreflang="en">EN</a></div>
+      <button class="lang" type="button" role="switch" aria-checked="false" aria-label="English" lang="en"><span aria-hidden="true">UA</span><span aria-hidden="true">EN</span><i aria-hidden="true"></i></button>
       <button class="icon-btn theme-toggle" type="button" aria-label="Перемкнути тему" data-theme-toggle>
         <svg class="ico ico-moon" aria-hidden="true"><use href="#i-moon"/></svg>
         <svg class="ico ico-sun" aria-hidden="true"><use href="#i-sun"/></svg>
@@ -1607,45 +1604,115 @@ try { (() => {
   });
 })(); } catch (e) { console.error(e); }
 try { (() => {
-  // Перемикач UA / EN: замість стрибка на початок нової сторінки запам'ятовуємо, яку секцію
-  // (її номер у <main>) і з якого зсуву видно зараз, одразу переходимо, а на новій сторінці
-  // відновлюємо те саме місце й коротко проявляємось. Без JS лінки просто ведуть на / і /en/.
-  const KEY = 'lang-scroll';
-  const PROBE = 96; // висота шапки з запасом: за нею визначаємо, яка секція зараз перед очима
-  const root = document.documentElement;
-  const sections = [...document.querySelectorAll('main > section')];
-  const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  // Мова: повний переклад без перезавантаження. Словник (src/data/i18n-en.json) вшитий у сторінку:
+  // ключ це точний український текст вузла чи атрибута. Перемикач ходить по текстових вузлах і
+  // атрибутах, оригінали пам'ятає в WeakMap (повернення бере їх, а не здогад). Підхід як на Katsko.
+  const DICT = {"Владислав Нагорнюк — онлайн-тренер: програми, тренування, харчування":"Vladyslav Nahorniuk — online coach: programs, workouts, nutrition","Онлайн-тренер Владислав Нагорнюк: програми тренувань від 350 грн, тренування по відеозв'язку, консультації та раціон харчування. 12 років досвіду, 100+ клієнтів, чемпіон світу з підтягувань.":"Online coach Vladyslav Nahorniuk: training programs from 350 UAH, video-call workouts, consultations and meal plans. 12 years of experience, 100+ clients, pull-up world champion.","uk_UA":"en_US","Владислав Нагорнюк":"Vladyslav Nahorniuk","Владислав Нагорнюк — онлайн-тренер":"Vladyslav Nahorniuk — online coach","Програми тренувань, онлайн-заняття по відео, консультації та харчування. 12 років досвіду, 100+ задоволених клієнтів.":"Training programs, online video workouts, consultations and nutrition. 12 years of experience, 100+ happy clients.","https://nahorniuk.netlify.app/":"https://nahorniuk.netlify.app/en/","https://nahorniuk.netlify.app/img/og.jpg":"https://nahorniuk.netlify.app/img/og-en.jpg","Пропустити до змісту":"Skip to content","Владислав Нагорнюк, онлайн-тренер. На початок сторінки":"Vladyslav Nahorniuk, online coach. Back to top","тренер":"coach","Головне меню":"Main menu","Послуги":"Services","Результати":"Results","Про мене":"About me","Питання":"FAQ","Написати в Telegram":"Message on Telegram","Перемкнути тему":"Toggle theme","Відкрити меню":"Open menu","Чемпіон світу":"World champion","2017 · підтягування +32 кг":"2017 · pull-ups +32 kg","Фіналіст":"Finalist","«Україна має талант 5»":"“Ukraine’s Got Talent 5”","Чемпіон світу 2017 • підтягування +32 кг •":"World champion 2017 • pull-ups +32 kg •","Чемпіон світу з підтягувань":"Pull-up world champion","Тренування, що дають результат,":"Training that delivers results,","де б ти не був":"wherever you are","Програма під твою ціль, відео техніки й підтримка в Telegram. Вдома, в залі чи на вулиці.":"A program built for your goal, technique videos and support in Telegram. At home, in the gym or outdoors.","Або спершу подивитись результати":"Or see the results first","Програма від 350 ₴":"Programs from 350 ₴","Онлайн по відеозв'язку":"Online via video call","Відповідаю в Telegram та Instagram":"I reply in Telegram and Instagram","років у тренерстві":"years of coaching","років онлайн":"years online","задоволених клієнтів":"happy clients","Чемпіон світу 2017":"World champion 2017","Фіналіст «Україна має талант 5»":"Finalist of “Ukraine’s Got Talent 5”","Чемпіон України 2015":"Ukrainian champion 2015","12 років у тренерстві":"12 years of coaching","6 років онлайн":"6 years online","100+ клієнтів":"100+ clients","Призупинити анімацію стрічок":"Pause the scrolling strips","Що я пропоную":"What I offer","Обери свій формат":"Choose your format","Від разової програми за 350 ₴ до місяця тренувань із відео техніки. Оплата через monobank, далі пишеш мені в Telegram.":"From a one-time program for 350 ₴ to a month of training with technique videos. Pay via monobank, then message me on Telegram.","Найдешевший старт":"Cheapest start","Програма тренувань":"Training program","Персональна програма під твою ціль, рівень і обладнання. У місячному форматі до кожної вправи додається відео техніки виконання.":"A personal program for your goal, level and equipment. The monthly format adds a technique video to every exercise.","Підбір під ціль: маса, схуднення, форма":"Tailored to your goal: muscle, fat loss, shape","Відео техніки в місячній програмі":"Technique videos in the monthly program","Зручно для залу й дому":"Works for the gym and for home","Разова програма":"One-time program","Оплатити разову програму, 350 гривень":"Pay for the one-time program, 350 hryvnias","Оплатити":"Pay","На місяць":"Monthly","10 тренувань + відео техніки":"10 workouts + technique videos","Оплатити програму на місяць, 4000 гривень":"Pay for the monthly program, 4000 hryvnias","Найпопулярніше":"Most popular","Тренування онлайн по відеозв'язку":"Online workouts by video call","Я поруч у відеодзвінку: ставлю техніку, підбираю ваги й темп. Не важливо, вдома ти чи в залі.":"I am with you on the video call: I set your technique and pick weights and pace. It does not matter whether you are at home or in the gym.","Корекція техніки в реальному часі":"Real-time technique correction","Вдома, у залі або на вулиці":"At home, in the gym or outdoors","Графік підбираємо під тебе":"Schedule built around you","Одне тренування":"One workout","Оплатити одне онлайн-тренування, 700 гривень":"Pay for one online workout, 700 hryvnias","Пакет":"Package","10 тренувань":"10 workouts","Оплатити пакет із 10 онлайн-тренувань, 7000 гривень":"Pay for a package of 10 online workouts, 7000 hryvnias","Перший крок":"First step","Консультація":"Consultation","Розбираємо твою ситуацію, ціль і помилки. Ти отримуєш чіткий план дій, щоб рухатись далі самостійно.":"We go through your situation, goal and mistakes. You get a clear action plan so you can keep going on your own.","Аналіз цілі, режиму й навантаження":"Review of your goal, routine and workload","Відповіді на всі запитання":"Answers to all your questions","Конкретні наступні кроки":"Concrete next steps","Одна консультація":"One consultation","Оплатити консультацію, 1000 гривень":"Pay for the consultation, 1000 hryvnias","Тільки харчування":"Nutrition only","Харчування":"Nutrition","Раціон на місяць із урахуванням усіх твоїх потреб: ціль, режим дня, смаки та особливості.":"A monthly meal plan that takes all your needs into account: goal, daily routine, tastes and specifics.","Під твою ціль і калорійність":"Matched to your goal and calories","Враховує уподобання й обмеження":"Respects your preferences and restrictions","Без виснажливих дієт":"No exhausting diets","Раціон на місяць":"Meal plan for a month","Оплатити раціон на місяць, 3000 гривень":"Pay for the monthly meal plan, 3000 hryvnias","Кнопка відкриє банку monobank із підставленою сумою. Якщо сума не підставилась, введи її вручну й вкажи послугу в коментарі. Сторінка monobank не відкривається або пише «Помилка підключення»? Вимкни VPN і блокувальник реклам або":"The button opens the monobank jar with the amount filled in. If the amount is missing, enter it manually and name the service in the comment. The monobank page does not open or shows “Connection error”? Turn off your VPN and ad blocker or","напиши мені":"message me",", надішлю реквізити. Не впевнений, що обрати?":"and I will send the payment details. Not sure what to choose?","Напиши мені":"Message me",": підкажу.":"and I will help.","Результати клієнтів":"Client results","Не словом, а ділом":"Actions, not words","Реальні фото «до» і «після» та слова клієнтів із переписок. Натисни на фото, щоб розглянути уважніше.":"Real before and after photos and words from client chats. Tap a photo to take a closer look.","Відкрити: місяць тренувань, плюс 5 кг":"Open: one month of training, plus 5 kg","Місяць тренувань: +5 кг":"One month of training: +5 kg","Фото до і після: місяць тренувань":"Before and after photo: one month of training","+5 кг":"+5 kg","Місяць тренувань":"One month of training","Відкрити: 4 місяці, плюс 4 кг м'язів":"Open: 4 months, plus 4 kg of muscle","4 місяці: прибрали живіт, додали в м'язах +4 кг":"4 months: lost belly fat, gained 4 kg of muscle","Фото до і після: 4 місяці, м'язи":"Before and after photo: 4 months, muscle","+4 кг":"+4 kg","4 місяці · без живота":"4 months · no belly fat","Відкрити: 2 місяці, плюс 6 кг":"Open: 2 months, plus 6 kg","2 місяці роботи: +6 кг, ціль — набір м'язів":"2 months of work: +6 kg, goal: muscle gain","Фото до і після: 2 місяці роботи":"Before and after photo: 2 months of work","+6 кг":"+6 kg","2 місяці · набір м'язів":"2 months · muscle gain","Відкрити: 3 роки тренувань":"Open: 3 years of training","3 роки тренувань":"3 years of training","Фото до і після: 3 роки тренувань":"Before and after photo: 3 years of training","3 роки":"3 years","тренувань":"of training","Відкрити: 4 роки, перевтілення":"Open: 4 years, transformation","4 роки: перевтілення":"4 years: a full transformation","Фото до і після: 4 роки":"Before and after photo: 4 years","4 роки":"4 years","перевтілення":"transformation","Відкрити: 4 місяці, мінус 5 кг":"Open: 4 months, minus 5 kg","4 місяці: −5 кг і округлі сідниці":"4 months: −5 kg and toned glutes","Фото до і після: 4 місяці тренувань":"Before and after photo: 4 months of training","−5 кг":"−5 kg","4 місяці · округлі сідниці":"4 months · toned glutes","Відкрити: 4 місяці, мінус 3 кг":"Open: 4 months, minus 3 kg","4 місяці: округлі сідниці, виражені ноги, −3 кг":"4 months: toned glutes, defined legs, −3 kg","Фото до і після: 4 місяці, ноги":"Before and after photo: 4 months, legs","−3 кг":"−3 kg","4 місяці · гарно виражені ноги":"4 months · defined legs","Показати ще 4 результати":"Show 4 more results","Хочеш такий самий результат?":"Want the same result?","Напиши мені: підберу програму під твою ціль і рівень.":"Message me and I will build a program for your goal and level.","Що пишуть клієнти":"What clients write","Слова з переписок у Telegram та Instagram, без імен. Переклад українською.":"Words from Telegram and Instagram chats, without names, translated into English.","Пауза":"Pause","Коли ми починали займатися, я тоді востаннє була на льоду… а зараз після наших тренувань усе настільки легше дається, я прямо відчула, що сил стало більше. Дуже дякую за результати!":"When we started training, that was the last time I had been on the ice… and now everything feels so much easier after our workouts, I really felt I had more energy. Thank you so much for the results!","Клієнтка, фігуристка":"Client, figure skater","Дякую за підтримку й мотивацію в моїх починаннях, я дуже рада, що саме ти був моїм першим тренером!":"Thank you for the support and motivation in my endeavors, I am so glad you were my first coach!","Клієнтка":"Client","Порівняно з тим, як починав, я бачу великий результат":"Compared to where I started, I can see a big result","Клієнт":"Client","По вазі трохи прогрес, по об'ємах мінус 5–6 см":"A little progress in weight, and minus 5–6 cm in measurements","Сьогодні дуже сподобалось тренування! Загалом динаміка позитивна! Спина відпускає, і настрій від цього росте!":"I really enjoyed today's workout! Overall the progress is positive! My back is loosening up and my mood is lifting because of it!","Клієнт(ка)":"Client","Друге дуже сподобалось, я прямо відчула все навантаження. А руки робила з 20 кг":"I really liked the second one, I could feel every bit of the burn. And I did the arms with 20 kg","Привіт, взагалі вогонь! Я за годину впоралась, може навіть хвилин за 50":"Hi, it was absolutely fire! I finished within an hour, maybe even in about 50 minutes","Тренування якраз у точку, і ваги всі чітко":"The workout was spot on and all the weights were just right","Показати ще 5 відгуків":"Show 5 more reviews","Результати індивідуальні й залежать від регулярності тренувань, харчування та відновлення. Гарантій конкретних цифр немає. Більше історій в":"Results are individual and depend on training consistency, nutrition and recovery. No specific numbers are guaranteed. More stories on","Фітнес-тренер із 12-річним досвідом, останні 6 років працюю онлайн. Вища освіта у сфері фізичного виховання. Сам виступав і перемагав, тому знаю ціну кожного підходу.":"Fitness coach with 12 years of experience, working online for the last 6. Higher education in physical education. I competed and won myself, so I know the price of every set.","клієнтів":"clients","Програма під твою ціль, рівень і обладнання":"A program for your goal, level and equipment","Техніка така, що береже суглоби й спину":"Technique that protects your joints and back","Написати мені":"Message me","Титули, які я здобув сам":"Titles I earned myself","Підтягування":"Pull-ups","З додатковою вагою 32 кг.":"With 32 kg of added weight.","Статика":"Static strength","Чемпіон України":"Ukrainian champion","Утримання елемента «передній вис».":"Holding the “front lever”.","Телебачення":"Television","Фінал":"Final","«Україна має талант 5»":"“Ukraine’s Got Talent 5”","Фіналіст національного талант-шоу.":"Finalist of the national talent show.","Освіта":"Education","Вища":"Higher","Освіта тренера":"Coach’s education","У сфері фізичного виховання.":"In physical education.","Як це працює":"How it works","Чотири кроки до старту":"Four steps to start","Без складнощів: обираєш, оплачуєш, пишеш мені й починаєш тренуватись.":"Simple: you choose, pay, message me and start training.","Обери послугу":"Choose a service","Програма, онлайн-тренування, консультація або харчування. Не знаєш, що підійде, напиши мені.":"A program, online workouts, a consultation or nutrition. Not sure what fits? Message me.","Оплати":"Pay","Кнопка на картці відкриє monobank із потрібною сумою. Оплата наперед.":"The button on the card opens monobank with the right amount. Payment in advance.","Напиши в Telegram":"Message me on Telegram","Розкажи про ціль, досвід і обладнання. Домовимось про терміни й формат.":"Tell me about your goal, experience and equipment. We agree on timing and format.","Тренуйся":"Train","Отримуєш програму з відео техніки або заходиш на тренування по відеозв'язку.":"You get a program with technique videos or join a workout by video call.","Що зазвичай зупиняє":"What usually holds people back","Я новачок. Мені підійде?":"I am a beginner. Is this for me?","Так. Я підбираю навантаження під твій рівень, а техніку пояснюю на відео й у дзвінку. Багато клієнтів починали з нуля.":"Yes. I match the load to your level and explain technique in videos and on calls. Many clients started from zero.","Чи потрібне обладнання або зал?":"Do I need equipment or a gym?","Ні, не обов'язково. Тренуватись можна вдома, у залі чи на вулиці. Скажи, що в тебе є, і я складу програму під це.":"Not necessarily. You can train at home, in the gym or outdoors. Tell me what you have and I will build the program around it.","У чому різниця між програмою й тренуванням по відеозв'язку?":"What is the difference between a program and a video-call workout?","Програма — це план, який ти виконуєш самостійно за відео техніки. Тренування по відеозв'язку — я поруч у дзвінку й коригую тебе під час заняття.":"A program is a plan you follow on your own using technique videos. A video-call workout means I am on the call and correct you during the session.","Чи треба сидіти на жорстких дієтах?":"Do I have to go on a strict diet?","Ні. Харчування будуємо під твій режим і смаки, без виснажливих обмежень. Раціон на місяць можна замовити окремо.":"No. Nutrition is built around your routine and tastes, without exhausting restrictions. A monthly meal plan can be ordered separately.","Коли буде видно результат?":"When will I see results?","Усе індивідуально. Перші зміни клієнти зазвичай помічають за кілька тижнів регулярних тренувань, а виразний результат дає системна робота протягом місяців.":"It is individual. Clients usually notice the first changes after a few weeks of regular training, and a clear result comes from consistent work over months.","Як оплатити?":"How do I pay?","Натисни «Оплатити» на потрібній послузі, відкриється банка monobank. Оплати карткою, а потім напиши мені в Telegram, щоб узгодити старт. Якщо сторінка оплати не відкривається, вимкни VPN і блокувальник реклам або напиши мені: надішлю реквізити іншим способом.":"Press “Pay” on the service you need and the monobank jar opens. Pay by card, then message me on Telegram to agree on the start. If the payment page does not open, turn off your VPN and ad blocker or message me and I will send the details another way.","Не знайшов відповідь?":"Did not find an answer?","Напиши мені в Telegram. Відповім і підкажу, з чого почати саме тобі.":"Message me on Telegram. I will answer and tell you where to start.","Умови співпраці":"Terms of service","Прозоро й без сюрпризів":"Transparent, no surprises","Надання послуг":"Service delivery","Послуга надається після оплати. Формат, терміни й час занять узгоджуємо в Telegram.":"Services are provided after payment. We agree format, dates and session times in Telegram.","Оплата":"Payment","Оплата наперед через monobank. Ціни вказані в гривнях. Питання щодо повернення коштів обговорюємо індивідуально.":"Payment in advance via monobank. Prices are in hryvnias (UAH). Refund questions are handled individually.","Результат":"Results","Результат залежить від регулярності тренувань, харчування й відновлення. Конкретні показники не гарантуються.":"Results depend on training consistency, nutrition and recovery. Specific outcomes are not guaranteed.","Конфіденційність":"Privacy","Твої дані й фото лишаються між нами. Публікую їх лише за твоєю згодою.":"Your data and photos stay between us. I publish them only with your consent.","Готовий почати?":"Ready to start?","Напиши мені в Telegram: розкажи про ціль, а я підкажу, з чого стартувати. Навіть якщо це буде проста програма за 350 ₴.":"Message me on Telegram: tell me your goal and I will suggest where to start. Even if it is just a simple program for 350 ₴.","© 2026 Владислав Нагорнюк. Результати індивідуальні й не гарантуються.":"© 2026 Vladyslav Nahorniuk. Results are individual and not guaranteed.","Написати":"Message","Перегляд результату":"Result viewer","Закрити":"Close","Попереднє фото":"Previous photo","Наступне фото":"Next photo","Закрити меню":"Close menu","Відновити анімацію стрічок":"Resume the scrolling strips","Відновити":"Resume"};
+  const KEY = 'lang';
+  const ATTRS = ['alt', 'aria-label', 'placeholder', 'title', 'content', 'data-cap'];
+  const btn = document.querySelector('.lang');
+  if (!btn) return;
+  const has = (k) => Object.prototype.hasOwnProperty.call(DICT, k);
+  const origText = new WeakMap();
+  const origAttr = new WeakMap();
+  let lang = 'uk';
+  try { if (localStorage.getItem(KEY) === 'en') lang = 'en'; } catch (e) { /* сховище недоступне */ }
+  let own = false; // власні правки спостерігач ігнорує
 
-  // відновлення (нова сторінка)
-  let saved = null;
-  try { saved = JSON.parse(sessionStorage.getItem(KEY) || 'null'); sessionStorage.removeItem(KEY); } catch (e) { /* не критично */ }
-  if (saved && sections[saved.i] && Date.now() - saved.t < 10000) {
-    const s = sections[saved.i];
-    const y = s.getBoundingClientRect().top + window.scrollY + Math.min(saved.off, Math.max(0, s.offsetHeight - 200)) - PROBE;
-    window.scrollTo({ top: Math.max(0, y), behavior: 'instant' });
-  }
-  root.classList.remove('lang-restore');
-  if (saved && !reduce) {
-    root.classList.add('lang-in');
-    setTimeout(() => root.classList.remove('lang-in'), 250);
-  }
+  const text = (node, en) => {
+    const p = node.parentElement;
+    if (!p || p.tagName === 'SCRIPT' || p.tagName === 'STYLE') return;
+    if (en) {
+      const t = node.textContent.trim();
+      if (!t || !has(t)) return;
+      origText.set(node, node.textContent);
+      node.textContent = node.textContent.replace(t, () => DICT[t]);
+    } else {
+      const was = origText.get(node);
+      if (was === undefined) return;
+      node.textContent = was;
+      origText.delete(node);
+    }
+  };
 
-  // перехід (поточна сторінка)
-  document.querySelectorAll('.lang-switch a').forEach((a) => {
-    a.addEventListener('click', (e) => {
-      if (a.getAttribute('aria-current') === 'true') { e.preventDefault(); return; }
-      if (e.metaKey || e.ctrlKey || e.shiftKey || e.button) return;
-      e.preventDefault();
-      let i = 0;
-      sections.forEach((s, n) => { if (s.getBoundingClientRect().top <= PROBE) i = n; });
-      const off = Math.max(0, PROBE - sections[i].getBoundingClientRect().top);
-      try { sessionStorage.setItem(KEY, JSON.stringify({ i, off: Math.round(off), t: Date.now() })); } catch (err) { /* не критично */ }
-      location.href = a.href; // без затримки: перехід миттєвий, лише коротке проявлення на новій сторінці
-    });
+  const attrs = (el, en) => {
+    if (!el.getAttribute) return;
+    for (const a of ATTRS) {
+      if (en) {
+        const v = el.getAttribute(a);
+        if (!v || !has(v.trim())) continue;
+        const saved = origAttr.get(el) || {};
+        saved[a] = v;
+        origAttr.set(el, saved);
+        el.setAttribute(a, DICT[v.trim()]);
+      } else {
+        const saved = origAttr.get(el);
+        if (!saved || saved[a] === undefined) continue;
+        el.setAttribute(a, saved[a]);
+        delete saved[a];
+      }
+    }
+  };
+
+  const translate = (root, en) => {
+    if (root.nodeType === 3) { text(root, en); return; }
+    if (root.nodeType !== 1 && root.nodeType !== 9 && root.nodeType !== 11) return;
+    const walk = document.createTreeWalker(root, NodeFilter.SHOW_TEXT);
+    let n;
+    while ((n = walk.nextNode())) text(n, en);
+    if (root.nodeType === 1) attrs(root, en);
+    if (root.querySelectorAll) root.querySelectorAll('*').forEach((e) => attrs(e, en));
+  };
+
+  // Те, що скрипти ставлять уже в браузері (підписи кнопок меню й паузи, підпис у перегляді фото),
+  // у розмітці не лежить. Спостерігач живе лише в англійській версії.
+  const observer = new MutationObserver((changes) => {
+    if (own || lang !== 'en') return;
+    own = true;
+    for (const c of changes) {
+      if (c.type === 'childList') c.addedNodes.forEach((n) => translate(n, true));
+      else if (c.type === 'characterData') text(c.target, true);
+      else if (c.type === 'attributes') attrs(c.target, true);
+    }
+    own = false;
   });
-  // «Назад» з кешу браузера не повинно лишати сторінку згаслою
-  window.addEventListener('pageshow', (e) => { if (e.persisted) root.classList.remove('lang-restore'); });
-})(); } catch (e) { console.error(e); document.documentElement.classList.remove('lang-restore'); }
+  const watch = () => {
+    if (lang === 'en') {
+      observer.observe(document.body, { childList: true, subtree: true, characterData: true, attributes: true, attributeFilter: ATTRS });
+    } else {
+      observer.disconnect();
+    }
+  };
+
+  const apply = () => {
+    own = true;
+    const en = lang === 'en';
+    translate(document.head, en);
+    translate(document.body, en);
+    document.documentElement.lang = lang;
+    // ім'я кнопки стале («English»), стан несе лише aria-checked
+    btn.setAttribute('aria-checked', String(en));
+    own = false;
+    watch();
+  };
+
+  btn.addEventListener('click', () => {
+    lang = lang === 'en' ? 'uk' : 'en';
+    try { localStorage.setItem(KEY, lang); } catch (e) { /* сховище недоступне */ }
+    // сотні вузлів міняються одним махом: startViewTransition розчиняє два знімки на композиторі,
+    // тому швидко й без перерахунку розкладки щокадру
+    const motion = !matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if (!motion || !document.startViewTransition) { apply(); return; }
+    const root = document.documentElement;
+    root.dataset.langAnim = '';
+    const t = document.startViewTransition(apply);
+    t.ready.catch(() => {});
+    const done = () => root.removeAttribute('data-lang-anim');
+    t.finished.then(done, done);
+  });
+
+  if (lang === 'en') apply();
+})(); } catch (e) { console.error(e); }
 try { (() => {
   // Клік по логотипу (шапка й футер) плавно підіймає на початок сторінки. Шапка закріплена,
   // тому перехід за #top нічого не прокручує: робимо це явно. Без JS працює звичайний якір.
