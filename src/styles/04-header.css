@@ -86,3 +86,10 @@
 @media (max-width:349px){.site-header .logo-text{display:none}}
 @media (min-width:900px) and (max-width:1099px){.site-header .logo-text{display:none}}
 @media (min-width:1100px) and (max-width:1199px){.site-header .logo-text{max-width:7.5rem}}
+
+/* плавне перемикання мови: згасання, а на новій сторінці проявлення (скрипт 12-lang.js) */
+html.lang-out{opacity:0;transition:opacity .2s ease}
+html.lang-restore{opacity:0}
+html.lang-in{animation:lang-in .4s ease both}
+@keyframes lang-in{from{opacity:0}to{opacity:1}}
+@media (prefers-reduced-motion:reduce){html.lang-out,html.lang-in{transition:none;animation:none}}

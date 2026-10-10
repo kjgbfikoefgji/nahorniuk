@@ -25,7 +25,7 @@
 :root[data-theme="light"] .hero-photo{z-index:1;display:block;position:absolute;top:var(--pt);bottom:var(--pb);right:var(--pr);width:var(--pw);overflow:hidden;
   border:3px solid #17120d;border-radius:calc(var(--radius) + 0.75rem);background:#3a1c0c;box-shadow:0 1.5rem 3.5rem rgba(80,20,0,.3)}
 :root[data-theme="light"] .hero-photo img{inset:0;width:100%;height:100%;max-width:none;object-fit:cover;object-position:50% 30%;
-  transform-origin:50% 40%;transform:translateX(-20%) scale(1.4);-webkit-mask-image:none;mask-image:none}
+  transform-origin:50% 35%;transform:scale(1.04);-webkit-mask-image:none;mask-image:none}
 :root[data-theme="light"] .hero h1 .accent{color:#e0560a}
 @media (min-width:900px){:root[data-theme="light"] .hero-copy{max-width:min(46rem,calc(100% - var(--pw) - 3rem))}}
 :root[data-theme="light"] .ticker-track li.hl{color:var(--accent-text)}
@@ -94,7 +94,7 @@
   :root[data-theme="light"] .hero{--pw:min(21rem,calc(100vw - var(--gutter) * 2))}
   :root[data-theme="light"] .hero-bg::after{top:1.5rem;bottom:auto;left:50%;right:auto;translate:-50% 0;height:calc(var(--pw) * 1.12);transform:rotate(4deg) scale(1.02)}
   :root[data-theme="light"] .hero-photo{top:1.5rem;bottom:auto;left:50%;right:auto;translate:-50% 0;height:calc(var(--pw) * 1.12);box-shadow:0 1.5rem 3rem rgba(90,40,5,.25)}
-  :root[data-theme="light"] .hero-photo img{object-position:50% 8%;transform:translateX(-10%) scale(1.2)}
+  :root[data-theme="light"] .hero-photo img{object-position:50% 10%;transform:scale(1.04)}
   :root[data-theme="light"] .hero-inner{padding-top:calc(var(--pw) * 1.12 + 3.5rem)}
 }
 /* темна тема на телефоні: так само, як у світлій, портрет у рамці по центру (обличчя ціле, не під плашкою й заголовком),
@@ -108,7 +108,7 @@
   :root:not([data-theme="light"]) .hero-photo{z-index:1;display:block;position:absolute;top:1.5rem;left:50%;translate:-50% 0;width:var(--pw);height:calc(var(--pw) * 1.12);overflow:hidden;
     border:2px solid rgba(255,170,90,.7);border-radius:calc(var(--radius) + 0.75rem);background:#2a140a;box-shadow:0 1.5rem 3rem rgba(0,0,0,.55)}
   :root:not([data-theme="light"]) .hero-photo img{inset:0;width:100%;height:100%;max-width:none;object-fit:cover;object-position:50% 8%;
-    transform-origin:50% 40%;transform:translateX(-10%) scale(1.2);-webkit-mask-image:none;mask-image:none}
+    transform-origin:50% 35%;transform:scale(1.04);-webkit-mask-image:none;mask-image:none}
   :root:not([data-theme="light"]) .hero-inner{padding-top:calc(var(--pw) * 1.12 + 3.5rem)}
 }
 /* телефон в альбомній орієнтації: портрет праворуч, текст ліворуч, щоб заголовок і кнопка були в першому екрані */
@@ -121,7 +121,7 @@
   .hero-copy{max-width:calc(100% - var(--pw) - 2rem)}
   :root[data-theme="light"] .hero-bg::after{top:1.25rem;bottom:auto;left:auto;right:var(--gutter);translate:none;width:var(--pw);height:calc(100svh - var(--header-h) - 2.5rem)}
   :root[data-theme="light"] .hero-photo{top:1.25rem;bottom:auto;left:auto;right:var(--gutter);translate:none;width:var(--pw);height:calc(100svh - var(--header-h) - 2.5rem)}
-  :root[data-theme="light"] .hero-photo img{object-position:50% 30%;transform:translateX(-14%) scale(1.3)}
+  :root[data-theme="light"] .hero-photo img{object-position:50% 30%;transform:scale(1.04)}
   :root[data-theme="light"] .hero-inner{padding-top:2rem}
 }
 /* найвужчі телефони: посилання під кнопкою вміщається в один рядок разом зі стрілкою */

@@ -2,6 +2,13 @@
 try {
   const root = document.documentElement;
   root.classList.add('js');
+  // після перемикання мови сторінка лишається прихованою, доки 12-lang.js не відновить прокрутку
+  try {
+    if (sessionStorage.getItem('lang-scroll')) {
+      root.classList.add('lang-restore');
+      setTimeout(() => root.classList.remove('lang-restore'), 1500);
+    }
+  } catch (e) { /* сховище недоступне */ }
   let theme = null;
   try { theme = localStorage.getItem('theme'); } catch (e) { /* приватний режим */ }
   if (theme !== 'light' && theme !== 'dark') {
