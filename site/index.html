@@ -473,7 +473,7 @@ main{counter-reset:sec}
 .service:hover{border-color:rgba(255,122,26,.5);transform:translateY(-4px);box-shadow:var(--shadow)}
 
 /* візуальна шапка картки: акцентне сяйво, крапкова фактура, велика іконка, тег */
-.service-visual{position:relative;display:grid;place-items:center;height:15rem;overflow:hidden;border-bottom:1px solid var(--line);
+.service-visual{position:relative;display:grid;place-items:center;aspect-ratio:3/2;overflow:hidden;border-bottom:1px solid var(--line);
   background:radial-gradient(22rem 14rem at 25% 0%,rgba(255,122,26,.34),transparent 62%),radial-gradient(18rem 12rem at 90% 100%,rgba(255,150,40,.14),transparent 60%),var(--card-hi)}
 .service-visual::before{content:"";position:absolute;inset:0;background-image:radial-gradient(rgba(255,255,255,.10) 1px,transparent 1.2px);background-size:1.25rem 1.25rem;
   -webkit-mask-image:linear-gradient(180deg,#000,transparent);mask-image:linear-gradient(180deg,#000,transparent)}
@@ -512,7 +512,7 @@ main{counter-reset:sec}
   .options .btn{grid-column:1/-1}
 }
 @media (max-width:639px){
-  .service-visual{height:8.5rem;place-items:center end;padding-right:2.5rem}
+  .service-visual{aspect-ratio:4/3}
   .service-visual .ico{width:3.25rem;height:3.25rem}
 }
 /* Сітка з однаковою висотою рядка: без порожніх «дірок», як у масонрі. Фото в рядку підтягуються по висоті (object-fit), остання клітинка це заклик до дії.
@@ -964,7 +964,7 @@ body.lb-open{overflow:hidden}
 
       <article class="card service reveal">
         <div class="service-visual">
-          <img class="service-photo" src="/img/out/svc-consult.webp" alt="" width="800" height="1000" loading="lazy" style="object-position:50% 54%">
+          <img class="service-photo" src="/img/out/svc-consult.webp" alt="" width="800" height="1000" loading="lazy" style="object-position:50% 28%">
           <span class="vtag">Перший крок</span>
         </div>
         <div class="service-body">
@@ -987,7 +987,7 @@ body.lb-open{overflow:hidden}
 
       <article class="card service reveal">
         <div class="service-visual">
-          <img class="service-photo" src="/img/out/svc-meal.webp" alt="" width="800" height="1000" loading="lazy" style="object-position:50% 30%">
+          <img class="service-photo" src="/img/out/svc-meal.webp" alt="" width="800" height="1000" loading="lazy" style="object-position:50% 34%">
           <span class="vtag">Тільки харчування</span>
         </div>
         <div class="service-body">
