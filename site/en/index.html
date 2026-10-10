@@ -1,0 +1,1598 @@
+<!doctype html>
+<html lang="en" data-theme="dark">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="color-scheme" content="dark light">
+<meta name="theme-color" content="#0e1218">
+<title>Vladyslav Nahorniuk — online coach: programs, workouts, nutrition</title>
+<meta name="description" content="Online coach Vladyslav Nahorniuk: training programs from 350 UAH, video-call workouts, consultations and meal plans. 12 years of experience, 100+ clients, pull-up world champion.">
+<link rel="canonical" href="https://nahorniuk.netlify.app/en/">
+<link rel="alternate" hreflang="uk" href="https://nahorniuk.netlify.app/">
+<link rel="alternate" hreflang="en" href="https://nahorniuk.netlify.app/en/">
+<link rel="alternate" hreflang="x-default" href="https://nahorniuk.netlify.app/">
+<meta property="og:type" content="website">
+<meta property="og:locale" content="en_US">
+<meta property="og:site_name" content="Vladyslav Nahorniuk">
+<meta property="og:title" content="Vladyslav Nahorniuk — online coach">
+<meta property="og:description" content="Training programs, online video workouts, consultations and nutrition. 12 years of experience, 100+ happy clients.">
+<meta property="og:url" content="https://nahorniuk.netlify.app/en/">
+<meta property="og:image" content="https://nahorniuk.netlify.app/img/og-en.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Person",
+  "name": "Vladyslav Nahorniuk",
+  "jobTitle": "Online fitness coach",
+  "url": "https://nahorniuk.netlify.app/en/",
+  "image": "https://nahorniuk.netlify.app/img/og-en.jpg",
+  "sameAs": ["https://t.me/nahorniuk_vlad", "https://www.instagram.com/nahorniuk/"],
+  "alumniOf": "Higher education in physical education",
+  "award": [
+    "2017 world champion in weighted pull-ups (+32 kg)",
+    "2015 Ukrainian champion in the static front lever hold",
+    "Finalist of the show Ukraine's Got Talent 5"
+  ]
+}
+</script>
+<link rel="icon" href="/favicon.ico" sizes="any">
+<link rel="apple-touch-icon" href="/img/out/icon-180.png">
+<script>
+// Тема до першого малювання, щоб не було спалаху. Без збереженого вибору береться системна.
+try {
+  const root = document.documentElement;
+  root.classList.add('js');
+  let theme = null;
+  try { theme = localStorage.getItem('theme'); } catch (e) { /* приватний режим */ }
+  if (theme !== 'light' && theme !== 'dark') {
+    theme = matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark';
+  }
+  root.dataset.theme = theme;
+  const meta = document.querySelector('meta[name="theme-color"]');
+  if (meta) meta.content = theme === 'light' ? '#f6f3ee' : '#0e1218';
+} catch (e) { console.error(e); }
+</script>
+<style>
+/* Шрифти самохостяться (CSP не дозволяє зовнішні джерела). Unbounded (OFL): заголовки й цифри, Onest: текст. Обидва варіативні. */
+@font-face{font-family:"Unbounded";font-style:normal;font-weight:200 900;font-display:swap;
+  src:url(/fonts/unbounded-cyrillic-wght-normal.woff2) format("woff2-variations");
+  unicode-range:U+0301,U+0400-045F,U+0490-0491,U+04B0-04B1,U+2116}
+@font-face{font-family:"Unbounded";font-style:normal;font-weight:200 900;font-display:swap;
+  src:url(/fonts/unbounded-latin-wght-normal.woff2) format("woff2-variations");
+  unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}
+@font-face{font-family:"Onest";font-style:normal;font-weight:100 900;font-display:swap;
+  src:url(/fonts/onest-cyrillic-wght-normal.woff2) format("woff2-variations");
+  unicode-range:U+0301,U+0400-045F,U+0490-0491,U+04B0-04B1,U+2116}
+@font-face{font-family:"Onest";font-style:normal;font-weight:100 900;font-display:swap;
+  src:url(/fonts/onest-latin-wght-normal.woff2) format("woff2-variations");
+  unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}
+/* Дизайн-токени. Мова дизайну: темний «спортивний преміум» (широкий шрифт Unbounded капсом, повноекранне фото, акцентні цифри).
+   Акцент помаранчевий: він збігається з теплим тлом портрета. */
+:root{
+  --font-head:"Unbounded","Onest",system-ui,sans-serif;
+  --font-body:"Onest",system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;
+
+  --accent:#ff7a1a;
+  --accent-hover:#ff8e3d;
+  --accent-grad:linear-gradient(135deg,#ffa23d 0%,#ff6a0a 100%);
+  --on-accent:#140a02;
+
+  --radius:1.125rem;
+  --radius-sm:0.75rem;
+  --maxw:72rem;
+  --gutter:clamp(1.25rem,4vw,2.5rem);
+  --section-y:clamp(3.75rem,9vw,8rem);
+  --header-h:4.5rem;
+
+  --ease:cubic-bezier(.22,.8,.3,1);
+  --t-fast:160ms;
+  --t-med:320ms;
+}
+:root,:root[data-theme="dark"]{
+  color-scheme:dark;
+  --bg:#08080a;
+  --bg-alt:#0d0d10;
+  --card:#121216;
+  --card-hi:#1a1a1f;
+  --line:rgba(255,255,255,.085);
+  --text:#f7f4ef;
+  --muted:#b4aea6;
+  --accent-text:#ff8f3d;
+  --glass:rgba(255,255,255,.06);
+  --glass-line:rgba(255,255,255,.14);
+  --shadow:0 1.5rem 3.75rem rgba(0,0,0,.55);
+  --header-bg:#08080a;
+  --dots:rgba(255,255,255,.055);
+  --grain:.05;
+}
+:root[data-theme="light"]{
+  color-scheme:light;
+  --bg:#f7f3ec;
+  --bg-alt:#eee8de;
+  --card:#ffffff;
+  --card-hi:#f4efe6;
+  --line:rgba(30,20,10,.12);
+  --text:#17120d;
+  --muted:#5a5148;
+  --accent-text:#a83a06;
+  --glass:rgba(255,255,255,.7);
+  --glass-line:rgba(30,20,10,.12);
+  --shadow:0 1.5rem 3.75rem rgba(70,45,10,.16);
+  --header-bg:rgba(247,243,236,.9);
+  --dots:rgba(30,20,10,.07);
+  --grain:.04;
+}
+*,*::before,*::after{box-sizing:border-box}
+/* на дуже широких екранах інтерфейс трохи збільшується разом із rem; нижче ~1700px лишається 16px */
+html{-webkit-text-size-adjust:100%;scroll-behavior:smooth;scroll-padding-top:5.5rem;font-size:max(16px,calc(.45vw + 6px))}
+body{margin:0;background:var(--bg);color:var(--text);font:400 1rem/1.6 var(--font-body);
+  -webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility;overflow-x:hidden;
+  transition:background-color var(--t-med) ease,color var(--t-med) ease}
+/* легке зерно поверх сторінки */
+body::after{content:"";position:fixed;inset:0;z-index:90;pointer-events:none;opacity:var(--grain);
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 1 0 0 0 0 1 0 0 0 0 1 0 0 0 .9 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E")}
+img{display:block;max-width:100%;height:auto}
+a{color:inherit}
+h1,h2,h3{margin:0;font-family:var(--font-head);text-wrap:balance}
+h1,h2{font-weight:800;text-transform:uppercase;letter-spacing:-.015em;line-height:1.06}
+h1{font-size:clamp(1.85rem,4.4vw,3.7rem)}
+h2{font-size:clamp(1.7rem,3.9vw,3.2rem)}
+h3{font-size:1.2rem;line-height:1.25;font-weight:700;letter-spacing:-.01em}
+p{margin:0 0 1em;text-wrap:pretty}
+ul,ol{margin:0;padding:0;list-style:none}
+:focus-visible{outline:3px solid var(--accent);outline-offset:3px;border-radius:0.5rem}
+main:focus{outline:none}
+::selection{background:var(--accent);color:var(--on-accent)}
+
+.container{width:100%;max-width:calc(var(--maxw) + var(--gutter) * 2);margin-inline:auto;padding-inline:var(--gutter)}
+.skip{position:absolute;left:0.75rem;top:-12rem;z-index:100;background:var(--accent);color:var(--on-accent);padding:0.625rem 1rem;border-radius:0.5rem;font-weight:600;text-decoration:none}
+.skip:focus{top:0.75rem}
+
+.ico{width:1.25rem;height:1.25rem;flex:none;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+.ico-lg{width:1.75rem;height:1.75rem;stroke-width:1.7}
+
+.accent{color:var(--accent)}
+:root[data-theme="light"] .accent{color:var(--accent-text)}
+.nowrap{white-space:nowrap}
+
+/* рубрика над заголовком: лінія + капс */
+main{counter-reset:sec}
+.eyebrow{display:flex;align-items:center;gap:0.75rem;margin:0 0 1.125rem;font:700 0.75rem/1 var(--font-head);letter-spacing:.14em;text-transform:uppercase;color:var(--accent-text);counter-increment:sec}
+.eyebrow::before{content:counter(sec,decimal-leading-zero);display:grid;place-items:center;flex:none;min-width:2.25rem;height:1.75rem;padding-inline:0.5rem;border:1px solid currentColor;border-radius:0.4rem;font-size:0.75rem;letter-spacing:.02em}
+.eyebrow span{display:none}
+.lead{font-size:clamp(1.05rem,1.4vw,1.25rem);color:var(--muted);max-width:42ch}
+
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:0.625rem;min-height:3rem;padding:0 1.5rem;border:1.5px solid transparent;border-radius:var(--radius-sm);
+  font:700 0.9rem/1 var(--font-head);text-decoration:none;cursor:pointer;white-space:nowrap;
+  transition:transform var(--t-fast) var(--ease),background-color var(--t-fast),border-color var(--t-fast),box-shadow var(--t-fast),color var(--t-fast)}
+.btn-primary{background:var(--accent-grad);color:var(--on-accent);box-shadow:0 0.625rem 1.875rem rgba(255,106,10,.28)}
+.btn-primary:hover{transform:translateY(-2px);box-shadow:0 0.875rem 2.375rem rgba(255,106,10,.42)}
+.btn-primary:active{transform:translateY(0)}
+.btn-ghost{background:transparent;color:var(--text);border-color:var(--glass-line)}
+.btn-ghost:hover{border-color:var(--accent);color:var(--accent-text);transform:translateY(-2px)}
+.btn-lg{min-height:3.5rem;padding:0 2rem;font-size:0.95rem}
+.btn-sm{min-height:2.75rem;padding:0 1.125rem;font-size:0.8rem}
+.btn-block{width:100%}
+.link-arrow{display:inline-flex;align-items:center;gap:0.5rem;min-height:2.75rem;font-weight:600;color:var(--muted);text-decoration:none;border-bottom:1px solid var(--glass-line);transition:color var(--t-fast),border-color var(--t-fast)}
+.link-arrow:hover{color:var(--accent-text);border-color:var(--accent)}
+
+.icon-btn{display:inline-flex;align-items:center;justify-content:center;width:2.75rem;height:2.75rem;border-radius:var(--radius-sm);border:1px solid var(--glass-line);
+  background:var(--glass);color:var(--text);cursor:pointer;text-decoration:none;transition:border-color var(--t-fast),color var(--t-fast),transform var(--t-fast) var(--ease)}
+.icon-btn:hover{border-color:var(--accent);color:var(--accent-text);transform:translateY(-2px)}
+
+/* картки: підсвітка під курсором (--mx/--my виставляє scripts/08-spotlight.js) */
+.card{position:relative;isolation:isolate;background:var(--card);border:1px solid var(--line);border-radius:var(--radius);
+  transition:border-color var(--t-med),transform var(--t-med) var(--ease),box-shadow var(--t-med)}
+/* темна тема: скляна поверхня з легким верхнім відблиском; :where тримає специфічність низькою, щоб виділена картка послуг зберегла своє сяйво */
+:where(:root:not([data-theme="light"])) .card{background:linear-gradient(180deg,rgba(255,255,255,.055),rgba(255,255,255,.014) 55%),var(--card);box-shadow:inset 0 1px 0 rgba(255,255,255,.07)}
+/* світла тема: м'яка тінь замість лінії, щоб білі картки відділялись від кремового тла */
+:where(:root[data-theme="light"]) .card,:where(:root[data-theme="light"]) .result{box-shadow:0 0.25rem 1.5rem rgba(70,45,10,.07)}
+.card::before,.result::before{content:"";position:absolute;inset:0;z-index:-1;border-radius:inherit;pointer-events:none;opacity:0;transition:opacity var(--t-med);
+  background:radial-gradient(24rem circle at var(--mx,50%) var(--my,-30%),rgba(255,122,26,.16),transparent 62%)}
+.card:hover::before,.result:hover::before{opacity:1}
+
+.section{padding-block:var(--section-y);position:relative;isolation:isolate}
+/* верхня лінія розділу й м'яке акцентне сяйво з кутка (кути чергуються) */
+.section::before{content:"";position:absolute;left:0;right:0;top:0;height:1px;background:linear-gradient(90deg,transparent,rgba(255,122,26,.38) 50%,transparent);pointer-events:none}
+.section::after{content:"";position:absolute;inset:0;z-index:-1;pointer-events:none;background:radial-gradient(48rem 26rem at 100% 0%,rgba(255,122,26,.10),transparent 70%)}
+.section:nth-of-type(even)::after{background:radial-gradient(48rem 26rem at 0% 0%,rgba(255,122,26,.10),transparent 70%)}
+:root[data-theme="light"] .section::before{background:linear-gradient(90deg,transparent,rgba(190,80,10,.22) 50%,transparent)}
+:root[data-theme="light"] .section::after{opacity:.6}
+.section-alt{background:var(--bg-alt)}
+/* крапкова сітка як фактура секцій */
+.dotted{background-image:radial-gradient(var(--dots) 1px,transparent 1.2px);background-size:1.5rem 1.5rem}
+.section-head{display:grid;gap:1rem 3rem;margin-bottom:clamp(2.25rem,5vw,3.75rem)}
+.section-head .eyebrow{grid-column:1/-1;margin-bottom:0}
+.section-lead{color:var(--muted);font-size:clamp(1.02rem,1.2vw,1.12rem);margin:0;max-width:44ch}
+@media (min-width:900px){
+  .section-head{grid-template-columns:1.25fr 1fr;align-items:end}
+}
+
+.ticks{display:grid;gap:0.75rem;margin:1.25rem 0}
+.ticks li{position:relative;padding-left:1.75rem}
+.ticks li::before{content:"";position:absolute;left:0;top:.3em;width:1.0625rem;height:1.0625rem;border-radius:50%;background:rgba(255,122,26,.18)}
+.ticks li::after{content:"";position:absolute;left:0.375rem;top:.52em;width:0.25rem;height:0.5rem;border:solid var(--accent);border-width:0 2px 2px 0;transform:rotate(45deg)}
+
+/* телефон: трохи більший базовий текст, щоб читалось без напруги */
+@media (max-width:639px){
+  body{font-size:1.0625rem;line-height:1.62}
+  h2{font-size:clamp(1.65rem,7.4vw,2.1rem)}
+  .section-head{gap:0.75rem}
+  .section-lead{font-size:1.05rem}
+}
+/* Суцільна смуга, колір слідує темі: у темній майже чорна, у світлій кремова (токени з 02-tokens.css).
+   Нічого не перекриває, герой починається під нею. Фон суцільний: backdrop-filter не ставимо, бо всередині є fixed-панель меню. */
+.site-header{--muted:#c4bbb0;
+  position:sticky;top:0;z-index:50;height:var(--header-h);background:var(--header-bg);color:var(--text);border-bottom:1px solid var(--line)}
+:root[data-theme="light"] .site-header{--muted:#4a4138;--header-bg:#fbf8f2}
+.header-row{height:100%;display:flex;align-items:center;gap:1.5rem}
+.logo{display:inline-flex;align-items:center;gap:0.75rem;min-height:2.75rem;text-decoration:none;margin-right:auto}
+.logo-mark{flex:none;display:block;width:2.75rem;height:2.75rem;border-radius:50%;overflow:hidden;border:2px solid var(--accent);background:var(--accent-grad);box-shadow:0 0 1.5rem rgba(255,122,26,.35)}
+.logo-mark img{display:block;width:100%;height:100%;object-fit:cover}
+.logo-text{font:800 1rem/1 var(--font-head);text-transform:uppercase;letter-spacing:-.01em}
+.logo-text b{color:var(--accent-text);font-weight:800}
+
+/* посилання на всю висоту смуги; активний розділ підсвічує помаранчева планка внизу */
+.nav{display:flex;align-self:stretch;gap:0.125rem}
+.nav a{position:relative;display:flex;align-items:center;white-space:nowrap;padding:0 0.875rem;text-decoration:none;font:700 0.78rem/1 var(--font-body);letter-spacing:.09em;text-transform:uppercase;color:var(--muted);transition:color var(--t-fast),background-color var(--t-fast)}
+.nav a::after{content:"";position:absolute;left:0.875rem;right:0.875rem;bottom:-1px;height:0.1875rem;border-radius:3px 3px 0 0;background:var(--accent);box-shadow:0 0 0.75rem rgba(255,122,26,.65);z-index:1;transform:scaleX(0);transform-origin:0 50%;transition:transform var(--t-med) var(--ease)}
+.nav a:hover{color:var(--text);background:var(--glass)}
+.nav a[aria-current]{color:var(--accent-text)}
+.nav a:hover::after,.nav a[aria-current]::after{transform:scaleX(1)}
+.nav .nav-cta{display:none}
+.header-actions{display:flex;align-items:center;gap:0.625rem}
+.header-cta{min-height:2.875rem;padding-inline:1.25rem}
+
+.theme-toggle .ico-sun{display:none}
+:root[data-theme="light"] .theme-toggle .ico-sun{display:block}
+:root[data-theme="light"] .theme-toggle .ico-moon{display:none}
+
+.menu-btn{display:none}
+.menu-btn .ico-close{display:none}
+.menu-open .menu-btn .ico-open{display:none}
+.menu-open .menu-btn .ico-close{display:block}
+
+/* 900–1099px: меню вже в рядку, але місця мало, тож пункти й відступи компактніші (інакше кнопка виходила за край) */
+@media (min-width:900px) and (max-width:1099px){
+  .header-row{gap:1rem}
+  .nav a{padding:0 0.55rem;letter-spacing:.05em}
+  .nav a::after{left:0.55rem;right:0.55rem}
+  .header-cta{padding-inline:0.875rem}
+}
+@media (max-width:639px){.site-header .logo-text b{display:none}}
+@media (min-width:1200px){.logo-text{white-space:nowrap}}
+@media (min-width:900px) and (max-width:1199px){
+  .site-header .logo-text{max-width:8.5rem;font-size:.9rem;line-height:1.15}
+  .site-header .logo-text b{display:none}
+}
+@media (min-width:900px) and (max-width:939px){
+  .header-row{gap:0.75rem}
+  .nav a{padding:0 0.45rem}
+  .nav a::after{left:0.45rem;right:0.45rem}
+  .site-header .logo-text{max-width:7.5rem;font-size:.85rem}
+}
+@media (max-width:899px){
+  .menu-btn{display:inline-flex}
+  .header-cta{display:none}
+  .nav{position:fixed;inset:var(--header-h) 0 auto 0;align-self:auto;flex-direction:column;gap:0;padding:0.75rem var(--gutter) 1.5rem;background:var(--header-bg);
+    border-bottom:1px solid var(--line);box-shadow:var(--shadow);transform:translateY(-0.75rem);opacity:0;visibility:hidden;
+    transition:transform var(--t-med) var(--ease),opacity var(--t-med),visibility 0s linear var(--t-med)}
+  .menu-open .nav{transform:none;opacity:1;visibility:visible;transition-delay:0s}
+  .nav a{padding:1.125rem 0;font-size:1rem;letter-spacing:.08em;color:var(--text);border-bottom:1px solid var(--line)}
+  .nav a:hover{background:none}
+  .nav .nav-cta{display:inline-flex;justify-content:center;margin-top:1.25rem;padding:0 1.5rem;min-height:3.25rem;border:0;color:var(--on-accent);font-size:0.85rem}
+  .nav .nav-cta::after{display:none}
+  .nav a[aria-current]{color:var(--accent-text)}
+  .nav a::after{display:none}
+}
+
+/* перемикач мови UA / EN */
+.lang-switch{display:inline-flex;gap:2px;padding:3px;height:2.75rem;box-sizing:border-box;border:1px solid var(--glass-line);border-radius:var(--radius-sm);background:var(--glass)}
+.lang-switch a{display:grid;place-items:center;min-width:2.125rem;padding:0 0.375rem;border-radius:calc(var(--radius-sm) - 3px);color:var(--muted);text-decoration:none;font:700 0.75rem/1 var(--font-head);letter-spacing:.04em;transition:background var(--t-fast),color var(--t-fast)}
+.lang-switch a:hover{color:var(--accent-text)}
+.lang-switch a[aria-current="true"]{background:var(--accent);color:var(--on-accent);cursor:default}
+@media (max-width:639px){
+  .header-actions{gap:0.375rem}
+  .lang-switch{height:2.5rem}
+  .lang-switch a{min-width:1.875rem;padding:0 0.25rem}
+}
+@media (max-width:479px){
+  .site-header .logo{gap:0.5rem}
+  .site-header .logo-text{font-size:0.78rem}
+}
+@media (max-width:379px){
+  .site-header .logo-text{font-size:0.7rem}
+  .site-header .logo-mark{width:2.5rem;height:2.5rem}
+  .header-row{gap:0.5rem}
+}
+@media (max-width:349px){.site-header .logo-text{display:none}}
+@media (min-width:900px) and (max-width:1099px){.site-header .logo-text{display:none}}
+@media (min-width:1100px) and (max-width:1199px){.site-header .logo-text{max-width:7.5rem}}
+/* Повноекранний герой: портрет як фон, текст поверх з градієнтом, статистика, стрічка внизу */
+.hero{position:relative;isolation:isolate;overflow:hidden;background:var(--bg)}
+.hero-bg{position:absolute;inset:0 0 3.75rem 0;z-index:-1;overflow:hidden}
+.hero-bg::before{content:"";position:absolute;inset:0;
+  background:radial-gradient(48rem 38rem at 78% 38%,rgba(255,122,26,.30),transparent 62%),radial-gradient(32rem 26rem at 8% 92%,rgba(255,150,40,.10),transparent 60%)}
+:root:not([data-theme="light"]) .hero-bg::after{content:"";position:absolute;right:max(-6rem,calc((100% - var(--maxw)) / 2 - 8rem));top:50%;width:min(44rem,70vw);aspect-ratio:1;translate:0 -50%;border-radius:50%;
+  border:1px solid rgba(255,122,26,.16);box-shadow:0 0 0 3rem rgba(255,122,26,.025),0 0 0 3.05rem rgba(255,122,26,.08),inset 0 0 6rem rgba(255,122,26,.06);pointer-events:none}
+.hero-bg img{position:absolute;top:0;right:max(0px,calc((100% - var(--maxw)) / 2 - 2rem));height:100%;width:auto;max-width:none;object-fit:cover;object-position:50% 12%;
+  -webkit-mask-image:linear-gradient(90deg,transparent 0,#000 34%),linear-gradient(270deg,transparent 0,#000 18%),linear-gradient(0deg,transparent 0,#000 26%),linear-gradient(180deg,transparent 0,#000 8%);
+  -webkit-mask-composite:source-in;
+  mask-image:linear-gradient(90deg,transparent 0,#000 34%),linear-gradient(270deg,transparent 0,#000 18%),linear-gradient(0deg,transparent 0,#000 26%),linear-gradient(180deg,transparent 0,#000 8%);
+  mask-composite:intersect}
+/* обгортка портрета в темній темі не створює власної коробки: фото лежить прямо на тлі героя */
+.hero-photo{display:contents}
+
+/* Світла тема: герой світлий, портрет у високій рамці на всю висоту героя. Кадр наближено (scale + зсув), щоб обличчя
+   стояло ближче до центру рамки; позаду трохи нахилена помаранчева картка з крапковою фактурою (виглядає з-під рамки по кутах),
+   вона має розмір рамки, тож не розтягується на широких екранах. --pr: правий край рамки = правий край контенту */
+:root[data-theme="light"] .hero{--pw:min(26rem,34vw);--pt:2.25rem;--pb:2.25rem;--pr:max(var(--gutter),calc((100% - var(--maxw)) / 2))}
+:root[data-theme="light"] .hero-bg::before{background:radial-gradient(46rem 36rem at 80% 40%,rgba(255,122,26,.20),transparent 64%),radial-gradient(30rem 24rem at 6% 96%,rgba(255,150,40,.14),transparent 60%)}
+:root[data-theme="light"] .hero-bg::after{content:"";position:absolute;z-index:0;top:var(--pt);bottom:var(--pb);right:var(--pr);width:var(--pw);pointer-events:none;
+  border-radius:calc(var(--radius) + 0.75rem);transform:rotate(4deg) scale(1.02);
+  background:radial-gradient(rgba(23,18,13,.2) 0.09rem,transparent 0.13rem) 0 0/1.25rem 1.25rem,linear-gradient(165deg,#ffa04a,#ff7a1a 46%,#f05a00);
+  box-shadow:0 1.5rem 3.5rem rgba(226,90,0,.3)}
+:root[data-theme="light"] .hero-photo{z-index:1;display:block;position:absolute;top:var(--pt);bottom:var(--pb);right:var(--pr);width:var(--pw);overflow:hidden;
+  border:3px solid #17120d;border-radius:calc(var(--radius) + 0.75rem);background:#3a1c0c;box-shadow:0 1.5rem 3.5rem rgba(80,20,0,.3)}
+:root[data-theme="light"] .hero-photo img{inset:0;width:100%;height:100%;max-width:none;object-fit:cover;object-position:50% 30%;
+  transform-origin:50% 40%;transform:translateX(-20%) scale(1.4);-webkit-mask-image:none;mask-image:none}
+:root[data-theme="light"] .hero h1 .accent{color:#e0560a}
+@media (min-width:900px){:root[data-theme="light"] .hero-copy{max-width:min(46rem,calc(100% - var(--pw) - 3rem))}}
+:root[data-theme="light"] .ticker-track li.hl{color:var(--accent-text)}
+
+/* скляні чіпи поверх портрета (лише десктоп), легко «пливуть» */
+.hero-chips{position:absolute;inset:0;left:0;right:0;margin-inline:auto;pointer-events:none;display:none}
+.chip{position:absolute;display:flex;align-items:center;gap:0.75rem;padding:0.75rem 1rem 0.75rem 0.75rem;border-radius:var(--radius-sm);border:1px solid var(--glass-line);
+  background:rgba(14,14,17,.66);color:#f7f4ef;-webkit-backdrop-filter:blur(0.875rem);backdrop-filter:blur(0.875rem);box-shadow:0 1rem 2.5rem rgba(0,0,0,.35);animation:float 7s ease-in-out infinite}
+/* світла тема: біле скло замість сірого */
+:root[data-theme="light"] .chip{background:rgba(255,255,255,.86);color:#17120d;border-color:rgba(30,20,10,.12);box-shadow:0 1rem 2.5rem rgba(90,40,5,.2)}
+:root[data-theme="light"] .chip small{color:#5a5148}
+.chip b{display:block;font:800 0.82rem/1.2 var(--font-head);text-transform:uppercase;letter-spacing:-.005em}
+.chip small{display:block;margin-top:0.25rem;font:500 0.75rem/1.3 var(--font-body);color:#cfc8bf}
+.chip-ico{display:grid;place-items:center;flex:none;width:2.5rem;height:2.5rem;border-radius:0.6rem;background:var(--accent-grad);color:var(--on-accent)}
+.chip-a{right:1.5rem;bottom:6rem}
+.chip-b{right:calc(min(27rem,38vw) - 3.5rem);top:50%;animation-delay:-3.5s}
+/* світла тема: чіп і печатка тримаються країв рамки портрета (у координатах контейнера правий край рамки = --gutter) */
+:root[data-theme="light"] .chip-a{display:none}
+:root[data-theme="light"] .chip-b{top:auto;right:calc(var(--gutter) + var(--pw) + 1.5rem);bottom:calc(var(--pb) + 6rem);translate:100% 0}
+/* печатка «Чемпіон світу», що повільно обертається (лише світла тема, пауза разом зі стрічками) */
+.hero-stamp{display:none}
+:root[data-theme="light"] .hero-stamp{display:grid;place-items:center;position:absolute;right:calc(var(--gutter) + var(--pw) - 4.375rem);top:calc(var(--pt) + 1.5rem);width:8.75rem;height:8.75rem;border-radius:50%;
+  background:#fff;color:#17120d;border:3px solid #17120d;box-shadow:0 1.25rem 2.75rem rgba(80,20,0,.35)}
+.hero-stamp>svg{position:absolute;inset:0;width:100%;height:100%;animation:spin 28s linear infinite}
+.hero-stamp text{font-family:var(--font-head);font-size:9.6px;font-weight:800;letter-spacing:.04em;text-transform:uppercase;fill:currentColor}
+.hero-stamp-ico{display:grid;place-items:center;width:3.25rem;height:3.25rem;border-radius:50%;background:var(--accent-grad);color:var(--on-accent)}
+.hero-stamp-ico .ico{width:1.6rem;height:1.6rem}
+@media (min-width:1100px){.hero-chips{display:block}}
+.hero-inner{display:flex;align-items:flex-end;min-height:min(46rem,calc(100svh - var(--header-h) - 3.75rem));padding-block:3.5rem 2.75rem}
+.hero-copy{max-width:46rem}
+.badge{display:inline-flex;align-items:center;flex-wrap:wrap;gap:0.375rem 0.75rem;margin:0 0 1.5rem;padding:0.625rem 1rem;border-radius:var(--radius-sm);
+  border:1px solid rgba(255,122,26,.42);background:rgba(255,122,26,.12);font-size:0.9rem;line-height:1.3}
+.badge .ico{color:var(--accent-text);width:1.125rem;height:1.125rem}
+.badge b{font-weight:700}
+.badge span{color:var(--accent-text);font-weight:600}
+.hero h1{margin-bottom:1.25rem}
+.hero-actions{display:flex;flex-wrap:wrap;align-items:center;gap:0.5rem 1.75rem;margin-top:2rem}
+.hero-checks{display:flex;flex-wrap:wrap;gap:0.5rem 1.5rem;margin-top:1.5rem;color:var(--muted);font-size:0.92rem}
+.hero-checks li{display:inline-flex;align-items:center;gap:0.5rem}
+.hero-checks .ico{width:1rem;height:1rem;color:var(--accent-text);stroke-width:2.6}
+
+.hero-stats{display:flex;flex-wrap:wrap;gap:1.25rem 0;margin-top:2.25rem;padding-top:1.5rem;border-top:1px solid var(--line)}
+.hero-stats li{padding-right:1.75rem;margin-right:1.75rem;border-right:1px solid var(--line)}
+.hero-stats li:last-child{border-right:0;margin-right:0;padding-right:0}
+.hero-stats b{display:block;font:800 clamp(1.1rem,1.8vw,1.6rem)/1.15 var(--font-head);letter-spacing:-.01em;font-variant-numeric:tabular-nums}
+.hero-stats span{display:block;margin-top:0.375rem;font:600 0.75rem/1.35 var(--font-body);letter-spacing:.12em;text-transform:uppercase;color:var(--muted)}
+
+/* безперервна стрічка внизу героя */
+.ticker{position:relative;z-index:1;overflow:hidden;border-block:1px solid var(--line);background:var(--bg-alt);height:3.75rem;padding-right:calc(var(--gutter) + 3.5rem)}
+.ticker-clip{height:100%;overflow:hidden}
+.ticker-track{display:flex;width:max-content;height:100%;align-items:center}
+.ticker-track li{display:flex;align-items:center;white-space:nowrap;padding-left:2.25rem;font:800 clamp(1rem,2.2vw,1.6rem)/1 var(--font-head);text-transform:uppercase;letter-spacing:-.01em}
+.ticker-track li.hl{color:var(--accent)}
+.ticker-track li::after{content:"";width:0.5rem;height:0.5rem;margin-left:2.25rem;background:var(--accent);transform:rotate(45deg);flex:none}
+
+@media (max-width:899px){
+  :root:not([data-theme="light"]) .hero-bg::after{display:none}
+  .hero-bg::before{background:radial-gradient(34rem 26rem at 70% 18%,rgba(255,122,26,.30),transparent 62%)}
+  .hero-bg img{left:0;right:0;width:100%;height:min(36rem,125vw);object-position:50% 8%;
+    -webkit-mask-image:linear-gradient(0deg,transparent 0,#000 62%);mask-image:linear-gradient(0deg,transparent 0,#000 62%);-webkit-mask-composite:source-over;mask-composite:add}
+  .hero-inner{min-height:0;padding-top:clamp(17rem,80vw,27rem)}
+  .hero-stats li{padding-right:1.25rem;margin-right:1.25rem}
+}
+@media (max-width:899px){
+  /* портрет у світлій темі на телефоні: майже квадратна рамка по центру, обличчя ціле на будь-якій ширині (широка рамка його обрізала) */
+  :root[data-theme="light"] .hero{--pw:min(21rem,calc(100vw - var(--gutter) * 2))}
+  :root[data-theme="light"] .hero-bg::after{top:1.5rem;bottom:auto;left:50%;right:auto;translate:-50% 0;height:calc(var(--pw) * 1.12);transform:rotate(4deg) scale(1.02)}
+  :root[data-theme="light"] .hero-photo{top:1.5rem;bottom:auto;left:50%;right:auto;translate:-50% 0;height:calc(var(--pw) * 1.12);box-shadow:0 1.5rem 3rem rgba(90,40,5,.25)}
+  :root[data-theme="light"] .hero-photo img{object-position:50% 8%;transform:translateX(-10%) scale(1.2)}
+  :root[data-theme="light"] .hero-inner{padding-top:calc(var(--pw) * 1.12 + 3.5rem)}
+}
+/* темна тема на телефоні: так само, як у світлій, портрет у рамці по центру (обличчя ціле, не під плашкою й заголовком),
+   позаду нахилена помаранчева картка з сяйвом; не для альбомного телефона (там портрет збоку, див. нижче) */
+@media (max-width:899px) and (orientation:portrait),(max-width:899px) and (min-height:561px){
+  :root:not([data-theme="light"]) .hero{--pw:min(21rem,calc(100vw - var(--gutter) * 2))}
+  :root:not([data-theme="light"]) .hero-bg::before{background:radial-gradient(30rem 24rem at 50% 14%,rgba(255,122,26,.30),transparent 64%)}
+  :root:not([data-theme="light"]) .hero-bg::after{display:block;content:"";position:absolute;z-index:0;top:1.5rem;right:auto;left:50%;width:var(--pw);height:calc(var(--pw) * 1.12);aspect-ratio:auto;translate:-50% 0;
+    transform:rotate(4deg) scale(1.02);border:0;border-radius:calc(var(--radius) + 0.75rem);pointer-events:none;
+    background:radial-gradient(rgba(10,6,2,.28) 0.09rem,transparent 0.13rem) 0 0/1.25rem 1.25rem,linear-gradient(165deg,#ff8f33,#e8620c 55%,#a63e06);box-shadow:0 0 4rem rgba(255,122,26,.35)}
+  :root:not([data-theme="light"]) .hero-photo{z-index:1;display:block;position:absolute;top:1.5rem;left:50%;translate:-50% 0;width:var(--pw);height:calc(var(--pw) * 1.12);overflow:hidden;
+    border:2px solid rgba(255,170,90,.7);border-radius:calc(var(--radius) + 0.75rem);background:#2a140a;box-shadow:0 1.5rem 3rem rgba(0,0,0,.55)}
+  :root:not([data-theme="light"]) .hero-photo img{inset:0;width:100%;height:100%;max-width:none;object-fit:cover;object-position:50% 8%;
+    transform-origin:50% 40%;transform:translateX(-10%) scale(1.2);-webkit-mask-image:none;mask-image:none}
+  :root:not([data-theme="light"]) .hero-inner{padding-top:calc(var(--pw) * 1.12 + 3.5rem)}
+}
+/* телефон в альбомній орієнтації: портрет праворуч, текст ліворуч, щоб заголовок і кнопка були в першому екрані */
+@media (max-width:899px) and (orientation:landscape) and (max-height:560px){
+  .hero,:root[data-theme="light"] .hero{--pw:min(15rem,34vw)}
+  .hero-bg img{top:0;left:auto;right:0;width:48%;height:calc(100svh - var(--header-h));object-position:50% 25%;
+    -webkit-mask-image:linear-gradient(90deg,transparent 0,#000 45%),linear-gradient(0deg,transparent 0,#000 30%);-webkit-mask-composite:source-in;
+    mask-image:linear-gradient(90deg,transparent 0,#000 45%),linear-gradient(0deg,transparent 0,#000 30%);mask-composite:intersect}
+  .hero-inner{padding-top:2rem}
+  .hero-copy{max-width:calc(100% - var(--pw) - 2rem)}
+  :root[data-theme="light"] .hero-bg::after{top:1.25rem;bottom:auto;left:auto;right:var(--gutter);translate:none;width:var(--pw);height:calc(100svh - var(--header-h) - 2.5rem)}
+  :root[data-theme="light"] .hero-photo{top:1.25rem;bottom:auto;left:auto;right:var(--gutter);translate:none;width:var(--pw);height:calc(100svh - var(--header-h) - 2.5rem)}
+  :root[data-theme="light"] .hero-photo img{object-position:50% 30%;transform:translateX(-14%) scale(1.3)}
+  :root[data-theme="light"] .hero-inner{padding-top:2rem}
+}
+/* найвужчі телефони: посилання під кнопкою вміщається в один рядок разом зі стрілкою */
+@media (max-width:399px){.hero .link-arrow{font-size:0.94rem}}
+/* невисокі екрани ноутбуків: щільніші відступи, щоб заголовок, кнопка й цифри вміщались у перший екран */
+@media (min-width:900px) and (max-height:860px){
+  .hero-inner{padding-block:2rem 1.75rem}
+  .hero h1{font-size:clamp(1.85rem,min(4.4vw,7.6vh),3.7rem)}
+  .badge{margin-bottom:1rem}
+  .hero .lead{margin-bottom:0}
+  .hero-actions{margin-top:1.5rem}
+  .hero-checks{margin-top:1.125rem}
+  .hero-stats{margin-top:1.5rem;padding-top:1.125rem}
+  :root[data-theme="light"] .hero{--pt:1.75rem;--pb:1.75rem}
+}
+/* 900–1099px: колонка тексту вузька, тому відступи між цифрами менші, і всі три вміщуються в один рядок */
+@media (min-width:900px) and (max-width:1099px){.hero-stats li{padding-right:1rem;margin-right:1rem}}
+/* телефон: статистика героя в три компактні колонки замість стовпчика */
+@media (max-width:639px){
+  .hero-stats{display:grid;grid-template-columns:repeat(3,1fr);gap:0;margin-top:1.75rem;padding-top:1.25rem}
+  .hero-stats li{min-width:0;padding-right:0.75rem;margin-right:0.75rem}
+  .hero-stats b{font-size:1rem}
+  .hero-stats span{font-size:0.75rem;letter-spacing:.03em;line-height:1.35}
+  .hero-checks{gap:0.5rem 1rem;font-size:0.92rem}
+  .hero .lead{font-size:1.1rem}
+  .hero-actions{gap:0.25rem 1.5rem}
+  .hero-actions .btn{width:100%}
+}
+/* Титули всередині секції «Про мене»: велика акцентна цифра як головний елемент картки, водяний знак-іконка, лінія акценту зверху */
+.ach-block{margin-top:clamp(2.5rem,6vw,4.5rem)}
+.ach-kicker{display:flex;align-items:center;gap:1rem;margin:0 0 1.5rem;font:800 clamp(1.05rem,1.8vw,1.4rem)/1.2 var(--font-head);text-transform:uppercase;letter-spacing:-.01em}
+.ach-kicker::after{content:"";flex:1;height:1px;background:linear-gradient(90deg,var(--glass-line),transparent)}
+.ach-grid{display:grid;gap:1rem}
+.ach{display:flex;flex-direction:column;overflow:hidden;padding:1.5rem 1.5rem 1.75rem}
+.ach::after{content:"";position:absolute;left:0;top:0;right:0;height:3px;background:var(--accent-grad);transform:scaleX(.28);transform-origin:0 50%;transition:transform var(--t-med) var(--ease)}
+.ach:hover{border-color:rgba(255,122,26,.5);transform:translateY(-4px)}
+.ach:hover::after{transform:scaleX(1)}
+.ach-wm{position:absolute;right:-1.25rem;bottom:-1.5rem;width:9rem;height:9rem;stroke-width:1;color:var(--accent);opacity:.07;pointer-events:none;transition:opacity var(--t-med),transform var(--t-med) var(--ease)}
+.ach:hover .ach-wm{opacity:.14;transform:rotate(-6deg) scale(1.05)}
+.ach-top{display:flex;align-items:center;gap:0.75rem;margin:0 0 1.5rem}
+.ach-ico{display:grid;place-items:center;flex:none;width:2.5rem;height:2.5rem;border-radius:var(--radius-sm);background:rgba(255,122,26,.14);color:var(--accent-text)}
+.ach-label{font:700 0.75rem/1.3 var(--font-body);letter-spacing:.12em;text-transform:uppercase;color:var(--muted)}
+/* розмір цифри/слова від ширини самої картки (cqi), а не вікна: «ФІНАЛ» і «ВИЩА» не виходять за картку на жодній ширині */
+.ach{container-type:inline-size}
+.ach-fig{display:block;margin-bottom:0.75rem;font:800 clamp(2.2rem,4.4vw,3.4rem)/1 var(--font-head);font-size:clamp(1.9rem,21cqi,3.4rem);letter-spacing:-.03em;text-transform:uppercase;color:var(--accent);font-variant-numeric:tabular-nums}
+.ach-fig small{margin-left:0.4rem;font-size:0.38em;letter-spacing:.04em;text-transform:uppercase;color:var(--muted)}
+.ach h3{font-size:1.05rem;text-transform:uppercase;margin-bottom:0.5rem}
+.ach-text{margin:0;color:var(--muted);font-size:0.95rem}
+@media (min-width:640px){.ach-grid{grid-template-columns:repeat(2,1fr)}}
+@media (min-width:1000px){.ach-grid{grid-template-columns:repeat(4,1fr)}}
+@media (max-width:639px){
+  .ach-grid{grid-template-columns:1fr;gap:0.75rem}
+  .ach{padding:1.25rem 1.25rem 1.5rem}
+  .ach-top{margin-bottom:1rem}
+  .ach-label{letter-spacing:.1em}
+  .ach h3{font-size:1rem}
+  .ach-text{font-size:1rem;line-height:1.5}
+  .ach-wm{width:7rem;height:7rem}
+}
+.service-grid{display:grid;gap:1.25rem}
+.service{display:flex;flex-direction:column;overflow:hidden}
+.service:hover{border-color:rgba(255,122,26,.5);transform:translateY(-4px);box-shadow:var(--shadow)}
+
+/* візуальна шапка картки: акцентне сяйво, крапкова фактура, велика іконка, тег */
+.service-visual{position:relative;display:grid;place-items:center;aspect-ratio:3/2;overflow:hidden;border-bottom:1px solid var(--line);
+  background:radial-gradient(22rem 14rem at 25% 0%,rgba(255,122,26,.34),transparent 62%),radial-gradient(18rem 12rem at 90% 100%,rgba(255,150,40,.14),transparent 60%),var(--card-hi)}
+.service-visual::before{content:"";position:absolute;inset:0;background-image:radial-gradient(rgba(255,255,255,.10) 1px,transparent 1.2px);background-size:1.25rem 1.25rem;
+  -webkit-mask-image:linear-gradient(180deg,#000,transparent);mask-image:linear-gradient(180deg,#000,transparent)}
+:root[data-theme="light"] .service-visual::before{background-image:radial-gradient(rgba(30,20,10,.14) 1px,transparent 1.2px)}
+.service-visual .ico{position:relative;width:4.5rem;height:4.5rem;stroke-width:1.15;color:var(--accent);filter:drop-shadow(0 0 1.5rem rgba(255,122,26,.55))}
+.service-photo{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.service-visual:has(.service-photo)::before{display:none}
+.service-visual:has(.service-photo)::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,transparent 45%,rgba(10,9,8,.72))}
+:root[data-theme="light"] .service-visual:has(.service-photo){background:var(--card-hi)}
+.vtag{z-index:1;position:absolute;left:1.25rem;bottom:1.125rem;padding:0.5rem 0.75rem;border-radius:0.5rem;background:rgba(10,9,8,.78);color:#fff;
+  font:700 0.75rem/1 var(--font-head);letter-spacing:.05em;text-transform:uppercase;border:1px solid rgba(255,255,255,.12)}
+.vtag-accent{background:var(--accent);color:var(--on-accent);border-color:transparent}
+
+.service-body{display:flex;flex-direction:column;flex:1;padding:1.75rem}
+.service h3{margin-bottom:0.75rem;font-size:clamp(1.15rem,1.7vw,1.4rem)}
+.service-body>p{color:var(--muted);margin:0}
+
+.options{display:grid;gap:0.625rem;margin-top:auto;padding-top:1.5rem}
+.options li{display:grid;grid-template-columns:1fr auto auto;align-items:center;gap:0.875rem;padding:0.875rem 0.875rem 0.875rem 1.125rem;background:var(--bg);border:1px solid var(--line);border-radius:var(--radius-sm)}
+:root[data-theme="light"] .options li{background:var(--card-hi)}
+.opt-name{display:block;font-weight:600}
+.opt-meta{display:block;font-size:0.85rem;color:var(--muted);margin-top:2px}
+.price{font:700 clamp(1.1rem,1.5vw,1.35rem)/1 var(--font-head);letter-spacing:-.02em;white-space:nowrap;font-variant-numeric:tabular-nums}
+
+/* виділена послуга: акцентна рамка й сяйво (як у еталона), без суцільної заливки */
+.service-featured{border-color:var(--accent);box-shadow:0 0 0 1px var(--accent),0 1.75rem 4.5rem rgba(255,106,10,.2)}
+.service-featured:hover{border-color:var(--accent);box-shadow:0 0 0 1px var(--accent),0 2rem 5rem rgba(255,106,10,.32)}
+
+.pay-note{display:flex;gap:0.875rem;align-items:flex-start;margin:2rem 0 0;padding:1.125rem 1.375rem;border:1px dashed var(--glass-line);border-radius:var(--radius-sm);color:var(--muted);font-size:0.95rem}
+.pay-note .ico{margin-top:2px;color:var(--accent)}
+.pay-note a{color:var(--accent-text)}
+
+@media (min-width:900px){.service-grid{grid-template-columns:repeat(2,1fr);gap:1.5rem}}
+@media (max-width:480px){
+  .options li{grid-template-columns:1fr auto}
+  .options .btn{grid-column:1/-1}
+}
+@media (max-width:639px){
+  .service-visual{aspect-ratio:4/3}
+  .service-visual .ico{width:3.25rem;height:3.25rem}
+}
+/* Сітка з однаковою висотою рядка: без порожніх «дірок», як у масонрі. Фото в рядку підтягуються по висоті (object-fit), остання клітинка це заклик до дії.
+   Телефон: одна колонка, фото на всю ширину без обрізання; 640–759px: дві колонки (7 фото + заклик = 4 рівні рядки); від 760px: три колонки, заклик на дві клітинки */
+.results-grid{display:grid;grid-template-columns:1fr;gap:1rem}
+.results-grid li{display:flex}
+@media (min-width:640px){.results-grid{grid-template-columns:repeat(2,1fr)}}
+@media (min-width:760px){.results-grid{grid-template-columns:repeat(3,1fr);gap:1.25rem}}
+/* «Показати ще»: на телефоні з JS видно перші три фото, решта за кнопкою (scripts/11-more.js) */
+.results-grid .more-li,.more-wrap{display:none}
+.more-btn{min-height:3.25rem;gap:0.5rem}
+.more-btn .ico{width:1.125rem;height:1.125rem}
+@media (max-width:639px){
+  .results-grid.is-collapsed>li:nth-child(n+4):not(.more-li):not(.result-cta){display:none}
+  .results-grid.is-collapsed>.more-li{display:block}
+}
+.result{position:relative;isolation:isolate;display:block;width:100%;padding:0;border:1px solid var(--line);border-radius:var(--radius);overflow:hidden;background:var(--card);cursor:zoom-in;color:inherit;text-align:left;
+  transition:border-color var(--t-med),transform var(--t-med) var(--ease),box-shadow var(--t-med)}
+.result:hover{border-color:rgba(255,122,26,.5);transform:translateY(-4px);box-shadow:var(--shadow)}
+.result{display:flex;flex-direction:column;flex:1}
+.result img{width:100%;height:auto;flex:1 1 auto;min-height:0;object-fit:cover;object-position:50% 25%}
+.result-cap{flex:none}
+.result-cta{flex-direction:column;justify-content:center;align-items:flex-start;gap:0.75rem;padding:1.5rem;border-radius:var(--radius);border:1px solid rgba(255,122,26,.4);
+  background:radial-gradient(22rem 16rem at 100% 0%,rgba(255,122,26,.22),transparent 70%),var(--card)}
+.result-cta-title{margin:0;font:800 clamp(1.15rem,2vw,1.6rem)/1.15 var(--font-head);text-transform:uppercase;letter-spacing:-.01em}
+.result-cta-text{margin:0 0 0.5rem;color:var(--muted)}
+.result-cta .btn{min-height:3rem;padding-inline:1.25rem;white-space:normal;text-align:center}
+@media (min-width:760px){.result-cta{grid-column:span 2;padding:2.25rem}}
+/* підпис як в еталона: велика акцентна цифра, нижче капс-опис */
+.result-cap{display:block;padding:1.125rem 1.5rem 1.375rem;border-top:1px solid var(--line);font:600 0.75rem/1.4 var(--font-body);letter-spacing:.1em;text-transform:uppercase;color:var(--muted)}
+.result-cap b{display:block;margin-bottom:0.5rem;font:800 clamp(1.7rem,2.6vw,2.25rem)/1 var(--font-head);letter-spacing:-.02em;text-transform:none;color:var(--accent-text);white-space:nowrap}
+/* телефон: цифра й опис в один рядок, опис читається без напруги */
+@media (max-width:639px){
+  .result-cap{display:flex;align-items:center;gap:0.875rem;padding:0.875rem 1.125rem 1rem;font-size:0.8rem;letter-spacing:.07em;line-height:1.35}
+  .result-cap b{flex:none;margin:0;font-size:1.65rem}
+  .result-cta{padding:1.5rem 1.25rem}
+  .result-cta .btn{width:100%}
+}
+.disclaimer{margin:2rem 0 0;padding-left:1rem;border-left:3px solid var(--accent);color:var(--muted);font-size:0.9rem;max-width:70ch}
+.disclaimer a{color:var(--accent-text)}
+
+/* горизонтальні жести у вікні перегляду віддаємо свайпу (scripts/05-lightbox.js), інакше браузер сприймає їх як «Назад» */
+.lightbox{width:min(96vw,68.75rem);max-height:96vh;padding:0;border:0;background:transparent;color:#fff;overflow:visible;touch-action:pan-y pinch-zoom;overscroll-behavior:contain}
+.lightbox::backdrop{background:rgba(6,6,5,.92);-webkit-backdrop-filter:blur(0.5rem);backdrop-filter:blur(0.5rem)}
+.lb-figure{margin:0;text-align:center}
+.lb-figure img{max-height:80vh;width:auto;max-width:100%;margin-inline:auto;border-radius:var(--radius)}
+.lb-figure figcaption{display:flex;flex-wrap:wrap;justify-content:center;align-items:center;gap:0.5rem 0.875rem;margin-top:1rem;font:800 1.1rem/1.2 var(--font-head);text-transform:uppercase}
+.lb-count{padding:0.375rem 0.625rem;border:1px solid rgba(255,255,255,.22);border-radius:0.5rem;font:700 0.8rem/1 var(--font-body);letter-spacing:.08em;color:#d8d0c6;font-variant-numeric:tabular-nums}
+.lightbox .icon-btn{background:rgba(20,18,15,.85);color:#fff;border-color:rgba(255,255,255,.2)}
+.lb-close{position:fixed;top:1rem;right:1rem;z-index:2}
+.lb-nav{position:fixed;top:50%;translate:0 -50%;z-index:2}
+.lb-prev{left:0.75rem}
+.lb-next{right:0.75rem}
+body.lb-open{overflow:hidden}
+/* телефон: стрілки внизу по центру, щоб не перекривали фото; гортати можна й свайпом */
+@media (max-width:759px){
+  .lb-figure img{max-height:72vh}
+  .lb-nav{top:auto;bottom:calc(1rem + env(safe-area-inset-bottom));translate:none;width:3.25rem;height:3.25rem}
+  .lb-prev{left:calc(50% - 4rem)}
+  .lb-next{right:calc(50% - 4rem)}
+  .lb-figure figcaption{font-size:0.95rem;padding-inline:0.5rem}
+}
+/* Два ряди відгуків, що біжать у різні боки (лише десктоп із мишею, scripts/09-marquee.js).
+   Без бігу (телефон, сенсорний екран, reduced-motion, без JS) це звичайна сітка карток, яку зручно читати. */
+.reviews{overflow:hidden}
+/* відгуки живуть усередині розділу «Результати»: підзаголовок, лід і стрічки під сіткою фото */
+.reviews-block{margin-top:clamp(3rem,7vw,5rem)}
+.reviews-block .section-lead{max-width:60ch;margin:0 0 1rem}
+.marquee{position:relative;overflow-x:auto;padding-block:0.5rem;scrollbar-width:none}
+.marquee::-webkit-scrollbar{display:none}
+.marquee+.marquee{margin-top:1.25rem}
+.marquee.is-running{overflow:hidden;
+  -webkit-mask-image:linear-gradient(90deg,transparent,#000 7%,#000 93%,transparent);mask-image:linear-gradient(90deg,transparent,#000 7%,#000 93%,transparent)}
+.track{display:flex;width:max-content;padding-inline:var(--gutter)}
+.marquee.is-running .track{padding-inline:0;animation:marquee 80s linear infinite}
+.marquee-rev.is-running .track{animation-direction:reverse}
+.marquee.is-running:hover .track{animation-play-state:paused}
+
+.quote{display:flex;flex-direction:column;flex:none;width:min(84vw,24rem);margin-right:1.25rem;padding:1.5rem 1.625rem 1.375rem}
+.quote-lg{width:min(88vw,30rem)}
+.q-top{display:flex;align-items:center;justify-content:space-between;gap:0.75rem;margin:0 0 1.125rem}
+.q-mark{display:grid;place-items:center;width:2.5rem;height:2.5rem;padding-top:0.5rem;border-radius:var(--radius-sm);background:var(--accent-grad);color:var(--on-accent);font:800 2.1rem/1 var(--font-head)}
+.q-src{padding:0.3125rem 0.75rem;border:1px solid var(--glass-line);border-radius:2rem;font:700 0.75rem/1.2 var(--font-body);letter-spacing:.1em;text-transform:uppercase;color:var(--muted)}
+.quote blockquote{margin:0 0 1.5rem;font-size:1.08rem;font-weight:500;line-height:1.55}
+.who{position:relative;margin:auto 0 0;padding:1rem 0 0 1.75rem;border-top:1px solid var(--line);color:var(--muted);font-size:0.85rem;font-weight:600}
+.who::before{content:"";position:absolute;left:0;top:calc(1rem + 0.62em);width:1.125rem;height:2px;background:var(--accent)}
+/* статична сітка: картки на всю ширину колонки, без обрізаних країв і горизонтального гортання */
+.marquee:not(.is-running){overflow:visible;padding-block:0}
+.marquee:not(.is-running) .track{display:grid;grid-template-columns:1fr;gap:0.875rem;width:auto;max-width:calc(var(--maxw) + var(--gutter) * 2);margin-inline:auto}
+.marquee:not(.is-running) .quote{width:auto;margin:0}
+.marquee:not(.is-running)+.marquee{margin-top:0.875rem}
+@media (min-width:640px){
+  .marquee:not(.is-running) .track{grid-template-columns:repeat(2,1fr);gap:1.25rem}
+  .marquee:not(.is-running)+.marquee{margin-top:1.25rem}
+}
+@media (min-width:1200px){.marquee:not(.is-running) .track{grid-template-columns:repeat(4,1fr)}}
+/* телефон: з JS видно перші три відгуки, решта за кнопкою «Показати ще» */
+@media (max-width:639px){
+  .reviews-wall.is-collapsed .marquee-rev,.reviews-wall.is-collapsed .quote:nth-child(n+4){display:none}
+  .reviews-wall.is-collapsed .more-wrap{display:block;margin-top:0.875rem}
+  .quote{padding:1.25rem 1.25rem 1.125rem}
+  .q-top{margin-bottom:0.875rem}
+  .q-mark{width:2.25rem;height:2.25rem;font-size:1.9rem}
+  .quote blockquote{font-size:1.0625rem;line-height:1.55;margin-bottom:1rem}
+}
+.about-grid{display:grid;gap:clamp(2rem,6vw,5.5rem);align-items:center}
+.about-visual{max-width:27rem;width:100%;margin-inline:auto;padding:0.5rem;border:2px solid rgba(255,122,26,.5);border-radius:calc(var(--radius) + 0.5rem);box-shadow:0 0 4rem rgba(255,122,26,.12)}
+.about-visual img{width:100%;aspect-ratio:4/5;object-fit:cover;object-position:50% 18%;border-radius:var(--radius)}
+.about-copy h2{margin-bottom:1.25rem}
+.about-lead{color:var(--muted);font-size:1.1rem}
+.about-stats{display:grid;grid-template-columns:repeat(3,1fr);gap:1rem;margin:1.5rem 0;padding-block:1.375rem;border-block:1px solid var(--line)}
+.about-stats b{display:block;font:800 clamp(1.4rem,2.4vw,2rem)/1.1 var(--font-head);color:var(--accent-text)}
+.about-stats span{display:block;margin-top:0.375rem;font:600 0.75rem/1.35 var(--font-body);letter-spacing:.12em;text-transform:uppercase;color:var(--muted)}
+.about-copy .btn{margin-top:0.5rem}
+@media (min-width:900px){.about-grid{grid-template-columns:.8fr 1.2fr}}
+
+/* кроки: картки з номером у помаранчевому значку */
+.steps{display:grid;gap:1rem;counter-reset:st}
+.step{position:relative;overflow:hidden;padding:1.5rem 1.5rem 1.75rem;border:1px solid var(--line);border-radius:var(--radius);background:var(--card);counter-increment:st;transition:border-color var(--t-med),transform var(--t-med) var(--ease)}
+:where(:root:not([data-theme="light"])) .step{background:linear-gradient(180deg,rgba(255,255,255,.05),rgba(255,255,255,.012) 55%),var(--card);box-shadow:inset 0 1px 0 rgba(255,255,255,.07)}
+.step:hover{border-color:rgba(255,122,26,.5);transform:translateY(-4px)}
+.step-num{display:grid;place-items:center;width:3rem;height:3rem;margin-bottom:1.25rem;border-radius:var(--radius-sm);background:var(--accent-grad);color:var(--on-accent);font:800 1.2rem/1 var(--font-head)}
+.step h3{margin-bottom:0.625rem;font-size:1.05rem;text-transform:uppercase}
+.step p{position:relative;margin:0;color:var(--muted)}
+@media (min-width:640px){.steps{grid-template-columns:repeat(2,1fr)}}
+@media (min-width:1000px){.steps{grid-template-columns:repeat(4,1fr)}}
+.faq-grid{display:grid;gap:1.5rem;align-items:start}
+.faq{display:grid;gap:0.75rem}
+.faq details{background:var(--card);border:1px solid var(--line);border-radius:var(--radius-sm);transition:border-color var(--t-fast),background-color var(--t-fast)}
+.faq details:hover{border-color:rgba(255,122,26,.4)}
+.faq details[open]{border-color:rgba(255,122,26,.6);background:var(--card-hi)}
+.faq summary{display:flex;justify-content:space-between;align-items:center;gap:1.25rem;min-height:4rem;padding:1rem 1.375rem;cursor:pointer;list-style:none;font-weight:700;font-size:1.05rem;line-height:1.35}
+.faq summary::-webkit-details-marker{display:none}
+.plus{position:relative;flex:none;width:1.25rem;height:1.25rem}
+.plus::before,.plus::after{content:"";position:absolute;left:0;top:50%;width:100%;height:2.5px;margin-top:-1.25px;border-radius:2px;background:var(--accent);transition:transform var(--t-med) var(--ease)}
+.plus::after{transform:rotate(90deg)}
+.faq details[open] .plus::after{transform:rotate(0)}
+.faq details p{margin:0;padding:0 1.375rem 1.375rem;color:var(--muted);max-width:68ch}
+.faq-side{padding:1.75rem}
+.faq-side h3{margin-bottom:0.75rem}
+.faq-side p{color:var(--muted)}
+@media (min-width:960px){
+  .faq-grid{grid-template-columns:1fr 21rem}
+  .faq-side{position:sticky;top:6rem}
+}
+
+.terms{display:grid;gap:1rem}
+.terms>div{padding:1.5rem 1.625rem;border:1px solid var(--line);border-left:3px solid var(--accent);background:var(--card);border-radius:var(--radius-sm)}
+.terms h3{margin-bottom:0.5rem;font-size:1rem;text-transform:uppercase}
+.terms p{margin:0;color:var(--muted)}
+@media (min-width:760px){.terms{grid-template-columns:repeat(2,1fr)}}
+
+/* знизу менший відступ: між закликом і футером не лишається порожньої смуги */
+.cta{padding-block:0 clamp(2.5rem,6vw,4.5rem)}
+.cta-box{position:relative;isolation:isolate;overflow:hidden;display:grid;gap:2rem;align-items:center;padding:clamp(2.25rem,6vw,4.5rem);border-radius:calc(var(--radius) + 0.5rem);
+  background:var(--accent-grad);color:var(--on-accent)}
+.cta-box::before{content:"";position:absolute;z-index:-1;right:-10%;bottom:-80%;width:55%;aspect-ratio:1;border-radius:50%;background:rgba(255,255,255,.2)}
+/* кільце концентричне світлому колу (той самий бокс, збільшений), тож не перетинає заголовок */
+.cta-box::after{content:"";position:absolute;z-index:-1;right:-10%;bottom:-80%;width:55%;aspect-ratio:1;border-radius:50%;border:2px solid rgba(20,10,2,.14);transform:scale(1.22)}
+.cta-box h2{font-size:clamp(1.8rem,4.4vw,3.4rem);margin-bottom:1rem}
+.cta-box p{max-width:44ch;margin:0;font-size:1.1rem;color:rgba(20,10,2,.85)}
+.cta-actions{display:flex;flex-wrap:wrap;gap:0.75rem}
+.cta-box .btn-primary{background:var(--on-accent);color:#fff;box-shadow:none}
+.cta-box .btn-primary:hover{background:#000}
+.cta-box .btn-ghost{background:transparent;color:var(--on-accent);border-color:rgba(20,10,2,.5)}
+.cta-box .btn-ghost:hover{background:rgba(20,10,2,.1);color:var(--on-accent);border-color:var(--on-accent)}
+@media (min-width:900px){.cta-box{grid-template-columns:1.2fr 1fr}.cta-actions{justify-content:flex-end}}
+/* телефон: кнопки на всю ширину блоку з меншими полями, щоб «Написати в Telegram» не обрізалась */
+@media (max-width:639px){
+  .cta-box{padding:2.25rem 1.25rem}
+  .cta-actions .btn{width:100%;padding-inline:1rem}
+}
+.site-footer{border-top:1px solid var(--line);padding-block:1.75rem;background:var(--bg)}
+.footer-row{display:flex;flex-wrap:wrap;align-items:center;gap:1.25rem 2rem}
+.footer-row .logo{margin-right:0}
+.site-footer .logo-text b{color:var(--accent-text)}
+.footer-copy{flex:1;min-width:14rem;margin:0;color:var(--muted);font-size:0.85rem}
+.footer-copy a{color:var(--text)}
+.socials{display:flex;align-items:center;gap:0.625rem}
+
+.sticky-cta{position:fixed;left:0;right:0;bottom:0;z-index:40;padding:0.75rem var(--gutter) calc(0.75rem + env(safe-area-inset-bottom));
+  background:linear-gradient(to top,var(--bg) 55%,transparent);translate:0 110%;visibility:hidden;
+  transition:translate var(--t-med) var(--ease),visibility 0s linear var(--t-med)}
+.sticky-cta.on{translate:0 0;visibility:visible;transition-delay:0s}
+@media (min-width:900px){.sticky-cta{display:none}}
+@media (max-width:899px){html{scroll-padding-bottom:5rem}}
+/* Поява при скролі працює лише з JS (клас .js на <html>), без нього все видно одразу */
+.js .reveal{opacity:0;translate:0 1.75rem;transition:opacity .8s var(--ease),translate .8s var(--ease)}
+.js .reveal.in{opacity:1;translate:0 0}
+
+@keyframes ticker{to{transform:translateX(-50%)}}
+@keyframes marquee{to{transform:translateX(-50%)}}
+@keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-0.5rem)}}
+@keyframes spin{to{transform:rotate(1turn)}}
+@keyframes glow{0%,100%{opacity:.85;transform:scale(1)}50%{opacity:1;transform:scale(1.06)}}
+
+.ticker-track{animation:ticker 50s linear infinite}
+.ticker:hover .ticker-track{animation-play-state:paused}
+.hero-bg::before{animation:glow 9s ease-in-out infinite}
+
+/* кнопка паузи для рухомих стрічок (WCAG 2.2.2) */
+.motion-paused .ticker-track,.motion-paused .track,.motion-paused .chip,.motion-paused .hero-stamp>svg,.motion-paused .hero-bg::before{animation-play-state:paused!important}
+.ticker:focus-within .ticker-track{animation-play-state:paused}
+.motion-btn .ico-play,.motion-btn[aria-pressed="true"] .ico-pause{display:none}
+.motion-btn[aria-pressed="true"] .ico-play{display:block}
+.motion-btn .ico{width:1.1rem;height:1.1rem;fill:currentColor;stroke:none}
+.motion-btn-ticker{position:absolute;right:var(--gutter);bottom:0.5rem;z-index:2;background:var(--card);color:var(--text);border-color:var(--glass-line)}
+.motion-btn-text{width:auto;gap:0.5rem;padding:0 1rem;font:700 0.8rem/1 var(--font-body);letter-spacing:.06em;text-transform:uppercase}
+/* кнопка паузи біля відгуків потрібна лише тоді, коли стрічки справді біжать (клас ставить scripts/09-marquee.js) */
+.motion-row{display:none;justify-content:flex-start;margin:0 0 1.25rem}
+.has-marquee .motion-row{display:flex}
+
+@media (prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto}
+  *,*::before,*::after{animation:none!important;transition-duration:.01ms!important;transition-delay:0s!important}
+  .js .reveal{opacity:1;translate:none}
+}
+/* Посилення світлої теми: контраст, глибина й акцент тими ж прийомами, що й у темній, але у світлій палітрі.
+   Без чорних смуг-«островів» і зсунутих чорних тіней (вони виглядали як збій): глибину дають м'які теплі тіні, чіткі рамки
+   й помаранчевий акцент. Файл іде останнім, щоб перекривати базові правила; усе тут діє лише при data-theme="light".
+   Правила світлого героя лежать у 05-hero.css. */
+
+/* 1. Ритм розділів: «Як це працює» і футер на теплому пісочному тлі, як «Послуги» */
+:root[data-theme="light"] .site-footer{background:var(--bg-alt);border-top-color:rgba(30,20,10,.12)}
+:root[data-theme="light"] .step{box-shadow:0 0.5rem 2rem rgba(70,45,10,.08)}
+:root[data-theme="light"] .hero-stats b{color:var(--text)}
+
+/* 2. Рубрики й заголовки: залита мітка з номером; великі акцентні слова й цифри яскраво-помаранчеві
+   (#e0560a дає ≥3:1 на кремовому, цього досить для великого тексту; дрібний текст лишається темнішим --accent-text) */
+:root[data-theme="light"] .eyebrow::before{background:#17120d;color:#fff;border-color:#17120d}
+:root[data-theme="light"] .ach-kicker::after{background:linear-gradient(90deg,rgba(30,20,10,.3),transparent)}
+:root[data-theme="light"] .section::before{background:linear-gradient(90deg,transparent,rgba(255,122,26,.55) 50%,transparent)}
+:root[data-theme="light"] :is(h1,h2) .accent,:root[data-theme="light"] .ach-fig{color:#e0560a}
+
+/* 3. Картки: чітка рамка й м'яка тепла тінь; при наведенні помаранчева рамка й глибша тінь, як у темній темі */
+:where(:root[data-theme="light"]) .card,:where(:root[data-theme="light"]) .result{box-shadow:0 0.5rem 2rem rgba(70,45,10,.10)}
+:root[data-theme="light"] .card,:root[data-theme="light"] .result{border-color:rgba(30,20,10,.14)}
+:root[data-theme="light"] :is(.ach,.service,.result,.step):hover{border-color:rgba(226,90,0,.6);box-shadow:0 1.25rem 3rem rgba(110,50,5,.16)}
+:root[data-theme="light"] .service-featured{border:2px solid var(--accent);box-shadow:0 1.5rem 3.5rem rgba(255,106,10,.22)}
+:root[data-theme="light"] .service-featured:hover{border-color:var(--accent);box-shadow:0 2rem 4.5rem rgba(255,106,10,.32)}
+:root[data-theme="light"] .service-visual{background:radial-gradient(22rem 14rem at 25% 0%,rgba(255,122,26,.42),transparent 62%),linear-gradient(135deg,#ffe3c7,#ffd2a6)}
+:root[data-theme="light"] .vtag{background:#17120d}
+:root[data-theme="light"] .vtag-accent{background:var(--accent);color:var(--on-accent);border:2px solid #17120d}
+:root[data-theme="light"] .options li{background:#fff7ec;border-color:rgba(30,20,10,.14)}
+:root[data-theme="light"] .ach-wm{opacity:.1}
+
+/* 4. Кнопки: м'яка помаранчева тінь; контурна кнопка з темною рамкою */
+:root[data-theme="light"] .btn-primary{box-shadow:0 0.625rem 1.5rem rgba(226,90,0,.26)}
+:root[data-theme="light"] .btn-primary:hover{box-shadow:0 0.875rem 2.125rem rgba(226,90,0,.36)}
+:root[data-theme="light"] .btn-ghost{border-color:rgba(23,18,13,.55);color:#17120d}
+:root[data-theme="light"] .btn-ghost:hover{border-color:var(--accent);color:var(--accent-text)}
+:root[data-theme="light"] .nav a:hover{background:rgba(30,20,10,.06)}
+:root[data-theme="light"] .site-header .logo-mark{box-shadow:none}
+
+/* 5. Заклик: помаранчевий блок із теплим сяйвом; темна кнопка на ньому з легкою тінню */
+:root[data-theme="light"] .cta-box{box-shadow:0 1.75rem 4rem rgba(226,90,0,.26)}
+:root[data-theme="light"] .cta-box .btn-primary,:root[data-theme="light"] .cta-box .btn-primary:hover{box-shadow:0 0.75rem 1.75rem rgba(20,10,2,.22)}
+:root[data-theme="light"] .cta-box .btn-ghost{border-color:rgba(20,10,2,.55);color:var(--on-accent)}
+:root[data-theme="light"] .cta-box .btn-ghost:hover{border-color:var(--on-accent);color:var(--on-accent)}
+
+/* 6. Відгуки й питання: білі картки, відкрите питання з помаранчевою рамкою */
+:root[data-theme="light"] .quote{background:#fff}
+:root[data-theme="light"] .faq details{border-color:rgba(30,20,10,.16)}
+:root[data-theme="light"] .faq details[open]{border-color:var(--accent);background:#fff}
+
+/* 7. Портрет у «Про мене»: темна рамка й помаранчевий блок позаду (графічний акцент, не тінь) */
+:root[data-theme="light"] .about-visual{border:3px solid #17120d;box-shadow:0.9rem 0.9rem 0 var(--accent)}
+@media (max-width:899px){
+  :root[data-theme="light"] .about-visual{box-shadow:0.5rem 0.5rem 0 var(--accent)}
+}
+</style>
+</head>
+<body>
+
+<a class="skip" href="#main">Skip to content</a>
+
+<header class="site-header" id="top">
+  <div class="container header-row">
+    <a class="logo" href="#top" aria-label="Vladyslav Nahorniuk, online coach. Back to top">
+      <span class="logo-mark" aria-hidden="true"><img src="/img/out/avatar-112.webp" alt="" width="112" height="112"></span>
+      <span class="logo-text">Vladyslav Nahorniuk <b>coach</b></span>
+    </a>
+    <nav class="nav" id="nav" aria-label="Main menu">
+      <a href="#services">Services</a>
+      <a href="#results">Results</a>
+      <a href="#about">About</a>
+      <a href="#faq">FAQ</a>
+      <a class="nav-cta btn btn-primary" href="https://t.me/nahorniuk_vlad" target="_blank" rel="noopener">Message on Telegram</a>
+    </nav>
+    <div class="header-actions">
+      <div class="lang-switch" role="group" aria-label="Site language"><a href="/" lang="uk" hreflang="uk">UA</a><a href="/en/" lang="en" hreflang="en" aria-current="true">EN</a></div>
+      <button class="icon-btn theme-toggle" type="button" aria-label="Toggle theme" data-theme-toggle>
+        <svg class="ico ico-moon" aria-hidden="true"><use href="#i-moon"/></svg>
+        <svg class="ico ico-sun" aria-hidden="true"><use href="#i-sun"/></svg>
+      </button>
+      <a class="btn btn-primary btn-sm header-cta" href="https://t.me/nahorniuk_vlad" target="_blank" rel="noopener">Message on Telegram</a>
+      <button class="icon-btn menu-btn" type="button" aria-label="Open menu" aria-expanded="false" aria-controls="nav" data-menu-btn>
+        <svg class="ico ico-open" aria-hidden="true"><use href="#i-menu"/></svg>
+        <svg class="ico ico-close" aria-hidden="true"><use href="#i-x"/></svg>
+      </button>
+    </div>
+  </div>
+</header>
+
+<svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
+  <defs>
+    <symbol id="i-check" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></symbol>
+    <symbol id="i-x" viewBox="0 0 24 24"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></symbol>
+    <symbol id="i-pause" viewBox="0 0 24 24"><rect x="6" y="5" width="4" height="14" rx="1"/><rect x="14" y="5" width="4" height="14" rx="1"/></symbol>
+    <symbol id="i-play" viewBox="0 0 24 24"><polygon points="7 4 20 12 7 20 7 4"/></symbol>
+    <symbol id="i-menu" viewBox="0 0 24 24"><path d="M4 6h16M4 12h16M4 18h16"/></symbol>
+    <symbol id="i-sun" viewBox="0 0 24 24"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"/></symbol>
+    <symbol id="i-moon" viewBox="0 0 24 24"><path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"/></symbol>
+    <symbol id="i-arrow" viewBox="0 0 24 24"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></symbol>
+    <symbol id="i-chevron" viewBox="0 0 24 24"><path d="m6 9 6 6 6-6"/></symbol>
+    <symbol id="i-left" viewBox="0 0 24 24"><path d="m15 18-6-6 6-6"/></symbol>
+    <symbol id="i-right" viewBox="0 0 24 24"><path d="m9 18 6-6-6-6"/></symbol>
+    <symbol id="i-telegram" viewBox="0 0 24 24"><path d="m22 2-7 20-4-9-9-4Z"/><path d="M22 2 11 13"/></symbol>
+    <symbol id="i-instagram" viewBox="0 0 24 24"><rect x="2" y="2" width="20" height="20" rx="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><path d="M17.5 6.5h.01"/></symbol>
+    <symbol id="i-trophy" viewBox="0 0 24 24"><path d="M6 9H4.5a2.5 2.5 0 0 1 0-5H6"/><path d="M18 9h1.5a2.5 2.5 0 0 0 0-5H18"/><path d="M4 22h16"/><path d="M10 14.66V17c0 .55-.47.98-.97 1.21C7.85 18.75 7 20.24 7 22"/><path d="M14 14.66V17c0 .55.47.98.97 1.21C16.15 18.75 17 20.24 17 22"/><path d="M18 2H6v7a6 6 0 0 0 12 0V2Z"/></symbol>
+    <symbol id="i-star" viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></symbol>
+    <symbol id="i-medal" viewBox="0 0 24 24"><path d="M7.21 15 2.66 7.14a2 2 0 0 1 .13-2.2L4.4 2.8A2 2 0 0 1 6 2h12a2 2 0 0 1 1.6.8l1.6 2.14a2 2 0 0 1 .14 2.2L16.79 15"/><path d="M11 12 5.12 2.2"/><path d="m13 12 5.88-9.8"/><path d="M8 7h8"/><circle cx="12" cy="17" r="5"/></symbol>
+    <symbol id="i-cap" viewBox="0 0 24 24"><path d="M22 10v6M2 10l10-5 10 5-10 5z"/><path d="M6 12v5c3 3 9 3 12 0v-5"/></symbol>
+    <symbol id="i-video" viewBox="0 0 24 24"><path d="m16 13 5.223 3.482a.5.5 0 0 0 .777-.416V7.87a.5.5 0 0 0-.752-.432L16 10.5"/><rect x="2" y="6" width="14" height="12" rx="2"/></symbol>
+    <symbol id="i-dumbbell" viewBox="0 0 24 24"><path d="M6.5 6.5v11M3.5 9v6M17.5 6.5v11M20.5 9v6M6.5 12h11"/></symbol>
+    <symbol id="i-chat" viewBox="0 0 24 24"><path d="M7.9 20A9 9 0 1 0 4 16.1L2 22Z"/></symbol>
+    <symbol id="i-food" viewBox="0 0 24 24"><path d="M3 2v7c0 1.1.9 2 2 2h4a2 2 0 0 0 2-2V2"/><path d="M7 2v20"/><path d="M21 15V2a5 5 0 0 0-5 5v6c0 1.1.9 2 2 2h3Zm0 0v7"/></symbol>
+    <symbol id="i-plan" viewBox="0 0 24 24"><rect width="8" height="4" x="8" y="2" rx="1"/><path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"/><path d="M12 11h4M12 16h4M8 11h.01M8 16h.01"/></symbol>
+    <symbol id="i-shield" viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10Z"/><path d="m9 12 2 2 4-4"/></symbol>
+    <symbol id="i-card" viewBox="0 0 24 24"><rect x="2" y="5" width="20" height="14" rx="2"/><path d="M2 10h20"/></symbol>
+  </defs>
+</svg>
+
+<main id="main" tabindex="-1">
+
+<section class="hero" aria-labelledby="hero-title">
+  <div class="hero-bg" aria-hidden="true">
+    <div class="hero-photo"><img src="/img/out/portrait-853.webp" alt="" width="853" height="1280" fetchpriority="high"></div>
+  </div>
+
+  <div class="container hero-chips" aria-hidden="true">
+    <div class="chip chip-a"><span class="chip-ico"><svg class="ico" aria-hidden="true"><use href="#i-trophy"/></svg></span><span><b>World champion</b><small>2017 · pull-ups +32&nbsp;kg</small></span></div>
+    <div class="chip chip-b"><span class="chip-ico"><svg class="ico" aria-hidden="true"><use href="#i-star"/></svg></span><span><b>Finalist</b><small>“Ukraine’s Got Talent 5”</small></span></div>
+    <div class="hero-stamp">
+      <svg viewBox="0 0 120 120" aria-hidden="true"><path id="stamp-ring" d="M60 60m-46 0a46 46 0 1 1 92 0a46 46 0 1 1-92 0" fill="none"/><text><textPath href="#stamp-ring" textLength="288" lengthAdjust="spacing">World champion 2017 • pull-ups +32 kg • </textPath></text></svg>
+      <span class="hero-stamp-ico"><svg class="ico" aria-hidden="true"><use href="#i-trophy"/></svg></span>
+    </div>
+  </div>
+
+  <div class="container hero-inner">
+    <div class="hero-copy">
+      <p class="badge reveal">
+        <svg class="ico" aria-hidden="true"><use href="#i-shield"/></svg>
+        <b>Vladyslav Nahorniuk</b><span>Pull-up world champion</span>
+      </p>
+      <h1 id="hero-title" class="reveal">Training that delivers results, <span class="accent">wherever you are</span></h1>
+      <p class="lead reveal">A program built for your goal, technique videos and support in Telegram. At home, in the gym or outdoors.</p>
+      <div class="hero-actions reveal">
+        <a class="btn btn-primary btn-lg" href="https://t.me/nahorniuk_vlad" target="_blank" rel="noopener">Message me on Telegram<svg class="ico" aria-hidden="true"><use href="#i-arrow"/></svg></a>
+        <a class="link-arrow" href="#results">Or see the results first<svg class="ico" aria-hidden="true"><use href="#i-arrow"/></svg></a>
+      </div>
+      <ul class="hero-checks reveal">
+        <li><svg class="ico" aria-hidden="true"><use href="#i-check"/></svg>Programs from 350 ₴</li>
+        <li><svg class="ico" aria-hidden="true"><use href="#i-check"/></svg>Online via video call</li>
+        <li><svg class="ico" aria-hidden="true"><use href="#i-check"/></svg>I reply in Telegram and Instagram</li>
+      </ul>
+
+      <ul class="hero-stats reveal">
+        <li><b class="num" data-count="12">12</b><span>years of coaching</span></li>
+        <li><b class="num" data-count="6">6</b><span>years online</span></li>
+        <li><b class="num" data-count="100" data-plus>100+</b><span>happy clients</span></li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="ticker" aria-hidden="true">
+    <div class="ticker-clip"><ul class="ticker-track">
+      <li>World champion 2017</li><li class="hl">Finalist of “Ukraine’s Got Talent 5”</li><li>Ukrainian champion 2015</li><li class="hl">12 years of coaching</li><li>6 years online</li><li class="hl">100+ clients</li>
+      <li>World champion 2017</li><li class="hl">Finalist of “Ukraine’s Got Talent 5”</li><li>Ukrainian champion 2015</li><li class="hl">12 years of coaching</li><li>6 years online</li><li class="hl">100+ clients</li>
+    </ul></div>
+  </div>
+  <button class="icon-btn motion-btn motion-btn-ticker" type="button" aria-pressed="false" aria-label="Pause the scrolling strips" data-motion-toggle><svg class="ico ico-pause" aria-hidden="true"><use href="#i-pause"/></svg><svg class="ico ico-play" aria-hidden="true"><use href="#i-play"/></svg></button>
+</section>
+
+<section class="section section-alt dotted" id="services" aria-labelledby="services-title">
+  <div class="container">
+    <header class="section-head reveal">
+      <p class="eyebrow">What I offer</p>
+      <h2 id="services-title">Choose your format</h2>
+      <p class="section-lead">From a one-time program for 350 ₴ to a month of training with technique videos. Pay via monobank, then message me on Telegram.</p>
+    </header>
+
+    <div class="service-grid">
+
+      <article class="card service reveal">
+        <div class="service-visual">
+          <img class="service-photo" src="/img/out/svc-plan.webp" alt="" width="800" height="1000" loading="lazy" style="object-position:50% 6%">
+          <span class="vtag">Cheapest start</span>
+        </div>
+        <div class="service-body">
+          <h3>Training program</h3>
+          <p>A personal program for your goal, level and equipment. The monthly format adds a technique video to every exercise.</p>
+          <ul class="ticks">
+            <li>Tailored to your goal: muscle, fat loss, shape</li>
+            <li>Technique videos in the monthly program</li>
+            <li>Works for the gym and for home</li>
+          </ul>
+          <ul class="options">
+            <li>
+              <div><span class="opt-name">One-time program</span></div>
+              <b class="price">350 ₴</b>
+              <a class="btn btn-primary btn-sm" href="https://send.monobank.ua/jar/2xg515qvKK?a=350&amp;t=Training%20program%20%28one-time%29" target="_blank" rel="noopener" aria-label="Pay for the one-time program, 350 hryvnias">Pay</a>
+            </li>
+            <li>
+              <div><span class="opt-name">Monthly</span><span class="opt-meta">10 workouts + technique videos</span></div>
+              <b class="price">4 000 ₴</b>
+              <a class="btn btn-primary btn-sm" href="https://send.monobank.ua/jar/2xg515qvKK?a=4000&amp;t=Training%20program%20for%20a%20month" target="_blank" rel="noopener" aria-label="Pay for the monthly program, 4000 hryvnias">Pay</a>
+            </li>
+          </ul>
+        </div>
+      </article>
+
+      <article class="card service service-featured reveal">
+        <div class="service-visual">
+          <img class="service-photo" src="/img/out/svc-online.webp" alt="" width="800" height="1000" loading="lazy" style="object-position:50% 10%">
+          <span class="vtag vtag-accent">Most popular</span>
+        </div>
+        <div class="service-body">
+          <h3>Online workouts by video call</h3>
+          <p>I am with you on the video call: I set your technique and pick weights and pace. It does not matter whether you are at home or in the gym.</p>
+          <ul class="ticks">
+            <li>Real-time technique correction</li>
+            <li>At home, in the gym or outdoors</li>
+            <li>Schedule built around you</li>
+          </ul>
+          <ul class="options">
+            <li>
+              <div><span class="opt-name">One workout</span></div>
+              <b class="price">700 ₴</b>
+              <a class="btn btn-primary btn-sm" href="https://send.monobank.ua/jar/2xg515qvKK?a=700&amp;t=Online%20workout%20%28video%20call%29" target="_blank" rel="noopener" aria-label="Pay for one online workout, 700 hryvnias">Pay</a>
+            </li>
+            <li>
+              <div><span class="opt-name">Package</span><span class="opt-meta">10 workouts</span></div>
+              <b class="price">7 000 ₴</b>
+              <a class="btn btn-primary btn-sm" href="https://send.monobank.ua/jar/2xg515qvKK?a=7000&amp;t=Online%20workouts%2C%20package%20of%2010" target="_blank" rel="noopener" aria-label="Pay for a package of 10 online workouts, 7000 hryvnias">Pay</a>
+            </li>
+          </ul>
+        </div>
+      </article>
+
+      <article class="card service reveal">
+        <div class="service-visual">
+          <img class="service-photo" src="/img/out/svc-consult.webp" alt="" width="800" height="1000" loading="lazy" style="object-position:50% 28%">
+          <span class="vtag">First step</span>
+        </div>
+        <div class="service-body">
+          <h3>Consultation</h3>
+          <p>We go through your situation, goal and mistakes. You get a clear action plan so you can keep going on your own.</p>
+          <ul class="ticks">
+            <li>Review of your goal, routine and workload</li>
+            <li>Answers to all your questions</li>
+            <li>Concrete next steps</li>
+          </ul>
+          <ul class="options">
+            <li>
+              <div><span class="opt-name">One consultation</span></div>
+              <b class="price">1 000 ₴</b>
+              <a class="btn btn-primary btn-sm" href="https://send.monobank.ua/jar/2xg515qvKK?a=1000&amp;t=Consultation" target="_blank" rel="noopener" aria-label="Pay for the consultation, 1000 hryvnias">Pay</a>
+            </li>
+          </ul>
+        </div>
+      </article>
+
+      <article class="card service reveal">
+        <div class="service-visual">
+          <img class="service-photo" src="/img/out/svc-meal.webp" alt="" width="800" height="1000" loading="lazy" style="object-position:50% 34%">
+          <span class="vtag">Nutrition only</span>
+        </div>
+        <div class="service-body">
+          <h3>Nutrition</h3>
+          <p>A monthly meal plan that takes all your needs into account: goal, daily routine, tastes and specifics.</p>
+          <ul class="ticks">
+            <li>Matched to your goal and calories</li>
+            <li>Respects your preferences and restrictions</li>
+            <li>No exhausting diets</li>
+          </ul>
+          <ul class="options">
+            <li>
+              <div><span class="opt-name">Meal plan for a month</span></div>
+              <b class="price">3 000 ₴</b>
+              <a class="btn btn-primary btn-sm" href="https://send.monobank.ua/jar/2xg515qvKK?a=3000&amp;t=Meal%20plan%20for%20a%20month" target="_blank" rel="noopener" aria-label="Pay for the monthly meal plan, 3000 hryvnias">Pay</a>
+            </li>
+          </ul>
+        </div>
+      </article>
+
+    </div>
+
+    <p class="pay-note reveal"><svg class="ico" aria-hidden="true"><use href="#i-card"/></svg><span>The button opens the monobank jar with the amount filled in. If the amount is missing, enter it manually and name the service in the comment. The monobank page does not open or shows “Connection error”? Turn off your VPN and ad blocker or <a href="https://t.me/nahorniuk_vlad" target="_blank" rel="noopener">message me</a> and I will send the payment details. Not sure what to choose? <a href="https://t.me/nahorniuk_vlad" target="_blank" rel="noopener">Message me</a> and I will help.</span></p>
+  </div>
+</section>
+
+<section class="section reviews" id="results" aria-labelledby="results-title">
+  <div class="container">
+    <header class="section-head reveal">
+      <p class="eyebrow">Client results</p>
+      <h2 id="results-title">Actions, not words</h2>
+      <p class="section-lead">Real before and after photos and words from client chats. Tap a photo to take a closer look.</p>
+    </header>
+
+    <ul class="results-grid" id="results-list">
+      <li class="reveal">
+        <button class="result" type="button" data-lb data-full="/img/out/res-1-1200.webp" data-cap="One month of training: +5 kg" aria-label="Open: one month of training, plus 5 kg">
+          <img src="/img/out/res-1-640.webp" alt="Before and after photo: one month of training" width="640" height="621" loading="lazy">
+          <span class="result-cap"><b>+5 kg</b> One month of training</span>
+        </button>
+      </li>
+      <li class="reveal">
+        <button class="result" type="button" data-lb data-full="/img/out/res-6-1200.webp" data-cap="4 months: lost belly fat, gained 4 kg of muscle" aria-label="Open: 4 months, plus 4 kg of muscle">
+          <img src="/img/out/res-6-640.webp" alt="Before and after photo: 4 months, muscle" width="640" height="649" loading="lazy">
+          <span class="result-cap"><b>+4 kg</b> 4 months · no belly fat</span>
+        </button>
+      </li>
+      <li class="reveal">
+        <button class="result" type="button" data-lb data-full="/img/out/res-2-1200.webp" data-cap="4 months: −5 kg and toned glutes" aria-label="Open: 4 months, minus 5 kg">
+          <img src="/img/out/res-2-640.webp" alt="Before and after photo: 4 months of training" width="640" height="522" loading="lazy">
+          <span class="result-cap"><b>−5 kg</b> 4 months · toned glutes</span>
+        </button>
+      </li>
+      <li class="reveal">
+        <button class="result" type="button" data-lb data-full="/img/out/res-7-1200.webp" data-cap="2 months of work: +6 kg, goal: muscle gain" aria-label="Open: 2 months, plus 6 kg">
+          <img src="/img/out/res-7-640.webp" alt="Before and after photo: 2 months of work" width="640" height="651" loading="lazy">
+          <span class="result-cap"><b>+6 kg</b> 2 months · muscle gain</span>
+        </button>
+      </li>
+      <li class="reveal">
+        <button class="result" type="button" data-lb data-full="/img/out/res-3-1200.webp" data-cap="4 months: toned glutes, defined legs, −3 kg" aria-label="Open: 4 months, minus 3 kg">
+          <img src="/img/out/res-3-640.webp" alt="Before and after photo: 4 months, legs" width="640" height="589" loading="lazy">
+          <span class="result-cap"><b>−3 kg</b> 4 months · defined legs</span>
+        </button>
+      </li>
+      <li class="reveal">
+        <button class="result" type="button" data-lb data-full="/img/out/res-4-1200.webp" data-cap="3 years of training" aria-label="Open: 3 years of training">
+          <img src="/img/out/res-4-640.webp" alt="Before and after photo: 3 years of training" width="640" height="633" loading="lazy">
+          <span class="result-cap"><b>3 years</b> of training</span>
+        </button>
+      </li>
+      <li class="reveal">
+        <button class="result" type="button" data-lb data-full="/img/out/res-5-1200.webp" data-cap="4 years: a full transformation" aria-label="Open: 4 years, transformation">
+          <img src="/img/out/res-5-640.webp" alt="Before and after photo: 4 years" width="640" height="700" loading="lazy">
+          <span class="result-cap"><b>4 years</b> transformation</span>
+        </button>
+      </li>
+      <li class="more-li"><button class="btn btn-ghost btn-block more-btn" type="button" aria-expanded="false" aria-controls="results-list" data-more=".result">Show 4 more results<svg class="ico" aria-hidden="true"><use href="#i-chevron"/></svg></button></li>
+      <li class="result-cta reveal">
+        <p class="result-cta-title">Want the same result?</p>
+        <p class="result-cta-text">Message me and I will build a program for your goal and level.</p>
+        <a class="btn btn-primary" href="https://t.me/nahorniuk_vlad" target="_blank" rel="noopener">Message me on Telegram<svg class="ico" aria-hidden="true"><use href="#i-arrow"/></svg></a>
+      </li>
+    </ul>
+
+    <div class="reviews-block">
+      <h3 class="ach-kicker reveal" id="reviews-title">What clients write</h3>
+      <p class="section-lead reveal">Words from Telegram and Instagram chats, without names. Quotes are kept in the original language (Ukrainian or Russian).</p>
+      <div class="motion-row reveal">
+        <button class="icon-btn motion-btn motion-btn-text" type="button" aria-pressed="false" aria-label="Pause the scrolling strips" data-motion-toggle><svg class="ico ico-pause" aria-hidden="true"><use href="#i-pause"/></svg><svg class="ico ico-play" aria-hidden="true"><use href="#i-play"/></svg><span class="motion-label">Pause</span></button>
+      </div>
+    </div>
+  </div>
+
+  <div class="reviews-wall" id="reviews-list">
+    <div class="marquee" data-marquee>
+      <ul class="track">
+        <li class="card quote quote-lg">
+          <p class="q-top"><span class="q-mark" aria-hidden="true">“</span><span class="q-src">Telegram</span></p>
+          <blockquote>Мы когда начинали заниматься, я тогда последний раз была на льду… а сейчас после наших тренировок всё настолько легче даётся, я прям почувствовала как больше сил стало. Спасибо большое за результаты!</blockquote>
+          <p class="who">Client, figure skater</p>
+        </li>
+        <li class="card quote">
+          <p class="q-top"><span class="q-mark" aria-hidden="true">“</span><span class="q-src">Instagram</span></p>
+          <blockquote>Спасибо за поддержку и мотивацию в моих начинаниях, я очень рада что именно ты был моим первым тренером!</blockquote>
+          <p class="who">Client</p>
+        </li>
+        <li class="card quote">
+          <p class="q-top"><span class="q-mark" aria-hidden="true">“</span><span class="q-src">Telegram</span></p>
+          <blockquote>По сравнению с тем как начинал — я вижу большой результат</blockquote>
+          <p class="who">Client</p>
+        </li>
+        <li class="card quote">
+          <p class="q-top"><span class="q-mark" aria-hidden="true">“</span><span class="q-src">Telegram</span></p>
+          <blockquote>По вазі трохи прогрес, по об'ємах мінус 5–6 см</blockquote>
+          <p class="who">Client</p>
+        </li>
+      </ul>
+    </div>
+    <div class="marquee marquee-rev" data-marquee>
+      <ul class="track">
+        <li class="card quote">
+          <p class="q-top"><span class="q-mark" aria-hidden="true">“</span><span class="q-src">Telegram</span></p>
+          <blockquote>Сьогодні дуже сподобалось тренування! В загалом динаміка позитивна! Спина відпускає і настрій від цього росте!</blockquote>
+          <p class="who">Client</p>
+        </li>
+        <li class="card quote">
+          <p class="q-top"><span class="q-mark" aria-hidden="true">“</span><span class="q-src">Telegram</span></p>
+          <blockquote>Друге дуже сподобалось, я прям відчула всю біль. А руки робила з 20 кг</blockquote>
+          <p class="who">Client</p>
+        </li>
+        <li class="card quote">
+          <p class="q-top"><span class="q-mark" aria-hidden="true">“</span><span class="q-src">Telegram</span></p>
+          <blockquote>Привет, вообще огонь! Я за час справилась, может даже минут за 50</blockquote>
+          <p class="who">Client</p>
+        </li>
+        <li class="card quote">
+          <p class="q-top"><span class="q-mark" aria-hidden="true">“</span><span class="q-src">Telegram</span></p>
+          <blockquote>Тренировка как раз в точку и веса все чётко</blockquote>
+          <p class="who">Client</p>
+        </li>
+      </ul>
+    </div>
+    <div class="container more-wrap"><button class="btn btn-ghost btn-block more-btn" type="button" aria-expanded="false" aria-controls="reviews-list" data-more=".quote">Show 5 more reviews<svg class="ico" aria-hidden="true"><use href="#i-chevron"/></svg></button></div>
+  </div>
+
+  <div class="container">
+
+    <p class="disclaimer reveal">Results are individual and depend on training consistency, nutrition and recovery. No specific numbers are guaranteed. More stories on <a href="https://www.instagram.com/nahorniuk/" target="_blank" rel="noopener">Instagram</a>.</p>
+  </div>
+</section>
+
+<section class="section dotted" id="about" aria-labelledby="about-title">
+  <div class="container about-grid">
+    <div class="about-visual reveal">
+      <img src="/img/out/about-853.webp" alt="Vladyslav Nahorniuk" width="853" height="1280" loading="lazy">
+    </div>
+    <div class="about-copy reveal">
+      <p class="eyebrow">About me</p>
+      <h2 id="about-title">Vladyslav Nahorniuk</h2>
+      <p class="about-lead">Fitness coach with 12 years of experience, working online for the last 6. Higher education in physical education. I competed and won myself, so I know the price of every set.</p>
+      <ul class="about-stats">
+        <li><b>12</b><span>years of coaching</span></li>
+        <li><b>6</b><span>years online</span></li>
+        <li><b>100+</b><span>clients</span></li>
+      </ul>
+      <ul class="ticks">
+        <li>A program for your goal, level and equipment</li>
+        <li>Technique that protects your joints and back</li>
+      </ul>
+      <a class="btn btn-primary" href="https://t.me/nahorniuk_vlad" target="_blank" rel="noopener">Message me<svg class="ico" aria-hidden="true"><use href="#i-arrow"/></svg></a>
+    </div>
+  </div>
+
+  <div class="container ach-block">
+    <p class="ach-kicker reveal">Titles I earned myself</p>
+    <ul class="ach-grid">
+    <li class="card ach reveal">
+      <svg class="ico ach-wm" aria-hidden="true"><use href="#i-trophy"/></svg>
+      <p class="ach-top"><span class="ach-ico"><svg class="ico" aria-hidden="true"><use href="#i-trophy"/></svg></span><span class="ach-label">Pull-ups</span></p>
+      <b class="ach-fig">2017</b>
+      <h3>World champion</h3>
+      <p class="ach-text">With 32&nbsp;kg of added weight.</p>
+    </li>
+    <li class="card ach reveal">
+      <svg class="ico ach-wm" aria-hidden="true"><use href="#i-medal"/></svg>
+      <p class="ach-top"><span class="ach-ico"><svg class="ico" aria-hidden="true"><use href="#i-medal"/></svg></span><span class="ach-label">Static strength</span></p>
+      <b class="ach-fig">2015</b>
+      <h3>Ukrainian champion</h3>
+      <p class="ach-text">Holding the “front&nbsp;lever”.</p>
+    </li>
+    <li class="card ach reveal">
+      <svg class="ico ach-wm" aria-hidden="true"><use href="#i-star"/></svg>
+      <p class="ach-top"><span class="ach-ico"><svg class="ico" aria-hidden="true"><use href="#i-star"/></svg></span><span class="ach-label">Television</span></p>
+      <b class="ach-fig">Final</b>
+      <h3>“Ukraine’s Got Talent&nbsp;5”</h3>
+      <p class="ach-text">Finalist of the national talent show.</p>
+    </li>
+    <li class="card ach reveal">
+      <svg class="ico ach-wm" aria-hidden="true"><use href="#i-cap"/></svg>
+      <p class="ach-top"><span class="ach-ico"><svg class="ico" aria-hidden="true"><use href="#i-cap"/></svg></span><span class="ach-label">Education</span></p>
+      <b class="ach-fig">Higher</b>
+      <h3>Coach’s education</h3>
+      <p class="ach-text">In physical education.</p>
+    </li>
+    </ul>
+  </div>
+</section>
+
+<section class="section section-alt dotted" id="how" aria-labelledby="how-title">
+  <div class="container">
+    <header class="section-head reveal">
+      <p class="eyebrow">How it works</p>
+      <h2 id="how-title">Four steps to start</h2>
+      <p class="section-lead">Simple: you choose, pay, message me and start training.</p>
+    </header>
+    <ol class="steps">
+      <li class="step reveal"><span class="step-num">1</span><h3>Choose a service</h3><p>A program, online workouts, a consultation or nutrition. Not sure what fits? Message me.</p></li>
+      <li class="step reveal"><span class="step-num">2</span><h3>Pay</h3><p>The button on the card opens monobank with the right amount. Payment in advance.</p></li>
+      <li class="step reveal"><span class="step-num">3</span><h3>Message me on Telegram</h3><p>Tell me about your goal, experience and equipment. We agree on timing and format.</p></li>
+      <li class="step reveal"><span class="step-num">4</span><h3>Train</h3><p>You get a program with technique videos or join a workout by video call.</p></li>
+    </ol>
+  </div>
+</section>
+
+<section class="section" id="faq" aria-labelledby="faq-title">
+  <div class="container">
+    <header class="section-head reveal">
+      <p class="eyebrow">What usually holds people back</p>
+      <h2 id="faq-title">FAQ</h2>
+    </header>
+    <div class="faq-grid">
+      <div class="faq reveal">
+        <details>
+          <summary>I am a beginner. Is this for me?<span class="plus" aria-hidden="true"></span></summary>
+          <p>Yes. I match the load to your level and explain technique in videos and on calls. Many clients started from zero.</p>
+        </details>
+        <details>
+          <summary>Do I need equipment or a gym?<span class="plus" aria-hidden="true"></span></summary>
+          <p>Not necessarily. You can train at home, in the gym or outdoors. Tell me what you have and I will build the program around it.</p>
+        </details>
+        <details>
+          <summary>What is the difference between a program and a video-call workout?<span class="plus" aria-hidden="true"></span></summary>
+          <p>A program is a plan you follow on your own using technique videos. A video-call workout means I am on the call and correct you during the session.</p>
+        </details>
+        <details>
+          <summary>Do I have to go on a strict diet?<span class="plus" aria-hidden="true"></span></summary>
+          <p>No. Nutrition is built around your routine and tastes, without exhausting restrictions. A monthly meal plan can be ordered separately.</p>
+        </details>
+        <details>
+          <summary>When will I see results?<span class="plus" aria-hidden="true"></span></summary>
+          <p>It is individual. Clients usually notice the first changes after a few weeks of regular training, and a clear result comes from consistent work over months.</p>
+        </details>
+        <details>
+          <summary>How do I pay?<span class="plus" aria-hidden="true"></span></summary>
+          <p>Press “Pay” on the service you need and the monobank jar opens. Pay by card, then message me on Telegram to agree on the start. If the payment page does not open, turn off your VPN and ad blocker or message me and I will send the details another way.</p>
+        </details>
+      </div>
+      <aside class="card faq-side reveal">
+        <h3>Did not find an answer?</h3>
+        <p>Message me on Telegram. I will answer and tell you where to start.</p>
+        <a class="btn btn-primary btn-block" href="https://t.me/nahorniuk_vlad" target="_blank" rel="noopener">Message me on Telegram</a>
+      </aside>
+    </div>
+  </div>
+</section>
+
+<section class="section section-alt" id="terms" aria-labelledby="terms-title">
+  <div class="container terms-wrap">
+    <header class="section-head reveal">
+      <p class="eyebrow">Terms of service</p>
+      <h2 id="terms-title">Transparent, no surprises</h2>
+    </header>
+    <div class="terms reveal">
+      <div>
+        <h3>Service delivery</h3>
+        <p>Services are provided after payment. We agree format, dates and session times in Telegram.</p>
+      </div>
+      <div>
+        <h3>Payment</h3>
+        <p>Payment in advance via monobank. Prices are in hryvnias (UAH). Refund questions are handled individually.</p>
+      </div>
+      <div>
+        <h3>Results</h3>
+        <p>Results depend on training consistency, nutrition and recovery. Specific outcomes are not guaranteed.</p>
+      </div>
+      <div>
+        <h3>Privacy</h3>
+        <p>Your data and photos stay between us. I publish them only with your consent.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="cta" aria-labelledby="cta-title">
+  <div class="container">
+    <div class="cta-box reveal">
+      <div class="cta-text">
+        <h2 id="cta-title">Ready to start?</h2>
+        <p>Message me on Telegram: tell me your goal and I will suggest where to start. Even if it is just a simple program for 350 ₴.</p>
+      </div>
+      <div class="cta-actions">
+        <a class="btn btn-primary btn-lg" href="https://t.me/nahorniuk_vlad" target="_blank" rel="noopener"><svg class="ico" aria-hidden="true"><use href="#i-telegram"/></svg>Message me on Telegram</a>
+        <a class="btn btn-ghost btn-lg" href="https://www.instagram.com/nahorniuk/" target="_blank" rel="noopener"><svg class="ico" aria-hidden="true"><use href="#i-instagram"/></svg>Instagram</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<footer class="site-footer">
+  <div class="container footer-row">
+    <a class="logo" href="#top" aria-label="Vladyslav Nahorniuk, online coach. Back to top">
+      <span class="logo-mark" aria-hidden="true"><img src="/img/out/avatar-112.webp" alt="" width="112" height="112"></span>
+      <span class="logo-text">Vladyslav Nahorniuk <b>coach</b></span>
+    </a>
+    <p class="footer-copy">© 2026 Vladyslav Nahorniuk. Results are individual and not guaranteed. <a href="#terms">Terms of service</a></p>
+    <div class="socials">
+      <a class="btn btn-primary btn-sm" href="https://t.me/nahorniuk_vlad" target="_blank" rel="noopener">Message</a>
+      <a class="icon-btn" href="https://www.instagram.com/nahorniuk/" target="_blank" rel="noopener" aria-label="Instagram"><svg class="ico" aria-hidden="true"><use href="#i-instagram"/></svg></a>
+      <a class="icon-btn" href="https://t.me/nahorniuk_vlad" target="_blank" rel="noopener" aria-label="Telegram"><svg class="ico" aria-hidden="true"><use href="#i-telegram"/></svg></a>
+    </div>
+  </div>
+</footer>
+
+<div class="sticky-cta" data-sticky-cta>
+  <a class="btn btn-primary btn-block" href="https://t.me/nahorniuk_vlad" target="_blank" rel="noopener">
+    <svg class="ico" aria-hidden="true"><use href="#i-telegram"/></svg>Message me on Telegram
+  </a>
+</div>
+
+<dialog class="lightbox" id="lightbox" aria-label="Result viewer">
+  <button class="icon-btn lb-close" type="button" aria-label="Close" data-lb-close><svg class="ico" aria-hidden="true"><use href="#i-x"/></svg></button>
+  <button class="icon-btn lb-nav lb-prev" type="button" aria-label="Previous photo" data-lb-prev><svg class="ico" aria-hidden="true"><use href="#i-left"/></svg></button>
+  <figure class="lb-figure">
+    <img id="lb-img" alt="" width="1200" height="1200">
+    <figcaption><span class="lb-count" id="lb-count"></span><span id="lb-cap"></span></figcaption>
+  </figure>
+  <button class="icon-btn lb-nav lb-next" type="button" aria-label="Next photo" data-lb-next><svg class="ico" aria-hidden="true"><use href="#i-right"/></svg></button>
+</dialog>
+
+<script>
+// Кожен верхньорівневий блок обгорнуто в try/catch: збій одного (скажімо,
+// SecurityError зі сховища в Safari) не зупиняє решту.
+try { (() => {
+  const btn = document.querySelector('[data-menu-btn]');
+  const nav = document.getElementById('nav');
+  if (!btn || !nav) return;
+  const set = (open) => {
+    document.body.classList.toggle('menu-open', open);
+    btn.setAttribute('aria-expanded', String(open));
+    btn.setAttribute('aria-label', open ? 'Close menu' : 'Open menu');
+  };
+  btn.addEventListener('click', () => set(btn.getAttribute('aria-expanded') !== 'true'));
+  nav.addEventListener('click', (e) => { if (e.target.closest('a')) set(false); });
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && btn.getAttribute('aria-expanded') === 'true') { set(false); btn.focus(); }
+  });
+  matchMedia('(min-width: 900px)').addEventListener('change', (e) => { if (e.matches) set(false); });
+})(); } catch (e) { console.error(e); }
+try { (() => {
+  const root = document.documentElement;
+  const btn = document.querySelector('[data-theme-toggle]');
+  if (!btn) return;
+  const meta = document.querySelector('meta[name="theme-color"]');
+  btn.addEventListener('click', () => {
+    const next = root.dataset.theme === 'light' ? 'dark' : 'light';
+    root.dataset.theme = next;
+    if (meta) meta.content = next === 'light' ? '#f6f3ee' : '#0e1218';
+    try { localStorage.setItem('theme', next); } catch (e) { /* не критично */ }
+  });
+})(); } catch (e) { console.error(e); }
+try { (() => {
+  const items = document.querySelectorAll('.reveal');
+  if (!items.length) return;
+  const show = (el) => el.classList.add('in');
+  if (!('IntersectionObserver' in window) || matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    items.forEach(show);
+    return;
+  }
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach((en) => {
+      if (!en.isIntersecting) return;
+      // невелика каскадна затримка для сусідів в одному рядку
+      const idx = [...en.target.parentElement.children].indexOf(en.target);
+      en.target.style.transitionDelay = Math.min(idx, 5) * 60 + 'ms';
+      show(en.target);
+      io.unobserve(en.target);
+    });
+  }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
+  items.forEach((el) => io.observe(el));
+})(); } catch (e) { console.error(e); }
+try { (() => {
+  const nums = document.querySelectorAll('[data-count]');
+  if (!nums.length) return;
+  if (!('IntersectionObserver' in window) || matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+  const run = (el) => {
+    const to = Number(el.dataset.count);
+    const plus = el.hasAttribute('data-plus') ? '+' : '';
+    const t0 = performance.now();
+    const dur = 1100;
+    const tick = (now) => {
+      const p = Math.min(1, (now - t0) / dur);
+      el.textContent = Math.round(to * (1 - Math.pow(1 - p, 3))) + (p === 1 ? plus : '');
+      if (p < 1) requestAnimationFrame(tick);
+    };
+    requestAnimationFrame(tick);
+  };
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach((en) => {
+      if (!en.isIntersecting) return;
+      run(en.target);
+      io.unobserve(en.target);
+    });
+  }, { threshold: 0.6 });
+  nums.forEach((el) => io.observe(el));
+})(); } catch (e) { console.error(e); }
+try { (() => {
+  const dlg = document.getElementById('lightbox');
+  if (!dlg || typeof dlg.showModal !== 'function') return;
+  const triggers = [...document.querySelectorAll('[data-lb]')];
+  const img = document.getElementById('lb-img');
+  const cap = document.getElementById('lb-cap');
+  const count = document.getElementById('lb-count');
+  let cur = 0;
+  let opener = null;
+
+  const show = (i) => {
+    cur = (i + triggers.length) % triggers.length;
+    const t = triggers[cur];
+    img.src = t.dataset.full;
+    img.alt = t.querySelector('img').alt;
+    cap.textContent = t.dataset.cap;
+    if (count) count.textContent = (cur + 1) + ' / ' + triggers.length;
+  };
+  const open = (i) => {
+    opener = triggers[i];
+    show(i);
+    dlg.showModal();
+    document.body.classList.add('lb-open');
+  };
+  triggers.forEach((t, i) => t.addEventListener('click', () => open(i)));
+  dlg.querySelector('[data-lb-prev]').addEventListener('click', () => show(cur - 1));
+  dlg.querySelector('[data-lb-next]').addEventListener('click', () => show(cur + 1));
+  dlg.querySelector('[data-lb-close]').addEventListener('click', () => dlg.close());
+  // клік по затемненню (поза фігурою) закриває
+  dlg.addEventListener('click', (e) => { if (e.target === dlg) dlg.close(); });
+  dlg.addEventListener('close', () => {
+    document.body.classList.remove('lb-open');
+    img.removeAttribute('src');
+    if (opener) opener.focus();
+  });
+  // свайп убік на телефоні гортає фото (вертикальний рух ігноруємо)
+  let sx = 0, sy = 0;
+  dlg.addEventListener('touchstart', (e) => { sx = e.touches[0].clientX; sy = e.touches[0].clientY; }, { passive: true });
+  dlg.addEventListener('touchend', (e) => {
+    const dx = e.changedTouches[0].clientX - sx, dy = e.changedTouches[0].clientY - sy;
+    if (Math.abs(dx) > 48 && Math.abs(dx) > Math.abs(dy) * 1.5) show(cur + (dx < 0 ? 1 : -1));
+  }, { passive: true });
+  dlg.addEventListener('keydown', (e) => {
+    if (e.key === 'ArrowLeft') show(cur - 1);
+    if (e.key === 'ArrowRight') show(cur + 1);
+  });
+})(); } catch (e) { console.error(e); }
+try { (() => {
+  if (!('IntersectionObserver' in window)) return;
+  const links = [...document.querySelectorAll('.nav a[href^="#"]')];
+  const map = new Map();
+  links.forEach((a) => {
+    const sec = document.getElementById(a.getAttribute('href').slice(1));
+    if (sec) map.set(sec, a);
+  });
+  // герой, «Як це працює», умови, заклик і футер не мають пункту меню: на них підсвітка знімається
+  const none = ['.hero', '#how', '#terms', '.cta', '.site-footer'].map((q) => document.querySelector(q)).filter(Boolean);
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach((en) => {
+      if (!en.isIntersecting) return;
+      if (none.includes(en.target)) { links.forEach((l) => l.removeAttribute('aria-current')); return; }
+      const a = map.get(en.target);
+      if (!a) return;
+      links.forEach((l) => l.removeAttribute('aria-current'));
+      a.setAttribute('aria-current', 'true');
+    });
+  }, { rootMargin: '-40% 0px -55% 0px' });
+  map.forEach((_, sec) => io.observe(sec));
+  none.forEach((sec) => io.observe(sec));
+})(); } catch (e) { console.error(e); }
+try { (() => {
+  // Липка кнопка на мобільному: з'являється після героя й ховається біля фінального CTA та футера.
+  const bar = document.querySelector('[data-sticky-cta]');
+  const hero = document.querySelector('.hero');
+  const end = document.querySelector('.cta');
+  if (!bar || !hero || !('IntersectionObserver' in window)) return;
+  let pastHero = false;
+  let atEnd = false;
+  const update = () => bar.classList.toggle('on', pastHero && !atEnd);
+  new IntersectionObserver(([en]) => { pastHero = !en.isIntersecting && en.boundingClientRect.top < 0; update(); }).observe(hero);
+  if (end) new IntersectionObserver(([en]) => { atEnd = en.isIntersecting; update(); }).observe(end);
+})(); } catch (e) { console.error(e); }
+try { (() => {
+  // Підсвітка під курсором на картках: CSS-змінні --mx/--my читає radial-gradient у .card::before
+  if (!matchMedia('(hover: hover) and (pointer: fine)').matches) return;
+  let raf = 0;
+  document.addEventListener('pointermove', (e) => {
+    const card = e.target.closest && e.target.closest('.card, .result');
+    if (!card) return;
+    cancelAnimationFrame(raf);
+    raf = requestAnimationFrame(() => {
+      const r = card.getBoundingClientRect();
+      card.style.setProperty('--mx', (e.clientX - r.left) + 'px');
+      card.style.setProperty('--my', (e.clientY - r.top) + 'px');
+    });
+  }, { passive: true });
+})(); } catch (e) { console.error(e); }
+try { (() => {
+  // Нескінченна стрічка відгуків: копіюємо картки (копія прихована від AT).
+  // Біжить лише на десктопі з мишею (наведення ставить на паузу). На телефоні, сенсорному екрані,
+  // з reduced-motion або без JS відгуки лишаються звичайною сіткою карток, яку зручно читати.
+  const fine = matchMedia('(min-width: 760px) and (hover: hover) and (pointer: fine)').matches;
+  if (!fine || matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+  const rows = document.querySelectorAll('[data-marquee]');
+  rows.forEach((m) => {
+    const track = m.querySelector('.track');
+    if (!track) return;
+    [...track.children].forEach((li) => {
+      const c = li.cloneNode(true);
+      c.setAttribute('aria-hidden', 'true');
+      c.setAttribute('inert', '');
+      track.appendChild(c);
+    });
+    m.classList.add('is-running');
+  });
+  if (rows.length) document.querySelector('.reviews')?.classList.add('has-marquee');
+})(); } catch (e) { console.error(e); }
+try { (() => {
+  // Пауза для рухомого контенту (WCAG 2.2.2): одна кнопка-перемикач на всіх стрічках, вибір пам'ятається
+  const root = document.documentElement;
+  const btns = [...document.querySelectorAll('[data-motion-toggle]')];
+  if (!btns.length) return;
+  const KEY = 'motion-paused';
+  const set = (paused) => {
+    root.classList.toggle('motion-paused', paused);
+    btns.forEach((b) => {
+      b.setAttribute('aria-pressed', String(paused));
+      b.setAttribute('aria-label', paused ? 'Resume the scrolling strips' : 'Pause the scrolling strips');
+      const t = b.querySelector('.motion-label');
+      if (t) t.textContent = paused ? 'Resume' : 'Pause';
+    });
+  };
+  let saved = false;
+  try { saved = localStorage.getItem(KEY) === '1'; } catch (e) { /* сховище недоступне */ }
+  if (saved) set(true);
+  btns.forEach((b) => b.addEventListener('click', () => {
+    const next = !root.classList.contains('motion-paused');
+    set(next);
+    try { localStorage.setItem(KEY, next ? '1' : '0'); } catch (e) { /* сховище недоступне */ }
+  }));
+})(); } catch (e) { console.error(e); }
+try { (() => {
+  // «Показати ще» для довгих списків (результати, відгуки). Згортаємо лише з JS, без нього все видно;
+  // що саме сховати, вирішує CSS (тільки на телефоні, до 640px). data-more на кнопці це селектор елементів
+  // списку: після розгортання фокус переходить на перший щойно показаний, бо кнопка зникає.
+  document.querySelectorAll('[data-more]').forEach((btn) => {
+    const list = document.getElementById(btn.getAttribute('aria-controls'));
+    if (!list) return;
+    list.classList.add('is-collapsed');
+    btn.addEventListener('click', () => {
+      const first = [...list.querySelectorAll(btn.dataset.more)].find((el) => !el.getClientRects().length);
+      list.classList.remove('is-collapsed');
+      btn.setAttribute('aria-expanded', 'true');
+      if (!first) return;
+      if (!first.matches('a, button')) first.setAttribute('tabindex', '-1');
+      first.focus({ preventScroll: true });
+    });
+  });
+})(); } catch (e) { console.error(e); }
+</script>
+
+</body>
+</html>

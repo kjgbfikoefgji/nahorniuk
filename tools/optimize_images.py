@@ -95,20 +95,24 @@ def cover(img, w, h):
     return ImageOps.fit(img, (w, h), Image.LANCZOS, centering=(0.5, 0.35))
 
 
-def og():
+def og(lang='uk'):
     W, H = 1200, 630
+    t = {
+        'uk': ('ОНЛАЙН-ТРЕНЕР', 'Владислав', 'Нагорнюк', '12 років досвіду · 100+ клієнтів', 'Чемпіон світу · «Україна має талант 5»', 'og.jpg'),
+        'en': ('ONLINE COACH', 'Vladyslav', 'Nahorniuk', '12 years of experience · 100+ clients', 'World champion · “Ukraine’s Got Talent 5”', 'og-en.jpg'),
+    }[lang]
     im = Image.new('RGB', (W, H), BG)
     d = ImageDraw.Draw(im)
     # правий блок: портрет тренера
     photo = Image.open(os.path.join(OUT, 'portrait-853.webp')).convert('RGB')
     im.paste(cover(photo, 400, 630), (800, 0))
     d.rectangle((0, 0, 14, H), fill=ACCENT)
-    d.text((70, 90), 'ОНЛАЙН-ТРЕНЕР', font=font(30), fill=ACCENT)
-    d.text((70, 140), 'Владислав', font=font(104), fill=TEXT)
-    d.text((70, 252), 'Нагорнюк', font=font(104), fill=TEXT)
-    d.text((70, 420), '12 років досвіду · 100+ клієнтів', font=font(32, False), fill=MUTED)
-    d.text((70, 470), 'Чемпіон світу · «Україна має талант 5»', font=font(28, False), fill=MUTED)
-    im.save(os.path.join(SITE, 'img', 'og.jpg'), 'JPEG', quality=86, optimize=True)
+    d.text((70, 90), t[0], font=font(30), fill=ACCENT)
+    d.text((70, 140), t[1], font=font(104), fill=TEXT)
+    d.text((70, 252), t[2], font=font(104), fill=TEXT)
+    d.text((70, 420), t[3], font=font(32, False), fill=MUTED)
+    d.text((70, 470), t[4], font=font(28, False), fill=MUTED)
+    im.save(os.path.join(SITE, 'img', t[5]), 'JPEG', quality=86, optimize=True)
 
 
 def icon_image(size):
@@ -132,7 +136,8 @@ def main():
     results()
     portrait()
     services()
-    og()
+    og('uk')
+    og('en')
     icons()
     print('готово:', OUT)
 

@@ -1,4 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-  <url><loc>{{ site_url }}/</loc></url>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml">
+  <url>
+    <loc>{{ url_uk }}</loc>
+    <xhtml:link rel="alternate" hreflang="uk" href="{{ url_uk }}"/>
+    <xhtml:link rel="alternate" hreflang="en" href="{{ url_en }}"/>
+  </url>
+  <url>
+    <loc>{{ url_en }}</loc>
+    <xhtml:link rel="alternate" hreflang="uk" href="{{ url_uk }}"/>
+    <xhtml:link rel="alternate" hreflang="en" href="{{ url_en }}"/>
+  </url>
 </urlset>

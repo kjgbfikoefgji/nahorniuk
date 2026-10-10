@@ -10,7 +10,8 @@
   * {{ site_url }}, {{ telegram_url }}, {{ instagram_url }}, {{ mono_url }} ...
     підставляються з src/site.json: ключ JSON = назва маркера.
 
-Збираються: src/index.html, src/robots.txt, src/sitemap.xml -> site/.
+Збираються: src/index.html (дві мови: site/index.html і site/en/index.html), src/robots.txt, src/sitemap.xml -> site/.
+Переклади англійської версії лежать у src/en/ з тими самими відносними шляхами, що й українські файли.
 Після збірки рахується sha256 кожного виконуваного inline-<script>, і хеші
 записуються в script-src у netlify.toml: вручну перераховувати їх не треба.
 
@@ -30,8 +31,15 @@ SRC = os.path.join(ROOT, 'src')
 SITE = os.path.join(ROOT, 'site')
 TOML = os.path.join(ROOT, 'netlify.toml')
 
-# шаблон у src/ -> готовий файл у site/
-PAGES = ['index.html', 'robots.txt', 'sitemap.xml']
+# (готовий файл у site/, шаблон у src/, мова). Англійська версія збирається з того самого
+# index.html, але кожен include спершу шукається в src/en/ (там лежать переклади), а якщо
+# файла там немає, береться український із src/. Так CSS і більшість JS спільні.
+PAGES = [
+    ('index.html', 'index.html', 'uk'),
+    ('en/index.html', 'index.html', 'en'),
+    ('robots.txt', 'robots.txt', 'uk'),
+    ('sitemap.xml', 'sitemap.xml', 'uk'),
+]
 
 INCLUDE = re.compile(r'^\{\{ include "([^"]+)" \}\}\n', re.M)
 VAR = re.compile(r'\{\{ (\w+) \}\}')
@@ -45,24 +53,28 @@ def read(path):
         return f.read().replace('\r\n', '\n')
 
 
-def src_path(rel):
+def src_path(rel, lang='uk'):
     path = os.path.normpath(os.path.join(SRC, *rel.split('/')))
     if os.path.commonpath([path, SRC]) != SRC:
         sys.exit('шлях виходить за межі src/: %s' % rel)
+    if lang != 'uk':
+        loc = os.path.normpath(os.path.join(SRC, lang, *rel.split('/')))
+        if os.path.isfile(loc):
+            return loc
     if not os.path.isfile(path):
         sys.exit('у src/ немає файла: %s' % rel)
     return path
 
 
-def render(text, variables, depth=0):
+def render(text, variables, depth=0, lang='uk'):
     if depth > MAX_DEPTH:
         sys.exit('include вкладений глибше за %d рівнів (цикл?)' % MAX_DEPTH)
 
     def include(m):
-        part = read(src_path(m.group(1)))
+        part = read(src_path(m.group(1), lang))
         if not part.endswith('\n'):
             part += '\n'
-        return render(part, variables, depth + 1)
+        return render(part, variables, depth + 1, lang)
 
     def var(m):
         return variables.get(m.group(1), m.group(0))
@@ -73,6 +85,8 @@ def render(text, variables, depth=0):
 def load_variables():
     data = json.loads(read(os.path.join(SRC, 'site.json')))
     data['site_url'] = data['site_url'].rstrip('/')
+    data['url_uk'] = data['site_url'] + '/'
+    data['url_en'] = data['site_url'] + '/en/'
     return data
 
 
@@ -80,8 +94,9 @@ def build_pages():
     """Повертає {назва файла в site/: готовий текст}."""
     variables = load_variables()
     pages = {}
-    for name in PAGES:
-        out = render(read(src_path(name)), variables)
+    for name, tpl, lang in PAGES:
+        v = dict(variables, html_lang=lang, url_self=variables['url_en'] if lang == 'en' else variables['url_uk'])
+        out = render(read(src_path(tpl)), v, lang=lang)
         left = LEFTOVER.search(out)
         if left:
             sys.exit('у %s лишився нерозкритий маркер: %s' % (name, left.group(0)))
@@ -137,12 +152,16 @@ def write_text(path, text):
 def main(argv):
     check = '--check' in argv
     pages = build_pages()
-    hashes = inline_script_hashes(pages['index.html'])
+    hashes = []
+    for html in ('index.html', 'en/index.html'):
+        for h in inline_script_hashes(pages[html]):
+            if h not in hashes:
+                hashes.append(h)
     if not hashes:
         sys.exit('у зібраному index.html немає жодного inline-скрипта')
     toml_old, toml_new = toml_with_hashes(hashes)
 
-    stale = [n for n in PAGES if read_current(os.path.join(SITE, n)) != pages[n]]
+    stale = [n for n in pages if read_current(os.path.join(SITE, *n.split('/'))) != pages[n]]
     toml_stale = toml_old != toml_new
 
     for h in hashes:
@@ -159,11 +178,11 @@ def main(argv):
         return 0
 
     for n in stale:
-        write_text(os.path.join(SITE, n), pages[n])
+        write_text(os.path.join(SITE, *n.split('/')), pages[n])
     if toml_stale:
         write_text(TOML, toml_new)
     print('site/: оновлено %d з %d файлів%s' % (
-        len(stale), len(PAGES), '; хеш у netlify.toml оновлено' if toml_stale else ''))
+        len(stale), len(pages), '; хеш у netlify.toml оновлено' if toml_stale else ''))
     return 0
 
 
