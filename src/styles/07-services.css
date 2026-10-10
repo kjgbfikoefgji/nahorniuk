@@ -3,7 +3,7 @@
 .service:hover{border-color:rgba(255,122,26,.5);transform:translateY(-4px);box-shadow:var(--shadow)}
 
 /* візуальна шапка картки: акцентне сяйво, крапкова фактура, велика іконка, тег */
-.service-visual{position:relative;display:grid;place-items:center;aspect-ratio:3/2;overflow:hidden;border-bottom:1px solid var(--line);
+.service-visual{position:relative;display:grid;place-items:center;aspect-ratio:4/3;overflow:hidden;border-bottom:1px solid var(--line);
   background:radial-gradient(22rem 14rem at 25% 0%,rgba(255,122,26,.34),transparent 62%),radial-gradient(18rem 12rem at 90% 100%,rgba(255,150,40,.14),transparent 60%),var(--card-hi)}
 .service-visual::before{content:"";position:absolute;inset:0;background-image:radial-gradient(rgba(255,255,255,.10) 1px,transparent 1.2px);background-size:1.25rem 1.25rem;
   -webkit-mask-image:linear-gradient(180deg,#000,transparent);mask-image:linear-gradient(180deg,#000,transparent)}
