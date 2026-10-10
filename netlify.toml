@@ -7,7 +7,7 @@
 [[headers]]
   for = "/*"
   [headers.values]
-    Content-Security-Policy = "default-src 'none'; script-src 'sha256-4XJ/uq2c9b8n6Vfveqo0DMI0607ib52GC5+PiwlkJLU=' 'sha256-f8o/Ok1SllPu/3YTYt5rvuy+xmPdjQrXaHzMnfZkduA='; style-src 'unsafe-inline'; img-src 'self' data:; font-src 'self'; base-uri 'none'; form-action 'none'; frame-ancestors 'none'"
+    Content-Security-Policy = "default-src 'none'; script-src 'sha256-4XJ/uq2c9b8n6Vfveqo0DMI0607ib52GC5+PiwlkJLU=' 'sha256-8rQ4FgWUF+5N6akeHRvE76ojgGzwK/0kPz/hHqRshNM='; style-src 'unsafe-inline'; img-src 'self' data:; font-src 'self'; base-uri 'none'; form-action 'none'; frame-ancestors 'none'"
     X-Frame-Options = "DENY"
     X-Content-Type-Options = "nosniff"
     Referrer-Policy = "strict-origin-when-cross-origin"

@@ -95,11 +95,10 @@ def cover(img, w, h):
     return ImageOps.fit(img, (w, h), Image.LANCZOS, centering=(0.5, 0.35))
 
 
-def og(lang='uk'):
+def og(lang='uk'):  # lang лишився на випадок окремого зображення для іншої мови
     W, H = 1200, 630
     t = {
         'uk': ('ОНЛАЙН-ТРЕНЕР', 'Владислав', 'Нагорнюк', '12 років досвіду · 100+ клієнтів', 'Чемпіон світу · «Україна має талант 5»', 'og.jpg'),
-        'en': ('ONLINE COACH', 'Vladyslav', 'Nahorniuk', '12 years of experience · 100+ clients', 'World champion · “Ukraine’s Got Talent 5”', 'og-en.jpg'),
     }[lang]
     im = Image.new('RGB', (W, H), BG)
     d = ImageDraw.Draw(im)
