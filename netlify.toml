@@ -30,6 +30,6 @@
     Cache-Control = "public, max-age=2592000"
 
 [[headers]]
-  for = "/img/og-3.jpg"
+  for = "/img/og-4.jpg"
   [headers.values]
     Cache-Control = "public, max-age=86400"

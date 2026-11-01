@@ -120,9 +120,9 @@ def og(lang='uk'):  # lang лишився на випадок окремого �
     W, H = 1200 * S, 630 * S
     t = {
         'uk': ('ОНЛАЙН-ТРЕНЕР', ('ВЛАДИСЛАВ', 'НАГОРНЮК'), ('ЧЕМПІОН СВІТУ', 'З ПІДТЯГУВАНЬ'),
-               ('12 РОКІВ ДОСВІДУ', '100+ КЛІЄНТІВ', 'ВІД 350 ГРН'),
+               (('12', 'років у тренерстві'), ('100+', 'задоволених клієнтів')),
                'ЧЕМПІОН СВІТУ 2017 • ПІДТЯГУВАННЯ +32 КГ • ',
-               'og-3.jpg'),  # нова назва = нове прев'ю: Telegram кешує картинку за адресою
+               'og-4.jpg'),  # нова назва = нове прев'ю: Telegram кешує картинку за адресою
     }[lang]
     INK, CREAM, HOT = (23, 18, 13), (247, 243, 236), (224, 86, 10)
     im = Image.new('RGB', (W, H), CREAM)
@@ -200,15 +200,17 @@ def og(lang='uk'):  # lang лишився на випадок окремого �
     draw_mixed(d, (56 * S, 140 * S), t[1][0], big, INK)
     draw_mixed(d, (56 * S, 228 * S), t[1][1], big, INK)
     mid = site_font('unbounded', 36 * S, 900)
-    draw_mixed(d, (60 * S, 350 * S), t[2][0], mid, HOT)
-    draw_mixed(d, (60 * S, 400 * S), t[2][1], mid, HOT)
-    chip = site_font('onest', 21 * S, 800)
+    draw_mixed(d, (60 * S, 336 * S), t[2][0], mid, HOT)
+    draw_mixed(d, (60 * S, 384 * S), t[2][1], mid, HOT)
+    # великі цифри з підписами, як рядок досягнень у героєві
+    num, cap = site_font('unbounded', 50 * S, 900), site_font('onest', 20 * S, 600)
     x = 60 * S
-    for c in t[3]:
-        w = sum((chip[0] if 0x400 <= ord(ch) < 0x530 else chip[1]).getlength(ch) for ch in c)
-        d.rectangle((x, 506 * S, x + w + 30 * S, 556 * S), fill=INK)
-        draw_mixed(d, (x + 15 * S, 517 * S), c, chip, (255, 255, 255))
-        x += w + 30 * S + 12 * S
+    for i, (n, c) in enumerate(t[3]):
+        if i:
+            d.line((x - 26 * S, 486 * S, x - 26 * S, 572 * S), fill=(205, 194, 178), width=2 * S)
+        wn = draw_mixed(d, (x, 474 * S), n, num, INK)
+        wc = draw_mixed(d, (x + 2 * S, 546 * S), c, cap, (90, 81, 72))
+        x += max(wn, wc) + 52 * S
     im = im.resize((W // S, H // S), Image.LANCZOS)
     im.save(os.path.join(SITE, 'img', t[5]), 'JPEG', quality=88, optimize=True)
 
