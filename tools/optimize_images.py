@@ -9,7 +9,7 @@ og.jpg (1200x630), favicon.ico та icon-180.png.
 import os
 import sys
 
-from PIL import Image, ImageChops, ImageDraw, ImageFont, ImageOps
+from PIL import Image, ImageDraw, ImageFont, ImageOps
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SRC = os.path.join(ROOT, 'images')
@@ -93,10 +93,6 @@ def services():
         print('%s: %dx%d' % (out, im.width, im.height))
 
 
-def cover(img, w, h):
-    return ImageOps.fit(img, (w, h), Image.LANCZOS, centering=(0.5, 0.35))
-
-
 def site_font(family, size, weight):
     """Шрифт сайту з site/fonts: пара (кирилиця, латиниця), бо woff2 розбиті на підмножини."""
     pair = []
@@ -120,46 +116,36 @@ def draw_mixed(d, xy, text, fonts, fill):
 def og(lang='uk'):  # lang лишився на випадок окремого зображення для іншої мови
     W, H = 1200, 630
     t = {
-        'uk': ('НАГОРНЮК', 'ОНЛАЙН-ТРЕНЕР', 'ТРЕНУВАННЯ, ЩО', 'ДАЮТЬ РЕЗУЛЬТАТ',
-               'ЧЕМПІОН СВІТУ  •  12 РОКІВ ДОСВІДУ  •  100+ КЛІЄНТІВ', 'og.jpg'),
+        'uk': ('ОНЛАЙН-ТРЕНЕР', ('ВЛАДИСЛАВ', 'НАГОРНЮК'), ('ЧЕМПІОН СВІТУ', 'З ПІДТЯГУВАНЬ'),
+               ('12 РОКІВ ДОСВІДУ', '100+ КЛІЄНТІВ', 'ВІД 350 ГРН'), 'og.jpg'),
     }[lang]
     im = Image.new('RGB', (W, H), BG)
-    # фото тренера праворуч, кадр від маківки до пояса, приглушене під темну тему
+    # фото тренера праворуч на всю висоту, кадр від маківки до пояса, без затемнення
     src = ImageOps.exif_transpose(Image.open(os.path.join(SRC, PORTRAIT))).convert('RGB')
-    pw = 760
-    side = round(src.height * 0.56)
+    pw = 500
+    side = round(src.height * 0.66)
     cw = round(side * pw / H)
-    # тренер на 3/4 ширини фото, щоб обличчя не опинилось під заголовком
-    left = min(max(round(src.width * PORTRAIT_CENTER - cw * 0.72), 0), src.width - cw)
-    top = round(src.height * 0.04)
-    photo = src.crop((left, top, left + cw, top + side))
-    photo = Image.blend(photo.resize((pw, H), Image.LANCZOS), Image.new('RGB', (pw, H), BG), 0.42)
-    im.paste(photo, (W - pw, 0))
-    # градієнти: зліва в тло (текст), знизу в тло (рядок регалій)
-    x0 = W - pw
-    side_shade = Image.linear_gradient('L').rotate(-90).resize((360, H))  # 255 зліва -> 0 справа
-    left_mask = Image.new('L', (W, H), 0)
-    left_mask.paste(255, (0, 0, x0, H))
-    left_mask.paste(side_shade, (x0, 0))
-    bottom_mask = Image.new('L', (W, H), 0)
-    bottom_mask.paste(Image.linear_gradient('L').resize((W, 220)).point(lambda v: v * 235 // 255), (0, H - 220))
-    im.paste(Image.new('RGB', (W, H), BG), (0, 0), ImageChops.lighter(left_mask, bottom_mask))
+    left = min(max(round(src.width * PORTRAIT_CENTER - cw / 2), 0), src.width - cw)
+    top = round(src.height * 0.035)
+    im.paste(src.crop((left, top, left + cw, top + side)).resize((pw, H), Image.LANCZOS), (W - pw, 0))
     d = ImageDraw.Draw(im)
-    # аватар і ім'я
-    av = Image.open(os.path.join(OUT, 'avatar-cap-112.webp')).convert('RGB').resize((76, 76), Image.LANCZOS)
-    mask = Image.new('L', (76, 76), 0)
-    ImageDraw.Draw(mask).ellipse((0, 0, 75, 75), fill=255)
-    d.ellipse((60, 52, 140, 132), fill=ACCENT)
-    im.paste(av, (62, 54), mask)
-    brand = site_font('unbounded', 30, 800)
-    w = draw_mixed(d, (162, 72), t[0], brand, TEXT)
-    draw_mixed(d, (162 + w + 14, 72), t[1], brand, ACCENT)
-    # заголовок
-    big = site_font('unbounded', 62, 900)
-    draw_mixed(d, (60, 300), t[2], big, TEXT)
-    draw_mixed(d, (60, 384), t[3], big, ACCENT)
-    draw_mixed(d, (62, 520), t[4], site_font('onest', 26, 800), TEXT)
-    im.save(os.path.join(SITE, 'img', t[5]), 'JPEG', quality=86, optimize=True)
+    d.rectangle((W - pw - 8, 0, W - pw - 1, H), fill=ACCENT)
+    draw_mixed(d, (64, 64), t[0], site_font('unbounded', 24, 700), ACCENT)
+    big = site_font('unbounded', 60, 900)
+    draw_mixed(d, (60, 150), t[1][0], big, TEXT)
+    draw_mixed(d, (60, 228), t[1][1], big, TEXT)
+    mid = site_font('unbounded', 34, 800)
+    draw_mixed(d, (62, 352), t[2][0], mid, ACCENT)
+    draw_mixed(d, (62, 400), t[2][1], mid, ACCENT)
+    # чіпи-регалії в рамках
+    chip = site_font('onest', 21, 800)
+    x = 62
+    for c in t[3]:
+        w = sum((chip[0] if 0x400 <= ord(ch) < 0x530 else chip[1]).getlength(ch) for ch in c)
+        d.rectangle((x, 512, x + w + 28, 560), outline=(80, 90, 105), width=2)
+        draw_mixed(d, (x + 14, 523), c, chip, TEXT)
+        x += w + 28 + 12
+    im.save(os.path.join(SITE, 'img', t[4]), 'JPEG', quality=86, optimize=True)
 
 
 def icon_image(size):
