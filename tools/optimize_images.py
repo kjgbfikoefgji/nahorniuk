@@ -6,10 +6,11 @@
 Заглавне фото: hero-640.webp, hero-853.webp. Результати before/after: res-N-640.webp і res-N-1200.webp. Також генеруються
 og-N.jpg (1200x630), favicon.ico та icon-180.png.
 """
+import math
 import os
 import sys
 
-from PIL import Image, ImageDraw, ImageFont, ImageOps
+from PIL import Image, ImageDraw, ImageFilter, ImageFont, ImageOps
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SRC = os.path.join(ROOT, 'images')
@@ -114,38 +115,118 @@ def draw_mixed(d, xy, text, fonts, fill):
 
 
 def og(lang='uk'):  # lang лишився на випадок окремого зображення для іншої мови
-    W, H = 1200, 630
+    """Прев'ю посилання у світлій темі героя: текст ліворуч, праворуч фото в рамці з нахиленою карткою й печаткою."""
+    S = 2  # малюємо вдвічі більше й зменшуємо: гладкі краї рамки, картки й печатки
+    W, H = 1200 * S, 630 * S
     t = {
         'uk': ('ОНЛАЙН-ТРЕНЕР', ('ВЛАДИСЛАВ', 'НАГОРНЮК'), ('ЧЕМПІОН СВІТУ', 'З ПІДТЯГУВАНЬ'),
-               ('12 РОКІВ ДОСВІДУ', '100+ КЛІЄНТІВ', 'ВІД 350 ГРН'), 'og-2.jpg'),  # нова назва = нове прев'ю: Telegram кешує картинку за адресою
+               ('12 РОКІВ ДОСВІДУ', '100+ КЛІЄНТІВ', 'ВІД 350 ГРН'),
+               'ЧЕМПІОН СВІТУ 2017 • ПІДТЯГУВАННЯ +32 КГ • ',
+               'og-3.jpg'),  # нова назва = нове прев'ю: Telegram кешує картинку за адресою
     }[lang]
-    im = Image.new('RGB', (W, H), BG)
-    # фото тренера праворуч на всю висоту, кадр від маківки до пояса, без затемнення
-    src = ImageOps.exif_transpose(Image.open(os.path.join(SRC, PORTRAIT))).convert('RGB')
-    pw = 500
-    side = round(src.height * 0.66)
-    cw = round(side * pw / H)
-    left = min(max(round(src.width * PORTRAIT_CENTER - cw / 2), 0), src.width - cw)
-    top = round(src.height * 0.035)
-    im.paste(src.crop((left, top, left + cw, top + side)).resize((pw, H), Image.LANCZOS), (W - pw, 0))
+    INK, CREAM, HOT = (23, 18, 13), (247, 243, 236), (224, 86, 10)
+    im = Image.new('RGB', (W, H), CREAM)
     d = ImageDraw.Draw(im)
-    d.rectangle((W - pw - 8, 0, W - pw - 1, H), fill=ACCENT)
-    draw_mixed(d, (64, 64), t[0], site_font('unbounded', 24, 700), ACCENT)
-    big = site_font('unbounded', 60, 900)
-    draw_mixed(d, (60, 150), t[1][0], big, TEXT)
-    draw_mixed(d, (60, 228), t[1][1], big, TEXT)
-    mid = site_font('unbounded', 34, 800)
-    draw_mixed(d, (62, 352), t[2][0], mid, ACCENT)
-    draw_mixed(d, (62, 400), t[2][1], mid, ACCENT)
-    # чіпи-регалії в рамках
-    chip = site_font('onest', 21, 800)
-    x = 62
+    # крапкова фактура тла, як на сайті
+    for y in range(14 * S, H, 26 * S):
+        for x in range(14 * S, W, 26 * S):
+            d.ellipse((x - S, y - S, x + S, y + S), fill=(226, 218, 205))
+    # рамка з фото
+    fx, fy, fw, fh, r = 770 * S, 48 * S, 370 * S, 534 * S, 30 * S
+
+    def layer(draw_fn, angle=0, blur=0):
+        lay = Image.new('RGBA', (W, H), (0, 0, 0, 0))
+        draw_fn(ImageDraw.Draw(lay))
+        if angle:
+            lay = lay.rotate(angle, Image.BICUBIC, center=(fx + fw // 2, fy + fh // 2))
+        if blur:
+            lay = lay.filter(ImageFilter.GaussianBlur(blur))
+        im.paste(lay, (0, 0), lay)
+
+    box = (fx, fy, fx + fw, fy + fh)
+    shadow = (fx + 6 * S, fy + 26 * S, fx + fw + 6 * S, fy + fh + 26 * S)
+    layer(lambda dr: dr.rounded_rectangle(shadow, r, fill=(150, 60, 0, 90)), -4, 22 * S)
+    # нахилена помаранчева картка з крапками
+    grad = Image.new('RGBA', (fw, fh))
+    gd = ImageDraw.Draw(grad)
+    for y in range(fh):  # #ffa04a -> #ff7a1a -> #f05a00
+        k = y / fh
+        c = (255, round(160 - 38 * k / .46), round(74 - 48 * k / .46)) if k < .46 else             (round(255 - 15 * (k - .46) / .54), round(122 - 32 * (k - .46) / .54), round(26 - 26 * (k - .46) / .54))
+        gd.line((0, y, fw, y), fill=c + (255,))
+    for y in range(10 * S, fh, 20 * S):
+        for x in range(10 * S, fw, 20 * S):
+            gd.ellipse((x - 2 * S, y - 2 * S, x + 2 * S, y + 2 * S), fill=(23, 18, 13, 50))
+    cmask = Image.new('L', (fw, fh), 0)
+    ImageDraw.Draw(cmask).rounded_rectangle((0, 0, fw - 1, fh - 1), r, fill=255)
+    tilted = Image.new('RGBA', (W, H), (0, 0, 0, 0))
+    tilted.paste(grad, (fx, fy), cmask)
+    tilted = tilted.rotate(-4, Image.BICUBIC, center=(fx + fw // 2, fy + fh // 2)).resize((round(W * 1.05), round(H * 1.05)), Image.LANCZOS)
+    c0 = (round((fx + fw / 2) * 1.05 - (fx + fw / 2)), round((fy + fh / 2) * 1.05 - (fy + fh / 2)))
+    tilted = tilted.crop((c0[0], c0[1], c0[0] + W, c0[1] + H))
+    im.paste(tilted, (0, 0), tilted)
+    # фото: кадр від маківки до пояса
+    src = ImageOps.exif_transpose(Image.open(os.path.join(SRC, PORTRAIT))).convert('RGB')
+    side = round(src.height * 0.74)
+    cw = round(side * fw / fh)
+    left = min(max(round(src.width * PORTRAIT_CENTER - cw / 2), 0), src.width - cw)
+    top = round(src.height * 0.03)
+    photo = src.crop((left, top, left + cw, top + side)).resize((fw, fh), Image.LANCZOS)
+    pmask = Image.new('L', (fw, fh), 0)
+    ImageDraw.Draw(pmask).rounded_rectangle((0, 0, fw - 1, fh - 1), r, fill=255)
+    im.paste(photo, (fx, fy), pmask)
+    d.rounded_rectangle(box, r, outline=INK, width=3 * S)
+    # печатка «Чемпіон світу» на лівому краї рамки
+    cx, cy, R = fx, fy + fh - 110 * S, 78 * S
+    layer(lambda dr: dr.ellipse((cx - R, cy - R + 18 * S, cx + R, cy + R + 18 * S), fill=(110, 40, 0, 110)), 0, 16 * S)
+    d.ellipse((cx - R, cy - R, cx + R, cy + R), fill=(255, 255, 255), outline=INK, width=3 * S)
+    d.ellipse((cx - 30 * S, cy - 30 * S, cx + 30 * S, cy + 30 * S), fill=ACCENT)
+    trophy(d, cx, cy, 40 * S, INK)
+    ring = site_font('unbounded', 12 * S, 800)
+    adv = [(ring[0] if 0x400 <= ord(ch) < 0x530 else ring[1]).getlength(ch) for ch in t[4]]
+    for i, ch in enumerate(t[4]):  # кут літери пропорційний її ширині
+        ang = math.radians(-90 + 360 * (sum(adv[:i]) + adv[i] / 2) / sum(adv))
+        f = ring[0] if 0x400 <= ord(ch) < 0x530 else ring[1]
+        g = Image.new('RGBA', (30 * S, 30 * S), (0, 0, 0, 0))
+        ImageDraw.Draw(g).text((15 * S, 15 * S), ch, font=f, fill=INK, anchor='mm')
+        g = g.rotate(-math.degrees(ang) - 90, Image.BICUBIC)
+        rr = R - 21 * S
+        im.paste(g, (round(cx + rr * math.cos(ang)) - 15 * S, round(cy + rr * math.sin(ang)) - 15 * S), g)
+    # текст
+    lab = site_font('unbounded', 19 * S, 800)
+    w = draw_mixed(ImageDraw.Draw(Image.new('L', (1, 1))), (0, 0), t[0], lab, 0)
+    d.rectangle((60 * S, 62 * S, 60 * S + w + 32 * S, 104 * S), fill=HOT)
+    draw_mixed(d, (76 * S, 70 * S), t[0], lab, (255, 255, 255))
+    big = site_font('unbounded', 70 * S, 900)
+    draw_mixed(d, (56 * S, 140 * S), t[1][0], big, INK)
+    draw_mixed(d, (56 * S, 228 * S), t[1][1], big, INK)
+    mid = site_font('unbounded', 36 * S, 900)
+    draw_mixed(d, (60 * S, 350 * S), t[2][0], mid, HOT)
+    draw_mixed(d, (60 * S, 400 * S), t[2][1], mid, HOT)
+    chip = site_font('onest', 21 * S, 800)
+    x = 60 * S
     for c in t[3]:
         w = sum((chip[0] if 0x400 <= ord(ch) < 0x530 else chip[1]).getlength(ch) for ch in c)
-        d.rectangle((x, 512, x + w + 28, 560), outline=(80, 90, 105), width=2)
-        draw_mixed(d, (x + 14, 523), c, chip, TEXT)
-        x += w + 28 + 12
-    im.save(os.path.join(SITE, 'img', t[4]), 'JPEG', quality=86, optimize=True)
+        d.rectangle((x, 506 * S, x + w + 30 * S, 556 * S), fill=INK)
+        draw_mixed(d, (x + 15 * S, 517 * S), c, chip, (255, 255, 255))
+        x += w + 30 * S + 12 * S
+    im = im.resize((W // S, H // S), Image.LANCZOS)
+    im.save(os.path.join(SITE, 'img', t[5]), 'JPEG', quality=88, optimize=True)
+
+
+def trophy(d, cx, cy, size, fill):
+    """Кубок зі спрайта (i-trophy, сітка 24x24) лініями Pillow."""
+    k = size / 24
+    w = max(1, round(2 * k))
+    P = lambda x, y: (cx + (x - 12) * k, cy + (y - 12) * k)
+    box = lambda x, y, r: (*P(x - r, y - r), *P(x + r, y + r))
+    d.line([P(6, 9), P(6, 2), P(18, 2), P(18, 9)], fill=fill, width=w, joint='curve')
+    d.arc(box(12, 9, 6), 0, 180, fill=fill, width=w)
+    d.arc(box(4.5, 6.5, 2.5), 90, 270, fill=fill, width=w)
+    d.arc(box(19.5, 6.5, 2.5), 270, 90, fill=fill, width=w)
+    for a, b in (((4.5, 4), (6, 4)), ((4.5, 9), (6, 9)), ((18, 4), (19.5, 4)), ((18, 9), (19.5, 9)), ((4, 22), (20, 22))):
+        d.line([P(*a), P(*b)], fill=fill, width=w)
+    d.line([P(10, 14.7), P(10, 17.3), P(7.6, 19.2), P(7, 22)], fill=fill, width=w, joint='curve')
+    d.line([P(14, 14.7), P(14, 17.3), P(16.4, 19.2), P(17, 22)], fill=fill, width=w, joint='curve')
 
 
 def icon_image(size):
