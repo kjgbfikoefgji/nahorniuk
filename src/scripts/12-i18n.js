@@ -12,6 +12,7 @@ try { (() => {
   const origAttr = new WeakMap();
   let lang = 'uk';
   try { if (localStorage.getItem(KEY) === 'en') lang = 'en'; } catch (e) { /* сховище недоступне */ }
+  try { const q = new URLSearchParams(location.search).get('lang'); if (q === 'uk' || q === 'en') lang = q; } catch (e) { /* без адреси */ }
   let own = false; // власні правки спостерігач ігнорує
 
   const text = (node, en) => {

@@ -43,7 +43,11 @@ try {
   const root = document.documentElement;
   root.classList.add('js');
   let theme = null;
-  try { theme = localStorage.getItem('theme'); } catch (e) { /* приватний режим */ }
+  // ?theme=light|dark (вбудування в чужу сторінку) важливіше за збережений вибір і нічого не запам'ятовує
+  try { theme = new URLSearchParams(location.search).get('theme'); } catch (e) { /* без адреси */ }
+  if (theme !== 'light' && theme !== 'dark') {
+    try { theme = localStorage.getItem('theme'); } catch (e) { /* приватний режим */ }
+  }
   if (theme !== 'light' && theme !== 'dark') {
     theme = matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark';
   }
@@ -154,6 +158,8 @@ main:focus{outline:none}
 .accent{color:var(--accent)}
 :root[data-theme="light"] .accent{color:var(--accent-text)}
 .nowrap{white-space:nowrap}
+/* Англійський переклад довший: на вузькому екрані дозволяємо перенос, інакше заголовок героя розпирає сторінку */
+@media (max-width:560px){html[lang="en"] .nowrap{white-space:normal}}
 
 /* рубрика над заголовком: лінія + капс */
 main{counter-reset:sec}
@@ -1692,6 +1698,7 @@ try { (() => {
   const origAttr = new WeakMap();
   let lang = 'uk';
   try { if (localStorage.getItem(KEY) === 'en') lang = 'en'; } catch (e) { /* сховище недоступне */ }
+  try { const q = new URLSearchParams(location.search).get('lang'); if (q === 'uk' || q === 'en') lang = q; } catch (e) { /* без адреси */ }
   let own = false; // власні правки спостерігач ігнорує
 
   const text = (node, en) => {

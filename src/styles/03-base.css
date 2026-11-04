@@ -30,6 +30,8 @@ main:focus{outline:none}
 .accent{color:var(--accent)}
 :root[data-theme="light"] .accent{color:var(--accent-text)}
 .nowrap{white-space:nowrap}
+/* Англійський переклад довший: на вузькому екрані дозволяємо перенос, інакше заголовок героя розпирає сторінку */
+@media (max-width:560px){html[lang="en"] .nowrap{white-space:normal}}
 
 /* рубрика над заголовком: лінія + капс */
 main{counter-reset:sec}
